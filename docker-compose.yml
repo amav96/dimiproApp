@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  dimiproapp:
+    container_name: dimiproapp
+    build:
+      context: .
+      dockerfile: dockerfile
+    command: sh /var/www/html/node_start.sh
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - 3001:3001
+
+    working_dir: /var/www/html
+    networks:
+      - mongodb_net
+networks:
+  mongodb_net:
+    external: true
+    name: mongodb_net
+
