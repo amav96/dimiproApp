@@ -14,5 +14,8 @@ export default defineConfig({
     port: 3001,
     host: true, // needed for the Docker Container port mapping to work
     strictPort: true,
-  }
+  },
+  resolve: {
+    alias: [{ find: '@', replacement: '/src' }],
+   },
 })
