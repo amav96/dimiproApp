@@ -2,10 +2,21 @@
 
 .baseInput {
     width: 100%;
-
+   
     &__input{
         width: 100%;
         padding: 6px;
         background:$background-grey-light;
+    }
+}
+
+.controlInput{
+    display: flex;
+    flex-direction: column;
+
+    &__text{
+        margin-top:4px;
+        font-size: 15.5px;
+        color: $error;
     }
 }

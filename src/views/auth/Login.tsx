@@ -1,10 +1,8 @@
-import React from 'react'
-import BaseForm from '../../components/Form/BaseForm'
+import { LoginForm } from '../../components/auth/LoginForm';
 
 export function Login() {
+
   return (
-    <div className='my-2 flex justify-center'>
-      <BaseForm/>
-    </div>
+    <LoginForm/>
   )
 }
