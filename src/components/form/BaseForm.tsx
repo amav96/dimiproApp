@@ -14,12 +14,16 @@ interface generatedInput extends PropsBaseInput{
   key: string,
 }
 
+type keyValue<K extends string | number> = {
+  [key in K]: string | number | Array<any> | object;
+}
+
 export default function BaseForm(props: Props<string | number , PropsBaseInput>) {
   const { inputs } = props;
 
   const [generatedInputs, setGeneratedInputs] = useState<Array<generatedInput>>([])
   const [returnForm, setReturnForm] = useState<any>({})
-  
+
   useEffect(() => {
     Object.keys(inputs).forEach((k) => {
       const index = generatedInputs.map((m) => m.key).indexOf(k);
@@ -28,7 +32,7 @@ export default function BaseForm(props: Props<string | number , PropsBaseInput>)
         updateGeneratedInput[index] = { ...generatedInputs[index], ...inputs[k] };
         setGeneratedInputs(updateGeneratedInput)
         if (inputs[k].value && inputs[k].value !== undefined) {
-          setReturnForm((prev:any) => ({
+          setReturnForm((prev: keyValue<string | number>) => ({
             ...prev,
             [k]: inputs[k].value
           }))
@@ -45,8 +49,8 @@ export default function BaseForm(props: Props<string | number , PropsBaseInput>)
             writable: true,
             value: {},
           });
-  
-          setReturnForm((prev: any) => {
+
+          setReturnForm((prev: keyValue<string | number>) => {
             if (inputs[k].hasOwnProperty('value') && inputs[k].value) {
               return {
                 ...prev,
@@ -59,23 +63,37 @@ export default function BaseForm(props: Props<string | number , PropsBaseInput>)
               }
             }
           })
-      }  
+      }
     })
   }, [inputs])
-  
+
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    console.log(evt)
+  }
+
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = evt.target;
+    setReturnForm((prev: keyValue<string | number>) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
   return (
-    <form className='baseForm grid grid-cols-12 gap-2'>
+    <form onSubmit={handleSubmit} className='baseForm grid grid-cols-12 gap-2'>
       {
         generatedInputs.filter((val) => val.hidden === undefined || val.hidden === false)
-        .map((value, index) => {
-          if(!value.hasOwnProperty('type') || (value.hasOwnProperty('type') && value.type === 'text')){
+        .map((v, index) => {
+          if(!v.hasOwnProperty('type') || (v.hasOwnProperty('type') && v.type === 'text')){
             return (
               <BaseInput
               key={index}
-              value={generatedInputs[index].value}
+              value={returnForm[v.key]}
               name={generatedInputs[index].name}
               placeholder={generatedInputs[index].placeholder}
-              onChange={()=> console.log('test')}
+              onChange={handleChange}
+              rules={generatedInputs[index].rules || {}}
               />
             )
           }
