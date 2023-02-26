@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
-import { BaseInput } from './BaseInput';
-import './BaseForm.scss'
+import { Input } from '../Input';
+import './Form.scss'
 import { useState } from 'react';
-import { PropsBaseInput } from '../../types/Form';
+import { PropsInput } from '../../../types/Form';
+import { Select } from '../Select';
 
-interface Props<K extends string | number , PropsBaseInput> {
+interface Props<K extends string | number , PropsInput> {
   inputs: {
-    [key in K]: PropsBaseInput;
+    [key in K]: PropsInput;
   }
 }
 
-interface generatedInput extends PropsBaseInput{
+interface generatedInput extends PropsInput{
   key: string,
 }
 
@@ -18,7 +19,7 @@ type keyValue<K extends string | number> = {
   [key in K]: string | number | Array<any> | object;
 }
 
-export default function BaseForm(props: Props<string | number , PropsBaseInput>) {
+export function Form(props: Props<string | number , PropsInput>) {
   const { inputs } = props;
 
   const [generatedInputs, setGeneratedInputs] = useState<Array<generatedInput>>([])
@@ -74,6 +75,7 @@ export default function BaseForm(props: Props<string | number , PropsBaseInput>)
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
+    console.log(value)
     setReturnForm((prev: keyValue<string | number>) => ({
       ...prev,
       [name]: value,
@@ -81,13 +83,13 @@ export default function BaseForm(props: Props<string | number , PropsBaseInput>)
   }
 
   return (
-    <form onSubmit={handleSubmit} className='baseForm grid grid-cols-12 gap-2'>
+    <form onSubmit={handleSubmit} className='Form grid grid-cols-12 gap-2'>
       {
         generatedInputs.filter((val) => val.hidden === undefined || val.hidden === false)
         .map((v, index) => {
           if(!v.hasOwnProperty('type') || (v.hasOwnProperty('type') && v.type === 'text')){
             return (
-              <BaseInput
+              <Input
               key={index}
               value={returnForm[v.key]}
               name={generatedInputs[index].name}

@@ -1,11 +1,10 @@
 @import "@/scss/index.scss";
 
-.baseInput {
+.Input {
     width: 100%;
-   
     &__input{
         width: 100%;
-        padding: 6px;
+        padding: 8.5px;
         background:$background-grey-light;
     }
 }

@@ -1,19 +1,20 @@
 import React from 'react'
-import './BaseInput.scss'
+import './Input.scss'
 import { useState } from 'react';
-import { validate, isEmpty, validationErrors} from '../../utils/formValidation';
-import { PropsBaseInput } from '../../types/Form';
+import { validate, isEmpty, validationErrors} from '../../../utils/formValidation';
+import { PropsInput } from '../../../types/Form';
 
-export function BaseInput(props: PropsBaseInput) {
+export function Input(props: PropsInput) {
     let {
         placeholder = 'Ingrese texto',
         cols =  'col-span-12',
         value,
         onChange,
         name,
-        rules
+        rules,
+        disabled = false,
     } = props;
-    const [errors, setErrors] = useState<Array<string>>([''])
+    const [errors, setErrors] = useState<Array<string>>([])
 
     const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
         if(onChange){
@@ -35,16 +36,17 @@ export function BaseInput(props: PropsBaseInput) {
     }
 
     return (
-    <div className={`baseInput controlInput ${cols}`}>
+    <div className={`Input controlInput ${cols}`}>
         <input
-        className="baseInput__input"
+        className="Input__input"
         placeholder={placeholder}
         onChange={handleChange}
-        value={value}
+        value={2}
         name={name}
         />
         {!isEmpty(errors) && errors.map((error,key) => (
             <div key={key} className="controlInput__text">
+                asdas
                 {error}
             </div>
             ))
