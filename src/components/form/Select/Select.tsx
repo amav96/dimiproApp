@@ -3,6 +3,8 @@ import { PropsSelect } from '../../../types/Form'
 import './Select.scss'
 import { useState } from 'react'
 import { isEmpty } from '../../../utils/formValidation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 interface styleList {
     top?: string | number
@@ -24,11 +26,12 @@ export function Select(props: PropsSelect) {
         clearable = false,
         disabled = false,
         label = 'name',
-        trackBy = 'id'
+        trackBy = 'id',
+        repeatable = false
     } = props
 
     const [localValue, setLocalValue] = useState('')
-    const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) :void => {
         setLocalValue(evt.target.value)
         filterOptions(localValue)
     }
@@ -38,7 +41,7 @@ export function Select(props: PropsSelect) {
         setLocalOptions(options)
     },[options])
 
-    const filterOptions = (needle: string) => {
+    const filterOptions = (needle: string) :void => {
         if(needle !== ''){
             const looking = localOptions.filter((val) => {
                 if(typeof val === 'number'){
@@ -71,24 +74,30 @@ export function Select(props: PropsSelect) {
         setShowMenu((prev) => !prev)
     }
 
-    const handleOnOpenCloseFromInput = (event: React.MouseEvent<HTMLElement>) => {
+    const handleOnOpenCloseFromInput = (event: React.MouseEvent<HTMLElement>) :void => {
         event.stopPropagation()
         setShowMenu((prev) => !prev)
     }
 
     const inputSelect: React.RefObject<HTMLInputElement> = createRef<HTMLInputElement>();
     const [touchedInputContainer, setTouchedInputContainer] = useState<Boolean>(false)
-    const handleOnOpenCloseMenuFromContainer = () => {
+    const handleOnOpenCloseMenuFromContainer = () :void => {
         setShowMenu((prev) => !prev)
         setTouchedInputContainer((prev) => !prev)
     }
 
-    // make focus on the input when clicked container
-    useEffect(() => {
+    const focusIntoInput = ():void => {
         if(inputSelect.current && showMenu){
             inputSelect.current.focus()
         }
+    }
+
+    // make focus on the input when clicked container
+    useEffect(() => {
+        focusIntoInput()
     }, [touchedInputContainer])
+
+
 
     let [positionListStyle, setPositionListStyle] = useState<styleList>({})
     let SelectMain: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement | null>(null);
@@ -128,13 +137,13 @@ export function Select(props: PropsSelect) {
         setPositionListStyle((prev) => ({...prev, ...pos}))
     }
 
-    const handleClickOutside = useCallback((event: MouseEvent) => {
+    const handleClickOutside = useCallback((event: MouseEvent) :void => {
         if (event.target instanceof HTMLElement && !SelectMain.current?.contains(event.target)) {
             setShowMenu(false);
         }
     }, [])
 
-    const instanceClick = () => {
+    const instanceClick = () :void => {
         if(showMenu){
             window.addEventListener('click', handleClickOutside, true);
         }else{
@@ -147,10 +156,67 @@ export function Select(props: PropsSelect) {
         instanceClick()
     }, [showMenu])
 
+    const handleOptionSelect = (option: object, index: number):void => {
+        if(multiselect) setMultipleOptions(option, index)
+        else setSingleOption(option, index)
+    }
+
+    const setMultipleOptions = (option: object, index: number) :void => {
+        if(typeof value === 'object' &&  Array.isArray(value)){
+            if(!repeatable && !value.some((val) => val[trackBy] === option[trackBy as keyof object])){
+                const mergedExternalValue = [...value, option];
+                if(mergedExternalValue && onChange ){
+                    onChange(mergedExternalValue, index)
+                    setLocalValue('')
+                    calculateMenuPosition()
+                    if(multiselect){
+                        focusIntoInput()
+                    }
+                }
+            }
+        }
+    }
+
+    const removeMultipleOptions = (option: object, index: number) :void => {
+        if(typeof value === 'object' &&  Array.isArray(value)){
+            const removedOption = value.filter((val,index) => val[trackBy] !== option[trackBy as keyof object])
+            if(removedOption && onChange ){
+                onChange(removedOption, index)
+            }
+        }
+    }
+
+    const setSingleOption = (option: object, index: number) => {
+
+    }
+
+    const isThereOption = (option: object, index: number) : boolean => {
+        if(option && value && !isEmpty(value) && Array.isArray(value) &&
+        value.some((val) => val[trackBy] === option[trackBy as keyof object])){
+            return true
+        }
+
+        return false;
+    }
+
   return (
     <div ref={SelectMain} className={`Select_container ${cols}`}>
         <div  className={`Select controlSelect `}>
             <div className={'Select__itemSelect'} >
+                {
+                    // items multiselects
+                    value && multiselect && Array.isArray(value)
+                    ? value.map((val,index) => (
+                        <div key={index} className='Select__itemSelect__multiValue'>
+                            <div className='Select__itemSelect__multiValue__label' > { val[label] } </div>
+                            <div
+                            onClick={() => removeMultipleOptions(val,index)}
+                            className='Select__itemSelect__multiValue__remove'>x</div>
+                        </div>
+                    ))
+                    // items normales
+                    : (<div> Item normal </div>)
+                }
                 <div
                 onClick={handleOnOpenCloseMenuFromContainer}
                 className='Select__itemSelect__inputContainer'
@@ -162,30 +228,39 @@ export function Select(props: PropsSelect) {
                     aria-expanded="true"
                     type="text"
                     ref={inputSelect}
+                    value={localValue}
                     />
                 </div>
             </div>
             <div className={'controlSelect'}>
-                <div className='controlSelect__indicatorContainer' > x </div>
+                <div className='controlSelect__indicatorContainer' >
+                <FontAwesomeIcon icon="times" />
+                
+                </div>
                 <span className='controlSelect__indicatorSeparator' ></span>
                 <div
                 onClick={handleOnOpenCloseMenu}
-                className='controlSelect__indicatorContainer'> lis </div>
+                className='controlSelect__indicatorContainer'>
+                    <FontAwesomeIcon icon="arrow-down" />
+                </div>
             </div>
         </div>
         {
           showMenu &&
-            <div ref={SelectMenu} style={positionListStyle} className="Select_menu">
+            <div ref={SelectMenu} style={positionListStyle} className="Select__menu">
                 {
                     localOptions.map((val, index) => (
-                        <div 
+                        <div
                         onMouseOver={() => setHoverItem(index)}
-                        key={index} 
-                        className={
-                        `Select_menu__itemContainer 
-                        ${currentIndexHover === index ? 'bg-gray-300': ''}`
+                        onClick={() => handleOptionSelect(val,index)}
+                        key={index}
+                        className=
+                        {
+                            `Select__menu__itemContainer
+                            ${currentIndexHover === index ? 'bg-gray-300': ''}
+                            ${isThereOption(val,index) ? 'font-bold' : ''}`
                         }>
-                            <div className='Select_menu__itemContainer__item'>
+                            <div className='Select__menu__itemContainer__item'>
                                 {val[label]}
                             </div>
                         </div>
@@ -196,3 +271,4 @@ export function Select(props: PropsSelect) {
     </div>
   )
 }
+
