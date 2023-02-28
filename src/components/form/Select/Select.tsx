@@ -31,6 +31,7 @@ export function Select(props: PropsSelect) {
     } = props
 
     const [localValue, setLocalValue] = useState('')
+
     const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) :void => {
         setLocalValue(evt.target.value)
         filterOptions(localValue)
@@ -164,7 +165,6 @@ export function Select(props: PropsSelect) {
             if(!repeatable && !value.some((val) => val[trackBy] === option[trackBy as keyof object])){
                 const mergedExternalValue = [...value, option];
                 if(mergedExternalValue && onChange ){
-                    console.log(mergedExternalValue)
                     onChange(mergedExternalValue, index)
                     setLocalValue('')
                     calculateMenuPosition()
@@ -179,6 +179,11 @@ export function Select(props: PropsSelect) {
     const setSingleOption = (option: object, index: number) => {
         if(onChange){
             onChange(option, index)
+            if(multiselect){
+                setLocalValue('')
+            }else{
+                setLocalValue(option[label as keyof object])
+            }
             setShowMenu(false)
         }
     }
@@ -194,7 +199,12 @@ export function Select(props: PropsSelect) {
 
     const removeAll = () :void => {
         if(onChange){
-            onChange({}, 0)
+            if(multiselect){
+                onChange([], 0)
+            }else {
+                onChange({}, 0)
+            }
+            setLocalValue('')
         }
     }
 
@@ -206,12 +216,11 @@ export function Select(props: PropsSelect) {
         return false;
     }
 
-    const renderSingleItem = (option: object | number): string => {
-        if(option && typeof option === 'object'){
-            return option[label as keyof object]
+    useEffect(() => {
+        if(!multiselect && value){
+            setLocalValue(value[label as keyof object])
         }
-        return options ? options.filter((val) => val[trackBy] === option)[0][label] : ''
-    }
+    }, [value])
 
   return (
     <div ref={SelectMain} className={`Select_container ${cols}`}>
@@ -233,31 +242,43 @@ export function Select(props: PropsSelect) {
                         </div>
                     ))
                     // items normales
-                    : value && !isEmpty(value) &&
+                    : !multiselect && 
                     (<div className='Select__itemSelect__value'>
                         <div className='Select__itemSelect__value__label' >
-                        { typeof value === 'object' || typeof value === 'number'? renderSingleItem(value) : '' }
+                        <input
+                        onClick={handleOnOpenCloseFromInput}
+                        className='Select__itemSelect__inputContainer__input'
+                        onChange={handleChange}
+                        aria-expanded="true"
+                        type="text"
+                        value={localValue}
+                        />
+
                         </div>
                     </div>)
                 }
-                <div
-                onClick={handleOnOpenCloseMenuFromContainer}
-                className='Select__itemSelect__inputContainer'
-                data-value={localValue}>
-                    <input
-                    onClick={handleOnOpenCloseFromInput}
-                    className='Select__itemSelect__inputContainer__input'
-                    onChange={handleChange}
-                    aria-expanded="true"
-                    type="text"
-                    ref={inputSelect}
-                    value={localValue}
-                    />
-                </div>
+                {/* renderizar items elegidos */}
+                {
+                    multiselect &&
+                    <div
+                    onClick={handleOnOpenCloseMenuFromContainer}
+                    className='Select__itemSelect__inputContainer'
+                    data-value={localValue}>
+                        <input
+                        onClick={handleOnOpenCloseFromInput}
+                        className='Select__itemSelect__inputContainer__input'
+                        onChange={handleChange}
+                        aria-expanded="true"
+                        type="text"
+                        ref={inputSelect}
+                        value={localValue}
+                        />
+                    </div>
+                }
             </div>
             <div className={'controlSelect'}>
                 {
-                    !multiselect && value && !isEmpty(value) &&
+                    value && !isEmpty(value) &&
                     <div
                     onClick={removeAll}
                     className='controlSelect__indicatorContainer' >

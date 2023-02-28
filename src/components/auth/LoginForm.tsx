@@ -45,7 +45,7 @@ export function LoginForm() {
   ];
 
 
-  const [paisSelect, setPaisSelect] = useState<number | object>({name: 'Argentina', id: 1})
+  const [paisSelect, setPaisSelect] = useState<number | object>([{name: 'Argentina', id: 1}])
 
   const onChange = (value: object , index: number | string):void => {
     if(typeof value === 'number' || typeof value === 'object'){
@@ -66,13 +66,14 @@ export function LoginForm() {
       options={paises}
       value={paisSelect}
       onChange={onChange}
+      multiselect={true}
       />
 
-      {/* { <button className='col-span-12 bg-orange-300'
-      onClick={() => setPaisSelect(2)}
+      {/* {  <button className='col-span-12 bg-orange-300'
+      onClick={() => setPaisSelect((prev) => ([{name: 'Chile', id: 3}]))}
       >
         agregar
-      </button> } */}
+      </button> }  */}
      
       {/* <Form
       inputs={inputs}
