@@ -25,6 +25,6 @@ export interface PropsSelect{
     clearable?: boolean,
     label?: string,
     trackBy?: string,
-    repeatable?: boolean
+    repeatable?: boolean,
    
 }

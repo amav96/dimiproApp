@@ -44,12 +44,11 @@ export function LoginForm() {
     {name: 'Brasil', id: 15},
   ];
 
-  const [va, setVal] = useState('value')
 
-  const [paisSelect, setPaisSelect] = useState<Array<object>>([]);
+  const [paisSelect, setPaisSelect] = useState<number | object>({name: 'Argentina', id: 1})
 
   const onChange = (value: object , index: number | string):void => {
-    if(Array.isArray(value)){
+    if(typeof value === 'number' || typeof value === 'object'){
       setPaisSelect(value)
     }
   }
@@ -57,7 +56,7 @@ export function LoginForm() {
   return (
     <div className='my-2 flex justify-center flex-column grid grid-cols-12 gap-2'>
       <Input
-      value={va}
+      value={'2'}
       name={'firstName'}
       placeholder={'nombre'}
       onChange={() => console.log('testing')}
@@ -67,8 +66,13 @@ export function LoginForm() {
       options={paises}
       value={paisSelect}
       onChange={onChange}
-      multiselect={true}
       />
+
+      {/* { <button className='col-span-12 bg-orange-300'
+      onClick={() => setPaisSelect(2)}
+      >
+        agregar
+      </button> } */}
      
       {/* <Form
       inputs={inputs}
