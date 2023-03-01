@@ -4,27 +4,6 @@ import { Form, Select, Input } from '../form';
 
 export function LoginForm() {
 
-  const [inputs, setInputs] = useState({
-    // firstName : {
-    //   placeholder : 'Nombre',
-    //   name: 'firstName',
-    //   value: '',
-    //   type: 'text',
-    //   rules: {
-    //     required: true
-    //   }
-    // },
-    // lastName: {
-    //   placeholder : 'Apellido',
-    //   name: 'lastName',
-    //   value: '',
-    //   type: 'text',
-    //   rules: {
-    //     required: true
-    //   }
-    // }
-    
-  })
 
   let paises = [
     {name: 'Argentina', id: 1},
@@ -44,6 +23,42 @@ export function LoginForm() {
     {name: 'Brasil', id: 15},
   ];
 
+  const [inputs, setInputs] = useState({
+    firstName : {
+      placeholder : 'Nombre',
+      name: 'firstName',
+      value: '',
+      type: 'text',
+      rules: {
+        required: true
+      }
+    },
+    lastName: {
+      placeholder : 'Apellido',
+      name: 'lastName',
+      value: '',
+      type: 'text',
+      rules: {
+        required: true
+      }
+    },
+    country: {
+      placeholder : 'Pais',
+      name: 'country',
+      value: [],
+      options: paises,
+      type: 'select',
+      multiselect: true
+    },
+    countrystatic: {
+      placeholder : 'Pais',
+      name: 'countrystatic',
+      value: [],
+      options: paises,
+      type: 'select',
+    }
+    
+  })
 
   const [paisSelect, setPaisSelect] = useState<number | object>([{name: 'Argentina', id: 1}])
 
@@ -54,8 +69,15 @@ export function LoginForm() {
   }
 
   return (
-    <div className='my-2 flex justify-center flex-column grid grid-cols-12 gap-2'>
-      <Input
+    <Form
+    inputs={inputs}
+    />
+  )
+}
+
+
+ // <div className='my-2 flex justify-center flex-column grid grid-cols-12 gap-2'>
+      /* <Input
       value={'2'}
       name={'firstName'}
       placeholder={'nombre'}
@@ -67,17 +89,5 @@ export function LoginForm() {
       value={paisSelect}
       onChange={onChange}
       multiselect={true}
-      />
-
-      {/* {  <button className='col-span-12 bg-orange-300'
-      onClick={() => setPaisSelect((prev) => ([{name: 'Chile', id: 3}]))}
-      >
-        agregar
-      </button> }  */}
-     
-      {/* <Form
-      inputs={inputs}
-      /> */}
-    </div>
-  )
-}
+      /> */
+    // </div>

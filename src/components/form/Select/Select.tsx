@@ -39,7 +39,9 @@ export function Select(props: PropsSelect) {
 
     const [localOptions, setLocalOptions] = useState<Array<any>>([])
     useEffect(() => {
-        setLocalOptions(options)
+        if(options){
+            setLocalOptions(options)
+        }
     },[options])
 
     const filterOptions = (needle: string) :void => {
@@ -61,7 +63,9 @@ export function Select(props: PropsSelect) {
 
     useEffect(() => {
         if(localValue === ''){
-            setLocalOptions(options)
+            if(options){
+                setLocalOptions(options)
+            }
         }
     },[localValue])
 
@@ -137,7 +141,9 @@ export function Select(props: PropsSelect) {
     }
 
     const handleClickOutside = useCallback((event: MouseEvent) :void => {
-        if (event.target instanceof HTMLElement && !SelectMain.current?.contains(event.target)) {
+        if (
+            (event.target instanceof HTMLElement || event.target instanceof SVGElement) &&
+            !SelectMain.current?.contains(event.target)) {
             setShowMenu(false);
         }
     }, [])
@@ -193,6 +199,7 @@ export function Select(props: PropsSelect) {
             const removedOption = value.filter((val,index) => val[trackBy] !== option[trackBy as keyof object])
             if(removedOption && onChange ){
                 onChange(removedOption, index)
+                focusIntoInput()
             }
         }
     }
@@ -217,13 +224,13 @@ export function Select(props: PropsSelect) {
     }
 
     useEffect(() => {
-        if(!multiselect && value){
+        if(!multiselect && value && !isEmpty(value)){
             setLocalValue(value[label as keyof object])
         }
     }, [value])
 
   return (
-    <div ref={SelectMain} className={`Select_container ${cols}`}>
+    <div ref={SelectMain} id={`${name}`} className={`Select_container ${cols}`}>
         <div  className={`Select controlSelect `}>
             <div className={'Select__itemSelect'} >
                 {
@@ -242,48 +249,46 @@ export function Select(props: PropsSelect) {
                         </div>
                     ))
                     // items normales
-                    : !multiselect && 
+                    : !multiselect &&
                     (<div className='Select__itemSelect__value'>
                         <div className='Select__itemSelect__value__label' >
-                        <input
-                        onClick={handleOnOpenCloseFromInput}
-                        className='Select__itemSelect__inputContainer__input'
-                        onChange={handleChange}
-                        aria-expanded="true"
-                        type="text"
-                        value={localValue}
-                        />
-
+                            <input
+                            onClick={handleOnOpenCloseFromInput}
+                            className='Select__itemSelect__inputContainer__input'
+                            onChange={handleChange}
+                            aria-expanded="true"
+                            type="text"
+                            value={localValue}
+                            />
                         </div>
                     </div>)
                 }
-                {/* renderizar items elegidos */}
                 {
                     multiselect &&
-                    <div
-                    onClick={handleOnOpenCloseMenuFromContainer}
-                    className='Select__itemSelect__inputContainer'
-                    data-value={localValue}>
-                        <input
-                        onClick={handleOnOpenCloseFromInput}
-                        className='Select__itemSelect__inputContainer__input'
-                        onChange={handleChange}
-                        aria-expanded="true"
-                        type="text"
-                        ref={inputSelect}
-                        value={localValue}
-                        />
-                    </div>
+                    (<div
+                        onClick={handleOnOpenCloseMenuFromContainer}
+                        className='Select__itemSelect__inputContainer'
+                        data-value={localValue}>
+                            <input
+                            onClick={handleOnOpenCloseFromInput}
+                            className='Select__itemSelect__inputContainer__input'
+                            onChange={handleChange}
+                            aria-expanded="true"
+                            type="text"
+                            ref={inputSelect}
+                            value={localValue}
+                            />
+                    </div>)
                 }
             </div>
             <div className={'controlSelect'}>
                 {
                     value && !isEmpty(value) &&
-                    <div
+                    (<div
                     onClick={removeAll}
                     className='controlSelect__indicatorContainer' >
                         <FontAwesomeIcon icon="times" />
-                    </div>
+                    </div>)
                 }
                 <span className='controlSelect__indicatorSeparator' ></span>
                 <div
@@ -294,7 +299,7 @@ export function Select(props: PropsSelect) {
             </div>
         </div>
         {
-        showMenu &&
+            showMenu &&
             <div ref={SelectMenu} style={positionListStyle} className="Select__menu">
                 {
                     localOptions.map((val, index) => (

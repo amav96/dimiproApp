@@ -167,7 +167,7 @@
     overflow-y: auto;
     transition: all 0.1s;
     contain: content;
-   
+    z-index: 200;
 
     &__itemContainer{
         padding:5px 6px;

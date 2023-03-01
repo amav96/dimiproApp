@@ -1,7 +1,7 @@
-export interface PropsInput {
+interface BaseInput {
     placeholder?: string,
     cols?: string,
-    value?: string | number,
+    value?: any,
     onChange?: Function,
     name: string,
     rules? : object,
@@ -10,21 +10,15 @@ export interface PropsInput {
     disabled?: boolean
 }
 
-export interface PropsSelect{
-    placeholder?: string,
-    cols?: string,
-    value?: string | number | Array<any> | object,
-    onChange?: Function,
-    name: string,
-    rules? : object,
-    hidden? : boolean,
-    type? : string,
-    disabled?: boolean
-    options: Array<any>,
+export interface PropsInput extends BaseInput {
+
+}
+
+export interface PropsSelect extends BaseInput{
+    options?: Array<any>,
     multiselect?: boolean,
     clearable?: boolean,
     label?: string,
     trackBy?: string,
     repeatable?: boolean,
-   
 }

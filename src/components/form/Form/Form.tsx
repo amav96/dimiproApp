@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { Input } from '../Input';
+import { Select } from '../Select';
 import './Form.scss'
 import { useState } from 'react';
-import { PropsInput } from '../../../types/Form';
-import { Select } from '../Select';
+import { PropsInput, PropsSelect } from '../../../types/Form';
 
 interface Props<K extends string | number , PropsInput> {
   inputs: {
@@ -11,7 +11,7 @@ interface Props<K extends string | number , PropsInput> {
   }
 }
 
-interface generatedInput extends PropsInput{
+interface generatedInput extends PropsInput,PropsSelect   {
   key: string,
 }
 
@@ -73,13 +73,21 @@ export function Form(props: Props<string | number , PropsInput>) {
     console.log(evt)
   }
 
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
-    console.log(value)
     setReturnForm((prev: keyValue<string | number>) => ({
       ...prev,
       [name]: value,
     }));
+  }
+
+  const onChangeSelect = (value: object , index: number | string, name: string):void => {
+    if(typeof value === 'number' || typeof value === 'object'){
+      setReturnForm((prev: keyValue<string | number>) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   }
 
   return (
@@ -94,8 +102,19 @@ export function Form(props: Props<string | number , PropsInput>) {
               value={returnForm[v.key]}
               name={generatedInputs[index].name}
               placeholder={generatedInputs[index].placeholder}
-              onChange={handleChange}
+              onChange={handleChangeInput}
               rules={generatedInputs[index].rules || {}}
+              />
+            )
+          } else if (v.type === 'select'){
+            return (
+              <Select
+              key={index}
+              name={generatedInputs[index].name}
+              options={generatedInputs[index].options}
+              value={returnForm[v.key]}
+              onChange={ (value: object | Array<object>, index : string | number) => onChangeSelect(value,index,v.key)}
+              multiselect={generatedInputs[index].multiselect}
               />
             )
           }

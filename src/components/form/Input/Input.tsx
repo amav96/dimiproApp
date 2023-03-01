@@ -41,12 +41,11 @@ export function Input(props: PropsInput) {
         className="Input__input"
         placeholder={placeholder}
         onChange={handleChange}
-        value={2}
+        value={value}
         name={name}
         />
         {!isEmpty(errors) && errors.map((error,key) => (
             <div key={key} className="controlInput__text">
-                asdas
                 {error}
             </div>
             ))
