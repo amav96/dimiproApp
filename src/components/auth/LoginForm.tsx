@@ -1,6 +1,6 @@
 // import Form from '../../components/Form/Form'
 import React, { useState } from 'react';
-import { Form, Select, Input } from '../form';
+import { Form, Select, Input, Switch } from '../form';
 
 export function LoginForm() {
 
@@ -51,7 +51,7 @@ export function LoginForm() {
       multiselect: true
     },
     countrystatic: {
-      placeholder : 'Pais',
+      placeholder : 'Pais estatico',
       name: 'countrystatic',
       value: [],
       options: paises,
@@ -62,16 +62,36 @@ export function LoginForm() {
 
   const [paisSelect, setPaisSelect] = useState<number | object>([{name: 'Argentina', id: 1}])
 
-  const onChange = (value: object , index: number | string):void => {
-    if(typeof value === 'number' || typeof value === 'object'){
-      setPaisSelect(value)
-    }
+  // const onChange = (value: object , index: number | string):void => {
+  //   if(typeof value === 'number' || typeof value === 'object'){
+  //     setPaisSelect(value)
+  //   }
+  // }
+
+  const onChange = (value: object ):void => {
+    setSwi(value)
+  }
+
+  const [swi, setSwi] = useState<object>({name: 'alvaro', id:2})
+
+ function test(){
+    setSwi({name: 'alvaro', id:2})
   }
 
   return (
-    <Form
-    inputs={inputs}
-    />
+    <div className="mt-4 mb-2">
+      <Switch
+      label={'valor 1'}
+      value={swi}
+      option={{name: 'alvaro', id:1}}
+      onChange={onChange}
+      />
+
+      <button
+      className='bg-gray-300 p-2'
+      onClick={test}
+      > testing </button>
+    </div>
   )
 }
 

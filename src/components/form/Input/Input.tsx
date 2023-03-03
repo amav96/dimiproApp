@@ -2,7 +2,7 @@ import React from 'react'
 import './Input.scss'
 import { useState } from 'react';
 import { validate, isEmpty, validationErrors} from '../../../utils/formValidation';
-import { PropsInput } from '../../../types/Form';
+import { PropsInput } from '../../../types/form';
 
 export function Input(props: PropsInput) {
     let {
@@ -40,9 +40,11 @@ export function Input(props: PropsInput) {
         <input
         className="Input__input"
         placeholder={placeholder}
+        autoComplete="off"
         onChange={handleChange}
         value={value}
         name={name}
+        disabled={disabled}
         />
         {!isEmpty(errors) && errors.map((error,key) => (
             <div key={key} className="controlInput__text">

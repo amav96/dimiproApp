@@ -68,7 +68,7 @@
                     color: inherit;
                     background: 0px center;
                     opacity: 1;
-                    width: 100%;
+                    // width: 100%;
                     grid-area: 1 / 2 / auto / auto;
                     font: inherit;
                     min-width: 8px;
@@ -116,9 +116,6 @@
                     cursor: pointer;
                 }
             }
-
-            
-
     }
 
     &__select{

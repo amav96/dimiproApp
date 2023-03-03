@@ -22,3 +22,11 @@ export interface PropsSelect extends BaseInput{
     trackBy?: string,
     repeatable?: boolean,
 }
+
+export interface PropsSwitch {
+    option?: object | number | string | boolean;
+    label?: string;
+    trackBy?: string;
+    onChange?: Function;
+    value?: object | number | string | boolean;
+}

@@ -3,7 +3,7 @@ import { Input } from '../Input';
 import { Select } from '../Select';
 import './Form.scss'
 import { useState } from 'react';
-import { PropsInput, PropsSelect } from '../../../types/Form';
+import { PropsInput, PropsSelect } from '../../../types/form';
 
 interface Props<K extends string | number , PropsInput> {
   inputs: {
@@ -110,6 +110,7 @@ export function Form(props: Props<string | number , PropsInput>) {
             return (
               <Select
               key={index}
+              placeholder={generatedInputs[index].placeholder}
               name={generatedInputs[index].name}
               options={generatedInputs[index].options}
               value={returnForm[v.key]}

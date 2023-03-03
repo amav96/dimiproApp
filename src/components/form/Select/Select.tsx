@@ -1,5 +1,5 @@
 import React, { createRef, useCallback, useEffect, useRef } from 'react'
-import { PropsSelect } from '../../../types/Form'
+import { PropsSelect } from '../../../types/form'
 import './Select.scss'
 import { useState } from 'react'
 import { isEmpty } from '../../../utils/formValidation';
@@ -15,7 +15,7 @@ interface styleList {
 
 export function Select(props: PropsSelect) {
     const {
-        placeholder = 'Ingrese texto',
+        placeholder = 'Seleccione opción',
         cols =  'col-span-12',
         value,
         onChange,
@@ -254,6 +254,8 @@ export function Select(props: PropsSelect) {
                         <div className='Select__itemSelect__value__label' >
                             <input
                             onClick={handleOnOpenCloseFromInput}
+                            placeholder={placeholder}
+                            autoComplete="off"
                             className='Select__itemSelect__inputContainer__input'
                             onChange={handleChange}
                             aria-expanded="true"
@@ -270,7 +272,10 @@ export function Select(props: PropsSelect) {
                         className='Select__itemSelect__inputContainer'
                         data-value={localValue}>
                             <input
+                            style={{width: !isEmpty(value) ? '100%' : 'auto'}}
                             onClick={handleOnOpenCloseFromInput}
+                            placeholder={!isEmpty(value) ? '' : placeholder}
+                            autoComplete="off"
                             className='Select__itemSelect__inputContainer__input'
                             onChange={handleChange}
                             aria-expanded="true"
