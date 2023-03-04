@@ -7,10 +7,11 @@ import { isEmpty } from '../../../utils/formValidation';
 export function Switch(props: PropsSwitch) {
   const {
     option = {},
+    cols =  'col-span-12',
     label = '',
     trackBy = 'id',
     onChange,
-    value = {}
+    value = {},
   } = props;
 
   const [switched, setSwitched] = useState<boolean>(false);
@@ -95,7 +96,7 @@ export function Switch(props: PropsSwitch) {
 
 
   return (
-    <div>
+    <div className={`${cols}`}>
       <div className="flex flex-row items-center">
         <div
         onClick={onSwitch}

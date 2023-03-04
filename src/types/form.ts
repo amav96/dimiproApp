@@ -1,20 +1,22 @@
-interface BaseInput {
+interface BaseProps {
     placeholder?: string,
     cols?: string,
-    value?: any,
+    value: any,
     onChange?: Function,
     name: string,
     rules? : object,
     hidden? : boolean,
     type? : string,
-    disabled?: boolean
+    disabled?: boolean,
+    slot?: boolean,
+    class?: string
 }
 
-export interface PropsInput extends BaseInput {
+export interface PropsInput extends BaseProps {
 
 }
 
-export interface PropsSelect extends BaseInput{
+export interface PropsSelect extends BaseProps{
     options?: Array<any>,
     multiselect?: boolean,
     clearable?: boolean,
@@ -23,10 +25,10 @@ export interface PropsSelect extends BaseInput{
     repeatable?: boolean,
 }
 
-export interface PropsSwitch {
+type BasePropsPreparedSwitch = Omit<BaseProps,'placeholder'>
+
+export interface PropsSwitch extends BasePropsPreparedSwitch {
     option?: object | number | string | boolean;
     label?: string;
     trackBy?: string;
-    onChange?: Function;
-    value?: object | number | string | boolean;
 }

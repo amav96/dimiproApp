@@ -56,41 +56,24 @@ export function LoginForm() {
       value: [],
       options: paises,
       type: 'select',
-    }
-    
+    },
+    lavadero: {
+      label : 'lavadero',
+      name: 'lavadero',
+      type: 'check',
+      value: false,
+    },
+    test: {
+      slot: true
+    },
   })
-
-  const [paisSelect, setPaisSelect] = useState<number | object>([{name: 'Argentina', id: 1}])
-
-  // const onChange = (value: object , index: number | string):void => {
-  //   if(typeof value === 'number' || typeof value === 'object'){
-  //     setPaisSelect(value)
-  //   }
-  // }
-
-  const onChange = (value: object ):void => {
-    setSwi(value)
-  }
-
-  const [swi, setSwi] = useState<object>({name: 'alvaro', id:2})
-
- function test(){
-    setSwi({name: 'alvaro', id:2})
-  }
 
   return (
     <div className="mt-4 mb-2">
-      <Switch
-      label={'valor 1'}
-      value={swi}
-      option={{name: 'alvaro', id:1}}
-      onChange={onChange}
+      <Form
+      inputs={inputs}
+      test={<div>Soy slot</div>}
       />
-
-      <button
-      className='bg-gray-300 p-2'
-      onClick={test}
-      > testing </button>
     </div>
   )
 }
