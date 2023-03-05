@@ -78,7 +78,7 @@ export function Form(props: Props<string | number> | testHTML<string>) {
                   ...prev,
                   [k]: converInputsInObject.value
                 }
-              } else if(converInputsInObject.hasOwnProperty('value')) {
+              } else {
                 return {
                   ...prev,
                   [k]: ''
@@ -146,6 +146,7 @@ export function Form(props: Props<string | number> | testHTML<string>) {
                 onChange={handleChangeInput}
                 rules={generatedInputs[index].rules || {}}
                 cols={generatedInputs[index].cols}
+                errors={generatedInputs[index].errors}
                 />
               )
             } else if (v.type === 'select'){
@@ -159,6 +160,7 @@ export function Form(props: Props<string | number> | testHTML<string>) {
                 onChange={ (value: object | Array<object>, index : string | number) => onChangeSelect(value,index,v.key)}
                 multiselect={generatedInputs[index].multiselect}
                 cols={generatedInputs[index].cols}
+                errors={generatedInputs[index].errors}
                 />
               )
             } else if (v.type === 'check' || v.type === 'switch'){

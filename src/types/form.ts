@@ -1,15 +1,16 @@
 interface BaseProps {
-    placeholder?: string,
-    cols?: string,
-    value: any,
-    onChange?: Function,
-    name: string,
-    rules? : object,
-    hidden? : boolean,
-    type? : string,
-    disabled?: boolean,
-    slot?: boolean,
-    class?: string
+    placeholder?: string;
+    cols?: string;
+    value: any;
+    onChange?: Function;
+    name: string;
+    rules? : object;
+    hidden? : boolean;
+    type? : string;
+    disabled?: boolean;
+    slot?: boolean;
+    class?: string;
+    errors?: string | Array<string>;
 }
 
 export interface PropsInput extends BaseProps {

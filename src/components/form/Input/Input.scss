@@ -5,7 +5,12 @@
     &__input{
         width: 100%;
         padding: 8.5px;
-        background:$background-grey-light;
+        border-radius: 6.5px;
+        background: $background-grey-light;
+    }
+
+    &__input:focus{
+        outline: none !important;
     }
 }
 

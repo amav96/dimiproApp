@@ -25,6 +25,7 @@
     border-width: 1px;
     box-sizing: border-box;
     outline: 0px !important;
+    padding: 1.5px 0px;
 
     &__itemSelect {
             -webkit-box-align: center;
@@ -149,6 +150,12 @@
         margin-bottom: 8px;
         margin-top: 8px;
         box-sizing: border-box;
+    }
+
+    &__text{
+        margin-top:4px;
+        font-size: 15.5px;
+        color: $error;
     }
 }
 

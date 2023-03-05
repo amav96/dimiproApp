@@ -64,16 +64,47 @@ export function LoginForm() {
       value: false,
     },
     test: {
-      slot: true
+      slot: true,
+      
     },
   })
 
+  const [err, setErr] = useState<Array<string>>([]);
+  const [oka, setOka] = useState('');
+
+  const setErrors = ():void => {
+    console.log('gege')
+    setErr(['hola este es un error'])
+  }
+  const remove = ():void => {
+    console.log('gege')
+    setErr([])
+  }
+
+  const [paisSelect, setPaisSelect]= useState<Array<any>>([]);
+  const onChange = (value: any, index:any) => {
+    if(Array.isArray(value)){
+      setPaisSelect(value)
+    }
+  }
+
+
   return (
-    <div className="mt-4 mb-2">
-      <Form
+    <div className="mt-4 mb-2 mx-2">
+      {<Form
       inputs={inputs}
       test={<div>Soy slot</div>}
+      /> }
+      <Select
+      name={'pais'}
+      options={paises}
+      value={paisSelect}
+      onChange={onChange}
+      multiselect={true}
+      errors={err}
       />
+      <button onClick={setErrors} className='bg-green-200 p-2' > set errors </button>
+      <button onClick={remove} className='bg-red-200 p-2' > quitar </button>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect} from 'react'
 import './Input.scss'
 import { useState } from 'react';
 import { validate, isEmpty, validationErrors} from '../../../utils/formValidation';
@@ -13,8 +13,9 @@ export function Input(props: PropsInput) {
         name,
         rules,
         disabled = false,
+        errors
     } = props;
-    const [errors, setErrors] = useState<Array<string>>([])
+    const [localErrors, setLocalErrors] = useState<Array<string> | string>([])
 
     const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
         if(onChange){
@@ -29,11 +30,17 @@ export function Input(props: PropsInput) {
         validate(value, rules)
         const hasErrors = validationErrors()
         if(!isEmpty(hasErrors)) {
-            setErrors(hasErrors)
+            setLocalErrors(hasErrors)
         }else {
-            setErrors([])
+            setLocalErrors([])
         }
     }
+
+    useEffect(() => {
+        if(errors){
+            setLocalErrors(errors)
+        }
+    }, [errors])
 
     return (
     <div className={`Input controlInput ${cols}`}>
@@ -46,11 +53,17 @@ export function Input(props: PropsInput) {
         name={name}
         disabled={disabled}
         />
-        {!isEmpty(errors) && errors.map((error,key) => (
-            <div key={key} className="controlInput__text">
-                {error}
+        { Array.isArray(localErrors) && !isEmpty(localErrors) ?
+            localErrors.map((error,key) => (
+                <div key={key} className="controlInput__text">
+                    {error}
+                </div>
+            )
+        ): (
+            <div className="controlInput__text">
+                {localErrors}
             </div>
-            ))
+           )
         }
     </div>
     )

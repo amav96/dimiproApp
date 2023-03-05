@@ -28,6 +28,7 @@ export function Select(props: PropsSelect) {
         label = 'name',
         trackBy = 'id',
         repeatable = false,
+        errors
     } = props
 
     const [localValue, setLocalValue] = useState('')
@@ -229,6 +230,13 @@ export function Select(props: PropsSelect) {
         }
     }, [value])
 
+    const [localErrors, setLocalErrors] = useState<Array<string> | string>([])
+    useEffect(() => {
+        if(errors){
+            setLocalErrors(errors)
+        }
+    }, [errors])
+
   return (
     <div ref={SelectMain} id={`${name}`} className={`Select_container ${cols}`}>
         <div  className={`Select controlSelect `}>
@@ -303,6 +311,18 @@ export function Select(props: PropsSelect) {
                 </div>
             </div>
         </div>
+        { Array.isArray(localErrors) && !isEmpty(localErrors) ?
+            localErrors.map((error,key) => (
+                <div key={key} className="controlSelect__text">
+                    {error}
+                </div>
+            )
+        ): (
+            <div className="controlSelect__text">
+                {localErrors}
+            </div>
+           )
+        }
         {
             showMenu &&
             <div ref={SelectMenu} style={positionListStyle} className="Select__menu">
