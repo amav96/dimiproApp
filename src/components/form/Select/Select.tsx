@@ -1,9 +1,11 @@
 import React, { createRef, useCallback, useEffect, useRef } from 'react'
-import { PropsSelect } from '../../../types/form'
+import { PropsSelect } from '../../../types/Form'
 import './Select.scss'
 import { useState } from 'react'
-import { isEmpty } from '../../../utils/formValidation';
+import { isEmpty } from '../../../services/utils/Validations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Validator } from '../../../services/utils/Validator';
+import { IValidations } from '../../../types/Validations';
 
 
 interface styleList {
@@ -13,6 +15,7 @@ interface styleList {
     height?: string | number
 }
 
+const validate =  new Validator();
 export function Select(props: PropsSelect) {
     const {
         placeholder = 'Seleccione opción',
@@ -20,9 +23,9 @@ export function Select(props: PropsSelect) {
         value,
         onChange,
         name,
-        rules,
+        validations,
         options,
-        multiselect = false,
+        multiple = false,
         clearable = false,
         disabled = false,
         label = 'name',
@@ -163,7 +166,7 @@ export function Select(props: PropsSelect) {
     }, [showMenu])
 
     const handleOptionSelect = (option: object, index: number):void => {
-        if(multiselect) setMultipleOptions(option, index)
+        if(multiple) setMultipleOptions(option, index)
         else setSingleOption(option, index)
     }
 
@@ -175,8 +178,9 @@ export function Select(props: PropsSelect) {
                     onChange(mergedExternalValue, index)
                     setLocalValue('')
                     calculateMenuPosition()
-                    if(multiselect){
-                        focusIntoInput()
+                    focusIntoInput()
+                    if(validations){
+                        handleValidations(mergedExternalValue, validations);
                     }
                 }
             }
@@ -186,10 +190,9 @@ export function Select(props: PropsSelect) {
     const setSingleOption = (option: object, index: number) => {
         if(onChange){
             onChange(option, index)
-            if(multiselect){
-                setLocalValue('')
-            }else{
-                setLocalValue(option[label as keyof object])
+            setLocalValue(option[label as keyof object])
+            if(validations){
+                handleValidations(option, validations);
             }
             setShowMenu(false)
         }
@@ -201,18 +204,37 @@ export function Select(props: PropsSelect) {
             if(removedOption && onChange ){
                 onChange(removedOption, index)
                 focusIntoInput()
+                if(validations){
+                    handleValidations(removedOption, validations);
+                }
             }
         }
     }
 
     const removeAll = () :void => {
         if(onChange){
-            if(multiselect){
+            if(multiple){
                 onChange([], 0)
+                if(validations){
+                    handleValidations([], validations);
+                }
             }else {
                 onChange({}, 0)
+                if(validations){
+                    handleValidations({}, validations);
+                }
             }
             setLocalValue('')
+        }
+    }
+
+    const handleValidations = (value: object, validations: IValidations) => {
+        validate.validate(value, validations)
+        const hasErrors = validate.getErrors
+        if(!isEmpty(hasErrors)) {
+            setLocalErrors(hasErrors)
+        }else {
+            setLocalErrors([])
         }
     }
 
@@ -225,7 +247,7 @@ export function Select(props: PropsSelect) {
     }
 
     useEffect(() => {
-        if(!multiselect && value && !isEmpty(value)){
+        if(!multiple && value && !isEmpty(value)){
             setLocalValue(value[label as keyof object])
         }
     }, [value])
@@ -242,8 +264,8 @@ export function Select(props: PropsSelect) {
         <div  className={`Select controlSelect `}>
             <div className={'Select__itemSelect'} >
                 {
-                    // items multiselects
-                    value && multiselect && Array.isArray(value)
+                    // items multiples
+                    value && multiple && Array.isArray(value)
                     ? value.map((val,index) => (
                         <div key={index} className='Select__itemSelect__multiValue'>
                             <div className='Select__itemSelect__multiValue__label' >
@@ -257,7 +279,7 @@ export function Select(props: PropsSelect) {
                         </div>
                     ))
                     // items normales
-                    : !multiselect &&
+                    : !multiple &&
                     (<div className='Select__itemSelect__value'>
                         <div className='Select__itemSelect__value__label' >
                             <input
@@ -274,7 +296,7 @@ export function Select(props: PropsSelect) {
                     </div>)
                 }
                 {
-                    multiselect &&
+                    multiple &&
                     (<div
                         onClick={handleOnOpenCloseMenuFromContainer}
                         className='Select__itemSelect__inputContainer'
@@ -311,19 +333,19 @@ export function Select(props: PropsSelect) {
                 </div>
             </div>
         </div>
-        { Array.isArray(localErrors) && !isEmpty(localErrors) ?
-            localErrors.map((error,key) => (
-                <div key={key} className="controlSelect__text">
-                    {error}
-                </div>
-            )
-        ): (
-            <div className="controlSelect__text">
-                {localErrors}
-            </div>
-           )
-        }
         {
+            // mensajes de errores
+            Array.isArray(localErrors) && !isEmpty(localErrors) &&
+                localErrors.map((error,key) => (
+                    <div key={key} className="controlSelect__text">
+                        {error}
+                    </div>
+                )
+            )
+        }
+
+        {
+            // listado de items
             showMenu &&
             <div ref={SelectMenu} style={positionListStyle} className="Select__menu">
                 {

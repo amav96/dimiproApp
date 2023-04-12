@@ -23,14 +23,29 @@ export function LoginForm() {
     {name: 'Brasil', id: 15},
   ];
 
+  const test = (value: any, input: any) => {
+    console.log('test')
+    console.log(value)
+    console.log(input)
+    setInputs((prev) => ({
+      ...prev,
+      firstName: {
+        ...prev.firstName,
+        value: 'testiin'
+      }
+    }))
+  }
+
   const [inputs, setInputs] = useState({
     firstName : {
       placeholder : 'Nombre',
       name: 'firstName',
       value: '',
       type: 'text',
-      rules: {
-        required: true
+      validations: {
+        rules: {
+          required: true
+        }
       }
     },
     lastName: {
@@ -38,35 +53,44 @@ export function LoginForm() {
       name: 'lastName',
       value: '',
       type: 'text',
-      rules: {
-        required: true
+      validations: {
+        rules: {
+          required: true
+        }
       }
     },
-    country: {
-      placeholder : 'Pais',
-      name: 'country',
-      value: [],
-      options: paises,
-      type: 'select',
-      multiselect: true
-    },
-    countrystatic: {
-      placeholder : 'Pais estatico',
-      name: 'countrystatic',
-      value: [],
-      options: paises,
-      type: 'select',
-    },
-    lavadero: {
-      label : 'lavadero',
-      name: 'lavadero',
-      type: 'check',
-      value: false,
-    },
-    test: {
-      slot: true,
+
+    // country: {
+    //   placeholder : 'Pais',
+    //   name: 'country',
+    //   value: [],
+    //   options: paises,
+    //   type: 'select',
+    //   multiple: true,
+    //   validations: {
+    //     rules: {
+    //       required: true
+    //     }
+    //   },
+    //   listenSelect: test
+    // },
+    // countrystatic: {
+    //   placeholder : 'Pais estatico',
+    //   name: 'countrystatic',
+    //   value: [],
+    //   options: paises,
+    //   type: 'select',
+    // },
+    // lavadero: {
+    //   label : 'lavadero',
+    //   name: 'lavadero',
+    //   type: 'check',
+    //   value: false,
+    // },
+    // test: {
+    //   slot: true,
       
-    },
+    // },
   })
 
   const [err, setErr] = useState<Array<string>>([]);
@@ -87,22 +111,30 @@ export function LoginForm() {
       setPaisSelect(value)
     }
   }
-
-
+// setTimeout(() => {
+//   setInputs((val) => ({
+//     ...val,
+//     firstName: {
+//       ...val.firstName,
+//       errors: ['has tenido un error']
+//     }
+//   }))
+  
+// }, 3000);
   return (
     <div className="mt-4 mb-2 mx-2">
       {<Form
       inputs={inputs}
       test={<div>Soy slot</div>}
       /> }
-      <Select
+      {/* <Select
       name={'pais'}
       options={paises}
       value={paisSelect}
       onChange={onChange}
-      multiselect={true}
+      multiple={true}
       errors={err}
-      />
+      /> */}
       <button onClick={setErrors} className='bg-green-200 p-2' > set errors </button>
       <button onClick={remove} className='bg-red-200 p-2' > quitar </button>
     </div>
@@ -122,6 +154,6 @@ export function LoginForm() {
       options={paises}
       value={paisSelect}
       onChange={onChange}
-      multiselect={true}
+      multiple={true}
       /> */
     // </div>

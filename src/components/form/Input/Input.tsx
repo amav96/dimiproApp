@@ -1,9 +1,12 @@
 import React, { useEffect} from 'react'
 import './Input.scss'
 import { useState } from 'react';
-import { validate, isEmpty, validationErrors} from '../../../utils/formValidation';
-import { PropsInput } from '../../../types/form';
+import { isEmpty } from "../../../services/utils/Validations";
+import { Validator } from '../../../services/utils/Validator';
+import { PropsInput } from '../../../types/Form';
+import { IValidations } from '../../../types/Validations';
 
+const validate =  new Validator();
 export function Input(props: PropsInput) {
     let {
         placeholder = 'Ingrese texto',
@@ -11,7 +14,7 @@ export function Input(props: PropsInput) {
         value,
         onChange,
         name,
-        rules,
+        validations,
         disabled = false,
         errors
     } = props;
@@ -20,15 +23,15 @@ export function Input(props: PropsInput) {
     const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
         if(onChange){
             onChange(evt)
-            if(!isEmpty(rules) && rules !== undefined) {
-                handleValidations(evt.target.value, rules);
+            if(validations !== undefined){
+                handleValidations(evt.target.value, validations);
             }
         }
     }
 
-    const handleValidations = (value: string | number, rules: object) => {
-        validate(value, rules)
-        const hasErrors = validationErrors()
+    const handleValidations = (value: string | number, validations: IValidations) => {
+        validate.validate(value, validations)
+        const hasErrors = validate.getErrors
         if(!isEmpty(hasErrors)) {
             setLocalErrors(hasErrors)
         }else {
@@ -38,7 +41,9 @@ export function Input(props: PropsInput) {
 
     useEffect(() => {
         if(errors){
-            setLocalErrors(errors)
+            let newMessages = [...localErrors,...errors]
+            console.log(newMessages);
+            setLocalErrors([...new Set(newMessages)])
         }
     }, [errors])
 
@@ -53,17 +58,13 @@ export function Input(props: PropsInput) {
         name={name}
         disabled={disabled}
         />
-        { Array.isArray(localErrors) && !isEmpty(localErrors) ?
+        { Array.isArray(localErrors) && !isEmpty(localErrors) &&
             localErrors.map((error,key) => (
                 <div key={key} className="controlInput__text">
                     {error}
                 </div>
+                )
             )
-        ): (
-            <div className="controlInput__text">
-                {localErrors}
-            </div>
-           )
         }
     </div>
     )

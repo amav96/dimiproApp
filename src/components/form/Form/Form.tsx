@@ -4,13 +4,10 @@ import { Select } from '../Select';
 import { Switch } from '../Switch/Switch';
 import './Form.scss'
 import { useState } from 'react';
-import { PropsInput, PropsSelect, PropsSwitch } from '../../../types/form';
+import { generatedInputs,PropsInput, PropsSelectKey, PropsSwitch, PropsSwitchKey } from '../../../types/Form';
 
-interface generatedInput extends PropsInput, PropsSelect, PropsSwitch  {
-  key: string,
-}
 
-type generatedInputWithoutKey = Omit<generatedInput,'key'>
+type generatedInputWithoutKey = Omit<generatedInputs,'key'>
 
 interface Props<K extends string | number > {
   inputs: {
@@ -18,7 +15,6 @@ interface Props<K extends string | number > {
   },
   // [key in K]?: JSX.Element | JSX.Element[];
 }
-
 
 type ReactText = string | number;
 type ReactChild = ReactElement | ReactText;
@@ -39,7 +35,7 @@ type keyValue<K extends string | number> = {
 
 export function Form(props: Props<string | number> | testHTML<string>) {
   const { inputs} = props;
-  const [generatedInputs, setGeneratedInputs] = useState<Array<generatedInput>>([])
+  const [generatedInputs, setGeneratedInputs] = useState<Array<generatedInputs>>([])
   const [returnForm, setReturnForm] = useState<any>({})
 
   useEffect(() => {
@@ -48,21 +44,29 @@ export function Form(props: Props<string | number> | testHTML<string>) {
         const index = generatedInputs.map((m) => m.key).indexOf(k);
         if (index > -1) {
           const updateGeneratedInput = [...generatedInputs];
-          let converInputs: generatedInput  = inputs[k as keyof object];
-          updateGeneratedInput[index] = { ...generatedInputs[index], ...converInputs as object };
-          setGeneratedInputs(updateGeneratedInput)
-          if (converInputs.value && converInputs.value !== undefined) {
+          let updateInput: generatedInputs  = inputs[k as keyof object];
+          setGeneratedInputs((prevState) => 
+              prevState.map((obj,i) => {
+                if(i === index){
+                  return {...obj, ...updateInput }
+                }
+              return obj
+            })
+          )
+          if (updateInput.value && updateInput.value !== undefined) {
             setReturnForm((prev: keyValue<string | number>) => ({
               ...prev,
-              [k]: converInputs.value
+              [k]: updateInput.value
             }))
           }
-        
+          if(k === 'firstName'){
+            console.log(updateGeneratedInput);
+          }
         } else {
-          let converInputsInObject: generatedInput  = inputs[k as keyof object];
+          let newInput: generatedInputs  = inputs[k as keyof object];
           setGeneratedInputs((prev) => ([
             ...prev,
-            ...[{ ...converInputsInObject, ...{ key: k } }]
+            ...[{ ...newInput, ...{ key: k } }]
           ]))
           Object.defineProperty(returnForm, k,
             {
@@ -71,12 +75,11 @@ export function Form(props: Props<string | number> | testHTML<string>) {
               writable: true,
               value: {},
             });
-            
             setReturnForm((prev: keyValue<string | number>) => {
-              if (converInputsInObject.hasOwnProperty('value') && converInputsInObject.value) {
+              if (newInput.hasOwnProperty('value') && newInput.value) {
                 return {
                   ...prev,
-                  [k]: converInputsInObject.value
+                  [k]: newInput.value
                 }
               } else {
                 return {
@@ -103,21 +106,27 @@ export function Form(props: Props<string | number> | testHTML<string>) {
     }));
   }
 
-  const onChangeSelect = (value: object , index: number | string, key: string):void => {
+  const onChangeSelect = (value: object , index: number | string, input: PropsSelectKey):void => {
     if(typeof value === 'number' || typeof value === 'object'){
       setReturnForm((prev: keyValue<string | number>) => ({
         ...prev,
-        [key]: value,
+        [input.key]: value,
       }));
+      if(input.listenSelect){
+        input.listenSelect({value, input})
+      }
     }
   }
 
-  const handleChangeSwitch = (value: object | number | boolean , key: string) :void => {
+  const handleChangeSwitch = (value: object | number | boolean , input: PropsSwitchKey) :void => {
     if(typeof value === 'number' || typeof value === 'object' || typeof value === 'boolean'){
       setReturnForm((prev: keyValue<string | number>) => ({
         ...prev,
-        [key]: value,
+        [input.key]: value,
       }));
+      if(input.listenChange){
+        input.listenChange({value, input})
+      }
     }
   }
 
@@ -125,53 +134,56 @@ export function Form(props: Props<string | number> | testHTML<string>) {
     <form onSubmit={handleSubmit} className='Form grid grid-cols-12 gap-2'>
       {
         generatedInputs.filter((val) => val.hidden === undefined || val.hidden === false)
-        .map((v, index) => {
-          if(v.slot){
+        .map((input, index) => {
+          if(input.slot){
             return(
-              <div 
+              <div
               key={index}
-              className={`${v.class ? v.class : ''}`}
+              className={`${input.className ? input.className : ''}`}
               >
-                {props[v.key as keyof object]}
+                {props[input.key as keyof object]}
               </div>
             )
           }else {
-            if(!v.hasOwnProperty('type') || (v.hasOwnProperty('type') && v.type === 'text')){
+            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && input.type === 'text')){
               return (
                 <Input
                 key={index}
-                value={returnForm[v.key]}
+                value={returnForm[input.key]}
                 name={generatedInputs[index].name}
                 placeholder={generatedInputs[index].placeholder}
                 onChange={handleChangeInput}
-                rules={generatedInputs[index].rules || {}}
+                validations={generatedInputs[index].validations}
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
                 />
               )
-            } else if (v.type === 'select'){
+            } else if (input.type === 'select'){
               return (
                 <Select
                 key={index}
                 placeholder={generatedInputs[index].placeholder}
                 name={generatedInputs[index].name}
                 options={generatedInputs[index].options}
-                value={returnForm[v.key]}
-                onChange={ (value: object | Array<object>, index : string | number) => onChangeSelect(value,index,v.key)}
-                multiselect={generatedInputs[index].multiselect}
+                value={returnForm[input.key]}
+                onChange={ 
+                  (value: object | Array<object>, index : string | number) => onChangeSelect(value,index,input)
+                }
+                multiple={generatedInputs[index].multiple}
+                validations={generatedInputs[index].validations}
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
                 />
               )
-            } else if (v.type === 'check' || v.type === 'switch'){
+            } else if (input.type === 'check' || input.type === 'switch'){
               return(
                 <Switch
                 key={index}
                 name={generatedInputs[index].name}
                 label={generatedInputs[index].label}
                 option={generatedInputs[index].option}
-                value={returnForm[v.key]}
-                onChange={ (value: object | Array<object>) => handleChangeSwitch(value, v.key)}
+                value={returnForm[input.key]}
+                onChange={ (value: object | Array<object>) => handleChangeSwitch(value, input)}
                 cols={generatedInputs[index].cols}
                 />
               )
