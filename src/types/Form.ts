@@ -1,4 +1,6 @@
-import { IValidations } from "./Validations";
+import { PropsInput } from "../components/form/Input/Input.type";
+import { PropsSelect } from "../components/form/Select/Select.type";
+import { Validations } from "./Validations";
 
 type InputsTypes =  "text" |
                     "number" |
@@ -25,23 +27,10 @@ export interface BaseProps {
   hidden?: boolean;
   className?: string;
   onChange?: Function;
-  validations?: IValidations;
+  validations?: Validations;
   errors?: Array<string>;
   cols?: number;
 }
-
-// -----------------Input-----------------------
-
-export interface PropsInput extends BaseProps {
-  listenChange?: Function;
-  listenForm?: Function;
-}
-
-export type BaseInput = Omit<BaseProps, "multiple">;
-
-
-// ----------------------------------------------
-
 
 // -----------------TextArea-----------------------
 
@@ -51,29 +40,6 @@ export interface PropsTextArea extends BaseProps {
   listenChange?: Function;
   listenForm?: Function;
 }
-
-// ----------------------------------------------
-
-// -----------------Select------------------------
-
-export interface PropsSelect extends BaseProps {
-    options?: Array<any>;
-    label?: string;
-    trackBy?: string;
-    searchable?: boolean;
-    listenRemove?: Function;
-    listenSelect?: Function;
-    listenForm?: Function;
-    multiple?: boolean;
-    clearable?: boolean,
-    repeatable?: boolean,
-}
-
-export interface PropsSelectKey extends PropsSelect {
-  key: string;
-}
-
-// ----------------------------------------------
 
 // -----------------File------------------------
 

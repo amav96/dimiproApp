@@ -1,11 +1,11 @@
 import React, { createRef, useCallback, useEffect, useRef } from 'react'
-import { PropsSelect } from '../../../types/Form'
 import './Select.scss'
 import { useState } from 'react'
 import { isEmpty } from '../../../services/utils/Validations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Validator } from '../../../services/utils/Validator';
-import { IValidations } from '../../../types/Validations';
+import { Validations } from '../../../types/Validations';
+import { PropsSelect } from './Select.type';
 
 
 interface styleList {
@@ -22,6 +22,7 @@ export function Select(props: PropsSelect) {
         cols =  'col-span-12',
         value,
         onChange,
+        onRemove,
         name,
         validations,
         options,
@@ -175,7 +176,7 @@ export function Select(props: PropsSelect) {
             if(!repeatable && !value.some((val) => val[trackBy] === option[trackBy as keyof object])){
                 const mergedExternalValue = [...value, option];
                 if(mergedExternalValue && onChange ){
-                    onChange(mergedExternalValue, index)
+                    onChange({value: mergedExternalValue, index})
                     setLocalValue('')
                     calculateMenuPosition()
                     focusIntoInput()
@@ -189,7 +190,7 @@ export function Select(props: PropsSelect) {
 
     const setSingleOption = (option: object, index: number) => {
         if(onChange){
-            onChange(option, index)
+            onChange({value: option, item: option, index})
             setLocalValue(option[label as keyof object])
             if(validations){
                 handleValidations(option, validations);
@@ -200,9 +201,12 @@ export function Select(props: PropsSelect) {
 
     const removeMultipleOptions = (option: object, index: number) :void => {
         if(typeof value === 'object' &&  Array.isArray(value)){
-            const removedOption = value.filter((val,index) => val[trackBy] !== option[trackBy as keyof object])
+            const removedOption = value.filter((val) => val[trackBy] !== option[trackBy as keyof object])
             if(removedOption && onChange ){
-                onChange(removedOption, index)
+                onChange({value: removedOption, index})
+                if(onRemove){
+                  onRemove({value: option, index})
+                }
                 focusIntoInput()
                 if(validations){
                     handleValidations(removedOption, validations);
@@ -212,23 +216,29 @@ export function Select(props: PropsSelect) {
     }
 
     const removeAll = () :void => {
-        if(onChange){
-            if(multiple){
-                onChange([], 0)
-                if(validations){
-                    handleValidations([], validations);
-                }
-            }else {
-                onChange({}, 0)
-                if(validations){
-                    handleValidations({}, validations);
-                }
+      if(onChange && clearable){
+          if(multiple){
+            onChange({value: [], index: null})
+            if(onRemove){
+              onRemove({value: [], index : null})
             }
-            setLocalValue('')
-        }
+            if(validations){
+                handleValidations([], validations);
+            }
+          }else {
+            onChange({value: {}, index: null})
+            if(onRemove){
+              onRemove({value: {}, index : null})
+            }
+            if(validations){
+                handleValidations({}, validations);
+            }
+          }
+          setLocalValue('')
+      }
     }
 
-    const handleValidations = (value: object, validations: IValidations) => {
+    const handleValidations = (value: object, validations: Validations) => {
         validate.validate(value, validations)
         const hasErrors = validate.getErrors
         if(!isEmpty(hasErrors)) {
@@ -247,16 +257,58 @@ export function Select(props: PropsSelect) {
     }
 
     useEffect(() => {
-        if(!multiple && value && !isEmpty(value)){
-            setLocalValue(value[label as keyof object])
+      if(multiple && Array.isArray(value) && value.length > 0 &&  value.some((v) => typeof v === 'number')){
+        lookForObjectsByPropertiesArray(value.filter((v) => typeof v === 'number'))
+      } else if (!multiple &&  !Array.isArray(value) && typeof value === 'number'){
+        lookForObjectByValue(value)
+      }
+    }, [])
+    const lookForObjectsByPropertiesArray = (ArrayProperties: Array<number>) => {
+      // cuando seteamos como valor un array de ids. Ejemplo: Pais = { value : [1,2,3] }
+      // buscamos los objetos en el listado de opciones para setear los objetos encontrados como valor
+      if(options){
+        let val : Array<object> | Array<string> | object;
+        const lookFor = options.filter((option) => ArrayProperties.includes(option[trackBy]))
+        val = [...value.filter((val: object | Array<number|string>) => typeof val !== 'number'), ...lookFor]
+        if(onChange){
+          onChange({value: val, index: null})
         }
+        if(validations){
+          handleValidations(val, validations)
+        }
+      }
+    }
+    
+    const lookForObjectByValue = (value: number | string) => {
+      // cuando seteamos un numero como value. Ejemplo: Pais = { value : 1}
+      if(options){
+        const lookFor = options.filter((option) => value === option[trackBy])[0]
+        // emit("update:model-value", lookFor);
+        if(onChange){
+          onChange({value: lookFor, index: null})
+        }
+        if(validations){
+          handleValidations(lookFor, validations)
+        }
+      }
+    }
+
+    useEffect(() => {
+      if(!multiple && value && !isEmpty(value)){
+        setLocalValue(value[label as keyof object])
+      }
+      if(multiple && Array.isArray(value) && value.length > 0 &&  value.some((v) => typeof v === 'number')){
+        lookForObjectsByPropertiesArray(value.filter((v) => typeof v === 'number'))
+      } else if (!multiple &&  !Array.isArray(value) && typeof value === 'number'){
+        lookForObjectByValue(value)
+      }
     }, [value])
 
     const [localErrors, setLocalErrors] = useState<Array<string> | string>([])
     useEffect(() => {
-        if(errors){
-            setLocalErrors(errors)
-        }
+      if(errors){
+        setLocalErrors(errors)
+      }
     }, [errors])
 
   return (
@@ -296,6 +348,7 @@ export function Select(props: PropsSelect) {
                     </div>)
                 }
                 {
+                    // input buscador para los items multiple
                     multiple &&
                     (<div
                         onClick={handleOnOpenCloseMenuFromContainer}
@@ -318,7 +371,8 @@ export function Select(props: PropsSelect) {
             </div>
             <div className={'controlSelect'}>
                 {
-                    value && !isEmpty(value) &&
+                    // Limpiar items X
+                    clearable && value && !isEmpty(value) &&
                     (<div
                     onClick={removeAll}
                     className='controlSelect__indicatorContainer' >

@@ -3,8 +3,8 @@ import './Input.scss'
 import { useState } from 'react';
 import { isEmpty } from "../../../services/utils/Validations";
 import { Validator } from '../../../services/utils/Validator';
-import { PropsInput } from '../../../types/Form';
-import { IValidations } from '../../../types/Validations';
+import { Validations } from '../../../types/Validations';
+import { PropsInput } from './Input.type';
 
 const validate =  new Validator();
 export function Input(props: PropsInput) {
@@ -21,15 +21,22 @@ export function Input(props: PropsInput) {
     const [localErrors, setLocalErrors] = useState<Array<string> | string>([])
 
     const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-        if(onChange){
-            onChange(evt)
-            if(validations !== undefined){
-                handleValidations(evt.target.value, validations);
-            }
-        }
+      if(onChange){
+          onChange(evt)
+          if(validations !== undefined){
+              handleValidations(evt.target.value, validations);
+          }
+      }
     }
 
-    const handleValidations = (value: string | number, validations: IValidations) => {
+    const onBlur = (event : React.ChangeEvent<HTMLInputElement>) => {
+      let el = event.target as HTMLInputElement
+      if(validations !== undefined){
+          handleValidations(el.value, validations)
+      }
+    }
+
+    const handleValidations = (value: string | number, validations: Validations) => {
         validate.validate(value, validations)
         const hasErrors = validate.getErrors
         if(!isEmpty(hasErrors)) {
@@ -42,7 +49,6 @@ export function Input(props: PropsInput) {
     useEffect(() => {
         if(errors){
             let newMessages = [...localErrors,...errors]
-            console.log(newMessages);
             setLocalErrors([...new Set(newMessages)])
         }
     }, [errors])
@@ -54,11 +60,14 @@ export function Input(props: PropsInput) {
         placeholder={placeholder}
         autoComplete="off"
         onChange={handleChange}
+        onBlur={onBlur}
         value={value}
         name={name}
         disabled={disabled}
         />
-        { Array.isArray(localErrors) && !isEmpty(localErrors) &&
+        {
+          // mostrar errores
+          Array.isArray(localErrors) && !isEmpty(localErrors) &&
             localErrors.map((error,key) => (
                 <div key={key} className="controlInput__text">
                     {error}

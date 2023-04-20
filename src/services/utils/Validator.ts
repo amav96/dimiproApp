@@ -1,4 +1,4 @@
-import { IValidations, Messages, Rules } from "../../types/Validations";
+import { Validations, Messages, Rules } from "../../types/Validations";
 import { isEmpty, minLength, contain, isEmail, isTypeValue, maxLength} from "./Validations";
 
 
@@ -13,7 +13,7 @@ export class Validator {
   string: boolean = false;
   number: boolean = false;
 
-  public validate(value: any, validations: IValidations): void {
+  public validate(value: any, validations: Validations): void {
     this.errors = []
     if (typeof validations === "object" && validations !== null) {
       const property: Rules = validations.rules;

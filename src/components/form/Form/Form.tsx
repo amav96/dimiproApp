@@ -4,7 +4,8 @@ import { Select } from '../Select';
 import { Switch } from '../Switch/Switch';
 import './Form.scss'
 import { useState } from 'react';
-import { generatedInputs,PropsInput, PropsSelectKey, PropsSwitch, PropsSwitchKey } from '../../../types/Form';
+import { generatedInputs, PropsSwitchKey } from '../../../types/Form';
+import { PropsSelectKey, onChangeSelect } from '../Select/Select.type';
 
 
 type generatedInputWithoutKey = Omit<generatedInputs,'key'>
@@ -106,15 +107,19 @@ export function Form(props: Props<string | number> | testHTML<string>) {
     }));
   }
 
-  const onChangeSelect = (value: object , index: number | string, input: PropsSelectKey):void => {
-    if(typeof value === 'number' || typeof value === 'object'){
-      setReturnForm((prev: keyValue<string | number>) => ({
-        ...prev,
-        [input.key]: value,
-      }));
-      if(input.listenSelect){
-        input.listenSelect({value, input})
-      }
+  const onChangeSelect = (data: onChangeSelect, input: PropsSelectKey):void => {
+    setReturnForm((prev: keyValue<string | number>) => ({
+      ...prev,
+      [input.key]: data.value,
+    }));
+    if(input.onSelect){
+      input.onSelect({...data, ...{input: input}})
+    }
+  }
+
+  const onRemoveSelect = (data: onChangeSelect, input: PropsSelectKey):void => {
+    if(input.onRemove){
+      input.onRemove({ ...data, ...{input: input}})
     }
   }
 
@@ -166,10 +171,10 @@ export function Form(props: Props<string | number> | testHTML<string>) {
                 name={generatedInputs[index].name}
                 options={generatedInputs[index].options}
                 value={returnForm[input.key]}
-                onChange={ 
-                  (value: object | Array<object>, index : string | number) => onChangeSelect(value,index,input)
-                }
+                onChange={(e : onChangeSelect) => onChangeSelect(e,input)}
+                onRemove={(e : onChangeSelect) => onRemoveSelect(e,input)}
                 multiple={generatedInputs[index].multiple}
+                clearable={generatedInputs[index].clearable}
                 validations={generatedInputs[index].validations}
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}

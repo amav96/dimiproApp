@@ -18,7 +18,7 @@ export interface Messages {
   string?: string;
   number?: string;
 }
-export interface IValidations {
+export interface Validations {
     rules : Rules,
     messages? : Messages
 }
