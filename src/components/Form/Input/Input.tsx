@@ -16,7 +16,8 @@ export function Input(props: PropsInput) {
         name,
         validations,
         disabled = false,
-        errors
+        errors,
+        type
     } = props;
     const [localErrors, setLocalErrors] = useState<Array<string> | string>([])
 
@@ -64,6 +65,7 @@ export function Input(props: PropsInput) {
         value={value}
         name={name}
         disabled={disabled}
+        type={type}
         />
         {
           // mostrar errores

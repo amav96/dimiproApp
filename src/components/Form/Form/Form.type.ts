@@ -1,6 +1,7 @@
-import { PropsInput } from "../components/form/Input/Input.type";
-import { PropsSelect } from "../components/form/Select/Select.type";
-import { Validations } from "./Validations";
+import { PropsInput } from "../Input/Input.type";
+import { PropsSelect } from "../Select/Select.type";
+import { Validations } from "../../../types/Validations";
+import { PropsDate } from "../DatePack/DatePack.type";
 
 type InputsTypes =  "text" |
                     "number" |
@@ -96,7 +97,9 @@ export interface Inputs extends
     PropsSelect,
     PropsFile,
     PropsDatePicker,
-    PropsSwitch {
+    PropsSwitch,
+    PropsDate
+     {
 }
 
 export interface generatedInputs extends 
@@ -105,7 +108,8 @@ export interface generatedInputs extends
     PropsSelect,
     PropsFile,
     PropsDatePicker,
-    PropsSwitch {
+    PropsSwitch,
+    PropsDate {
   key: string;
   slot: boolean;
 }

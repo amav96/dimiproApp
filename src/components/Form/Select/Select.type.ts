@@ -1,4 +1,4 @@
-import { BaseProps } from "../../../types/Form";
+import { BaseProps } from "../Form/Form.type";
 
 export interface PropsSelect extends BaseProps {
     options?: Array<any>;

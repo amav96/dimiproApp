@@ -4,8 +4,10 @@ import { Select } from '../Select';
 import { Switch } from '../Switch/Switch';
 import './Form.scss'
 import { useState } from 'react';
-import { generatedInputs, PropsSwitchKey } from '../../../types/Form';
+import { generatedInputs, PropsSwitchKey } from './Form.type';
 import { PropsSelectKey, onChangeSelect } from '../Select/Select.type';
+import { DatePack } from '../DatePack/DatePack';
+import { PropsDateKey } from '../DatePack/DatePack.type';
 
 
 type generatedInputWithoutKey = Omit<generatedInputs,'key'>
@@ -107,6 +109,13 @@ export function Form(props: Props<string | number> | testHTML<string>) {
     }));
   }
 
+  const handleChangeDate = (date : Date, input: PropsDateKey):void => {
+    setReturnForm((prev: keyValue<string | number>) => ({
+      ...prev,
+      [input.key]: date,
+    }));
+  }
+
   const onChangeSelect = (data: onChangeSelect, input: PropsSelectKey):void => {
     setReturnForm((prev: keyValue<string | number>) => ({
       ...prev,
@@ -150,14 +159,29 @@ export function Form(props: Props<string | number> | testHTML<string>) {
               </div>
             )
           }else {
-            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && input.type === 'text')){
+            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text'))){
               return (
                 <Input
                 key={index}
+                type={generatedInputs[index].type}
                 value={returnForm[input.key]}
                 name={generatedInputs[index].name}
                 placeholder={generatedInputs[index].placeholder}
                 onChange={handleChangeInput}
+                validations={generatedInputs[index].validations}
+                cols={generatedInputs[index].cols}
+                errors={generatedInputs[index].errors}
+                />
+              )
+            } else if (input.type === 'datetime'){
+              return (
+                <DatePack
+                key={index}
+                value={returnForm[input.key]}
+                name={generatedInputs[index].name}
+                placeholder={generatedInputs[index].placeholder}
+                onChange={(e : any) => handleChangeDate(e,input)}
+                dateFormat={generatedInputs[index].dateFormat ?? 'dd/MM/yyyy hh:mm'}
                 validations={generatedInputs[index].validations}
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}

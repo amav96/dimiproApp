@@ -1,6 +1,6 @@
 import React, { useEffect, useRef} from 'react'
 import './Switch.scss'
-import { PropsSwitch } from '../../../types/Form';
+import { PropsSwitch } from '../Form/Form.type';
 import { useState } from 'react';
 import { isEmpty } from '../../../services/utils/Validations';
 

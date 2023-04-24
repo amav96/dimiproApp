@@ -1,7 +1,7 @@
 // import Form from '../../components/Form/Form'
 import React, { useState } from 'react';
-import { Form, Select, Input, Switch } from '../form';
-import { PropsSelect } from '../form/Select/Select.type';
+import { Form, Select, Input, Switch } from '../Form';
+import { PropsSelect } from '../Form/Select/Select.type';
 
 export function LoginForm() {
 
@@ -70,11 +70,11 @@ export function LoginForm() {
         }
       }
     },
-    lastName: {
-      placeholder : 'Apellido',
-      name: 'lastName',
-      value: '',
-      type: 'text',
+    dateStart: {
+      placeholder : 'Fecha',
+      name: 'dateStart',
+      value: null,
+      type: 'datetime',
       validations: {
         rules: {
           required: true
@@ -120,16 +120,16 @@ export function LoginForm() {
       setPaisSelect(value)
     }
   }
-// setTimeout(() => {
-//   setInputs((val) => ({
-//     ...val,
-//     country: {
-//       ...val.country,
-//       value: 1
-//     }
-//   }))
+//  setTimeout(() => {
+//    setInputs((val) => ({
+//      ...val,
+//      dateStart: {
+//        ...val.dateStart,
+//        value: new Date('04-04-2023 20:33')
+//      }
+//    }))
   
-// }, 3000);
+//  }, 3000);
   return (
     <div className="mt-4 mb-2 mx-2">
       {<Form

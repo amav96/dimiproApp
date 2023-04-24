@@ -28,7 +28,7 @@ export class Validator {
         this.required = false;
       }
 
-      if (!isEmpty(value) && property.string && !isTypeValue(value,"string")) {
+      if (!isEmpty(value) && property.string && isTypeValue(value,"string")) {
           this.string = true
           let message =  messages?.string ?? `Este valor debe ser un string`;
           this.errors.push(message)
