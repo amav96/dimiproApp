@@ -16,6 +16,8 @@ help: ## Show this help message
 
 run:
 	docker-compose up -d
+down:
+	docker-compose down
 
 stop:
 	docker-compose stop

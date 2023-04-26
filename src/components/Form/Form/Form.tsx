@@ -1,15 +1,17 @@
 import React, { ReactElement, ReactPortal, useEffect } from 'react'
 import { Input } from '../Input';
+import { Textarea } from '../Textarea';
 import { Select } from '../Select';
 import { Switch } from '../Switch/Switch';
 import './Form.scss'
 import { useState } from 'react';
-import { generatedInputs, PropsSwitchKey } from './Form.type';
+import { generatedInputs } from './Form.type';
 import { PropsSelectKey, onChangeSelect } from '../Select/Select.type';
 import { DatePack } from '../DatePack/DatePack';
 import { File } from '../File/File';
 import { PropsDateKey } from '../DatePack/DatePack.type';
 import { PropsFileKey } from '../File/File.type';
+import { PropsSwitchKey } from '../Switch/Switch.type';
 
 
 type generatedInputWithoutKey = Omit<generatedInputs,'key'>
@@ -225,6 +227,18 @@ export function Form(props: Props<string | number> | testHTML<string>) {
                       onChange={ (value: Array<any> | Array<object>) => handleChangeFile(value, input)}
                       validations={generatedInputs[index].validations}
                       cols={generatedInputs[index].cols}
+                    />
+                    : input.type === 'textarea' ?
+                    <Textarea
+                      key={`file-${index}`}
+                      placeholder={generatedInputs[index].placeholder}
+                      name={generatedInputs[index].name}
+                      value={returnForm[input.key]}
+                      onChange={ (value: Array<any> | Array<object>) => handleChangeFile(value, input)}
+                      validations={generatedInputs[index].validations}
+                      cols={generatedInputs[index].cols}
+                      colsArea={generatedInputs[index].colsArea}
+                      
                     />
                     : <Input
                     key={`input-${index}`}

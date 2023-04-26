@@ -1,0 +1,26 @@
+@import "@/scss/index.scss";
+
+.Textarea {
+    width: 100%;
+    &__input{
+        width: 100%;
+        padding: 8.5px;
+        border-radius: 6.5px;
+        background: $background-grey-light;
+    }
+
+    &__input:focus{
+        outline: none !important;
+    }
+}
+
+.controlTextarea{
+    display: flex;
+    flex-direction: column;
+
+    &__text{
+        margin-top:4px;
+        font-size: 15.5px;
+        color: $error;
+    }
+}

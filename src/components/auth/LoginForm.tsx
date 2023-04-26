@@ -102,6 +102,17 @@ export function LoginForm() {
         }
       }
     },
+    comentario: {
+      placeholder : 'Comentarios',
+      name: 'comentario',
+      value: '',
+      type: 'textarea',
+      validations: {
+        rules: {
+          required: true
+        }
+      }
+    },
     lavadero: {
       label : 'lavadero',
       name: 'lavadero',
