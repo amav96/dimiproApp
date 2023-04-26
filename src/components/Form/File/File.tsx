@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { AcceptTypes, PropsFile } from './File.type'
 import { isEmpty } from '../../../services/utils/Validations';
 import './File.scss'
@@ -28,21 +28,25 @@ export function File(props: PropsFile) {
       listenForm
   } = props;
 
-  const [localErrors, setlocalErrors] = useState<Array<string>>([])
+  const [localErrors, setLocalErrors] = useState<Array<string>>([])
   const validate =  new Validator();
   const handleValidations = (val: Array<File>) => {
-    console.log(val);
-    console.log(validations);
-    
     if(validations){
       validate.validate(val, validations)
       if(!isEmpty(validate.getErrors)){
-        setlocalErrors(validate.getErrors)
+        setLocalErrors(validate.getErrors)
       } else {
-        setlocalErrors([])
+        setLocalErrors([])
       }
     }
   }
+
+  useEffect(() => {
+    if(errors){
+        let newMessages = [...localErrors,...errors]
+        setLocalErrors([...new Set(newMessages)])
+    }
+  }, [errors])
 
   const localAccept = () :string => accept.join(",")
 
@@ -54,6 +58,7 @@ export function File(props: PropsFile) {
     } else if(listenForm){
       listenForm(allowedFiles(files))
     }
+    handleValidations(value)
 
   }
 
@@ -91,7 +96,6 @@ export function File(props: PropsFile) {
   }
 
   const allowedFiles = (files: Array<File>) =>  [...files].filter((f) => accept.includes(f.type as AcceptTypes))
-
 
   return (
     <div className={`File ${cols}`}>
