@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -18,6 +18,7 @@ export function DatePack(props: PropsDate) {
     onChange,
     validations,
     dateFormat,
+    errors
   } = props;
   const [localErrors, setLocalErrors] = useState<Array<string> | string>([])
 
@@ -56,6 +57,13 @@ export function DatePack(props: PropsDate) {
         setLocalErrors([])
     }
   }
+
+  useEffect(() => {
+    if(errors){
+        let newMessages = [...localErrors,...errors]
+        setLocalErrors([...new Set(newMessages)])
+    }
+  }, [errors])
 
   return (
     <div className={`DatePack ${cols}`}>

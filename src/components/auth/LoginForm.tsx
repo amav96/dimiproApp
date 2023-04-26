@@ -47,7 +47,7 @@ export function LoginForm() {
     value: [],
     options: paises,
     type: 'select',
-    multiple: false,
+    multiple: true,
     validations: {
       rules: {
         required: true
@@ -61,6 +61,7 @@ export function LoginForm() {
   const [inputs, setInputs] = useState({
     firstName : {
       placeholder : 'Nombre',
+      title: 'prueba',
       name: 'firstName',
       value: '',
       type: 'text',
@@ -89,6 +90,17 @@ export function LoginForm() {
       options: paises,
       type: 'select',
       clearable: true
+    },
+    imagenes: {
+      placeholder : 'Imagen Avatar',
+      name: 'imagenes',
+      value: [],
+      type: 'file',
+      validations: {
+        rules: {
+          required: true
+        }
+      }
     },
     lavadero: {
       label : 'lavadero',

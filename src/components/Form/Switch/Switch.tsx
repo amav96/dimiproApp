@@ -15,6 +15,7 @@ export function Switch(props: PropsSwitch) {
   } = props;
 
   const [switched, setSwitched] = useState<boolean>(false);
+  // manually es para saber si lo seteo manualmente o desde afuera del componente
   const manually = useRef(false);
 
   const onSwitch = ():void => {
@@ -114,4 +115,3 @@ export function Switch(props: PropsSwitch) {
     </div>
   )
 }
-// || typeof value === 'boolean' && value === true
