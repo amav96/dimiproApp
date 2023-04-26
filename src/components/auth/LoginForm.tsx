@@ -116,7 +116,7 @@ export function LoginForm() {
     lavadero: {
       label : 'lavadero',
       name: 'lavadero',
-      type: 'check',
+      type: 'switch',
       value: false,
     },
     test: {
