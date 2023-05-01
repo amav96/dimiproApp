@@ -171,93 +171,79 @@ export function Form(props: Props<string | number> | testHTML<string>) {
               </div>
             )
           }else {
+            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text'))){
               return (
-                <React.Fragment key={`input-${index}`}>
-                  { !input.type && input?.title &&
-                    <label
-                      key={`label-${index}`}
-                      className="my-1 d-flex label-global"
-                    >
-                      { input.title }
-                    </label>
-                  }
-                  {
-                    input.type === 'datetime' ? 
-                    <DatePack
-                    key={`datetime-${index}`}
-                    value={returnForm[input.key]}
-                    name={generatedInputs[index].name}
-                    placeholder={generatedInputs[index].placeholder}
-                    onChange={(e : any) => handleChangeDate(e,input)}
-                    dateFormat={generatedInputs[index].dateFormat ?? 'dd/MM/yyyy hh:mm'}
-                    validations={generatedInputs[index].validations}
-                    cols={generatedInputs[index].cols}
-                    errors={generatedInputs[index].errors}
-                    />
-                    : input.type === 'select' ? 
-                    <Select
-                    key={`select-${index}`}
-                    placeholder={generatedInputs[index].placeholder}
-                    name={generatedInputs[index].name}
-                    options={generatedInputs[index].options}
-                    value={returnForm[input.key]}
-                    onChange={(e : onChangeSelect) => onChangeSelect(e,input)}
-                    onRemove={(e : onChangeSelect) => onRemoveSelect(e,input)}
-                    multiple={generatedInputs[index].multiple}
-                    clearable={generatedInputs[index].clearable}
-                    validations={generatedInputs[index].validations}
-                    cols={generatedInputs[index].cols}
-                    errors={generatedInputs[index].errors}
-                    />
-                    : input.type === 'switch' ?
-                    <Switch
-                      key={`switch-${index}`}
-                      name={generatedInputs[index].name}
-                      label={generatedInputs[index].label}
-                      option={generatedInputs[index].option}
-                      value={returnForm[input.key]}
-                      onChange={ (value: object | Array<object>) => handleChangeSwitch(value, input)}
-                      cols={generatedInputs[index].cols}
-                    />
-                    : input.type === 'file' ?
-                    <File
-                      key={`file-${index}`}
-                      name={generatedInputs[index].name}
-                      value={returnForm[input.key]}
-                      onChange={ (value: Array<any> | Array<object>) => handleChangeFile(value, input)}
-                      validations={generatedInputs[index].validations}
-                      cols={generatedInputs[index].cols}
-                    />
-                    : input.type === 'textarea' ?
-                    <Textarea
-                      key={`file-${index}`}
-                      placeholder={generatedInputs[index].placeholder}
-                      name={generatedInputs[index].name}
-                      value={returnForm[input.key]}
-                      onChange={ (value: Array<any> | Array<object>) => handleChangeFile(value, input)}
-                      validations={generatedInputs[index].validations}
-                      cols={generatedInputs[index].cols}
-                      colsArea={generatedInputs[index].colsArea}
-                      
-                    />
-                    : <Input
-                    key={`input-${index}`}
-                    type={generatedInputs[index].type}
-                    value={returnForm[input.key]}
-                    name={generatedInputs[index].name}
-                    placeholder={generatedInputs[index].placeholder}
-                    onChange={handleChangeInput}
-                    validations={generatedInputs[index].validations}
-                    cols={generatedInputs[index].cols}
-                    errors={generatedInputs[index].errors}
-                   />
-                  }
-
-                </React.Fragment>
+                <Input
+                key={index}
+                type={generatedInputs[index].type}
+                value={returnForm[input.key]}
+                name={generatedInputs[index].name}
+                placeholder={generatedInputs[index].placeholder}
+                onChange={handleChangeInput}
+                validations={generatedInputs[index].validations}
+                cols={generatedInputs[index].cols}
+                errors={generatedInputs[index].errors}
+                />
               )
+            } else if (input.type === 'datetime'){
+              return (
+                <DatePack
+                key={index}
+                value={returnForm[input.key]}
+                name={generatedInputs[index].name}
+                placeholder={generatedInputs[index].placeholder}
+                onChange={(e : any) => handleChangeDate(e,input)}
+                dateFormat={generatedInputs[index].dateFormat ?? 'dd/MM/yyyy hh:mm'}
+                validations={generatedInputs[index].validations}
+                cols={generatedInputs[index].cols}
+                errors={generatedInputs[index].errors}
+                />
+              )
+            } else if (input.type === 'select'){
+              return (
+                <Select
+                key={index}
+                placeholder={generatedInputs[index].placeholder}
+                name={generatedInputs[index].name}
+                options={generatedInputs[index].options}
+                value={returnForm[input.key]}
+                onChange={(e : onChangeSelect) => onChangeSelect(e,input)}
+                onRemove={(e : onChangeSelect) => onRemoveSelect(e,input)}
+                multiple={generatedInputs[index].multiple}
+                clearable={generatedInputs[index].clearable}
+                validations={generatedInputs[index].validations}
+                cols={generatedInputs[index].cols}
+                errors={generatedInputs[index].errors}
+                />
+              )
+            } else if (input.type === 'check' || input.type === 'switch'){
+              return(
+                <Switch
+                key={index}
+                name={generatedInputs[index].name}
+                label={generatedInputs[index].label}
+                option={generatedInputs[index].option}
+                value={returnForm[input.key]}
+                onChange={ (value: object | Array<object>) => handleChangeSwitch(value, input)}
+                cols={generatedInputs[index].cols}
+                />
+              )
+            } else if (input.type === 'file' ){
+              return(
+                <File
+                key={`file-${index}`}
+                name={generatedInputs[index].name}
+                value={returnForm[input.key]}
+                onChange={ (value: Array<any> | Array<object>) => handleChangeFile(value, input)}
+                validations={generatedInputs[index].validations}
+                cols={generatedInputs[index].cols}
+              />
+              )
+            }
           }
         })
       }
+      
     </form>
   )
 }

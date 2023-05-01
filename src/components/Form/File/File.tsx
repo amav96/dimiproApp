@@ -4,6 +4,7 @@ import { isEmpty } from '../../../services/utils/Validations';
 import './File.scss'
 import nubeFile from './nube-file.svg';
 import { Validator } from '../../../services/utils/Validator';
+import { Validations } from '../../../types/Validations';
 
 export function File(props: PropsFile) {
 
@@ -30,16 +31,18 @@ export function File(props: PropsFile) {
 
   const [localErrors, setLocalErrors] = useState<Array<string>>([])
   const validate =  new Validator();
-  const handleValidations = (val: Array<File>) => {
-    if(validations){
-      validate.validate(val, validations)
-      if(!isEmpty(validate.getErrors)){
-        setLocalErrors(validate.getErrors)
-      } else {
+
+  const handleValidations = (value: Array<File>, validations: Validations) => {
+    console.log('value ', value)
+    validate.validate(value, validations)
+    const hasErrors = validate.getErrors
+    if(!isEmpty(hasErrors)) {
+        setLocalErrors(hasErrors)
+    }else {
         setLocalErrors([])
-      }
     }
-  }
+}
+
 
   useEffect(() => {
     if(errors){
@@ -47,6 +50,7 @@ export function File(props: PropsFile) {
         setLocalErrors([...new Set(newMessages)])
     }
   }, [errors])
+
 
   const localAccept = () :string => accept.join(",")
 
@@ -58,7 +62,10 @@ export function File(props: PropsFile) {
     } else if(listenForm){
       listenForm(allowedFiles(files))
     }
-    handleValidations(value)
+
+    if(validations !== undefined){
+      handleValidations(allowedFiles(files), validations);
+    }
 
   }
 
@@ -67,6 +74,9 @@ export function File(props: PropsFile) {
     if (evt.dataTransfer?.files.length && onChange) {
       let files = evt.dataTransfer.files as unknown as Array<File>
       onChange(allowedFiles(files))
+      if(validations !== undefined){
+        handleValidations(value, validations);
+      }
     }
   }
 
@@ -91,7 +101,10 @@ export function File(props: PropsFile) {
   }
 
   const checkIt = () => {
-    handleValidations(value)
+    // if(validations !== undefined){
+    //   console.log('checkin')
+    //   handleValidations(value, validations);
+    // }
     document.body.onfocus = null;
   }
 

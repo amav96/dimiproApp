@@ -1,5 +1,5 @@
 const debounce = (fn: Function, delay: number = 0, immediate: boolean = false) => {
-    let timeout: number;
+    let timeout: any;
     return (...args: any) => {
       if (immediate && !timeout) fn(...args);
       clearTimeout(timeout);
@@ -10,3 +10,4 @@ const debounce = (fn: Function, delay: number = 0, immediate: boolean = false) =
   };
   
   export default debounce;
+  

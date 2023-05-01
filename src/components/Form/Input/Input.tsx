@@ -25,7 +25,7 @@ export function Input(props: PropsInput) {
       if(onChange){
           onChange(evt)
           if(validations !== undefined){
-              handleValidations(evt.target.value, validations);
+            handleValidations(evt.target.value, validations);
           }
       }
     }
