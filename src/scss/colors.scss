@@ -1,25 +1,38 @@
-$primary: #1890ff;
-$primary-hover: #0280b3;
+
+$black: #001b35;
+$gray: #f0f3f4;
+$grey-light: rgba(206, 214, 214, 0.781);
+$black-web: #16212b;
+$red: #d12f2d;
+$white: #fff;
+$blue: #1890ff;
+$green: #40ce08;
+$violet: #7508ce;
+$blue-light: #1da1f2;
 
 // text
-$text-light: #fff;
-$text-black: #000;
+$text-black: $black;
+$text-grey: $gray;
+$text-grey-light: $grey-light;
+$text-black-web: $black-web;
+$text-red: $red;
+$text-white: $white;
+$text-blue: $blue;
+$text-green: $green;
+$text-violet: $violet;
+$text-blue-light: $blue-light;
 
 // background
-$background-dark: #001b35;
-$background-grey: #f0f3f4;
-$background-grey-light: #e3ecf0e1;
-$background-dark-web: #16212b;
+$background-black: $black;
+$background-grey: $gray;
+$background-grey-light: $grey-light;
+$background-black-web: $black-web;
+$background-red: $red;
+$background-white: $white;
+$background-blue: $blue;
+$background-green: $green;
+$background-violet: $violet;
+$background-blue-light: $blue-light;
 
 // border
-$border-grey: #808080;
-
-// status
-$success: #84b84c;
-$error: #d12f2d;
-
-// social color
-$youtube: #cd201f;
-$twitter: #1da1f2;
-$facebook: #3b5998;
-$linkedin: #0077b5;
+$border-grey: $gray;

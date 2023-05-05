@@ -52,10 +52,10 @@ export function TableAlive(props: TableAliveProps<string>) {
 
   return (
     <Table
-      items={localItems}
-      columns={columns}
-      scopedColumns={scopedColumns}
-      onChangePage={changePage}
-      />
+    items={localItems}
+    columns={columns}
+    scopedColumns={scopedColumns}
+    onChangePage={changePage}
+    />
   )
 }

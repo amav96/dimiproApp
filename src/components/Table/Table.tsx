@@ -11,7 +11,6 @@ export default function Table(props: TableProps<string>) {
 
   useEffect(() => {
     if(items.length === 0 && localItems.length > 0){
-      console.log('una vez')
       setLocalItems([])
     } else {
       setLocalItems((prev) => ([...prev, ...items]))

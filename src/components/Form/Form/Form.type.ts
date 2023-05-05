@@ -6,25 +6,23 @@ import { PropsTextArea } from "../Textarea/Textarea.type";
 import { PropsSwitch } from "../Switch/Switch.type";
 import { PropsFile } from "../File/File.type";
 
-type InputsTypes =  "text" |
-                    "number" |
-                    "time" |
-                    "date" |
-                    "color" |
-                    "slot" |
-                    "check" |
-                    "switch" |
-                    "select" |
-                    "multiple" |
-                    "datetime" |
-                    "file" | 
-                    "textarea"
-
 export interface BaseProps {
   placeholder?: string;
   value: any;
   name: string;
-  type?: InputsTypes;
+  type?: "text" |
+  "textarea" |
+  "number" |
+  "time" |
+  "date" |
+  "color" |
+  "slot" |
+  "check" |
+  "switch" |
+  "select" |
+  "multiple" |
+  "datetime" |
+  "file"
   title?: string;
   disabled?: boolean;
   state?: boolean | null;
@@ -39,14 +37,18 @@ export interface BaseProps {
 // -----------------Form--------------------
 
 export interface Inputs extends
-    PropsInput,
-    PropsSelect,
-    PropsFile,
-    PropsDate,
-    PropsSwitch,
-    PropsDate,
-    PropsTextArea
-     {
+  PropsInput,
+  PropsSelect,
+  PropsFile,
+  PropsDate,
+  PropsSwitch,
+  PropsDate,
+  PropsTextArea
+    {
+}
+
+export interface Slot {
+  slot: boolean
 }
 
 export interface generatedInputs extends 
@@ -58,7 +60,9 @@ export interface generatedInputs extends
     PropsDate,
     PropsTextArea {
   key: string;
-  slot: boolean;
+  slot?: boolean;
 }
+
+export type generatedInputWithoutKey = Omit<generatedInputs,'key'>
 
 // ----------------------------------------------

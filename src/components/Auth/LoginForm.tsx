@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { Form, Select, Input, Switch } from '../Form';
 import { PropsSelect } from '../Form/Select/Select.type';
+import { Modal } from '../Modal/Modal';
+import { PropsInput } from '../Form/Input/Input.type';
+import { Inputs, Slot } from '../Form/Form/Form.type';
 
 export function LoginForm() {
 
@@ -41,25 +44,12 @@ export function LoginForm() {
     
   }
 
-  const country : PropsSelect =  {
-    placeholder : 'Pais',
-    name: 'country',
-    value: [],
-    options: paises,
-    type: 'select',
-    multiple: true,
-    validations: {
-      rules: {
-        required: true
-      }
-    },
-    clearable: true,
-    onSelect: test,
-    onRemove: test1,
+  interface InputsForm  {
+    [key: string]: Inputs | Slot
   }
 
-  const [inputs, setInputs] = useState({
-    firstName : {
+  const [inputs, setInputs] = useState<InputsForm>({
+    firstName: {
       placeholder : 'Nombre',
       title: 'prueba',
       name: 'firstName',
@@ -82,7 +72,22 @@ export function LoginForm() {
         }
       }
     },
-    country: country,
+    country: {
+      placeholder : 'Pais',
+      name: 'country',
+      value: [],
+      options: paises,
+      type: 'select',
+      multiple: true,
+      validations: {
+        rules: {
+          required: true
+        }
+      },
+      clearable: true,
+      onSelect: test,
+      onRemove: test1,
+    },
     countrystatic: {
       placeholder : 'Pais estatico',
       name: 'countrystatic',
@@ -120,16 +125,13 @@ export function LoginForm() {
       value: false,
     },
     test: {
-      slot: true,
-      
-    },
+      slot: true
+    }
   })
 
   const [err, setErr] = useState<Array<string>>([]);
-  const [oka, setOka] = useState('');
 
   const setErrors = ():void => {
-    console.log('gege')
     setErr(['hola este es un error'])
   }
   const remove = ():void => {
@@ -143,49 +145,52 @@ export function LoginForm() {
       setPaisSelect(value)
     }
   }
-//  setTimeout(() => {
-//    setInputs((val) => ({
-//      ...val,
-//      dateStart: {
-//        ...val.dateStart,
-//        value: new Date('04-04-2023 20:33')
-//      }
-//    }))
-  
-//  }, 3000);
+
+const [openModal, setOpenModal] = useState<Boolean>(false)
+
+const openCloseModal = () => {
+  setOpenModal((prev) => !prev)
+}
+const onSubmit = (data: any) => {
+  console.log(data)
+}
   return (
     <div className="mt-4 mb-2 mx-2">
-      {<Form
+      {
+        <Form
       inputs={inputs}
-      test={<div>Soy slot</div>}
-      /> }
-      {/* <Select
-      name={'pais'}
-      options={paises}
-      value={paisSelect}
-      onChange={onChange}
-      multiple={true}
-      errors={err}
-      /> */}
+      onSubmit={onSubmit}
+      scopedFields={{
+        test: () => (
+          <div>gege</div>
+        )
+      }}
+      >
+        <button type="submit" className="col-span-12">
+          button enviar
+        </button>
+      </Form>
+      }
+
+      <Modal
+      isOpen={openModal}
+      closeModal={openCloseModal}
+      >
+        <div className="flex flex-col">
+          <div>
+            header
+          </div>
+          <div>
+            <button
+            onClick={openCloseModal}
+             > abrir cerrar
+            </button>
+          </div>
+        </div>
+      </Modal>
+
       <button onClick={setErrors} className='bg-green-200 p-2' > set errors </button>
-      <button onClick={remove} className='bg-red-200 p-2' > quitar </button>
+      <button onClick={openCloseModal} className='bg-red-200 p-2' > Abrir modal </button>
     </div>
   )
 }
-
-
- // <div className='my-2 flex justify-center flex-column grid grid-cols-12 gap-2'>
-      /* <Input
-      value={'2'}
-      name={'firstName'}
-      placeholder={'nombre'}
-      onChange={() => console.log('testing')}
-      />
-      <Select
-      name={'pais'}
-      options={paises}
-      value={paisSelect}
-      onChange={onChange}
-      multiple={true}
-      /> */
-    // </div>
