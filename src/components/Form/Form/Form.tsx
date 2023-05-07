@@ -5,7 +5,7 @@ import { Select } from '../Select';
 import { Switch } from '../Switch/Switch';
 import './Form.scss'
 import { useState } from 'react';
-import { Slot, generatedInputWithoutKey, generatedInputs } from './Form.type';
+import { Slot, generatedInputs } from './Form.type';
 import { PropsSelectKey, onChangeSelect } from '../Select/Select.type';
 import { DatePack } from '../DatePack/DatePack';
 import { File } from '../File/File';
@@ -14,15 +14,15 @@ import { PropsFileKey } from '../File/File.type';
 import { PropsSwitchKey } from '../Switch/Switch.type';
 import { Validator } from '../../../services/utils/Validator';
 import { isEmpty } from '../../../services/utils/Validations';
+import { PropsTextAreaKey } from '../Textarea/Textarea.type';
+import { PropsInputKey } from '../Input/Input.type';
 
 type field<K extends string | number> = {
-  [key in K]: ((data : { input: generatedInputs, returnForm: any} ) => React.ReactNode) | undefined;
+  [key in K]: ((data : { input: generatedInputs, formValues: any} ) => React.ReactNode) | undefined;
 }
 
 interface Props<K extends string | number > {
-  inputs: {
-    [key in K]: generatedInputWithoutKey | Slot;
-  },
+  inputs: Array<generatedInputs | Slot>,
   onSubmit?: Function,
   scopedFields?: field<K>,
   children?: JSX.Element | JSX.Element[],
@@ -40,68 +40,66 @@ export function Form(props: Props<string | number>) {
     onSubmit
   } = props;
   const [generatedInputs, setGeneratedInputs] = useState<Array<generatedInputs>>([])
-  const [returnForm, setReturnForm] = useState<any>({})
-  const hasValidations = useRef<boolean>(false)
+  const [formValues, setFormValues] = useState<any>({})
+
 
   useEffect(() => {
-    if(inputs && typeof inputs === 'object'){
-      Object.keys(inputs).forEach((k) => {
-        const index = generatedInputs.map((m) => m.key).indexOf(k);
+      inputs.forEach(({key}, i) => {
+        const index = generatedInputs.map((m) => m.key).indexOf(key);
         if (index > -1) {
           const updateGeneratedInput = [...generatedInputs];
-          let updateInput: generatedInputWithoutKey  = inputs[k as keyof object] as generatedInputWithoutKey;
+          let updateInput : generatedInputs = inputs[i] as generatedInputs
           setGeneratedInputs((prevState) => 
               prevState.map((obj,i) => {
                 if(i === index){
-                  return {...obj, ...updateInput }
+                  return {...obj, ...inputs[i] }
                 }
               return obj
             })
           )
+          
           if (updateInput.value && updateInput.value !== undefined) {
-            setReturnForm((prev: keyValue<string | number>) => ({
+            setFormValues((prev: keyValue<string | number>) => ({
               ...prev,
-              [k]: updateInput.value
+              [key]: updateInput.value
             }))
           }
-          if(k === 'firstName'){
-            console.log(updateGeneratedInput);
-          }
         } else {
-          let newInput: generatedInputWithoutKey  = inputs[k as keyof object] as generatedInputWithoutKey;
+          let newInput: generatedInputs  = inputs[i] as generatedInputs;
           setGeneratedInputs((prev) => ([
             ...prev,
-            ...[{ ...newInput, ...{ key: k } }]
+            ...[{ ...newInput, ...{ key: key } }]
           ]))
-          Object.defineProperty(returnForm, k,
+          Object.defineProperty(formValues, key,
             {
               enumerable: true,
               configurable: true,
               writable: true,
               value: {},
             });
-            setReturnForm((prev: keyValue<string | number>) => {
+            setFormValues((prev: keyValue<string | number>) => {
               if (newInput.hasOwnProperty('value') && newInput.value) {
                 return {
                   ...prev,
-                  [k]: newInput.value
+                  [key]: newInput.value
                 }
               } else {
                 return {
                   ...prev,
-                  [k]: ''
+                  [key]: ''
                 }
               }
             })
         }
       })
-    }
   }, [inputs])
 
+  const hasValidations = useRef<boolean>(false)
+  const hasFormatValue = useRef<boolean>(true)
   useEffect(() => {
     hasValidations.current = generatedInputs.some((val) => val.hasOwnProperty('validations')  && val.validations)
+    hasFormatValue.current = generatedInputs.some((val) => val.hasOwnProperty('formatValue')  && val.formatValue && typeof val.formatValue === 'function')
   }, [generatedInputs])
-  
 
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -113,11 +111,25 @@ export function Form(props: Props<string | number>) {
   const getValues = () =>  {
     return new Promise( async (resolve) => {
       if(hasValidations.current){
-        resolve({ items: returnForm, isFormValid: isValid()})
+        resolve({ items: await processFormValues(formValues), isFormValid: isValid()})
       } else {
-        resolve({ items: returnForm})
+        resolve({ items: await processFormValues(formValues)})
       }
     });
+  }
+
+  const processFormValues = (formValues: any) : Promise<object> => {
+    return new Promise( async (resolve) => {
+      if(hasFormatValue.current){
+        let buildObject: any = {}
+        generatedInputs.forEach((value) => {
+          buildObject[value.key] = value.formatValue ? value.formatValue(formValues[value.key]) : formValues[value.key]
+        })
+        resolve(buildObject)
+      } else {
+        resolve(hasFormatValue)
+      }
+    })
   }
 
     // Validator
@@ -131,8 +143,16 @@ export function Form(props: Props<string | number>) {
     generatedInputs.forEach((_,index) => {
       let currentInput = generatedInputs[index]
       if(currentInput.validations){
-        validator.validate(returnForm[currentInput.key], currentInput.validations);
+        validator.validate(formValues[currentInput.key], currentInput.validations);
         if(!isEmpty(validator.getErrors)){
+          setGeneratedInputs((prevState) => 
+              prevState.map((obj,i) => {
+                if(i === index){
+                  return {...obj, ...{errors : validator.getErrors} }
+                }
+              return obj
+            })
+          )
           generatedInputs[index].errors = validator.getErrors;
           result = false;
         }
@@ -141,23 +161,40 @@ export function Form(props: Props<string | number>) {
     return result
   }
 
-  const handleChangeInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (evt: React.ChangeEvent<HTMLInputElement>, input: PropsInputKey) => {
     const { name: key , value } = evt.target;
-    setReturnForm((prev: keyValue<string | number>) => ({
+    setFormValues((prev: keyValue<string | number>) => ({
       ...prev,
       [key]: value,
     }));
+    if(input.onInput){
+      input.onInput({value, input})
+    }
+  }
+
+  const handleChangeTextarea = (evt: React.ChangeEvent<HTMLInputElement>, input: PropsTextAreaKey) => {
+    const { name: key , value } = evt.target;
+    setFormValues((prev: keyValue<string | number>) => ({
+      ...prev,
+      [key]: value,
+    }));
+    if(input.onTextarea){
+      input.onTextarea({value, input})
+    }
   }
 
   const handleChangeDate = (date : Date, input: PropsDateKey):void => {
-    setReturnForm((prev: keyValue<string | number>) => ({
+    setFormValues((prev: keyValue<string | number>) => ({
       ...prev,
       [input.key]: date,
     }));
+    if(input.onDate){
+      input.onDate({value: date, input})
+    }
   }
 
   const onChangeSelect = (data: onChangeSelect, input: PropsSelectKey):void => {
-    setReturnForm((prev: keyValue<string | number>) => ({
+    setFormValues((prev: keyValue<string | number>) => ({
       ...prev,
       [input.key]: data.value,
     }));
@@ -174,18 +211,18 @@ export function Form(props: Props<string | number>) {
 
   const handleChangeSwitch = (value: object | number | boolean , input: PropsSwitchKey) :void => {
     if(typeof value === 'number' || typeof value === 'object' || typeof value === 'boolean'){
-      setReturnForm((prev: keyValue<string | number>) => ({
+      setFormValues((prev: keyValue<string | number>) => ({
         ...prev,
         [input.key]: value,
       }));
-      if(input.listenChange){
-        input.listenChange({value, input})
+      if(input.onSwitch){
+        input.onSwitch({value, input})
       }
     }
   }
 
   const handleChangeFile = (value: Array<any>, input : PropsFileKey) => {
-    setReturnForm((prev: keyValue<string | number>) => {
+    setFormValues((prev: keyValue<string | number>) => {
         return ({
           ...prev,
           [input.key]:  value,
@@ -194,7 +231,8 @@ export function Form(props: Props<string | number>) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='Form grid grid-cols-12 gap-2'>
+    <form onSubmit={handleSubmit}>
+      <div className='Form grid grid-cols-12 gap-2'>
       {
         generatedInputs.filter((val) => val.hidden === undefined || val.hidden === false)
         .map((input, index) => {
@@ -204,7 +242,7 @@ export function Form(props: Props<string | number>) {
                 key={`slot-${index}`}
                 className={`${input.className ? input.className : ''}`}
               >
-                 {typeof scopedFields[input.key] === 'function' && scopedFields?.[input.key]?.({input , returnForm})}
+                 {typeof scopedFields[input.key] === 'function' && scopedFields?.[input.key]?.({input , formValues})}
               </div>
             )
           }else {
@@ -213,10 +251,24 @@ export function Form(props: Props<string | number>) {
                 <Input
                 key={index}
                 type={generatedInputs[index].type}
-                value={returnForm[input.key]}
+                value={formValues[input.key]}
                 name={generatedInputs[index].name}
                 placeholder={generatedInputs[index].placeholder}
-                onChange={handleChangeInput}
+                onChange={(e : React.ChangeEvent<HTMLInputElement>) => handleChangeInput(e,input)}
+                validations={generatedInputs[index].validations}
+                cols={generatedInputs[index].cols}
+                errors={generatedInputs[index].errors}
+                />
+              )
+            } else if (input.type === 'textarea'){
+              return (
+                <Textarea
+                key={index}
+                type={generatedInputs[index].type}
+                value={formValues[input.key]}
+                name={generatedInputs[index].name}
+                placeholder={generatedInputs[index].placeholder}
+                onChange={(e : React.ChangeEvent<HTMLInputElement>) => handleChangeTextarea(e,input)}
                 validations={generatedInputs[index].validations}
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
@@ -227,11 +279,12 @@ export function Form(props: Props<string | number>) {
                 <DatePack
                 key={index}
                 type={generatedInputs[index].type}
-                value={returnForm[input.key]}
+                value={formValues[input.key]}
                 name={generatedInputs[index].name}
                 placeholder={generatedInputs[index].placeholder}
                 onChange={(e : any) => handleChangeDate(e,input)}
-                dateFormat={generatedInputs[index].dateFormat ?? 'dd/MM/yyyy hh:mm'}
+                dateFormat={generatedInputs[index].dateFormat}
+                showTimeSelect={generatedInputs[index].showTimeSelect}
                 validations={generatedInputs[index].validations}
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
@@ -245,7 +298,7 @@ export function Form(props: Props<string | number>) {
                 placeholder={generatedInputs[index].placeholder}
                 name={generatedInputs[index].name}
                 options={generatedInputs[index].options}
-                value={returnForm[input.key]}
+                value={formValues[input.key]}
                 onChange={(e : onChangeSelect) => onChangeSelect(e,input)}
                 onRemove={(e : onChangeSelect) => onRemoveSelect(e,input)}
                 multiple={generatedInputs[index].multiple}
@@ -263,7 +316,7 @@ export function Form(props: Props<string | number>) {
                 name={generatedInputs[index].name}
                 label={generatedInputs[index].label}
                 option={generatedInputs[index].option}
-                value={returnForm[input.key]}
+                value={formValues[input.key]}
                 onChange={ (value: object | Array<object>) => handleChangeSwitch(value, input)}
                 cols={generatedInputs[index].cols}
                 />
@@ -274,7 +327,7 @@ export function Form(props: Props<string | number>) {
                 key={`file-${index}`}
                 type={generatedInputs[index].type}
                 name={generatedInputs[index].name}
-                value={returnForm[input.key]}
+                value={formValues[input.key]}
                 onChange={ (value: Array<any> | Array<object>) => handleChangeFile(value, input)}
                 validations={generatedInputs[index].validations}
                 cols={generatedInputs[index].cols}
@@ -284,8 +337,10 @@ export function Form(props: Props<string | number>) {
           }
         })
       }
+      </div>
       {children}
     </form>
+    
   )
 }
 

@@ -17,7 +17,8 @@ export function DatePack(props: PropsDate) {
     value,
     onChange,
     validations,
-    dateFormat,
+    dateFormat = 'dd/MM/yyyy',
+    showTimeSelect = false,
     errors
   } = props;
   const [localErrors, setLocalErrors] = useState<Array<string> | string>([])
@@ -68,13 +69,14 @@ export function DatePack(props: PropsDate) {
   return (
     <div className={`DatePack ${cols}`}>
       <DatePicker
-        dateFormat={ dateFormat ?? 'dd/MM/yyyy hh:mm'}
+        dateFormat={dateFormat}
         placeholderText={placeholder}
         selected={value}
         onChange={handleChange}
         onCalendarClose={handleCalendarClose}
         onCalendarOpen={handleCalendarOpen}
         className='DatePack__input'
+        showTimeSelect={showTimeSelect}
       />
       {
         // mostrar errores

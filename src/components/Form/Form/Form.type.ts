@@ -32,23 +32,14 @@ export interface BaseProps {
   validations?: Validations;
   errors?: Array<string>;
   cols?: number;
+  formatValue?: Function
 }
 
 // -----------------Form--------------------
 
-export interface Inputs extends
-  PropsInput,
-  PropsSelect,
-  PropsFile,
-  PropsDate,
-  PropsSwitch,
-  PropsDate,
-  PropsTextArea
-    {
-}
-
 export interface Slot {
-  slot: boolean
+  slot: boolean,
+  key: string
 }
 
 export interface generatedInputs extends 
@@ -62,7 +53,5 @@ export interface generatedInputs extends
   key: string;
   slot?: boolean;
 }
-
-export type generatedInputWithoutKey = Omit<generatedInputs,'key'>
 
 // ----------------------------------------------

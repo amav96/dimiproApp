@@ -1,10 +1,12 @@
 // import Form from '../../components/Form/Form'
 import React, { useState } from 'react';
-import { Form, Select, Input, Switch } from '../Form';
+import { Form} from '../Form';
 import { PropsSelect } from '../Form/Select/Select.type';
 import { Modal } from '../Modal/Modal';
 import { PropsInput } from '../Form/Input/Input.type';
-import { Inputs, Slot } from '../Form/Form/Form.type';
+import { Slot, generatedInputs } from '../Form/Form/Form.type';
+import { formatTypeDate, getValuesInArrayObjects } from '../../services/utils/Formatters';
+import { Button } from '../Button/Button';
 
 export function LoginForm() {
 
@@ -44,90 +46,100 @@ export function LoginForm() {
     
   }
 
-  interface InputsForm  {
-    [key: string]: Inputs | Slot
-  }
-
-  const [inputs, setInputs] = useState<InputsForm>({
-    firstName: {
-      placeholder : 'Nombre',
-      title: 'prueba',
-      name: 'firstName',
-      value: '',
-      type: 'text',
-      validations: {
-        rules: {
-          required: true
-        }
-      }
-    },
-    dateStart: {
-      placeholder : 'Fecha',
-      name: 'dateStart',
-      value: null,
-      type: 'datetime',
-      validations: {
-        rules: {
-          required: true
-        }
-      }
-    },
-    country: {
-      placeholder : 'Pais',
-      name: 'country',
-      value: [],
-      options: paises,
-      type: 'select',
-      multiple: true,
-      validations: {
-        rules: {
-          required: true
+  const [inputs, setInputs] = useState<Array<generatedInputs | Slot>>(
+    [
+      {
+        key: 'firstName',
+        placeholder : 'Nombre',
+        title: 'prueba',
+        name: 'firstName',
+        value: '',
+        type: 'text',
+        validations: {
+          rules: {
+            required: true
+          }
         }
       },
-      clearable: true,
-      onSelect: test,
-      onRemove: test1,
-    },
-    countrystatic: {
-      placeholder : 'Pais estatico',
-      name: 'countrystatic',
-      value: [],
-      options: paises,
-      type: 'select',
-      clearable: true
-    },
-    imagenes: {
-      placeholder : 'Imagen Avatar',
-      name: 'imagenes',
-      value: [],
-      type: 'file',
-      validations: {
-        rules: {
-          required: true
+      {
+        key: 'dateStart',
+        placeholder : 'Fecha',
+        name: 'dateStart',
+        value: null,
+        type: 'datetime',
+        validations: {
+          rules: {
+            required: true
+          }
+        },
+        // showTimeSelect: true,
+        // dateFormat:'dd/MM/yyyy hh:mm',
+        formatValue: (value : Date) => formatTypeDate(value)
+        
+      },
+      {
+        key: 'country',
+        placeholder: 'Pais',
+        name: 'country',
+        value: [],
+        options: paises,
+        type: 'select',
+        multiple: true,
+        validations: {
+          rules: {
+            required: true
+          }
+        },
+        clearable: true,
+        formatValue: (value: Array<object>) => getValuesInArrayObjects(value),
+        onSelect: test,
+        onRemove: test1
+      },
+      {
+        key: 'countrystatic',
+        placeholder: 'Pais estatico',
+        name: 'countrystatic',
+        value: [],
+        options: paises,
+        type: 'select',
+        clearable: true
+      },
+      {
+        key: 'imagenes',
+        placeholder: 'Imagen Avatar',
+        name: 'imagenes',
+        value: [],
+        type: 'file',
+        validations: {
+          rules: {
+            required: true
+          }
         }
-      }
-    },
-    comentario: {
-      placeholder : 'Comentarios',
-      name: 'comentario',
-      value: '',
-      type: 'textarea',
-      validations: {
-        rules: {
-          required: true
+      },
+      {
+        key: 'comentario',
+        placeholder: 'Comentarios',
+        name: 'comentario',
+        value: '',
+        type: 'textarea',
+        validations: {
+          rules: {
+            required: true
+          }
         }
+      },
+      {
+        key: 'lavadero',
+        label: 'lavadero',
+        name: 'lavadero',
+        type: 'switch',
+        value: false
+      },
+      {
+        key: 'test',
+        slot: true
       }
-    },
-    lavadero: {
-      label : 'lavadero',
-      name: 'lavadero',
-      type: 'switch',
-      value: false,
-    },
-    test: {
-      slot: true
-    }
-  })
+    ])
 
   const [err, setErr] = useState<Array<string>>([]);
 
@@ -166,9 +178,10 @@ const onSubmit = (data: any) => {
         )
       }}
       >
-        <button type="submit" className="col-span-12">
-          button enviar
-        </button>
+        <Button
+        type={'submit'}
+        text={'Enviar formulario'}
+        />
       </Form>
       }
 

@@ -5,14 +5,14 @@ import debounce from '../../services/utils/Debounce';
 import getProperty from '../../services/utils/Property';
 
 export default function Table(props: TableProps<string>) {
-  const { columns, scopedColumns, items = [], onChangePage } = props;
+  const { columns, scopedColumns, items, onChangePage } = props;
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
 
   useEffect(() => {
-    if(items.length === 0 && localItems.length > 0){
+    if(items?.length === 0 && localItems.length > 0){
       setLocalItems([])
-    } else {
+    } else if(items){
       setLocalItems((prev) => ([...prev, ...items]))
     }
   }, [items])

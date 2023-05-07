@@ -18,7 +18,6 @@ export class Validator {
     if (typeof validations === "object" && validations !== null) {
       const property: Rules = validations.rules;
       const messages: Messages | undefined = validations.messages;
-      console.log(isEmpty(value), value)
       if (property.required && isEmpty(value)) {
           this.required = true
           let message = messages?.required ?? `Es obligatorio`;

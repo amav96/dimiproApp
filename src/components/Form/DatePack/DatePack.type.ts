@@ -6,6 +6,8 @@ export interface PropsDate extends BaseProps {
     isClearable?: boolean,
     placeholderText?: string,
     dateFormat?: string
+    showTimeSelect?: boolean,
+    onDate?: Function, 
 }
 
 export interface PropsDateKey extends PropsDate {

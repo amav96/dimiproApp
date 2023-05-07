@@ -1,8 +1,11 @@
 import { BaseProps } from "../Form/Form.type";
 
 export interface PropsTextArea extends BaseProps {
-    listenChange?: Function;
-    listenForm?: Function;
+    onTextarea?: Function;
     colsArea?: number
     rows?: string
+}
+
+export interface PropsTextAreaKey extends PropsTextArea {
+    key: string;
 }

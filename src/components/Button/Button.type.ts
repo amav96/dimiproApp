@@ -3,5 +3,7 @@ export interface PropsButton {
     textColor?: string,
     backgroundColor?: string,
     borderColor?: string,
-    className?: string
+    customClass?: string
+    padding?: string
+    type?: "button" | "submit"
 }

@@ -8,14 +8,15 @@ export function Button(props: PropsButton) {
         text,
         textColor= 'text-black',
         backgroundColor = 'background-white',
-        borderColor = 'border-black',
-        className = 'c-border-rounded-l c-p-y-3 c-p-x-4'
+        borderColor = 'border-black c-border-rounded-l',
+        padding = 'c-p-y-3 c-p-x-4',
+        customClass,
+        type = "submit"
     } = props;
   return (
     <button 
-    style={{ width: '100%'}}
-    className={`c-${backgroundColor} c-${borderColor} ${className}`}
-    type="button" >
+    className={`c-${backgroundColor} c-${borderColor} ${padding} ${customClass}`}
+    type={type} >
         <span className={`c-${textColor}`} >{text}</span>
     </button>
   )

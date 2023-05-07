@@ -3,10 +3,9 @@ import { TableAliveProps } from '../Table/Table.type'
 import Table from '../Table/Table'
 
 export function TableAlive(props: TableAliveProps<string>) {
-  const { columns, scopedColumns, items, onChangePage, urlIndex, page, limit } = props;
+  const { columns, scopedColumns, items, onChangePage, urlIndex, page, limit, keyPage = '_page', keyLimit = '_limit', requestConfiguration } = props;
 
-  const [localItems, setLocalItems] = useState([])
-
+  const [localItems, setLocalItems] = useState<Array<any>>([])
   const pagination = useRef<{
     page: number,
     limit: number
@@ -24,13 +23,19 @@ export function TableAlive(props: TableAliveProps<string>) {
 
   const getItems = async () => {
     if(!loading.current){
-      const pageFilter = `_page=${pagination.current.page || 1}`;
-      const limitFilter = `_limit=${pagination.current.limit || 10}`;
+      const pageFilter = `${keyPage}=${pagination.current.page || 1}`;
+      const limitFilter = `${keyLimit}=${pagination.current.limit || 10}`;
       const url = `${urlIndex}?${pageFilter}&${limitFilter}`;
 
       loading.current = true
       try {
-        const response = await fetch(url);
+
+        let params = {
+          ...{ method: "GET" },
+          ...requestConfiguration
+        }
+
+        const response = await fetch(url, params);
         const result = await response.json();
         loading.current = false
         if(result && result.length > 0) {
@@ -45,9 +50,17 @@ export function TableAlive(props: TableAliveProps<string>) {
 
   useEffect(() => {
     if(urlIndex){
-        getItems()
+      getItems()
     }
   }, [])
+
+  useEffect(() => {
+    if(items?.length === 0 && localItems.length > 0){
+      setLocalItems([])
+    } else if(items) {
+      setLocalItems((prev) => ([...prev, ...items]))
+    }
+  }, [items])
   
 
   return (

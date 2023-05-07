@@ -1,3 +1,4 @@
+import { requestConfiguration } from "../../types/Api";
 
 
 type column<K extends string | number> = {
@@ -21,4 +22,7 @@ type column<K extends string | number> = {
     urlIndex: string,
     page?: number,
     limit?: number
+    keyPage? : string,
+    keyLimit? : string,
+    requestConfiguration: requestConfiguration
   }

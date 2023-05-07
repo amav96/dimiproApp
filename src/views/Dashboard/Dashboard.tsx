@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { TableAlive } from '../../components/TableAlive/TableAlive';
+import { authorization } from '../../services/utils/Autorizathion';
 
 export function Dashboard() {
 
@@ -15,6 +16,12 @@ export function Dashboard() {
       <TableAlive
       columns={columns}
       urlIndex={'https://jsonplaceholder.typicode.com/posts'}
+      requestConfiguration={{
+        method: 'GET',
+        headers: {
+          Authorization: authorization()
+        }
+      }}
       />
     </div>
   )
