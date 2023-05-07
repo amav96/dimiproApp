@@ -44,54 +44,53 @@ export function Form(props: Props<string | number>) {
 
 
   useEffect(() => {
-      inputs.forEach(({key}, i) => {
-        const index = generatedInputs.map((m) => m.key).indexOf(key);
-        if (index > -1) {
-          const updateGeneratedInput = [...generatedInputs];
-          let updateInput : generatedInputs = inputs[i] as generatedInputs
-          setGeneratedInputs((prevState) => 
-              prevState.map((obj,i) => {
-                if(i === index){
-                  return {...obj, ...inputs[i] }
-                }
-              return obj
-            })
-          )
-          
-          if (updateInput.value && updateInput.value !== undefined) {
-            setFormValues((prev: keyValue<string | number>) => ({
-              ...prev,
-              [key]: updateInput.value
-            }))
-          }
-        } else {
-          let newInput: generatedInputs  = inputs[i] as generatedInputs;
-          setGeneratedInputs((prev) => ([
-            ...prev,
-            ...[{ ...newInput, ...{ key: key } }]
-          ]))
-          Object.defineProperty(formValues, key,
-            {
-              enumerable: true,
-              configurable: true,
-              writable: true,
-              value: {},
-            });
-            setFormValues((prev: keyValue<string | number>) => {
-              if (newInput.hasOwnProperty('value') && newInput.value) {
-                return {
-                  ...prev,
-                  [key]: newInput.value
-                }
-              } else {
-                return {
-                  ...prev,
-                  [key]: ''
-                }
+    inputs.forEach(({key}, i) => {
+      const index = generatedInputs.map((m) => m.key).indexOf(key);
+      if (index > -1) {
+        let updateInput : generatedInputs = inputs[i] as generatedInputs
+        setGeneratedInputs((prevState) => 
+            prevState.map((obj,i) => {
+              if(i === index){
+                return {...obj, ...inputs[i] }
               }
-            })
+            return obj
+          })
+        )
+        
+        if (updateInput.value && updateInput.value !== undefined) {
+          setFormValues((prev: keyValue<string | number>) => ({
+            ...prev,
+            [key]: updateInput.value
+          }))
         }
-      })
+      } else {
+        let newInput: generatedInputs  = inputs[i] as generatedInputs;
+        setGeneratedInputs((prev) => ([
+          ...prev,
+          ...[{ ...newInput}]
+        ]))
+        Object.defineProperty(formValues, key,
+          {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: {},
+          });
+          setFormValues((prev: keyValue<string | number>) => {
+            if (newInput.hasOwnProperty('value') && newInput.value) {
+              return {
+                ...prev,
+                [key]: newInput.value
+              }
+            } else {
+              return {
+                ...prev,
+                [key]: ''
+              }
+            }
+          })
+      }
+    })
   }, [inputs])
 
   const hasValidations = useRef<boolean>(false)
