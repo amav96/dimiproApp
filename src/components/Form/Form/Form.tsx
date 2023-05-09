@@ -126,7 +126,7 @@ export function Form(props: Props<string | number>) {
         })
         resolve(buildObject)
       } else {
-        resolve(hasFormatValue)
+        resolve(formValues)
       }
     })
   }

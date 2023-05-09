@@ -5,5 +5,6 @@ export interface PropsButton {
     borderColor?: string,
     customClass?: string
     padding?: string
-    type?: "button" | "submit"
+    type?: "button" | "submit",
+    onClick?: Function
 }
