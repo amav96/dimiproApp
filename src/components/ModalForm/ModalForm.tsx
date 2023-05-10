@@ -22,9 +22,14 @@ export function ModalForm(props: PropsModalForm) {
     updateRequestConfiguration,
     updateDefaultParams,
     onCloseModal,
+    afterUpdate,
+    afterStore,
+    handleUpdateErrors,
+    handleStoreErrors
  } = props;
 
-  const [generatedForm, setGeneratedForm] = useState<Array<generatedInputs>>([])
+ 
+ const [generatedForm, setGeneratedForm] = useState<Array<generatedInputs>>([])
   useEffect(() => {
      inputs.forEach(({key}, i) => {
        const index = generatedForm.map((m) => m.key).indexOf(key);
@@ -49,10 +54,7 @@ export function ModalForm(props: PropsModalForm) {
 
   const [internalVisible, setInternalVisible] = useState<boolean>(false)
 
-  const refModalForm = useRef<HTMLFormElement | null>(null)
-
   const handleSubmit = (data: any) => {
-    console.log(data)
     if(!isEditMode) save(data)
     else update(data)
   }
@@ -63,7 +65,14 @@ export function ModalForm(props: PropsModalForm) {
         loading.current = true
         const { items, isFormValid } = data
         if(isFormValid !== undefined && !isFormValid){
-            // $toast.info('Debes llenar el formulario correctamente');
+          if(handleStoreErrors){
+            handleStoreErrors({
+              type: 'formInvalid',
+              message: 'Must fill the form correctly',
+              ...items,
+              ...isFormValid
+            })
+          }
         } else {
             try {
               const formParams = await serializeParams({...items})
@@ -81,15 +90,38 @@ export function ModalForm(props: PropsModalForm) {
               loading.current = false
               const { data, error } = result
               if(error){
-                  // $toast.error('Ha ocurrido un error con el servidor');
+                if(handleStoreErrors){
+                  handleStoreErrors({
+                    type: 'serverMessage',
+                    message: 'An error has occurred with the server',
+                    ...items,
+                    ...isFormValid,
+                    ...{ server : {
+                        ...error
+                      }
+                    }
+                  })
+                }
               }else {
-                  // $toast.success('Guardado correctamente');
-                  // emit('afterStore', data)
-                  hideModal()
+                if(afterStore){
+                  afterStore(result)
+                }
               }
             } catch (error) {
                 loading.current = false
-                // $toast.error('Ha ocurrido un error con el servidor b2');
+                if(handleStoreErrors){
+                  handleStoreErrors({
+                    type: 'serverError',
+                    message: 'An error has occurred with the server',
+                    ...items,
+                    ...isFormValid,
+                    ...{ 
+                      server : {
+                        error
+                      }
+                    }
+                  })
+                }
             }
         }
     }
@@ -100,7 +132,15 @@ export function ModalForm(props: PropsModalForm) {
         loading.current = true
         const { items, isFormValid } = data
         if(isFormValid !== undefined && !isFormValid){
-            // $toast.info('Debes llenar el formulario correctamente');
+          if(handleUpdateErrors){
+            handleUpdateErrors({
+              type: 'formInvalid',
+              message: 'Must fill the form correctly',
+              ...items,
+              ...isFormValid
+            })
+          }
+            // ('Debes llenar el formulario correctamente');
         } else {
             try {
               const formParams = await serializeParams({...items})
@@ -118,15 +158,38 @@ export function ModalForm(props: PropsModalForm) {
               loading.current = false
               const { data, error } = result
               if(error){
-                  // $toast.error('Ha ocurrido un error con el servidor');
+                if(handleUpdateErrors){
+                  handleUpdateErrors({
+                    type: 'serverMessage',
+                    message: 'An error has occurred with the server',
+                    ...items,
+                    ...isFormValid,
+                    ...{ server : {
+                        ...error
+                      }
+                    }
+                  })
+                }
               }else {
-                  // $toast.success('Guardado correctamente');
-                  // emit('afterUpdate', data)
-                  hideModal()
+                if(afterUpdate){
+                  afterUpdate(result)
+                }
               }
             } catch (error) {
                 loading.current = false
-                // $toast.error('Ha ocurrido un error con el servidor b2');
+                if(handleUpdateErrors){
+                  handleUpdateErrors({
+                    type: 'serverError',
+                    message: 'An error has occurred with the server',
+                    ...items,
+                    ...isFormValid,
+                    ...{ 
+                      server : {
+                        error
+                      }
+                    }
+                  })
+                }
             }
 
         }
@@ -134,7 +197,7 @@ export function ModalForm(props: PropsModalForm) {
   }
 
   const loadingEntity = useRef<boolean>(false)
-  const getEntity = async () => {
+  const show = async () => {
     if(urlShow){
       loadingEntity.current = true
       let params = {
@@ -150,46 +213,26 @@ export function ModalForm(props: PropsModalForm) {
 
   const completeEntity = (data : object) => {
     generatedForm.forEach((val, index) => {
-        if(data.hasOwnProperty(val.key)){
-            let property = data[val.key as keyof object];
-            setGeneratedForm((prevState) => 
-                prevState.map((obj,i) => {
-                if(i === index){
-                  return {...obj, ...{ value: property} }
-                }
-                return obj
-              })
-            )
-            // generatedForm[index].value = property
-        }
+      if(data.hasOwnProperty(val.key)){
+          let property = data[val.key as keyof object];
+          setGeneratedForm((prevState) => 
+              prevState.map((obj,i) => {
+              if(i === index){
+                return {...obj, ...{ value: property} }
+              }
+              return obj
+            })
+          )
+      }
     })
   }
 
-  const resetForm = () => {
-      generatedForm.forEach((val, index) => {
-          if(val.value !== null && typeof val.value === 'object'){
-              if(Array.isArray(val.value)){
-                  generatedForm[index].value = []
-              } else {
-                  generatedForm[index].value = {}
-              }
-          } else if (typeof val.value === 'string') {
-              generatedForm[index].value = ''
-          } else {
-              generatedForm[index].value = null
-          }
-      })
-  }
-
   useEffect(() => {
-    isEditMode && getEntity()
+    isEditMode && show()
   }, [])
 
   useEffect(() => {
-    // return () => {
-     console.log(isEditMode)
-      isEditMode && !loadingEntity.current && getEntity()
-    // }
+    isEditMode && !loadingEntity.current && show()
   }, [isEditMode])
 
   useEffect(() => {
@@ -197,15 +240,33 @@ export function ModalForm(props: PropsModalForm) {
   }, [visible])
 
   const hideModal = () => {
+    resetForm()
     setInternalVisible(false)
     onCloseModal && onCloseModal()
-    // internalVisible.current = false
   }
+
+  const resetForm = () => {
+    generatedForm.forEach((val, index) => {
+      if(val.value !== null && typeof val.value === 'object'){
+        if(Array.isArray(val.value)){
+          setGeneratedForm((prev) => prev.map((val,i) => i === index ? { ...val, ...{ value: [] }} : val))
+        } else {
+          setGeneratedForm((prev) => prev.map((val,i) => i === index ? { ...val, ...{ value: {} }} : val))
+        }
+      } else if (typeof val.value === 'string') {
+        setGeneratedForm((prev) => prev.map((val,i) => i === index ? { ...val, ...{ value: '' }} : val))
+      } else {
+        setGeneratedForm((prev) => prev.map((val,i) => i === index ? { ...val, ...{ value: null }} : val))
+      }
+    })
+  }
+
+  const refModalForm = useRef<HTMLFormElement | null>(null)
 
   return (
     <Modal
     isOpen={internalVisible}
-    closeModal={hideModal}
+    closeModal={() => hideModal()}
     >
       <div className="p-4">
         {

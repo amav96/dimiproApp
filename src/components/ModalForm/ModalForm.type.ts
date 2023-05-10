@@ -13,5 +13,9 @@ export interface PropsModalForm {
     storeRequestConfiguration?: requestConfiguration
     updateRequestConfiguration?: requestConfiguration,
     updateDefaultParams?: object,
-    onCloseModal?: Function
+    onCloseModal?: Function,
+    afterUpdate?: Function,
+    afterStore?: Function,
+    handleUpdateErrors? : Function,
+    handleStoreErrors? : Function,
 }

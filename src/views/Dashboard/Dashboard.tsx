@@ -85,8 +85,13 @@ export function Dashboard() {
   })
 
   const onOpenStore = () :void => {
-    propModalForm.current.visible = true
-    console.log(propModalForm.current.visible)
+    setPropModalForm((prev : any) => ({
+      ...prev,
+      ...{
+        visible: true,
+        isEditMode : false
+      }
+    }))
   }
 
   const onOpenUpdate = () :void => {
@@ -112,10 +117,26 @@ export function Dashboard() {
     }))
   }
 
-  useEffect(() => {
-    console.log(propModalForm)
-  }, [propModalForm])
-  
+  const onAfterUpdate = (data: any) => {
+    setPropModalForm((prev : any) => ({
+      ...prev,
+      ...{
+        urlShow: Routes.POSTS.SHOW,
+        urlUpdate: Routes.POSTS.UPDATE,
+        visible: false,
+        isEditMode : false
+      }
+    }))
+  }
+
+  const onAfterStore = (data: any) => {
+    setPropModalForm((prev : any) => ({
+      ...prev,
+      ...{
+        visible: false,
+      }
+    }))
+  }
 
   return (
     <div>
@@ -141,6 +162,8 @@ export function Dashboard() {
       storeRequestConfiguration={propModalForm.storeRequestConfiguration}
       updateRequestConfiguration={propModalForm.updateRequestConfiguration}
       onCloseModal={onCloseModal}
+      afterUpdate={onAfterUpdate}
+      afterStore={onAfterStore}
       />
 
       <TableAlive

@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactPortal, useEffect, useRef } from 'react'
+import React, { ReactElement, ReactPortal, forwardRef, useEffect, useRef } from 'react'
 import { Input } from '../Input';
 import { Textarea } from '../Textarea';
 import { Select } from '../Select';
@@ -31,8 +31,7 @@ interface Props<K extends string | number > {
 type keyValue<K extends string | number> = {
   [key in K]: string | number | Array<any> | object;
 }
-
-export function Form(props: Props<string | number>) {
+export const Form = forwardRef(function Form(props: Props<string | number>, ref) {
   const { 
     inputs,
     scopedFields,
@@ -341,5 +340,5 @@ export function Form(props: Props<string | number>) {
     </form>
     
   )
-}
+})
 
