@@ -139,7 +139,7 @@ export function LoginForm() {
         key: 'test',
         slot: true
       }
-    ])
+  ])
 
   const [err, setErr] = useState<Array<string>>([]);
 
@@ -169,7 +169,7 @@ const onSubmit = (data: any) => {
   return (
     <div className="mt-4 mb-2 mx-2">
       {
-        <Form
+      <Form
       inputs={inputs}
       onSubmit={onSubmit}
       scopedFields={{

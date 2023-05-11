@@ -31,7 +31,7 @@ export interface BaseProps {
   onChange?: Function;
   validations?: Validations;
   errors?: Array<string>;
-  cols?: number;
+  cols?: string;
   formatValue?: Function
 }
 

@@ -13,7 +13,7 @@ export default function Table(props: TableProps<string>) {
     if(items?.length === 0 && localItems.length > 0){
       setLocalItems([])
     } else if(items){
-      setLocalItems((prev) => ([...prev, ...items]))
+      setLocalItems(items)
     }
   }, [items])
 

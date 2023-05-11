@@ -1,7 +1,8 @@
 export interface requestConfiguration {
     method?: string,
     headers: {
-      Authorization: string
+      Authorization?: string,
+      'Content-Type'?: string;
     },
     body?: any
 }

@@ -12,7 +12,8 @@ export function Button(props: PropsButton) {
       padding = 'c-p-y-3 c-p-x-4',
       customClass,
       type = "submit",
-      onClick
+      onClick,
+      children
   } = props;
 
   const handleClick = () => {
@@ -25,7 +26,12 @@ export function Button(props: PropsButton) {
     onClick={handleClick}
     className={`c-${backgroundColor} c-${borderColor} ${padding} ${customClass}`}
     type={type} >
-        <span className={`c-${textColor}`} >{text}</span>
+        {
+          children ?
+          (children)
+          : <span className={`c-${textColor}`} >{text}</span>
+        }
+        
     </button>
   )
 }

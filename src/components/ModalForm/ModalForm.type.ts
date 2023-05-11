@@ -8,7 +8,7 @@ export interface PropsModalForm {
     urlShow?: string,
     isEditMode: boolean,
     visible: boolean,
-    resetAfterClose : boolean,
+    resetAfterClose? : boolean,
     showRequestConfiguration?: requestConfiguration
     storeRequestConfiguration?: requestConfiguration
     updateRequestConfiguration?: requestConfiguration,

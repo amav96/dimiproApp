@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactPortal, forwardRef, useEffect, useRef } from 'react'
+import React, { ReactElement, ReactPortal, forwardRef, useCallback, useEffect, useRef } from 'react'
 import { Input } from '../Input';
 import { Textarea } from '../Textarea';
 import { Select } from '../Select';
@@ -99,12 +99,13 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref)
     hasFormatValue.current = generatedInputs.some((val) => val.hasOwnProperty('formatValue')  && val.formatValue && typeof val.formatValue === 'function')
   }, [generatedInputs])
 
-  const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback( async (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if(onSubmit){
       onSubmit(await getValues())
     }
-  }
+  }, [onSubmit, formValues]);
+
 
   const getValues = () =>  {
     return new Promise( async (resolve) => {

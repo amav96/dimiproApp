@@ -1,4 +1,5 @@
 import { requestConfiguration } from "../../types/Api";
+import { generatedInputs } from "../Form/Form/Form.type";
 
 
 type column<K extends string | number> = {
@@ -15,7 +16,6 @@ type column<K extends string | number> = {
     onChangePage?: Function
   }
   export interface TableProps<K extends string | number> extends BaseTable<K> {
-    
   }
 
   export interface TableAliveProps<K extends string | number> extends BaseTable<K> {
@@ -24,5 +24,9 @@ type column<K extends string | number> = {
     limit?: number
     keyPage? : string,
     keyLimit? : string,
-    requestConfiguration: requestConfiguration
+    requestConfiguration: requestConfiguration,
+    inputs?: Array<generatedInputs>;
+    searchIcon?: string
+    searchable?: boolean,
+    modelKey? : string
   }
