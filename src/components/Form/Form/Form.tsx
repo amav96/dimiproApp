@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactPortal, forwardRef, useCallback, useEffect, useRef } from 'react'
+import React, { ReactElement, ReactPortal, forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from 'react'
 import { Input } from '../Input';
 import { Textarea } from '../Textarea';
 import { Select } from '../Select';
@@ -31,7 +31,7 @@ interface Props<K extends string | number > {
 type keyValue<K extends string | number> = {
   [key in K]: string | number | Array<any> | object;
 }
-export const Form = forwardRef(function Form(props: Props<string | number>, ref) {
+export const Form = forwardRef(function Form(props: Props<string | number>, ref: React.Ref<HTMLFormElement>) {
   const { 
     inputs,
     scopedFields,
@@ -114,6 +114,34 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref)
       } else {
         resolve({ items: await processFormValues(formValues)})
       }
+    });
+  }
+
+  const resetValues = () :Promise<object> =>  {
+    return new Promise( async (resolve) => {
+
+      const keys = Object.keys(formValues);
+      for (let i = 0; i < keys.length; i += 1) {
+        setFormValues((prev : any) => ({
+          ...prev,
+          [keys[i]]: ''
+        }))
+      }
+
+      generatedInputs.forEach((val, index) => {
+        if(val.value !== null && typeof val.value === 'object'){
+          if(Array.isArray(val.value)){
+            setGeneratedInputs((prev) => prev.map((val,i) => i === index ? { ...val, ...{ value: [] }} : val))
+          } else {
+            setGeneratedInputs((prev) => prev.map((val,i) => i === index ? { ...val, ...{ value: {} }} : val))
+          }
+        } else if (typeof val.value === 'string') {
+          setGeneratedInputs((prev) => prev.map((val,i) => i === index ? { ...val, ...{ value: '' }} : val))
+        } else {
+          setGeneratedInputs((prev) => prev.map((val,i) => i === index ? { ...val, ...{ value: null }} : val))
+        }
+      })
+      resolve(formValues);
     });
   }
 
@@ -229,8 +257,14 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref)
     });
   }
 
+  //@ts-ignore
+  useImperativeHandle(ref, () => ({
+    resetValues: resetValues,
+  }));
+
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} ref={ref}>
       <div className='Form grid grid-cols-12 gap-2'>
       {
         generatedInputs.filter((val) => val.hidden === undefined || val.hidden === false)

@@ -19,7 +19,8 @@ export function TableAlive(props: TableAliveProps<string>) {
     requestConfiguration,
     searchIcon,
     searchable,
-    modelKey = 'data'
+    modelKey = 'data',
+    header
   } = props;
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
@@ -37,47 +38,21 @@ export function TableAlive(props: TableAliveProps<string>) {
   const changePage = () => {
     if(!loading.current){
       pagination.current.page++
-      getItems()
+      applyLookFor(currentFilters.current)
     }
   }
 
-  const getItems = async () => {
-    if(!loading.current){
-      const pageFilter = `${keyPage}=${pagination.current.page || 1}`;
-      const limitFilter = `${keyLimit}=${pagination.current.limit || 10}`;
-      const url = `${urlIndex}?${pageFilter}&${limitFilter}`;
+  const currentFilters = useRef<object>({})
 
-      loading.current = true
-      try {
-
-        let params = {
-          ...{ method: "GET" },
-          ...requestConfiguration
-        }
-
-        const response = await fetch(url, params);
-        const result = await response.json();
-        loading.current = false
-        if(result && result.length > 0) {
-          setLocalItems(result)
-        }
-      } catch (error) {
-        loading.current = false
-      }
-    }
-
-  }
-
-  const applySearch = async (search : any , formValues: any) :Promise<void> => {
+  const applyLookFor = async (params: any = null, firstLook: boolean = false) :Promise<void> => {
       if(urlIndex && !loading.current){
           loading.current = true
           let queryParams : object = {}
-          if(searchable){
-              const { items } = formValues
-              queryParams = {...queryParams, ...items}
+          if(searchable && params){
+              queryParams = {...queryParams, ...params}
           }
-          queryParams = {...queryParams, ...{ page: search.page ?? pagination.current.page}}
-          console.log(formValues, queryParams)
+         
+          queryParams = {...queryParams, ...{ [keyPage]: pagination.current.page, [keyLimit] : pagination.current.limit}}
           try {
 
               let params = {
@@ -90,25 +65,27 @@ export function TableAlive(props: TableAliveProps<string>) {
                       delete queryParams[k as keyof object]
                   }
               })
-              let urlParams: any = urlIndex+'?'+ new URLSearchParams(queryParams as URLSearchParams)
+              currentFilters.current = queryParams
+              let urlParams: any = urlIndex+'?'+ new URLSearchParams(currentFilters.current as URLSearchParams)
 
               const response = await fetch(urlParams, params);
               const result = await response.json();
               loading.current = false
               if(result.error){
-                  // $toast.error('Ha ocurrido un error con el servidor');
+                  alert(result.error)
               }else{
-                console.log({result})
-                console.log({localItems})
-                  if(result && Array.isArray(result)){
+                  let data = result && Array.isArray(result)
+                  ? result
+                  : result && result[modelKey as keyof object] && Array.isArray(result[modelKey as keyof object])
+                  ? result[modelKey as keyof object] : result
+
+                  if(firstLook){
                     setLocalItems(result)
-                    console.log(0)
-                  }else if (result && result[modelKey as keyof object] && Array.isArray(result[modelKey as keyof object])){
-                    console.log(1)
-                    setLocalItems(result[modelKey as keyof object])
+                  }else {
+                    setLocalItems((prev) => ([...prev,... data]))
                   }
+
                   if(result?.pagination){
-                    console.log(2)
                       const pagination : any = result?.pagination
                       pagination.current.page = 1
                       pagination.current.limit = pagination.limit
@@ -116,12 +93,9 @@ export function TableAlive(props: TableAliveProps<string>) {
                   }
                   // emit("getItems", localItems.value)
               }
-              console.log(3)
           } catch (error) {
-              console.log(error);
+              alert(error)
               loading.current = false
-              // emit('loading', false)
-              // $toast.error('Ha ocurrido un error con el servidor B2');
           }
 
       } else if(!urlIndex) {
@@ -130,52 +104,59 @@ export function TableAlive(props: TableAliveProps<string>) {
   }
 
   const onSubmit = (data: any) => {
-    applySearch({},data)
+    pagination.current.page = 1
+    applyLookFor(data.items, true)
   }
+
+  const resetLookFor = async () => {
+    await refForm?.current?.resetValues()
+    pagination.current.page = 1
+    await applyLookFor()
+  }
+
+  const refForm = useRef<HTMLFormElement | null>(null)
 
   useEffect(() => {
     if(urlIndex){
-      getItems()
+      applyLookFor({[keyPage] :1})
     }
   }, [])
-
-  // useEffect(() => {
-  //   if(items?.length === 0 && localItems.length > 0){
-  //     setLocalItems([])
-  //   } else if(items) {
-  //     setLocalItems((prev) => ([...prev, ...items]))
-  //   }
-  // }, [items])
 
 
   return (
     <div >
       {
         inputs &&
-          <div className="d-flex flex-col ">
-            <Form
-            inputs={inputs}
-            onSubmit={onSubmit}
-            >
-              <div className="d-flex my-4">
-                <Button
-                type={'submit'}
-                >
-                  { searchIcon ? (<img src={searchIcon} alt="buscar"/>) : (<span>Buscar</span>)}
-                </Button>
-                <Button
-                >
-                  <span className="text-black" >Limpiar filtros</span>
-                </Button>
-              </div>
-            </Form>
-          </div>
+        <div className="d-flex flex-col ">
+          <Form
+          inputs={inputs}
+          onSubmit={onSubmit}
+          ref={refForm}
+          >
+            <div className="d-flex my-4">
+              <Button
+              >
+                { searchIcon ? (<img src={searchIcon} alt="buscar"/>) : (<span>Buscar</span>)}
+              </Button>
+              <Button
+              type={'button'}
+              onClick={resetLookFor}
+              customClass={'mx-2'}
+              >
+                <span className="text-black" >Limpiar filtros</span>
+              </Button>
+            </div>
+          </Form>
+        </div>
+      }
+      {
+        header && header
       }
       <Table
       items={localItems}
       columns={columns}
       scopedColumns={scopedColumns}
-      onChangePage={changePage}
+      onChangePage={() => changePage()}
       />
     </div>
   )

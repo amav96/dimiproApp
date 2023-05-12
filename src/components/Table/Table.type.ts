@@ -28,5 +28,6 @@ type column<K extends string | number> = {
     inputs?: Array<generatedInputs>;
     searchIcon?: string
     searchable?: boolean,
-    modelKey? : string
+    modelKey? : string,
+    header?: JSX.Element | JSX.Element[],
   }

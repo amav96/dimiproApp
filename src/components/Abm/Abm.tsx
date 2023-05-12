@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AbmModalFormProps, AbmProps } from './Abm.type'
 import { TableAlive } from '../TableAlive/TableAlive'
 import { ModalForm } from '../ModalForm/ModalForm';
+import { Button } from '../Button/Button';
 
 export function Abm(props: AbmProps) {
   const {
@@ -43,6 +44,26 @@ export function Abm(props: AbmProps) {
     afterStore,
   })
 
+  const onOpenStore = () => {
+    setModalFormData((prev) => ({
+      ...prev,
+      visible: true,
+      isEditMode: false
+    }))
+  }
+
+  const handleOnCloseModal = () => {
+    setModalFormData((prev) => ({
+      ...prev,
+      visible: false,
+      isEditMode: false
+    }))
+    
+    if(onCloseModal){
+      onCloseModal()
+    }
+  }
+
   return (
     <div>
       <TableAlive
@@ -51,6 +72,17 @@ export function Abm(props: AbmProps) {
       urlIndex={urlIndex}
       searchable={searchable}
       requestConfiguration={requestConfiguration}
+      header={(
+        <div className="flex justify-end">
+          <Button
+          type={'button'}
+          customClass={'mb-3 w-40'}
+          onClick={onOpenStore}
+          >
+            <span className="text-black" >Crear</span>
+          </Button>
+        </div>
+      )}
       />
 
       <ModalForm
@@ -64,7 +96,7 @@ export function Abm(props: AbmProps) {
       showRequestConfiguration={modalFormData.showRequestConfiguration}
       storeRequestConfiguration={modalFormData.storeRequestConfiguration}
       updateRequestConfiguration={modalFormData.updateRequestConfiguration}
-      onCloseModal={modalFormData.onCloseModal}
+      onCloseModal={handleOnCloseModal}
       afterUpdate={modalFormData.afterUpdate}
       afterStore={modalFormData.afterStore}
       />

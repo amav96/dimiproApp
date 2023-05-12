@@ -90,6 +90,7 @@ export function Users() {
       }
     },
     inputs: formInputs.map((input) => {
+      delete input.validations
       return {
         ...input,
         ...{

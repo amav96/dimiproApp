@@ -43,7 +43,7 @@ export default function Table(props: TableProps<string>) {
   return (
     <div 
     className='table-wrapper'
-    onScroll={debounce(scrollTable, 200)}
+    onScroll={debounce(scrollTable, 300)}
     >
       <table className='table-main'>
         <thead>
