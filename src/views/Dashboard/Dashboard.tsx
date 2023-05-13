@@ -117,7 +117,7 @@ export function Dashboard() {
     }))
   }
 
-  const onAfterUpdate = (data: any) => {
+  const onafterUpdate = (data: any) => {
     setPropModalForm((prev : any) => ({
       ...prev,
       ...{
@@ -129,7 +129,7 @@ export function Dashboard() {
     }))
   }
 
-  const onAfterStore = (data: any) => {
+  const onafterStore = (data: any) => {
     setPropModalForm((prev : any) => ({
       ...prev,
       ...{
@@ -162,8 +162,8 @@ export function Dashboard() {
       storeRequestConfiguration={propModalForm.storeRequestConfiguration}
       updateRequestConfiguration={propModalForm.updateRequestConfiguration}
       onCloseModal={onCloseModal}
-      afterUpdate={onAfterUpdate}
-      afterStore={onAfterStore}
+      afterUpdate={onafterUpdate}
+      afterStore={onafterStore}
       />
 
       <TableAlive

@@ -266,7 +266,7 @@ export function ModalForm(props: PropsModalForm) {
   return (
     <Modal
     isOpen={internalVisible}
-    closeModal={() => hideModal()}
+    closeModal={hideModal}
     >
       <div className="p-4">
         {

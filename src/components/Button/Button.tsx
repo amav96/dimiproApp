@@ -6,9 +6,9 @@ export function Button(props: PropsButton) {
 
   const {
       text,
-      textColor= 'text-black',
+      textColor= 'c-text-black',
       backgroundColor = 'background-white',
-      borderColor = 'border-black c-border-rounded-l',
+      borderColor = 'c-border-black c-border-rounded-l',
       padding = 'c-p-y-3 c-p-x-4',
       customClass,
       type = "submit",
@@ -25,12 +25,12 @@ export function Button(props: PropsButton) {
   return (
     <button 
     onClick={handleClick}
-    className={`c-${backgroundColor} c-${borderColor} ${padding} ${customClass}`}
+    className={`${backgroundColor} ${borderColor} ${padding} ${customClass}`}
     type={type} >
         {
           children ?
           (children)
-          : <span className={`c-${textColor}`} >{text}</span>
+          : <span className={`${textColor}`} >{text}</span>
         }
         
     </button>

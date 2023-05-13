@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { TableAliveProps } from '../Table/Table.type'
 import Table from '../Table/Table'
 import { Form } from '../Form';
 import { Button } from '../Button/Button';
 
-export function TableAlive(props: TableAliveProps<string>) {
+export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<string>, ref: React.Ref<HTMLFormElement>) {
   const {
     inputs,
     columns,
@@ -24,6 +24,12 @@ export function TableAlive(props: TableAliveProps<string>) {
   } = props;
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
+
+  useEffect(() => {
+    if(items){
+      setLocalItems(items)
+    }
+  },[items])
 
   const pagination = useRef<{
     page: number,
@@ -121,6 +127,11 @@ export function TableAlive(props: TableAliveProps<string>) {
       applyLookFor({[keyPage] :1})
     }
   }, [])
+  
+  //@ts-ignore
+  useImperativeHandle(ref, () => ({
+    localItems: localItems,
+  }));
 
 
   return (
@@ -160,4 +171,4 @@ export function TableAlive(props: TableAliveProps<string>) {
       />
     </div>
   )
-}
+})
