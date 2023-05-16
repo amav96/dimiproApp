@@ -1,0 +1,27 @@
+@import "@/scss/index.scss";
+
+.navbar-container {
+    height: 61px;
+    width: 100%;
+    background: #0162A0;
+    border-radius: 0px;
+    display: flex;
+    justify-content: space-between;
+
+    &__main{
+        display: flex;
+        img {
+            margin: 0px 5px 0px 20px;
+            height: 100%;
+            width: 100%;
+        }
+        &__title{
+            color: $white;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 19px;
+        }
+    }
+    
+}

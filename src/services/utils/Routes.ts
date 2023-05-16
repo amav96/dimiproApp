@@ -1,11 +1,11 @@
 import baseApiUrl from "../BaseApiUrl";
-
+const apiPlaceHolder = 'https://jsonplaceholder.typicode.com'
 export const Routes = {
     POSTS : {
-        INDEX: baseApiUrl + '/posts',
-        STORE: baseApiUrl + '/posts',
-        UPDATE: baseApiUrl + '/posts',
-        SHOW: baseApiUrl + '/posts',
-        DELETE: baseApiUrl + '/posts',
+        INDEX: apiPlaceHolder + '/posts',
+        STORE: apiPlaceHolder + '/posts',
+        UPDATE: apiPlaceHolder + '/posts',
+        SHOW: apiPlaceHolder + '/posts',
+        DELETE: apiPlaceHolder + '/posts',
     }
 }

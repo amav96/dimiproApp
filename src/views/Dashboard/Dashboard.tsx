@@ -3,7 +3,6 @@ import { TableAlive } from '../../components/TableAlive/TableAlive';
 import { authorization } from '../../services/utils/Autorizathion';
 import { ModalForm } from '../../components/ModalForm/ModalForm';
 import { Routes } from '../../services/utils/Routes';
-import baseApiUrl from '../../services/BaseApiUrl';
 import { generatedInputs } from '../../components/Form/Form/Form.type';
 import { Button } from '../../components/Button/Button';
 

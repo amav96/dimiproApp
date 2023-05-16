@@ -131,7 +131,7 @@ export function File(props: PropsFile) {
               (<span> Archivos seleccionados </span>)
               :(
                 <div className="text-center">
-                Soltá el archivo en este recuadro o <span className={`${isEmpty(localErrors) ? 'text-primary' : 'text-danger'}`}>seleccionalo</span> desde tu dispositivo
+                 <span className={`${isEmpty(localErrors) ? 'text-primary' : 'text-danger'}`}>Selecciona</span> desde tu dispositivo
                 </div>
               )
             }

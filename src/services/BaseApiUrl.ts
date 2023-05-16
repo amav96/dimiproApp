@@ -1,3 +1,2 @@
-const baseApiUrl = 'https://jsonplaceholder.typicode.com'
-
+const baseApiUrl = 'http://localhost:3000'
 export default baseApiUrl;
