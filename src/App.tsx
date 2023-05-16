@@ -18,7 +18,7 @@ const menu = {
           title: 'Home',
           image: baseApiUrl + '/icons/Home.svg',
           visible : true,
-          name: { name: 'Dashboard'}
+          name: 'dashboard'
       },
       {
           title: 'Lista de siniestros',
@@ -76,7 +76,7 @@ const menu = {
           title: 'Cerrar sesión',
           image: baseApiUrl + '/icons/logout.svg',
           visible : true,
-          name: { name: 'Logout'}
+          name: 'login'
       }
   ]
 }
