@@ -4,6 +4,7 @@ import { generatedInputs } from '../../components/Form/Form/Form.type'
 import { Routes } from '../../services/utils/Routes'
 import { authorization } from '../../services/utils/Autorizathion'
 import { AbmModalFormExternal, AbmTableAliveProps } from '../../components/Abm/Abm.type'
+import baseApiUrl from '../../services/BaseApiUrl'
 
 export function Users() {
 
@@ -74,8 +75,8 @@ export function Users() {
     columns: useMemo(() => [
       {key: 'userId', title: 'userId'},
       {key: 'id', title: 'id'},
-      {key: 'title', title: 'Titulo'},
-      {key: 'body', title: 'Contenido'},
+      {key: 'title', title: 'Titulo', format: (value: string) => value.substr(0,20) + '...'},
+      {key: 'body', title: 'Contenido' , format: (value: string) => value.substr(0,20) + '...'},
       {key: 'edit', title: 'Editar'},
       {key: 'delete', title: 'Eliminar'},
     ],[]),
@@ -91,7 +92,7 @@ export function Users() {
       return {
         ...input,
         ...{
-          cols: 'c-col-span-6'
+          cols: 'c-col-span-2'
         }
       }
     }),
@@ -109,6 +110,8 @@ export function Users() {
     afterDelete : (data: any) => {
       console.log('data after delete',data)
     },
+    updateIcon: baseApiUrl + '/icons/editar.svg',
+    deleteIcon: baseApiUrl + '/icons/basura.svg'
   })
   return (
     <div className='c-m-2'>

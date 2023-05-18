@@ -39,6 +39,14 @@ export default function Table(props: TableProps<string>) {
       }
     }
   }, [onChangePage]);
+
+  const showText = (row : any, column: any) => {
+    let value = getProperty(row, column.key)
+    if(column.format){
+      return column.format(value)
+    }
+    return value
+  }
   
   return (
     <div 
@@ -68,7 +76,11 @@ export default function Table(props: TableProps<string>) {
                   columns && columns.map((column, iCol) => {
                     if(scopedColumns?.[column.key]){
                       return  <React.Fragment key={`slot-${iCol}`}>
-                                {scopedColumns[column.key]({item: row, index}) as keyof object}
+                                <td
+                                className="border-table-app"
+                                >
+                                  {scopedColumns[column.key]({item: row, index}) as keyof object}
+                                </td>
                               </React.Fragment>
                     }
                     return (
@@ -76,7 +88,7 @@ export default function Table(props: TableProps<string>) {
                       key={`td-${iCol}`}
                       className="border-table-app" >
                         {
-                          getProperty(row, column.key)
+                          showText(row, column)
                         }
                       </td>
                     )

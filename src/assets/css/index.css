@@ -1,6 +1,6 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
 
 :root {
   --black: #001b35;
@@ -286,6 +286,9 @@ border-color: var(--text-blue);
 
 .c-justify-end{
   justify-content: flex-end;
+}
+.c-justify-center{
+  justify-content: center;
 }
 .c-items-center{
   align-items: center;

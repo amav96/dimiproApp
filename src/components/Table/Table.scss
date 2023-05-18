@@ -44,7 +44,7 @@ table thead tr th:last-child {
     /* box-shadow: 0 5px 10px #e1e5ee; */
     table-layout: auto;
     background: white;
-
+    
   }
 
   table > thead {
@@ -90,7 +90,6 @@ table thead tr th:last-child {
   }
 
   .border-table-app{
-    --tw-border-opacity: 1;
-    border-top: 1px solid rgba(229, 231, 235, var(--tw-border-opacity));
+    border-top: 1px solid rgba(213 216 221);
 
   }

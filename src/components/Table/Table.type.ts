@@ -9,7 +9,8 @@ type column<K extends string | number> = {
   interface BaseTable<K extends string | number> {
     columns: Array<{
     key: string
-    title: string
+    title: string,
+    format?: Function
     }>;
     scopedColumns?: column<K>,
     items?: Array<any>,

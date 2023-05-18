@@ -21,7 +21,9 @@ export function Abm(props: AbmProps) {
       deleteItemAfterDelete,
       afterDelete,
       updateIcon,
-      deleteIcon
+      deleteIcon,
+      storeIcon,
+      searchIcon
     },
     modalForm: {
       inputs,
@@ -190,6 +192,7 @@ export function Abm(props: AbmProps) {
       items={localItems}
       inputs={filterInputs}
       columns={columns}
+      searchIcon={searchIcon}
       scopedColumns={{
         edit : (item) => (
           <td>
@@ -205,7 +208,7 @@ export function Abm(props: AbmProps) {
             <Button type={'button'}
             onClick={() => onOpenDelete(item)}
              >
-            { deleteIcon ? (<img src={deleteIcon} alt="Editar"/>) : (<span>Eliminar</span>)}
+            { deleteIcon ? (<img src={deleteIcon} alt="Eliminar"/>) : (<span>Eliminar</span>)}
             </Button>
           </td>
         )
@@ -217,10 +220,10 @@ export function Abm(props: AbmProps) {
         <div className="c-flex c-justify-end">
           <Button
           type={'button'}
-          customClass={'c-mb-3 c-w-40'}
+          customClass={'c-mb-3 c-w-40 c-flex c-justify-center'}
           onClick={onOpenStore}
           >
-            <span className="c-text-black" >Crear</span>
+            { storeIcon ? (<img src={storeIcon} alt="Eliminar"/>) : (<span className="c-text-black" >Crear <strong>+</strong></span>)}
           </Button>
         </div>
       )}
