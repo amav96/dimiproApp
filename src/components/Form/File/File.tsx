@@ -10,7 +10,7 @@ export function File(props: PropsFile) {
 
   let {
       placeholder = 'Ingrese texto',
-      cols =  'col-span-12',
+      cols =  'c-col-span-12',
       value,
       onChange,
       name,

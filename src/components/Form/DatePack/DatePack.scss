@@ -1,4 +1,4 @@
-@import "@/scss/index.scss";
+@import "@/assets/scss/index.scss";
 
 .DatePack{
     
@@ -6,7 +6,7 @@
         width: 100%;
         padding: 8.5px;
         border-radius: 6.5px;
-        background: $background-grey-light;
+        background: var(--background-grey-light);
     }
 }
 
@@ -17,6 +17,6 @@
     &__text{
         margin-top:4px;
         font-size: 15.5px;
-        color: $red;
+        color: var(--red);
     }
 }

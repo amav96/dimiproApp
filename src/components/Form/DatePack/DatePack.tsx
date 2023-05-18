@@ -12,7 +12,7 @@ const validate =  new Validator();
 export function DatePack(props: PropsDate) {
 
   let {
-    cols =  'col-span-12',
+    cols =  'c-col-span-12',
     placeholder = 'Ingrese fecha',
     value,
     onChange,

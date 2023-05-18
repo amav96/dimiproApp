@@ -10,7 +10,7 @@ const validate =  new Validator();
 export function Input(props: PropsInput) {
     let {
         placeholder = 'Ingrese texto',
-        cols =  'col-span-12',
+        cols =  'c-col-span-12',
         value,
         onChange,
         name,

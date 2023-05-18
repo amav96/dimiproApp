@@ -1,4 +1,4 @@
-@import "@/scss/index.scss";
+@import "@/assets/scss/index.scss";
 
 .File {
     width: 100%;
@@ -48,6 +48,6 @@
     &__text{
         margin-top:4px;
         font-size: 15.5px;
-        color: $red;
+        color: var(--red);
     }
 }

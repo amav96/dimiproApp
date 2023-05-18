@@ -1,4 +1,4 @@
-@import "@/scss/index.scss";
+@import "@/assets/scss/index.scss";
 
 .navbar-container {
     height: 61px;
@@ -16,7 +16,7 @@
             width: 100%;
         }
         &__title{
-            color: $white;
+            color: var(--white);
             display: flex;
             align-items: center;
             font-weight: 500;

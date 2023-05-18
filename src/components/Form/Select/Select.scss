@@ -1,4 +1,4 @@
-@import "@/scss/index.scss";
+@import "@/assets/scss/index.scss";
 
 .Select_container{
     position: relative;
@@ -18,7 +18,7 @@
     min-height: 38px;
     position: relative;
     transition: all 100ms ease 0s;
-    background: $background-grey-light;
+    background: var(--background-grey-light);
     // border-color: rgb(204, 204, 204);
     border-radius: 6.5px;
     border-style: solid;
@@ -122,7 +122,7 @@
     &__select{
         width: 100%;
         padding: 6px;
-        background:$background-grey-light;
+        background:var(--background-grey-light);
     }
 }
 
@@ -155,7 +155,7 @@
     &__text{
         margin-top:4px;
         font-size: 15.5px;
-        color: $red;
+        color: var(--red);
     }
 }
 

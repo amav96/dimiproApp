@@ -265,7 +265,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
 
   return (
     <form onSubmit={handleSubmit} ref={ref}>
-      <div className='Form grid grid-cols-12 gap-2'>
+      <div className='Form c-grid c-grid-cols-12 gap-2'>
       {
         generatedInputs.filter((val) => val.hidden === undefined || val.hidden === false)
         .map((input, index) => {

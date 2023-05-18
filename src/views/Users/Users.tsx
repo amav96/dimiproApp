@@ -91,7 +91,7 @@ export function Users() {
       return {
         ...input,
         ...{
-          cols: 'col-span-6'
+          cols: 'c-col-span-6'
         }
       }
     }),

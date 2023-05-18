@@ -1,4 +1,4 @@
-@import "@/scss/index.scss";
+@import "@/assets/scss/index.scss";
 
 .Form{
     display:grid;
@@ -9,5 +9,5 @@
     font-size: 18px;
     margin-left: 12px;
     font-weight: 400;
-    color: $text-black;
+    color: var(--text-black);
 }

@@ -1,0 +1,214 @@
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --black: #001b35;
+  --gray: #f0f3f4;
+  --grey-light: rgba(206, 214, 214, 0.781);
+  --black-web: #16212b;
+  --red: #d12f2d;
+  --white: #fff;
+  --blue: #1890ff;
+  --green: #40ce08;
+  --violet: #7508ce;
+  --blue-light: #1da1f2;
+
+  --text-black: var(--black);
+  --text-grey: var(--gray);
+  --text-grey-light:  var(--grey-light);
+  --text-black-web:  var(--black-web);
+  --text-red: var(--red);
+  --text-white: var(--white);
+  --text-blue: var(--blue);
+  --text-green: var(--green);
+  --text-violet: var(--viole);
+  --text-blue-light:  var(--blue-light);
+
+  --background-black: var(--black);
+  --background-grey: var(--gray);
+  --background-grey-light: var(--grey-light);
+  --background-black-web: var(--black-web);
+  --background-red: var(--red);
+  --background-white: var(--white);
+  --background-blue: var(--blue);
+  --background-green: var(--green);
+  --background-violet: var(--violet);
+  --background-blue-light: var(--blue-light);
+
+  --border-grey: var(--gray);
+
+}
+
+/* colors */
+.c-bg-blue {
+  background: var(--background-blue) !important;
+}
+
+.c-bg-white {
+background: var(--background-white) !important;
+}
+
+.c-bg-red {
+background: var(--background-red) !important;
+}
+
+.c-bg-blue-light {
+background: var(--background-blue-light) !important;
+}
+
+.c-bg-green {
+background: var(--background-green) !important;
+}
+
+.c-bg-black {
+background: var(--background-black) !important;
+}
+
+.c-bg-gray-light {
+background: var(--background-grey-light) !important;
+}
+
+.c-bg-violet {
+background: var(--background-violet) !important;
+}
+
+.c-bg-transparent{
+background: transparent !important;
+}
+
+/* text color */
+
+.c-text-white {
+color: var(--text-white) !important;
+}
+
+.c-text-black {
+color: var(--text-black) !important;
+}
+
+.c-text-grey {
+color: var(--text-grey) !important;
+}
+
+.c-text-green {
+color: var(--text-green) !important;
+}
+
+.c-text-red {
+color: var(--text-red) !important;
+}
+
+.c-text-gray {
+color: var(--text-grey) !important;
+}
+
+.c-text-blue-light {
+color: var(--text-blue-light) !important;
+}
+
+.c-text-blue{
+color: var(--text-blue) !important;
+}
+
+/* // border */
+
+.c-border-white {
+border-color: var(--text-white);
+}
+
+.c-border-black {
+border: 1px solid var(--text-black)
+}
+
+.c-border-grey {
+border-color: var(--text-grey);
+}
+
+.c-border-green {
+border-color: var(--text-green);
+}
+
+.c-border-red {
+border-color: var(--text-red);
+}
+
+.c-border-gray {
+border-color: var(--text-grey);
+}
+
+.c-border-blue-light {
+border-color: var(--text-blue-light);
+}
+
+.c-border-blue{
+border-color: var(--text-blue);
+}
+
+
+/* // rounded */
+
+.c-border-rounded-lg{
+  border-radius: 10px;
+}
+
+.c-border-rounded-l{
+  border-radius: 5px;
+}
+
+
+/* // padding */
+
+.c-p-y-3{
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.c-p-x-3{
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.c-p-x-4{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* // flex */
+
+/* // grid */
+
+
+.c-grid {
+  display: grid;
+}
+
+.c-grid-cols-12{
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.c-col-span-12{
+  grid-column: span 12 / span 12;
+}
+
+.c-col-span-10{
+  grid-column: span 10 / span 10;
+}
+.c-col-span-8{
+  grid-column: span 8 / span 8;
+}
+.c-col-span-6{
+  grid-column: span 6 / span 6;
+}
+.c-col-span-4{
+  grid-column: span 4 / span 4;
+}
+.c-col-span-2{
+  grid-column: span 2 / span 2;
+}
+
+.c-gap-2{
+  gap: 0.5rem;
+}
+
+/* // inputs */

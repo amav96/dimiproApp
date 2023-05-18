@@ -1,13 +1,13 @@
 import React, { useEffect, useRef} from 'react'
 import './Switch.scss'
-import { PropsSwitch } from '../Form/Form.type';
 import { useState } from 'react';
 import { isEmpty } from '../../../services/utils/Validations';
+import { PropsSwitch } from './Switch.type';
 
 export function Switch(props: PropsSwitch) {
   const {
     option,
-    cols =  'col-span-12',
+    cols =  'c-col-span-12',
     label = '',
     trackBy = 'id',
     onChange,

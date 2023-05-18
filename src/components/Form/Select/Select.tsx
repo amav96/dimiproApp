@@ -19,7 +19,7 @@ const validate =  new Validator();
 export function Select(props: PropsSelect) {
     const {
         placeholder = 'Seleccione opción',
-        cols =  'col-span-12',
+        cols =  'c-col-span-12',
         value,
         onChange,
         onRemove,
