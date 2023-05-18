@@ -111,9 +111,9 @@ export function Users() {
     },
   })
   return (
-    <div className='m-2'>
-      <div className="my-2">
-        <h2 className='text-lg' >Dashboard usuarios</h2>
+    <div className='c-m-2'>
+      <div className="c-my-2">
+        <h2 className='c-text-lg' >Dashboard usuarios</h2>
       </div>
       <Abm
       table={propTable}

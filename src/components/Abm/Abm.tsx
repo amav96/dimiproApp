@@ -214,13 +214,13 @@ export function Abm(props: AbmProps) {
       searchable={searchable}
       requestConfiguration={requestConfiguration}
       header={(
-        <div className="flex justify-end">
+        <div className="c-flex c-justify-end">
           <Button
           type={'button'}
-          customClass={'mb-3 w-40'}
+          customClass={'c-mb-3 c-w-40'}
           onClick={onOpenStore}
           >
-            <span className="text-black" >Crear</span>
+            <span className="c-text-black" >Crear</span>
           </Button>
         </div>
       )}

@@ -138,13 +138,13 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
     <div >
       {
         inputs &&
-        <div className="d-flex flex-col ">
+        <div className="c-flex c-flex-col ">
           <Form
           inputs={inputs}
           onSubmit={onSubmit}
           ref={refForm}
           >
-            <div className="d-flex my-4">
+            <div className="c-flex c-my-4">
               <Button
               >
                 { searchIcon ? (<img src={searchIcon} alt="buscar"/>) : (<span>Buscar</span>)}
@@ -152,9 +152,9 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
               <Button
               type={'button'}
               onClick={resetLookFor}
-              customClass={'mx-2'}
+              customClass={'c-mx-2'}
               >
-                <span className="text-black" >Limpiar filtros</span>
+                <span className="c-text-black" >Limpiar filtros</span>
               </Button>
             </div>
           </Form>

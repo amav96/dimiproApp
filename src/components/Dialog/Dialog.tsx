@@ -36,11 +36,11 @@ export function Dialog(props: DialogProp) {
           isOpen={internalIsOpen}
           closeModal={hideModal}
           >
-            <div className="flex flex-col p-4">
-              <div className="mb-6">
+            <div className="c-flex c-flex-col c-p-4">
+              <div className="c-mb-6">
                 { text }
               </div>
-              <div className="flex flex-row justify-end">
+              <div className="c-flex c-flex-row c-justify-end">
                 <Button
                 textColor={'c-text-white'}
                 backgroundColor={'c-bg-green'}
@@ -50,7 +50,7 @@ export function Dialog(props: DialogProp) {
                 <Button
                 textColor={'c-text-white'}
                 backgroundColor={'c-bg-red'}
-                customClass="mx-2"
+                customClass="c-mx-2"
                 text={textCancel}
                 onClick={hideModal}
                 />

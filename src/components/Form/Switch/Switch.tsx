@@ -108,7 +108,7 @@ export function Switch(props: PropsSwitch) {
             `switch-pointer__${active()  ? 'active': 'inactive'}`
             }> </div>
           </div>
-          <div className="ml-2">
+          <div className="c-ml-2">
               {label}
           </div>
       </div>

@@ -167,7 +167,7 @@ const onSubmit = (data: any) => {
   console.log(data)
 }
   return (
-    <div className="mt-4 mb-2 mx-2">
+    <div className="c-mt-4 mb-2 mx-2">
       {
       <Form
       inputs={inputs}
@@ -189,7 +189,7 @@ const onSubmit = (data: any) => {
       isOpen={openModal}
       closeModal={openCloseModal}
       >
-        <div className="flex flex-col">
+        <div className="c-flex c-flex-col">
           <div>
             header
           </div>

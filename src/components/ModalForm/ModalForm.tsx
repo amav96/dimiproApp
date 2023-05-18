@@ -268,7 +268,7 @@ export function ModalForm(props: PropsModalForm) {
     isOpen={internalVisible}
     closeModal={hideModal}
     >
-      <div className="p-4">
+      <div className="c-p-4">
         {
         <Form
         inputs={generatedForm}
@@ -276,7 +276,7 @@ export function ModalForm(props: PropsModalForm) {
         >
           <Button
           text={'Enviar formulario'}
-          customClass={'mt-4 mr-4'}
+          customClass={'c-mt-4 c-mr-4'}
           />
         </Form>
         }
