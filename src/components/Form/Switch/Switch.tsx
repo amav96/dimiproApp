@@ -98,7 +98,7 @@ export function Switch(props: PropsSwitch) {
 
   return (
     <div className={`${cols}`}>
-      <div className="flex flex-row items-center">
+      <div className="c-flex c-flex-row c-items-center">
         <div
         onClick={onSwitch}
         className={
