@@ -40,7 +40,7 @@ export function Input(props: PropsInput) {
 
     const handleValidations = (value: string | number, validations: Validations) => {
         validate.validate(value, validations)
-        const hasErrors = validate.getErrors
+        const hasErrors = validate.getErrors()
         if(!isEmpty(hasErrors)) {
             setLocalErrors(hasErrors)
         }else {

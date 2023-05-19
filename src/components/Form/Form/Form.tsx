@@ -171,16 +171,16 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
       let currentInput = generatedInputs[index]
       if(currentInput.validations){
         validator.validate(formValues[currentInput.key], currentInput.validations);
-        if(!isEmpty(validator.getErrors)){
+        if(!isEmpty(validator.getErrors())){
           setGeneratedInputs((prevState) => 
               prevState.map((obj,i) => {
                 if(i === index){
-                  return {...obj, ...{errors : validator.getErrors} }
+                  return {...obj, ...{errors : validator.getErrors()} }
                 }
               return obj
             })
           )
-          generatedInputs[index].errors = validator.getErrors;
+          generatedInputs[index].errors = (validator.getErrors());
           result = false;
         }
       }

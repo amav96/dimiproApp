@@ -52,7 +52,7 @@ export function DatePack(props: PropsDate) {
 
   const handleValidations = (value: Date, validations: Validations) => {
     validate.validate(value, validations)
-    const hasErrors = validate.getErrors
+    const hasErrors = validate.getErrors()
     if(!isEmpty(hasErrors)) {
         setLocalErrors(hasErrors)
     }else {

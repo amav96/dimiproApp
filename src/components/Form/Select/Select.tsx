@@ -240,7 +240,7 @@ export function Select(props: PropsSelect) {
 
     const handleValidations = (value: object, validations: Validations) => {
         validate.validate(value, validations)
-        const hasErrors = validate.getErrors
+        const hasErrors = validate.getErrors()
         if(!isEmpty(hasErrors)) {
             setLocalErrors(hasErrors)
         }else {

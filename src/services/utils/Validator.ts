@@ -80,7 +80,7 @@ export class Validator {
       throw Error("Params incorrect");
     }
   }
-   get getErrors(): Array<string> {
+  public getErrors(): Array<string> {
     return this.errors;
   }
 } 

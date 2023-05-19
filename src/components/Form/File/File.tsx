@@ -5,6 +5,7 @@ import './File.scss'
 import nubeFile from './nube-file.svg';
 import { Validator } from '../../../services/utils/Validator';
 import { Validations } from '../../../types/Validations';
+import { removeDuplicates } from '../../../services/utils/Property';
 
 export function File(props: PropsFile) {
 
@@ -35,7 +36,7 @@ export function File(props: PropsFile) {
   const handleValidations = (value: Array<File>, validations: Validations) => {
     console.log('value ', value)
     validate.validate(value, validations)
-    const hasErrors = validate.getErrors
+    const hasErrors = validate.getErrors()
     if(!isEmpty(hasErrors)) {
         setLocalErrors(hasErrors)
     }else {
@@ -44,12 +45,15 @@ export function File(props: PropsFile) {
 }
 
 
-  useEffect(() => {
-    if(errors){
-        let newMessages = [...localErrors,...errors]
-        setLocalErrors([...new Set(newMessages)])
-    }
-  }, [errors])
+useEffect(() => {
+  const handleErrors = async () => {
+      if(errors){
+          let newMessages = await removeDuplicates(errors)
+          setLocalErrors(newMessages)
+      }
+  }
+  handleErrors()
+}, [errors])
 
 
   const localAccept = () :string => accept.join(",")
