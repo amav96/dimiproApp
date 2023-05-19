@@ -1,1 +1,5 @@
-export * from "./src/components";
+export {
+    Button,
+    Abm,
+    Dialog
+} from "./src/components";

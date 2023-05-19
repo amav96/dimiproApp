@@ -6,11 +6,13 @@ import { terser } from "rollup-plugin-terser";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import scss from 'rollup-plugin-scss';
 import svg from 'rollup-plugin-svg';
+import copy from "rollup-plugin-copy";
 
 const packageJson = require("./package.json");
 
 export default [
   {
+    input: "./index.ts",
     output: [
       {
         file: packageJson.main,
@@ -30,6 +32,12 @@ export default [
       typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
       scss(),
+      copy({
+        targets: [
+          { src: "src/assets/css/index.css", dest: "dist/css" },
+          // Puedes agregar más archivos CSS aquí si es necesario
+        ],
+      }),
       svg()
     ],
     external: ["react", "react-dom", "styled-components"],

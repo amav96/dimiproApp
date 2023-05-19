@@ -10,7 +10,7 @@ export function Button(props: PropsButton) {
       backgroundColor = 'background-white',
       borderColor = 'c-border-black c-border-rounded-l',
       padding = 'c-p-y-3 c-p-x-4',
-      customClass,
+      customClass = '',
       type = "submit",
       onClick,
       children

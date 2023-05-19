@@ -1,8 +1,9 @@
 export interface requestConfiguration {
-    method?: string,
-    headers: {
-      Authorization?: string,
-      'Content-Type'?: string;
-    },
-    body?: any
+  method?: string,
+  headers: {
+    Authorization: string,
+    'Content-Type'?: string;
+    'Accept'?: string;
+  },
+  body?: any
 }

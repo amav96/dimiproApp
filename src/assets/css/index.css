@@ -1,7 +1,3 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-
 :root {
   --black: #001b35;
   --gray: #f0f3f4;
@@ -453,4 +449,52 @@ border-color: var(--text-blue);
 }
 .c-w-fit	{
   width: fit-content;
+}
+
+
+.AppRoot-fullPage{
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.AppMain{
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.AppMain__layer{
+  display: flex;
+  flex: 1 1 0;
+  min-height: 1px;
+}
+
+.AppMain__PageAndTopBar{
+  display: flex;
+          flex: 1;
+          flex-direction: column;
+          position: relative;
+}
+
+.HomePageContent{
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  min-height: 1px;
+  position: relative;
+}
+
+.HomePageContent__contentContainer{
+  width: 100%;
+}
+
+.Scrollable--vertical{
+  min-height: 1px;
+  overflow-y: auto;
 }

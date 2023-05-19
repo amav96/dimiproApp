@@ -6,7 +6,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { icons } from './assets/icons/fontAwesome';
 import { Navbar } from "./components/NavBar/NavBar";
-import './App.scss'
 import { SideBar } from "./components/SideBar/SideBar";
 import baseApiUrl from "./services/BaseApiUrl";
 
