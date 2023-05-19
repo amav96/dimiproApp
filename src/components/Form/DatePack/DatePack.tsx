@@ -7,6 +7,7 @@ import { isEmpty } from '../../../services/utils/Validations';
 import { Validations } from '../../../types/Validations';
 import { Validator } from '../../../services/utils/Validator';
 import './DatePack.scss'
+import { removeDuplicates } from '../../../services/utils/Property';
 
 const validate =  new Validator();
 export function DatePack(props: PropsDate) {
@@ -21,7 +22,7 @@ export function DatePack(props: PropsDate) {
     showTimeSelect = false,
     errors
   } = props;
-  const [localErrors, setLocalErrors] = useState<Array<string> | string>([])
+  const [localErrors, setLocalErrors] = useState<Array<string>>([])
 
   const [valueListened, setValueListened] = useState<boolean>(false);
   const handleChange = (date: Date) => {
@@ -60,11 +61,14 @@ export function DatePack(props: PropsDate) {
   }
 
   useEffect(() => {
-    if(errors){
-        let newMessages = [...localErrors,...errors]
-        setLocalErrors([...new Set(newMessages)])
+    const handleErrors = async () => {
+        if(errors){
+            let newMessages = await removeDuplicates(errors)
+            setLocalErrors(newMessages)
+        }
     }
-  }, [errors])
+    handleErrors()
+}, [errors])
 
   return (
     <div className={`DatePack ${cols}`}>

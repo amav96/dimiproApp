@@ -304,7 +304,7 @@ export function Select(props: PropsSelect) {
       }
     }, [value])
 
-    const [localErrors, setLocalErrors] = useState<Array<string> | string>([])
+    const [localErrors, setLocalErrors] = useState<Array<string>>([])
     useEffect(() => {
       if(errors){
         setLocalErrors(errors)

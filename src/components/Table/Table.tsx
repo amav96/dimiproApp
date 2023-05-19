@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { TableProps } from './Table.type';
 import './Table.scss'
 import debounce from '../../services/utils/Debounce';
-import getProperty from '../../services/utils/Property';
+import {getProperty} from '../../services/utils/Property';
 
 export default function Table(props: TableProps<string>) {
   const { columns, scopedColumns, items, onChangePage } = props;

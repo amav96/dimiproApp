@@ -5,6 +5,7 @@ import { isEmpty } from "../../../services/utils/Validations";
 import { Validator } from '../../../services/utils/Validator';
 import { Validations } from '../../../types/Validations';
 import { PropsTextArea } from './Textarea.type';
+import { removeDuplicates } from '../../../services/utils/Property';
 
 const validate =  new Validator();
 export function Textarea(props: PropsTextArea) {
@@ -20,7 +21,7 @@ export function Textarea(props: PropsTextArea) {
         type,
         colsArea
     } = props;
-    const [localErrors, setLocalErrors] = useState<Array<string> | string>([])
+    const [localErrors, setLocalErrors] = useState<Array<string>>([])
 
     const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
       if(onChange){
@@ -48,11 +49,16 @@ export function Textarea(props: PropsTextArea) {
         }
     }
 
+    
+
     useEffect(() => {
-        if(errors){
-            let newMessages = [...localErrors,...errors]
-            setLocalErrors([...new Set(newMessages)])
+        const handleErrors = async () => {
+            if(errors){
+                let newMessages = await removeDuplicates(errors)
+                setLocalErrors(newMessages)
+            }
         }
+        handleErrors()
     }, [errors])
 
     return (
