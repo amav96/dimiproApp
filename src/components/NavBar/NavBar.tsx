@@ -15,9 +15,9 @@ export function Navbar(props: NavBarProps) {
         <img
         src={logo}
         />
-        <div className="navbar-container__main__title">
+        {/* <div className="navbar-container__main__title">
           <span> { title } </span>
-        </div>
+        </div> */}
       </div>
     </div>
   )
