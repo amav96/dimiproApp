@@ -5,3 +5,6 @@ docker-compose.yml
 dockerfile
 Makefile
 node_start.sh
+rollup.config.js
+.env
+.gitignore

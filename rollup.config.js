@@ -14,11 +14,11 @@ export default [
   {
     input: "./index.ts",
     output: [
-      {
-        file: packageJson.main,
-        format: "cjs",
-        sourcemap: true,
-      },
+      // {
+      //   file: packageJson.main,
+      //   format: "cjs",
+      //   sourcemap: true,
+      // },
       {
         file: packageJson.module,
         format: "esm",
@@ -48,3 +48,6 @@ export default [
     plugins: [dts.default()],
   },
 ];
+  // "main": "dist/cjs/index.js",
+
+  // npm run buildLib

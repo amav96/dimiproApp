@@ -88,7 +88,7 @@ function App() {
       <div className="AppRoot-fullPage">
       <Navbar
       logo={'https://www.dimiproworld.com/wp-content/uploads/2018/10/adventure_logo_1-dimiopro.png'}
-      title='Dimipro'
+      title='Corporation'
       />
       <BrowserRouter>
         <div className="AppMain">
