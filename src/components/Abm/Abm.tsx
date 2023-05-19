@@ -195,22 +195,18 @@ export function Abm(props: AbmProps) {
       searchIcon={searchIcon}
       scopedColumns={{
         edit : (item) => (
-          <td>
             <Button type={'button'}
             onClick={() => onOpenUpdate(item)}
              >
             { updateIcon ? (<img src={updateIcon} alt="Editar"/>) : (<span>Editar</span>)}
             </Button>
-          </td>
         ),
         delete : (item) => (
-          <td>
             <Button type={'button'}
             onClick={() => onOpenDelete(item)}
              >
             { deleteIcon ? (<img src={deleteIcon} alt="Eliminar"/>) : (<span>Eliminar</span>)}
             </Button>
-          </td>
         )
       }}
       urlIndex={urlIndex}

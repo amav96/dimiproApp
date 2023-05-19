@@ -8,8 +8,9 @@
 }
 
 .SidebarResizableContainer {
-
+    background: var(--background-primary);
     height: calc(100vh - 75px); //DINAMICO X APP
+    border-radius: 0px 8px 8px 0px;
     top: 7px; //DINAMICO X APP
 
     display: flex;
@@ -43,7 +44,7 @@
             flex-direction: column;
 
             &__item:hover{
-                background: rgba(0, 0, 0, 0.25);
+                background: var(--background-primary-light);
                 // opacity: 0.2;
                 border-radius: 15px;
             }
@@ -52,6 +53,7 @@
                 flex-direction: row;
                 align-items: center;
                 padding: 0px 6px;
+                gap: 8px;
 
 
                 &__title {

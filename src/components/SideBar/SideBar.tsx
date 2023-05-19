@@ -19,8 +19,6 @@ export function SideBar(props: SideBarProps) {
     }
 
     const {
-      background = '#0162A0',
-      colorScrollBar = '#0162A0',
       colorTextItem,
       menu,
     } = props;
@@ -28,20 +26,10 @@ export function SideBar(props: SideBarProps) {
   return (
     <div className="SidebarResizableContainer AppMain-sidebarResizableContainer">
         <div className="SidebarResizableContainer__sidebarWrapper">
-          <style>
-            {`
-            .Sidebar__Above::-webkit-scrollbar-thumb {
-              background: ${colorScrollBar};
-            }
-            .Sidebar__Top::-webkit-scrollbar-thumb {
-              background: ${colorScrollBar};
-            }
-            `}
-          </style>
             <div 
             onMouseOver={open}
             onMouseLeave={close}
-            className="Sidebar SidebarResizableContainer__sidebar" style={{ backgroundColor: background }}>
+            className="Sidebar SidebarResizableContainer__sidebar">
                 <div className="Sidebar__Top">
                   {
                     menu && menu.top && menu.top.map((item,i) => (

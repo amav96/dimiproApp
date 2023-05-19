@@ -68,6 +68,10 @@ export function ItemSideBar(props: ItemSideBarProps) {
                 <div
                 style={styleToSection()}
                 className="SidebarResizableContainer__item__box__item">
+                    <div className="SidebarResizableContainer__item__box__item__boxImg">
+                        <img src={image} />
+                    </div>
+                    
                     {
                       deployed && (
                         <div
@@ -79,9 +83,6 @@ export function ItemSideBar(props: ItemSideBarProps) {
                         </div>
                       )
                     }
-                    <div className="SidebarResizableContainer__item__box__item__boxImg">
-                        <img src={image} />
-                    </div>
                 </div>
                 {
                   deployedSection && deployed && subSection && (

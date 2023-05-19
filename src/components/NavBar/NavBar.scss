@@ -1,19 +1,18 @@
-
-
 .navbar-container {
     height: 61px;
     width: 100%;
-    background: #0162A0;
+    background: var(--background-primary);
     border-radius: 0px;
     display: flex;
     justify-content: space-between;
 
     &__main{
         display: flex;
+        padding: 10px 0;
         img {
-            margin: 0px 5px 0px 20px;
             height: 100%;
             width: 100%;
+            object-fit: cover;
         }
         &__title{
             color: var(--white);
