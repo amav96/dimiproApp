@@ -1,7 +1,7 @@
 {
   "name": "corporation-react-library",
   "private": false,
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -19,6 +19,9 @@
     "react-dom": "18.2.0",
     "react-router-dom": "^6.8.1",
     "sort-by": "^1.2.0"
+  },
+  "publishConfig": {
+    "registry": "https://github.com/amav96/corporation-react-library"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
