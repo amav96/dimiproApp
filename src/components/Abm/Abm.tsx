@@ -23,7 +23,8 @@ export function Abm(props: AbmProps) {
       updateIcon,
       deleteIcon,
       storeIcon,
-      searchIcon
+      searchIcon,
+      headerSticky
     },
     modalForm: {
       inputs,
@@ -223,6 +224,7 @@ export function Abm(props: AbmProps) {
           </Button>
         </div>
       )}
+      headerSticky={headerSticky}
       />
 
       <ModalForm

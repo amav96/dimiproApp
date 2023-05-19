@@ -111,7 +111,8 @@ export function Users() {
       console.log('data after delete',data)
     },
     updateIcon: baseApiUrl + '/icons/editar.svg',
-    deleteIcon: baseApiUrl + '/icons/basura.svg'
+    deleteIcon: baseApiUrl + '/icons/basura.svg',
+    headerSticky: true
   })
   return (
     <div className='c-m-2'>

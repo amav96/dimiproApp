@@ -20,7 +20,8 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
     searchIcon,
     searchable,
     modelKey = 'data',
-    header
+    header,
+    headerSticky
   } = props;
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
@@ -165,6 +166,7 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
       }
       <Table
       items={localItems}
+      headerSticky={headerSticky}
       columns={columns}
       scopedColumns={scopedColumns}
       onChangePage={() => changePage()}

@@ -24,7 +24,7 @@ export function SideBar(props: SideBarProps) {
     } = props;
 
   return (
-    <div className="SidebarResizableContainer AppMain-sidebarResizableContainer">
+    <div className="SidebarResizableContainer">
         <div className="SidebarResizableContainer__sidebarWrapper">
             <div 
             onMouseOver={open}

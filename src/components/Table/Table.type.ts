@@ -14,7 +14,8 @@ type column<K extends string | number> = {
     }>;
     scopedColumns?: column<K>,
     items?: Array<any>,
-    onChangePage?: Function
+    onChangePage?: Function,
+    headerSticky?: boolean
   }
   export interface TableProps<K extends string | number> extends BaseTable<K> {
   }

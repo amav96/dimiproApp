@@ -5,7 +5,7 @@ import debounce from '../../services/utils/Debounce';
 import {getProperty} from '../../services/utils/Property';
 
 export default function Table(props: TableProps<string>) {
-  const { columns, scopedColumns, items, onChangePage } = props;
+  const { columns, scopedColumns, items, onChangePage, headerSticky } = props;
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
 
@@ -47,14 +47,21 @@ export default function Table(props: TableProps<string>) {
     }
     return value
   }
+
+  const classThead = (): React.CSSProperties => {
+    if (headerSticky) {
+      return { position: 'sticky', top: 0 };
+    }
+    return {};
+  };
   
   return (
     <div 
     className='table-wrapper'
     onScroll={debounce(scrollTable, 300)}
     >
-      <table className='table-main'>
-        <thead>
+      <table  className='table-main'>
+        <thead style={classThead()} >
           <tr>
           {
             columns && columns.map((column, i) => (
