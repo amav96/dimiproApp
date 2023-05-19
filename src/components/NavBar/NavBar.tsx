@@ -3,7 +3,7 @@ import { NavBarProps } from './NavBar.type'
 import './NavBar.scss'
 
 export function Navbar(props: NavBarProps) {
-
+  // test
   const {
     logo,
     title = 'Aplicacion'
