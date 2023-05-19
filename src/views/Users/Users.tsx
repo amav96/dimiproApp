@@ -75,8 +75,8 @@ export function Users() {
     columns: useMemo(() => [
       {key: 'userId', title: 'userId'},
       {key: 'id', title: 'id'},
-      {key: 'title', title: 'Titulo', format: (value: string) => value.substr(0,20) + '...'},
-      {key: 'body', title: 'Contenido' , format: (value: string) => value.substr(0,20) + '...'},
+      {key: 'title', title: 'Titulo', format: (value: string) => value.substr(0,40) + '...'},
+      {key: 'body', title: 'Contenido' , format: (value: string) => value.substr(0,40) + '...'},
       {key: 'edit', title: 'Editar'},
       {key: 'delete', title: 'Eliminar'},
     ],[]),
@@ -116,7 +116,7 @@ export function Users() {
   return (
     <div className='c-m-2'>
       <div className="c-my-2">
-        <h2 className='c-text-lg' >Dashboard usuarios</h2>
+        <h2 className='c-text-xl'>Dashboard usuarios</h2>
       </div>
       <Abm
       table={propTable}

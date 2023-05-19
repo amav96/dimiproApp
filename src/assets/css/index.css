@@ -31,8 +31,11 @@
   --background-green: var(--green);
   --background-violet: var(--violet);
   --background-blue-light: var(--blue-light);
+  --background-primary: #001d3d;
+  --background-primary-light: #002e5e;
 
   --border-grey: var(--gray);
+  --border-table: #f3ebeb;
 
 }
 
