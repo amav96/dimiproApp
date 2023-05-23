@@ -1,7 +1,7 @@
 {
   "name": "corporation-react-library",
   "private": false,
-  "version": "1.0.14",
+  "version": "1.0.18",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,6 +15,12 @@
     "type": "git",
     "url": "https://github.com/amav96/corporation-react-library"
   },
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "library"
+  ],
   "dependencies": {
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
