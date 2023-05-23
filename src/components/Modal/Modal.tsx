@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useRef } from 'react';
-import './Modal.scss';
-import { PropModal } from './Modal.type';
+import { PropModal } from '../../types'
 import { ModalPortal } from './ModalPortal';
+import './Modal.scss';
 
 export function Modal(props: PropModal) {
   const {

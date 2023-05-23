@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react'
-import { ModalPortalProps } from './Modal.type'
+import { ModalPortalProps } from '../../types'
 
 export  function ModalPortal(props: ModalPortalProps) {
 

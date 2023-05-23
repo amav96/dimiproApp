@@ -1,8 +1,8 @@
 import React from 'react'
-import { NavBarProps } from './NavBar.type'
+import { NavBarProps } from '../../types'
 import './NavBar.scss'
 
-export function Navbar(props: NavBarProps) {
+export function NavBar(props: NavBarProps) {
   // test
   const {
     logo,

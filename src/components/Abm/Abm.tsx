@@ -1,10 +1,9 @@
-import React, { useRef, useState } from 'react'
-import { AbmProps } from './Abm.type'
+import  { useRef, useState } from 'react'
 import { TableAlive } from '../TableAlive/TableAlive'
 import { ModalForm } from '../ModalForm/ModalForm';
 import { Button } from '../Button/Button';
 import { Dialog } from '../Dialog/Dialog';
-import { PropsModalForm } from '../ModalForm/ModalForm.type';
+import { PropsModalForm, AbmProps } from '../../types'
 
 export function Abm(props: AbmProps) {
   const {

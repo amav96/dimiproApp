@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { DialogProp } from './Dialog.type'
+import { DialogProp } from '../../types'
 import { Modal } from '../Modal/Modal';
 import { Button } from '../Button/Button';
 

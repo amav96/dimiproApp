@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ItemSideBarProps } from './SideBar.type'
+import { ItemSideBarProps } from '../../types'
 import { useNavigate } from 'react-router-dom';
 import './SideBar.scss'
 

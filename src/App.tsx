@@ -1,15 +1,8 @@
 import { BrowserRouter } from "react-router-dom"
 import { Router } from "./router"
-import { AuthProvider } from './contexts/Auth'
-
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { icons } from './assets/icons/fontAwesome';
-import { Navbar } from "./components/NavBar/NavBar";
+import { NavBar } from "./components/NavBar/NavBar";
 import { SideBar } from "./components/SideBar/SideBar";
 import baseApiUrl from "./services/BaseApiUrl";
-
-library.add(fab, icons);
 
 const menu = {
   top: [
@@ -84,9 +77,8 @@ const menu = {
 function App() {
 
   return (
-    <AuthProvider>
       <div className="AppRoot-fullPage">
-      <Navbar
+      <NavBar
       logo={'https://www.dimiproworld.com/wp-content/uploads/2018/10/adventure_logo_1-dimiopro.png'}
       title='Corporation'
       />
@@ -111,7 +103,6 @@ function App() {
         </div>
       </BrowserRouter>
       </div>
-    </AuthProvider>
   )
 }
 

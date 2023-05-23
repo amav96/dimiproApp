@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import { TableAliveProps } from '../Table/Table.type'
-import Table from '../Table/Table'
+import { TableAliveProps } from '../../types'
+import {Table} from '../Table/Table'
 import { Form } from '../Form';
 import { Button } from '../Button/Button';
 

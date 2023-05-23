@@ -1,10 +1,8 @@
 // import Form from '../../components/Form/Form'
 import React, { useState } from 'react';
 import { Form} from '../Form';
-import { PropsSelect } from '../Form/Select/Select.type';
 import { Modal } from '../Modal/Modal';
-import { PropsInput } from '../Form/Input/Input.type';
-import { Slot, generatedInputs } from '../Form/Form/Form.type';
+import { Slot, GlobalInputs } from '../../types'
 import { formatTypeDate, getValuesInArrayObjects } from '../../services/utils/Formatters';
 import { Button } from '../Button/Button';
 
@@ -46,7 +44,7 @@ export function LoginForm() {
     
   }
 
-  const [inputs, setInputs] = useState<Array<generatedInputs | Slot>>(
+  const [inputs, setInputs] = useState<Array<GlobalInputs | Slot>>(
     [
       {
         key: 'firstName',

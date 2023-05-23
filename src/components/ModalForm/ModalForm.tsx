@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import './ModalForm.scss'
-import { PropsModalForm } from './ModalForm.type'
-import { generatedInputs } from '../Form/Form/Form.type';
+import { PropsModalForm } from '../../types'
+import { GlobalInputs } from '../../types'
 import { Form } from '../Form';
 import { serializeParams } from '../../services/utils/Api';
 import { Button } from '../Button/Button';
@@ -29,7 +28,7 @@ export function ModalForm(props: PropsModalForm) {
  } = props;
 
  
- const [generatedForm, setGeneratedForm] = useState<Array<generatedInputs>>([])
+ const [generatedForm, setGeneratedForm] = useState<Array<GlobalInputs>>([])
   useEffect(() => {
      inputs.forEach(({key}, i) => {
        const index = generatedForm.map((m) => m.key).indexOf(key);
@@ -43,7 +42,7 @@ export function ModalForm(props: PropsModalForm) {
            })
          )
        } else {
-         let newInput: generatedInputs  = inputs[i] as generatedInputs;
+         let newInput: GlobalInputs  = inputs[i] as GlobalInputs;
          setGeneratedForm((prev) => ([
            ...prev,
            ...[{ ...newInput }]

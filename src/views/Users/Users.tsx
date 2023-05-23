@@ -1,14 +1,14 @@
 import React, { useMemo, useState } from 'react'
 import { Abm } from '../../components/Abm'
-import { generatedInputs } from '../../components/Form/Form/Form.type'
+import { GlobalInputs } from '../../types'
 import { Routes } from '../../services/utils/Routes'
 import { authorization } from '../../services/utils/Autorizathion'
-import { AbmModalFormExternal, AbmTableAliveProps } from '../../components/Abm/Abm.type'
+import { AbmModalFormExternal, AbmTableAliveProps } from '../../types'
 import baseApiUrl from '../../services/BaseApiUrl'
 
 export function Users() {
 
-  const formInputs: generatedInputs[] = ([
+  const formInputs: GlobalInputs[] = ([
     {
       key: 'title',
       placeholder : 'Titulo',
@@ -34,6 +34,26 @@ export function Users() {
           required: true
         }
       },
+    },
+    {
+      key: 'pais',
+      name: 'pais',
+      value: [],
+      type: 'select',
+      multiple: true,
+      clearable: true,
+      options: [
+        {
+          name: 'Argentina', id: 1
+        },
+        {
+          name: 'Uruguay', id: 2
+        },
+        {
+          name: 'Paraguay', id: 3
+        },
+      ]
+ 
     }
   ])
 
@@ -92,7 +112,7 @@ export function Users() {
       return {
         ...input,
         ...{
-          cols: 'c-col-span-2'
+          cols: 'c-col-span-6'
         }
       }
     }),

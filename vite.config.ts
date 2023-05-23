@@ -22,6 +22,8 @@ export default defineConfig({
     strictPort: true,
   },
   resolve: {
-    alias: [{ find: '@', replacement: '/src' }],
+    alias: [
+      { find: '@', replacement: '/src' },
+    ],
    },
 })

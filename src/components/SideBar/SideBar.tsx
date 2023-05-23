@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SideBarProps } from './SideBar.type'
+import { SideBarProps } from '../../types'
 import { ItemSideBar } from './ItemSideBar';
 import './SideBar.scss'
 

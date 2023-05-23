@@ -1,6 +1,4 @@
-import React from 'react'
-import './Button.scss'
-import { PropsButton } from './Button.type'
+import { PropsButton } from '../../types'
 
 export function Button(props: PropsButton) {
 
@@ -21,9 +19,9 @@ export function Button(props: PropsButton) {
       onClick()
     }
   }
-  
+
   return (
-    <button 
+    <button
     onClick={handleClick}
     className={`${backgroundColor} ${borderColor} ${padding} ${customClass}`}
     type={type} >
@@ -32,7 +30,7 @@ export function Button(props: PropsButton) {
           (children)
           : <span className={`${textColor}`} >{text}</span>
         }
-        
+
     </button>
   )
 }
