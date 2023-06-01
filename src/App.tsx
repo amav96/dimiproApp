@@ -17,7 +17,7 @@ function App() {
             name: 'dashboard'
         },
         {
-            title: 'Lista de siniestros',
+            title: 'Lista de contratos',
             image: baseApiUrl + '/icons/lista.svg',
             visible : true,
             subSection: [
@@ -36,7 +36,7 @@ function App() {
             ]
         },
         {
-            title: 'Agregar siniestro',
+            title: 'Agregar contrato',
             image: baseApiUrl + '/icons/circulo_sumar.svg',
             visible : true
         },
