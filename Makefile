@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_CONTAINER = corporationapp
+DOCKER_CONTAINER = dimiproapp
 DOCKER_DB = mongodbcenter
 
 SPORT = --service-ports

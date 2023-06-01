@@ -1,10 +1,9 @@
 import React, { useMemo, useState } from 'react'
-import { Abm } from '../../components/Abm'
-import { GlobalInputs } from '../../types'
-import { Routes } from '../../services/utils/Routes'
-import { authorization } from '../../services/utils/Autorizathion'
-import { AbmModalFormExternal, AbmTableAliveProps } from '../../types'
-import baseApiUrl from '../../services/BaseApiUrl'
+import { Abm } from '@package'
+import { Routes } from '@services/utils/Routes'
+import { authorization } from '@services/utils/Autorizathion'
+import { AbmModalFormExternal, AbmTableAliveProps, GlobalInputs } from '@packageTypes'
+import baseApiUrl from '@services/BaseApiUrl'
 
 export function Users() {
 

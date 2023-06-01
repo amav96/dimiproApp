@@ -1,4 +1,4 @@
-import { Validations, Messages, Rules } from "../../types/Validations";
+import { Validations, Messages, Rules } from "@packageTypes";
 import { isEmpty, minLength, contain, isEmail, isTypeValue, maxLength} from "./Validations";
 
 

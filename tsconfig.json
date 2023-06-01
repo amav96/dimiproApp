@@ -13,6 +13,12 @@
     "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@services/*": ["src/services/*"],
+      "@package": ["src/components/package"],
+      "@packageTypes": ["src/packageTypes"]
+    }
   },
   "exclude": [
     "dist",

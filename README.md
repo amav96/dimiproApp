@@ -63,12 +63,28 @@ const forms: GlobalInputs  = [
       type: 'text',
       value: null,
       name: 'apellido'
+    },
+    {
+      key: 'descripcion',
+      slot: true
     }
 ]
+
+const handleSubmit (data) => {
+    const { items , isValid } = data;
+}
 
 function Example() {
   return  <Form
             inputs={forms}
+            onSubmit={handleSubmit}
+            scopedFields={{
+                descripcion: () => (
+                    <div>
+                        <input placeholder="descripcion" />
+                    </div>
+                )
+            }}
           />
 }
 ```

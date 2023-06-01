@@ -15,4 +15,4 @@ export {
     SideBar,
     Table,
     TableAlive
-} from "./src/components";
+} from "./src/components/package";

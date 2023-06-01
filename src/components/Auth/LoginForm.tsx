@@ -1,10 +1,8 @@
-// import Form from '../../components/Form/Form'
+
 import React, { useState } from 'react';
-import { Form} from '../Form';
-import { Modal } from '../Modal/Modal';
-import { Slot, GlobalInputs } from '../../types'
-import { formatTypeDate, getValuesInArrayObjects } from '../../services/utils/Formatters';
-import { Button } from '../Button/Button';
+import { Form, Modal, Button} from '@package';
+import { Slot, GlobalInputs } from '@packageTypes'
+import { formatTypeDate, getValuesInArrayObjects } from '@services/utils/Formatters';
 
 export function LoginForm() {
 
@@ -177,9 +175,9 @@ const onSubmit = (data: any) => {
       }}
       >
         <Button
-        type={'submit'}
-        text={'Enviar formulario'}
-        />
+        >
+          Enviar formulario
+        </Button>
       </Form>
       }
 

@@ -1,8 +1,8 @@
 version: "3.7"
 
 services:
-  corporationapp:
-    container_name: corporationapp
+  dimiproapp:
+    container_name: dimiproapp
     build:
       context: .
       dockerfile: dockerfile

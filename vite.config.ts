@@ -24,6 +24,9 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: '@', replacement: '/src' },
+      { find: '@package', replacement: '/src/components/package' },
+      { find: '@services', replacement: '/src/services' },
+      { find: '@packageTypes', replacement: '/src/packageTypes' },
     ],
    },
 })
