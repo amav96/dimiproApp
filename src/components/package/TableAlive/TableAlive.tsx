@@ -145,14 +145,14 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
           >
             <div className="c-flex c-my-4">
               <Button
+              customClass={'btn-primary'}
               >
                 { searchIcon ? (<img src={searchIcon} alt="buscar"/>) : (<span>Buscar</span>)}
               </Button>
               <Button
               type={'button'}
               onClick={resetLookFor}
-
-              customClass={'c-mx-2'}
+              customClass={'c-mx-2 btn-secondary'}
               >
                 Limpiar filtros
               </Button>

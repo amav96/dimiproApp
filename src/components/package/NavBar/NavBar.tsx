@@ -10,7 +10,7 @@ export function NavBar(props: NavBarProps) {
  } = props;
 
   return (
-    <div className="navbar-container">
+    <nav className="navbar-container">
       <div className="navbar-container__main">
         <img
         src={logo}
@@ -19,6 +19,6 @@ export function NavBar(props: NavBarProps) {
           <span> { title } </span>
         </div> */}
       </div>
-    </div>
+    </nav>
   )
 }
