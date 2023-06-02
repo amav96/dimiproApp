@@ -213,10 +213,10 @@ export function Abm(props: AbmProps) {
         <div className="c-flex c-justify-end">
           <Button
           type={'button'}
-          customClass={'c-mb-3 c-w-40 c-flex c-justify-center'}
+          customClass={'c-mb-3 c-w-40 c-flex c-justify-center btn-primary'}
           onClick={onOpenStore}
           >
-            { storeIcon ? (<img src={storeIcon} alt="Eliminar"/>) : (<span className="c-text-black" >Crear <strong>+</strong></span>)}
+            { storeIcon ? (<img src={storeIcon} alt="Eliminar"/>) : (<span>Crear <strong>+</strong></span>)}
           </Button>
         </div>
       )}

@@ -26,9 +26,9 @@ export function Button(props: PropsButton) {
     className={`${backgroundColor} ${borderColor} ${padding} ${customClass}`}
     type={type} >
         {children && (
-          <div className={textColor}>
+          <span>
             {children}
-          </div>
+          </span>
         )}
     </button>
   )

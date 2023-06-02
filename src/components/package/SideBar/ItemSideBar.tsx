@@ -79,9 +79,6 @@ export function ItemSideBar(props: ItemSideBarProps) {
                     {
                       deployed && (
                         <div
-                        style={{
-                            color: colorTextItem
-                        }}
                         className="SidebarResizableContainer__item__box__item__title" >
                         { title }
                         </div>
@@ -105,7 +102,7 @@ export function ItemSideBar(props: ItemSideBarProps) {
                                 section.image && (
                                   <div
                                   className="subSection__img">
-                                      <img src={section.image}/>
+                                      <img src={section.image} />
                                   </div>
                                 )
                               }

@@ -18,12 +18,9 @@
     min-height: 38px;
     position: relative;
     transition: all 100ms ease 0s;
-    background: var(--background-grey-light);
-    // border-color: rgb(204, 204, 204);
+    background: var(--white);
+    border: 1px solid var(--black);
     border-radius: 6.5px;
-    border-style: solid;
-    // border-width: 1px;
-    // box-sizing: border-box;
     outline: 0px !important;
     padding: 1.5px 0px;
 
@@ -91,7 +88,7 @@
             &__multiValue{
                 display: flex;
                 min-width: 0px;
-                background-color: rgb(209, 196, 196);
+                background-color: var(--background-hover-sidebar);
                 border-radius: 2px;
                 margin: 2px;
                 box-sizing: border-box;
@@ -183,6 +180,6 @@
 }
 
 .Select__menu__itemContainer:hover{
-    background:var(--background-grey-light);
+    background-color: var(--background-hover-sidebar);
     font-weight: 600;
 }

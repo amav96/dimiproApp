@@ -25,7 +25,9 @@ export interface BaseProps {
   "select" |
   "multiple" |
   "datetime" |
-  "file"
+  "file" |
+  "email" |
+  "password" 
   title?: string;
   disabled?: boolean;
   state?: boolean | null;

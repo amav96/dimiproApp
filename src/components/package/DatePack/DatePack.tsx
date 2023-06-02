@@ -6,6 +6,8 @@ import { Validator } from '@services/utils/Validator';
 import './DatePack.scss'
 import { removeDuplicates } from '@services/utils/Property';
 
+import "react-datepicker/dist/react-datepicker.css";
+
 const validate =  new Validator();
 export function DatePack(props: PropsDate) {
 
