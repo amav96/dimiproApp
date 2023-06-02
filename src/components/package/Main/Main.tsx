@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import baseApiUrl from "../../../services/BaseApiUrl";
 import { Router } from "../../../../src/router";
 import { SideBar } from "../SideBar";
@@ -6,6 +6,12 @@ import { NavBar } from "../NavBar";
 
 function MainPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isLoginPath = location.pathname === "/login";
+  const isForgotPasswordPath = location.pathname === "/forgot-password";
+
+  const shouldShowSideBar = !isLoginPath && !isForgotPasswordPath;
 
   const menu = {
     top: [
@@ -121,21 +127,24 @@ function MainPage() {
         }
         title="Corporation"
       />
-      <div className="AppMain">
-        <div className="AppMain__layer">
-          <SideBar menu={menu} colorTextItem="#fff" />
-          <main className="AppMain__layer__PageAndTopBar">
-            <div className="HomePageContent">
-              <div
-                className="Scrollable--vertical
+      {shouldShowSideBar && (
+        <div className="AppMain">
+          <div className="AppMain__layer">
+            <SideBar menu={menu} colorTextItem="#fff" />
+            <main className="AppMain__layer__PageAndTopBar">
+              <div className="HomePageContent">
+                <div
+                  className="Scrollable--vertical
                 HomePageContent__contentContainer"
-              >
-                <Router />
+                >
+                  <Router />
+                </div>
               </div>
-            </div>
-          </main>
+            </main>
+          </div>
         </div>
-      </div>
+      )}
+      {!shouldShowSideBar && <Router />}
     </>
   );
 }

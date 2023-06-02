@@ -45,12 +45,12 @@ export function LoginForm() {
   const [inputs, setInputs] = useState<Array<GlobalInputs | Slot>>(
     [
       {
-        key: 'firstName',
-        placeholder : 'Nombre',
-        title: 'prueba',
-        name: 'firstName',
+        key: 'email',
+        placeholder : 'Email',
+        title: 'email',
+        name: 'email',
         value: '',
-        type: 'text',
+        type: 'email',
         validations: {
           rules: {
             required: true
@@ -58,83 +58,17 @@ export function LoginForm() {
         }
       },
       {
-        key: 'dateStart',
-        placeholder : 'Fecha',
-        name: 'dateStart',
+        key: 'password',
+        placeholder : 'Password',
+        name: 'password',
         value: null,
-        type: 'datetime',
+        type: 'password',
         validations: {
           rules: {
             required: true
           }
-        },
-        // showTimeSelect: true,
-        // dateFormat:'dd/MM/yyyy hh:mm',
-        formatValue: (value : Date) => formatTypeDate(value)
-        
+        }      
       },
-      {
-        key: 'country',
-        placeholder: 'Pais',
-        name: 'country',
-        value: [],
-        options: paises,
-        type: 'select',
-        multiple: true,
-        validations: {
-          rules: {
-            required: true
-          }
-        },
-        clearable: true,
-        formatValue: (value: Array<object>) => getValuesInArrayObjects(value),
-        onSelect: test,
-        onRemove: test1
-      },
-      {
-        key: 'countrystatic',
-        placeholder: 'Pais estatico',
-        name: 'countrystatic',
-        value: [],
-        options: paises,
-        type: 'select',
-        clearable: true
-      },
-      {
-        key: 'imagenes',
-        placeholder: 'Imagen Avatar',
-        name: 'imagenes',
-        value: [],
-        type: 'file',
-        validations: {
-          rules: {
-            required: true
-          }
-        }
-      },
-      {
-        key: 'comentario',
-        placeholder: 'Comentarios',
-        name: 'comentario',
-        value: '',
-        type: 'textarea',
-        validations: {
-          rules: {
-            required: true
-          }
-        }
-      },
-      {
-        key: 'lavadero',
-        label: 'lavadero',
-        name: 'lavadero',
-        type: 'switch',
-        value: false
-      },
-      {
-        key: 'test',
-        slot: true
-      }
   ])
 
   const [err, setErr] = useState<Array<string>>([]);
@@ -174,13 +108,15 @@ const onSubmit = (data: any) => {
         )
       }}
       >
+        <a href="#" className='forgot-password'>¿Olvidaste tu contraseña?</a>
         <Button
+          customClass='btn-primary'
         >
-          Enviar formulario
+          Iniciar sesión
         </Button>
       </Form>
       }
-
+{/* 
       <Modal
       isOpen={openModal}
       closeModal={openCloseModal}
@@ -196,10 +132,10 @@ const onSubmit = (data: any) => {
             </button>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
 
-      <button onClick={setErrors} className='bg-green-200 p-2' > set errors </button>
-      <button onClick={openCloseModal} className='bg-red-200 p-2' > Abrir modal </button>
+      {/* <button onClick={setErrors} className='bg-green-200 p-2' > set errors </button>
+      <button onClick={openCloseModal} className='bg-red-200 p-2' > Abrir modal </button> */}
     </div>
   )
 }

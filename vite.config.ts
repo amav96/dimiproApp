@@ -29,4 +29,11 @@ export default defineConfig({
       { find: '@packageTypes', replacement: '/src/packageTypes' },
     ],
    },
+   css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./src/assets/css/_variables.scss";`
+      }
+    }
+  }
 })

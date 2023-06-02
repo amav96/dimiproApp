@@ -270,7 +270,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
               </div>
             )
           }else {
-            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text'))){
+            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text' || input.type === 'email' || input.type === 'password'))){
               return (
                 <Input
                 key={index}

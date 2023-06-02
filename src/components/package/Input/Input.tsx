@@ -5,6 +5,8 @@ import { isEmpty } from "@services/utils/Validations";
 import { Validator } from '@services/utils/Validator';
 import { PropsInput, Validations } from '@packageTypes'
 import { removeDuplicates } from '@services/utils/Property';
+import IconOpenEye from '../../../../public/icons/eye-open.svg'
+import IconCloseEye from '../../../../public/icons/eye-close.svg'
 
 const validate =  new Validator();
 export function Input(props: PropsInput) {
@@ -20,6 +22,12 @@ export function Input(props: PropsInput) {
         type
     } = props;
     const [localErrors, setLocalErrors] = useState<Array<string>>([])
+
+    const [showPassword, setShowPassword] = useState<Boolean>(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword)
+    }
 
     const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
       if(onChange){
@@ -68,8 +76,17 @@ export function Input(props: PropsInput) {
         value={value}
         name={name}
         disabled={disabled}
-        type={type}
+        type={showPassword ? 'text' : type}
         />
+        {
+            type === 'password' && (
+                <span className="password-icon" onClick={togglePasswordVisibility}>
+                    {
+                        showPassword ? <img src={IconCloseEye} alt="Ocultar contraseña" /> : <img src={IconOpenEye} alt="Mostrar contraseña" /> 
+                    }
+                </span>
+            )
+        }
         {
           // mostrar errores
           Array.isArray(localErrors) && !isEmpty(localErrors) &&
