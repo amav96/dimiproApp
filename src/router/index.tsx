@@ -11,6 +11,7 @@ export function Router() {
         <Route path="/" element={<Home/>} />
         <Route path="/users" element={<Users/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/forgot-password" element={<Login/>} />
       </Routes>
     )
 }

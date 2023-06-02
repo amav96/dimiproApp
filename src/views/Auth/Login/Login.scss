@@ -22,11 +22,11 @@
     @media (max-width: $breakpoint-m) {
       height: 40vh;
       background-image: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0)
-      ),
-      url("../../../../public/images/login-image.jpg");
+          to top,
+          rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0)
+        ),
+        url("../../../../public/images/login-image.jpg");
     }
 
     &:before {
@@ -43,10 +43,10 @@
       height: 100%;
       @media (max-width: $breakpoint-m) {
         background-image: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0)
-      );
+          to top,
+          rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0)
+        );
       }
     }
   }
@@ -60,7 +60,6 @@
       place-content: flex-start;
       padding: 30px 15px 0;
     }
-      
 
     .form-container__width {
       max-width: 450px;
@@ -91,9 +90,8 @@
 
         .password-icon {
           position: absolute;
-          top: 50%;
+          top: 14px;
           right: 1rem;
-          transform: translateY(-50%);
           cursor: pointer;
 
           img {
@@ -102,13 +100,12 @@
             object-fit: cover;
           }
         }
-
       }
     }
 
     .img {
-        position: absolute;
-        right: 0;
+      position: absolute;
+      right: 0;
     }
 
     .forgot-password {
@@ -128,6 +125,19 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       font-size: 14px;
+    }
+
+    .link-login {
+      margin-top: 1.6rem;
+      font-size: 14px;
+      display: inline-block;
+      width: 100%;
+      &:hover {
+        text-decoration: underline;
+      }
+      span {
+        font-weight: 600;
+      }
     }
   }
 }
