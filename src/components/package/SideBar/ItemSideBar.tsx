@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ItemSideBarProps } from '@packageTypes'
 import './SideBar.scss'
+import { useNavigate } from 'react-router-dom';
 
 export function ItemSideBar(props: ItemSideBarProps) {
 
@@ -15,6 +16,8 @@ export function ItemSideBar(props: ItemSideBarProps) {
       subSection,
       onNavigate
     } = props;
+
+    const navigate = useNavigate();
 
     const styleToSection = () => {
         return {
@@ -35,7 +38,6 @@ export function ItemSideBar(props: ItemSideBarProps) {
         if(subSection){
             setDeployedSection((prev) => !prev)
         } else {
-
             const object = {
                 title: title,
                 name : name,
@@ -47,7 +49,7 @@ export function ItemSideBar(props: ItemSideBarProps) {
                 subSection : subSection,
             }
             if(onNavigate){
-                onNavigate(object)
+              onNavigate(object)
             }
         }
     }
