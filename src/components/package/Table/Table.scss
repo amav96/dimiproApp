@@ -1,50 +1,58 @@
 .table-wrapper::-webkit-scrollbar {
-    height: 8px;
-    width: 8px;
+  height: 8px;
+  width: 8px;
 }
 
 .table-wrapper::-webkit-scrollbar-thumb {
-    background: #cfcece;
-    -webkit-border-radius: 1ex;
+  background: #cfcece;
+  -webkit-border-radius: 1ex;
 }
 
 .table-wrapper {
-    max-height: 33rem;
-    overflow-y: scroll;
-    overflow-x: auto;
-    background: white;
+  max-height: 33rem;
+  overflow-y: scroll;
+  overflow-x: auto;
+  background: white;
+  position: relative;
+  height: 33rem;
+
+  .lds-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .table-main {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    border-top: 1px solid var(--border-table);
-    border-top: 1px solid var(--border-table);
-    font-size: 14px;
-    color: #333;
-    background-color: #fff;
-    margin-bottom: 20px;
-    thead {
-        background-color: #f5f5f5;
-        tr {
-            th {
-                padding: 10px 15px;
-                border-top: 1px solid var(--border-table);
-                text-align: left;
-                font-weight: 600;
-            }
-        }
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-top: 1px solid var(--border-table);
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  margin-bottom: 20px;
+  thead {
+    background-color: #f5f5f5;
+    tr {
+      th {
+        padding: 10px 15px;
+        border-top: 1px solid var(--border-table);
+        text-align: left;
+        font-weight: 600;
+      }
     }
-    tbody {
-        tr {
-            td {
-                padding: 10px 15px;
-                border-top: 1px solid var(--border-table);
-                border-bottom: 1px solid var(--border-table);
-                text-align: left;
-                font-weight: 400;
-            }
-        }
+  }
+  tbody {
+    tr {
+      td {
+        padding: 10px 15px;
+        border-top: 1px solid var(--border-table);
+        border-bottom: 1px solid var(--border-table);
+        text-align: left;
+        font-weight: 400;
+      }
     }
+  }
 }
