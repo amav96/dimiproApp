@@ -111,7 +111,7 @@ function MainPage() {
         image: baseApiUrl + "/icons/logout.svg",
         visible: true,
         name: "logout",
-        path: "/logout",
+        path: "/login",
         onNavigate: (data: any) => {
           navigate(data.path);
         },
