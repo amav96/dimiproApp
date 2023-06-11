@@ -7,5 +7,8 @@ export const Routes = {
         UPDATE: apiPlaceHolder + '/posts',
         SHOW: apiPlaceHolder + '/posts',
         DELETE: apiPlaceHolder + '/posts',
+    },
+    AUTH: {
+        LOGIN: baseApiUrl + '/api/v1/auth/login', 
     }
 }

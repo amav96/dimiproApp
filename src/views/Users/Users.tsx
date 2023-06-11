@@ -6,7 +6,7 @@ import { AbmModalFormExternal, AbmTableAliveProps, GlobalInputs } from '@package
 import baseApiUrl from '@services/BaseApiUrl'
 
 export function Users() {
-
+ console.log('holis')
   const formInputs: GlobalInputs[] = ([
     {
       key: 'title',
