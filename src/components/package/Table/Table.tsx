@@ -3,6 +3,7 @@ import { TableProps } from '@packageTypes'
 import './Table.scss'
 import debounce from '@services/utils/Debounce';
 import {getProperty} from '@services/utils/Property';
+import Loader from '../Loader/Loader';
 
 export function Table(props: TableProps<string>) {
   const { columns, scopedColumns, items, onChangePage, headerSticky } = props;
@@ -60,6 +61,9 @@ export function Table(props: TableProps<string>) {
     className='table-wrapper'
     onScroll={debounce(scrollTable, 300)}
     >
+      <>
+        { localItems.length === 0 && <Loader /> }
+      </>
       <table  className='table-main'>
         <thead style={classThead()} >
           <tr>
