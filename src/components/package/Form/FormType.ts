@@ -10,6 +10,7 @@ import {
 
 
 export interface BaseProps {
+  icon?: string;
   placeholder?: string;
   value: any;
   name: string;

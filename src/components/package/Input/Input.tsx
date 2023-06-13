@@ -11,6 +11,7 @@ import IconCloseEye from '../../../../public/icons/eye-close.svg'
 const validate =  new Validator();
 export function Input(props: PropsInput) {
     let {
+        icon,
         placeholder = 'Ingrese texto',
         cols =  'c-col-span-12',
         value,
@@ -67,17 +68,20 @@ export function Input(props: PropsInput) {
 
     return (
     <div className={`Input controlInput ${cols}`}>
-        <input
-        className="Input__input"
-        placeholder={placeholder}
-        autoComplete="off"
-        onChange={handleChange}
-        onBlur={onBlur}
-        value={value}
-        name={name}
-        disabled={disabled}
-        type={showPassword ? 'text' : type}
+        <div className="container">
+            { icon && <img className='input_icon' src={icon} alt="icon" /> }
+            <input
+                className="Input__input"
+                placeholder={placeholder}
+                autoComplete="off"
+                onChange={handleChange}
+                onBlur={onBlur}
+                value={value}
+                name={name}
+                disabled={disabled}
+                type={showPassword ? 'text' : type}
         />
+        </div>
         {
             type === 'password' && (
                 <span className="password-icon" onClick={togglePasswordVisibility}>

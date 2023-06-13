@@ -1,0 +1,37 @@
+.add-contract-container {
+  max-width: 1240px;
+  padding-top: 10px;
+  h1 {
+    font-weight: 600;
+  }
+
+  .Form {
+    gap: 22px;
+    margin-top: 40px;
+
+    .Select_container,
+    .controlInput,
+    .File {
+      grid-column: span 6/span 6;
+      height: fit-content;
+
+      .controlInput__text {
+        margin-left: 32px;
+      }
+    }
+
+  }
+
+  .btn-primary {
+    margin-top: 30px;
+    width: 70%;
+    margin: 30px auto 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 46px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+}

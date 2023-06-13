@@ -270,9 +270,10 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
               </div>
             )
           }else {
-            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text' || input.type === 'email' || input.type === 'password'))){
+            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text' || input.type === 'email' || input.type === 'password' || input.type === 'number'))){
               return (
                 <Input
+                icon={input.icon}
                 key={index}
                 type={generatedInputs[index].type}
                 value={formValues[input.key]}
@@ -287,6 +288,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
             } else if (input.type === 'textarea'){
               return (
                 <Textarea
+                icon={input.icon}
                 key={index}
                 type={generatedInputs[index].type}
                 value={formValues[input.key]}
@@ -317,6 +319,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
             } else if (input.type === 'select'){
               return (
                 <Select
+                icon={generatedInputs[index].icon}
                 key={index}
                 type={generatedInputs[index].type}
                 placeholder={generatedInputs[index].placeholder}
@@ -348,6 +351,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
             } else if (input.type === 'file' ){
               return(
                 <File
+                icon={generatedInputs[index].icon}
                 key={`file-${index}`}
                 type={generatedInputs[index].type}
                 name={generatedInputs[index].name}

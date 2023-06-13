@@ -1,53 +1,58 @@
-
-
 .File {
-    width: 100%;
+  width: 100%;
 
-    &__box {
-        padding: 10px 10px;
-        border-radius: 35px;
-        width: 21rem;
-        height: 4rem;
+  &__box {
+    padding: 10px 10px;
+    border-radius: 35px;
+    width: 21rem;
+    height: 4rem;
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-
-        &__img {
-            display: flex;
-            justify-content: center;
-        }
-        &__text{
-            display: flex;
-            justify-content: center;
-            margin-top: 2px;
-            cursor: pointer;
-        }
-      }
-
-
-}
-
-
-
-  .color-files-normal {
-      border: 2px dotted #a19a9a;
-  }
-
-  .color-files-error {
-      border: 2px dotted #e33748;
-  }
-
-
-  .controlInput{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 
-    &__text{
-        margin-top:4px;
-        font-size: 15.5px;
-        color: var(--red);
+    &__img {
+      display: flex;
+      justify-content: center;
     }
+    &__text {
+      display: flex;
+      justify-content: center;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .File__icon {
+        width: 26px;
+        height: 26px;
+        object-fit: cover;
+    }
+  }
+}
+
+.color-files-normal {
+  border: 2px dotted #a19a9a;
+}
+
+.color-files-error {
+  border: 2px dotted #e33748;
+}
+
+.controlInput {
+  display: flex;
+  flex-direction: column;
+
+  &__text {
+    margin-top: 4px;
+    font-size: 15.5px;
+    color: var(--red);
+  }
 }
