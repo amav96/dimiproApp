@@ -2,9 +2,22 @@
 
 .Input {
     width: 100%;
+    gap: 8px;
 
     &__input:focus{
         outline: none !important;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .input_icon {
+        width: 26px;
+        height: 26px;
+        object-fit: cover;
     }
 }
 

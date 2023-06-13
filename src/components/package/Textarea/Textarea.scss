@@ -6,6 +6,18 @@
     &__input:focus{
         outline: none !important;
     }
+
+    .container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .input_icon {
+            width: 26px;
+            height: 26px;
+            object-fit: cover;
+        }
+    }
 }
 
 .controlTextarea{

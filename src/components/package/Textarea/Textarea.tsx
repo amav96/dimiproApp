@@ -9,6 +9,7 @@ import { removeDuplicates } from '@services/utils/Property';
 const validate =  new Validator();
 export function Textarea(props: PropsTextArea) {
     let {
+        icon,
         placeholder = 'Ingrese texto',
         cols =  'c-col-span-12',
         value,
@@ -62,17 +63,20 @@ export function Textarea(props: PropsTextArea) {
 
     return (
     <div className={`Textarea controlInput ${cols}`}>
-        <textarea
-        className="Textarea__input"
-        placeholder={placeholder}
-        autoComplete="off"
-        onChange={handleChange}
-        onBlur={onBlur}
-        value={value}
-        name={name}
-        disabled={disabled}
-        cols={colsArea}
-        />
+        <div className="container">
+            {icon && <img src={icon} alt="icon" className='input_icon' />}
+            <textarea
+                className="Textarea__input"
+                placeholder={placeholder}
+                autoComplete="off"
+                onChange={handleChange}
+                onBlur={onBlur}
+                value={value}
+                name={name}
+                disabled={disabled}
+                cols={colsArea}
+            />
+        </div>
         {
           // mostrar errores
           Array.isArray(localErrors) && !isEmpty(localErrors) &&
