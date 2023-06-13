@@ -2,13 +2,13 @@ import React, { useRef, useState } from "react";
 import { Form, Button } from "@package";
 import { Slot, GlobalInputs } from "@packageTypes";
 import { Link, useNavigate } from "react-router-dom";
-import AuthenticationApi from "@repositories/auth.repository";
+import AuthenticationRepository from "@repositories/auth.repository";
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import {setUser, setPermissions, setAccess } from '../../features/auth/authSlice'
+import {setUser, setPermissions, setToken } from '@features/auth/authSlice'
 import {  toast } from 'react-toastify';
 
 
-const authController = new AuthenticationApi()
+const authController = new AuthenticationRepository()
 export function LoginForm() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -48,10 +48,8 @@ export function LoginForm() {
     const { items } = data;
     setLoading(true);
     const response = await authController.login(items)
-    setLoading(false);
-    console.log(response)
     if(response.errors){
-      toast(`🦄 ${response.errors.message || 'Contraseña o usuario incorrecto'}`, {
+      toast(`🦄 ${response.errors.message}`, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -65,8 +63,8 @@ export function LoginForm() {
       if(response.user){
         dispatch(setUser(response.user))
       }
-      if(response.access){
-        dispatch(setAccess(response.access))
+      if(response.token){
+        dispatch(setToken(response.token))
       }
       if(response.permissions){
         dispatch(setPermissions(response.permissions))

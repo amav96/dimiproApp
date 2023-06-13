@@ -10,5 +10,13 @@ export const Routes = {
     },
     AUTH: {
         LOGIN: baseApiUrl + '/api/v1/auth/login', 
+        PERMISSIONS: baseApiUrl + '/api/v1/auth/permissions', 
+    },
+    USERS: {
+        INDEX: baseApiUrl + '/api/v1/users',
+        STORE: baseApiUrl + '/api/v1/user',
+        UPDATE: baseApiUrl + '/api/v1/user',
+        SHOW: baseApiUrl + '/api/v1/user',
+        DELETE: baseApiUrl + '/api/v1/user',
     }
 }

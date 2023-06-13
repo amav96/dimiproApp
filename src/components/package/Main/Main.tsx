@@ -29,20 +29,7 @@ function MainPage() {
         title: "Lista de contratos",
         image: baseApiUrl + "/icons/lista.svg",
         visible: true,
-        subSection: [
-          {
-            title: "Cerrados",
-            image: baseApiUrl + "/icons/lista.svg",
-          },
-          {
-            title: "Abiertos",
-            image: baseApiUrl + "/icons/lista.svg",
-          },
-          {
-            title: "Inactivos",
-            image: baseApiUrl + "/icons/lista.svg",
-          },
-        ],
+        
       },
       {
         title: "Agregar contrato",
@@ -55,44 +42,20 @@ function MainPage() {
         },
       },
       {
-        title: "Lista de cargas",
+        title: "Ajustes",
         image: baseApiUrl + "/icons/ajustes.svg",
         visible: true,
-        name: "charges",
-        path: "/charges",
-        onNavigate: (data: any) => {
-          navigate(data.path);
-        },
-      },
-      {
-        title: "Agregar carga",
-        image: baseApiUrl + "/icons/machine.svg",
-        visible: true,
-        name: "addCargo",
-        path: "/add-cargo",
-        onNavigate: (data: any) => {
-          navigate(data.path);
-        },
-      },
-      {
-        title: "Tracking de cargas",
-        image: baseApiUrl + "/icons/exclamacion.svg",
-        visible: true,
-        name: "tracking",
-        path: "/tracking",
-        onNavigate: (data: any) => {
-          navigate(data.path);
-        },
-      },
-      {
-        title: "Usuarios",
-        image: baseApiUrl + "/icons/perfil.svg",
-        visible: true,
-        name: "users",
-        path: "/users",
-        onNavigate: (data: any) => {
-          navigate(data.path);
-        },
+        subSection: [
+          {
+            title: "Usuarios",
+            image: baseApiUrl + "/icons/lista.svg",
+            path: "/users",
+            onNavigate: (data: any) => {
+              console.log('hello', data)
+              navigate(data.path);
+            },
+          },
+        ],
       },
     ],
     above: [

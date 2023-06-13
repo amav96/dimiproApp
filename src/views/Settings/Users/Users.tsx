@@ -5,63 +5,91 @@ import { Routes } from '@services/utils/Routes'
 import { authorization } from '@services/utils/Autorizathion'
 import { AbmModalFormExternal, AbmTableAliveProps, GlobalInputs } from '@packageTypes'
 import baseApiUrl from '@services/BaseApiUrl'
+import { Role } from 'src/types/role.type'
+import { formatDateTime } from '@services/utils/Formatters'
 
 export function Users() {
- console.log('holis')
   const formInputs: GlobalInputs[] = ([
     {
-      key: 'title',
-      placeholder : 'Titulo',
-      title: 'prueba',
-      name: 'title',
+      key: 'firstName',
+      placeholder : 'Nombre',
+      title: 'Nombre',
+      name: 'firstName',
       value: '',
       type: 'text',
+      cols: 'c-col-span-4',
       validations: {
         rules: {
           required: true
         }
-      },
+      }
     },
     {
-      key: 'body',
-      placeholder : 'Cuerpo',
-      title: 'Cuerpo',
-      name: 'body',
+      key: 'lastName',
+      placeholder : 'Apellido',
+      title: 'Apellido',
+      name: 'lastName',
       value: '',
       type: 'text',
+      cols: 'c-col-span-4',
       validations: {
         rules: {
           required: true
         }
-      },
+      }
     },
     {
-      key: 'pais',
-      name: 'pais',
-      value: [],
-      type: 'select',
-      multiple: true,
-      clearable: true,
-      options: [
-        {
-          name: 'Argentina', id: 1
-        },
-        {
-          name: 'Uruguay', id: 2
-        },
-        {
-          name: 'Paraguay', id: 3
-        },
-      ]
- 
-    }
+      key: 'email',
+      placeholder : 'Email',
+      title: 'Email',
+      name: 'email',
+      value: '',
+      type: 'text',
+      cols: 'c-col-span-4',
+      validations: {
+        rules: {
+          required: true
+        }
+      }
+    },
+  ])
+
+  const filterForms : GlobalInputs[] = ([
+    {
+      key: 'firstName',
+      placeholder : 'Nombre',
+      title: 'Nombre',
+      name: 'firstName',
+      value: '',
+      type: 'text',
+      cols: 'c-col-span-4'
+    },
+    {
+      key: 'lastName',
+      placeholder : 'Apellido',
+      title: 'Apellido',
+      name: 'lastName',
+      value: '',
+      type: 'text',
+      cols: 'c-col-span-4'
+    },
+    {
+      key: 'email',
+      placeholder : 'Email',
+      title: 'Email',
+      name: 'email',
+      value: '',
+      type: 'text',
+      cols: 'c-col-span-4'
+    },
   ])
 
   const [propModalForm, setPropModalForm] = useState<AbmModalFormExternal>({
     inputs: formInputs,
-    urlStore: Routes.POSTS.STORE,
-    urlUpdate: Routes.POSTS.UPDATE,
-    urlShow: Routes.POSTS.SHOW,
+    urlStore: Routes.USERS.STORE,
+    urlUpdate: Routes.USERS.UPDATE,
+    urlShow: Routes.USERS.SHOW,
+    modelShowKey: 'user',
     afterUpdate: (data: any) => {
       console.log('data after update',data)
     },
@@ -93,40 +121,36 @@ export function Users() {
 
   const [propTable, setPropTable] = useState<AbmTableAliveProps>({
     columns: useMemo(() => [
-      {key: 'userId', title: 'userId'},
-      {key: 'id', title: 'id'},
-      {key: 'title', title: 'Titulo', format: (value: string) => value.substr(0,40) + '...'},
-      {key: 'body', title: 'Contenido' , format: (value: string) => value.substr(0,40) + '...'},
+      {key: 'firstName', title: 'Nombre'},
+      {key: 'lastName', title: 'Apellido' },
+      {key: 'email', title: 'Email' },
+      {key: 'roles', title: 'Roles', format: (value: Role[]) => {
+        return value.map((rol) => {
+          return rol.name
+        }).toString()
+      }},
+      {key: 'createdAt', title: 'creado', format:(value: string) => formatDateTime(value) },
       {key: 'edit', title: 'Editar'},
-      {key: 'delete', title: 'Eliminar'},
     ],[]),
-    urlIndex: 'https://jsonplaceholder.typicode.com/posts',
+    urlIndex: Routes.USERS.INDEX,
     requestConfiguration : {
       method: 'GET',
       headers: {
         Authorization: authorization()
       }
     },
-    inputs: formInputs.map((input) => {
-      delete input.validations
-      return {
-        ...input,
-        ...{
-          cols: 'c-col-span-6'
-        }
-      }
-    }),
+    inputs: filterForms,
     searchable: true,
     addItemAfterStore: true,
     updateItemAfterUpdate: true,
-    deleteItemAfterDelete: true,
-    urlDelete: 'https://jsonplaceholder.typicode.com/posts',
-    deleteRequestConfiguration: {
-      method: 'DELETE',
-      headers: {
-        Authorization: authorization()
-      }
-    },
+    // deleteItemAfterDelete: true,
+    // urlDelete: 'https://jsonplaceholder.typicode.com/posts',
+    // deleteRequestConfiguration: {
+    //   method: 'DELETE',
+    //   headers: {
+    //     Authorization: authorization()
+    //   }
+    // },
     afterDelete : (data: any) => {
       console.log('data after delete',data)
     },
@@ -137,7 +161,7 @@ export function Users() {
   return (
     <div className='c-m-4'>
       <div className="c-my-2">
-        <h2 className='c-text-xl'>Dashboard usuarios</h2>
+        <h2 className='c-text-xl'>Usuarios</h2>
       </div>
       <Abm
       table={propTable}

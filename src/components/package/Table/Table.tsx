@@ -3,10 +3,10 @@ import { TableProps } from '@packageTypes'
 import './Table.scss'
 import debounce from '@services/utils/Debounce';
 import {getProperty} from '@services/utils/Property';
-import Loader from '../Loader/Loader';
+import {Loader} from '@package';
 
 export function Table(props: TableProps<string>) {
-  const { columns, scopedColumns, items, onChangePage, headerSticky } = props;
+  const { columns, scopedColumns, items, onChangePage, headerSticky, scrollbar = { height: '8', width: '8' } } = props;
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
 
@@ -33,8 +33,11 @@ export function Table(props: TableProps<string>) {
         if (tableMain instanceof HTMLElement) {
           offsetHeightTableMain = tableMain.offsetHeight;
         }
+        // Number(scrollbar.height) son los pixeles que se le suman o restan al table-wrapper
+        let calculateOffsetHeightTableMain = offsetHeightTableMain + Number(scrollbar.height)
+        
         // si el desplazamiento superior de la envoltura mas la altura de compensacion de envoltura es igual a la altura de compensacion de la tabla
-        if ((scrollTopTableWrapper + offsetHeightTableWrapper) >= offsetHeightTableMain) {
+        if ((scrollTopTableWrapper + offsetHeightTableWrapper) >= calculateOffsetHeightTableMain) {
           onChangePage()
         }
       }
@@ -53,7 +56,7 @@ export function Table(props: TableProps<string>) {
     if (headerSticky) {
       return { position: 'sticky', top: 0 };
     }
-    return {};
+    return { position: 'sticky', top: 0 };
   };
   
   return (
@@ -64,6 +67,12 @@ export function Table(props: TableProps<string>) {
       <>
         { localItems.length === 0 && <Loader /> }
       </>
+      <style>
+        {`.table-wrapper::-webkit-scrollbar {
+          height: ${scrollbar.height}px;
+          width: ${scrollbar.width}px;
+        }`}
+      </style>
       <table  className='table-main'>
         <thead style={classThead()} >
           <tr>

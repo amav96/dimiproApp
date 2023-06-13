@@ -55,8 +55,8 @@ export function ItemSideBar(props: ItemSideBarProps) {
     }
 
     const handleSubNavigation = (data: ItemSideBarProps) => {
-        if(onNavigate){
-            onNavigate(data)
+        if(data.onNavigate){
+           data.onNavigate(data)
         }
     }
 

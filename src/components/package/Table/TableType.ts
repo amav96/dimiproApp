@@ -13,7 +13,11 @@ type column<K extends string | number> = {
     scopedColumns?: column<K>,
     items?: Array<any>,
     onChangePage?: Function,
-    headerSticky?: boolean
+    headerSticky?: boolean,
+    scrollbar?:{
+      height?: string
+      width?: string
+    }
   }
   export interface TableProps<K extends string | number> extends BaseTable<K> {
   }

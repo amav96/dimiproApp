@@ -27,6 +27,7 @@ export function Abm(props: AbmProps) {
       urlStore,
       urlUpdate,
       urlShow,
+      modelShowKey,
       resetAfterClose,
       showRequestConfiguration,
       storeRequestConfiguration,
@@ -42,6 +43,7 @@ export function Abm(props: AbmProps) {
     urlStore,
     urlUpdate,
     urlShow,
+    modelShowKey,
     isEditMode: false,
     visible: false,
     resetAfterClose,
@@ -182,6 +184,21 @@ export function Abm(props: AbmProps) {
     }
   }
 
+  const [scopedColumns, setScopedColumns] = useState({
+    edit: (item: any) => (
+      <Button type="button" onClick={() => onOpenUpdate(item)}>
+        {updateIcon ? <img src={updateIcon} alt="Editar" /> : <span>Editar</span>}
+      </Button>
+    ),
+    delete: (item: any) => (
+      <Button type="button" onClick={() => onOpenDelete(item)}>
+        {deleteIcon ? <img src={deleteIcon} alt="Eliminar" /> : <span>Eliminar</span>}
+      </Button>
+    ),
+  });
+
+
+
   return (
     <div>
       <TableAlive
@@ -190,22 +207,7 @@ export function Abm(props: AbmProps) {
       inputs={filterInputs}
       columns={columns}
       searchIcon={searchIcon}
-      scopedColumns={{
-        edit : (item: any) => (
-            <Button type={'button'}
-            onClick={() => onOpenUpdate(item)}
-             >
-            { updateIcon ? (<img src={updateIcon} alt="Editar"/>) : (<span>Editar</span>)}
-            </Button>
-        ),
-        delete : (item: any) => (
-            <Button type={'button'}
-            onClick={() => onOpenDelete(item)}
-             >
-            { deleteIcon ? (<img src={deleteIcon} alt="Eliminar"/>) : (<span>Eliminar</span>)}
-            </Button>
-        )
-      }}
+      scopedColumns={scopedColumns}
       urlIndex={urlIndex}
       searchable={searchable}
       requestConfiguration={requestConfiguration}
@@ -228,6 +230,7 @@ export function Abm(props: AbmProps) {
       urlStore={modalFormData.urlStore}
       urlUpdate={modalFormData.urlUpdate}
       urlShow={modalFormData.urlShow}
+      modelShowKey={modalFormData.modelShowKey}
       isEditMode={modalFormData.isEditMode}
       visible={modalFormData.visible}
       resetAfterClose={modalFormData.resetAfterClose}

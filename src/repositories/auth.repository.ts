@@ -9,14 +9,22 @@ interface ResponseLogin {
     token?: string,
     user? : User,
     permissions? : string[],
-    access?: string,
     refresh?: string
 }
 
-class AuthenticationApi {
+class AuthenticationRepository {
   async login(params: any) : Promise<ResponseLogin> {
     try {
       const response = await $http.post(Routes.AUTH.LOGIN, params);
+      return response.data;
+    } catch (error : any) {
+      return error;
+    }
+  }
+
+  async permissions(): Promise<{permissions : string[]}> {
+    try {
+      const response = await $http.get(Routes.AUTH.PERMISSIONS);
       return response.data;
     } catch (error : any) {
       return error;
@@ -43,4 +51,4 @@ class AuthenticationApi {
 
 }
 
-export default AuthenticationApi;
+export default AuthenticationRepository;

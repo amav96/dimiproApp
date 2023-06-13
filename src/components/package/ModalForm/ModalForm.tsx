@@ -13,6 +13,7 @@ export function ModalForm(props: PropsModalForm) {
     urlUpdate,
     isEditMode = false,
     urlShow,
+    modelShowKey = 'data',
     visible,
     resetAfterClose,
     showRequestConfiguration,
@@ -203,7 +204,8 @@ export function ModalForm(props: PropsModalForm) {
           ...showRequestConfiguration
       }
       const response = await fetch(urlShow, params);
-      const result = await response.json();
+      let result = await response.json();
+      result = result[modelShowKey]
       loadingEntity.current = false
       if(result) completeEntity(result)
     }

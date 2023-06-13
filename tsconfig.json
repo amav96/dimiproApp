@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@repositories/*": ["src/repositories/*"],
+      "@features/*": ["src/features/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@views/*": ["src/views/*"],
       "@services/*": ["src/services/*"],
       "@package": ["src/components/package"],
       "@packageTypes": ["src/packageTypes"]

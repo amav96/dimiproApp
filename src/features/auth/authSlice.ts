@@ -1,16 +1,17 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {User} from '../../types/user.type'
+import { RootState } from 'src/store'
 
 interface AuthState {
   user: User | null,
   permissions: string[],
-  access: string,
+  token: string,
 }
 
 const initialState: AuthState = {
   user: null,
   permissions: [],
-  access : ''
+  token : ''
 }
 
 export const authSlice = createSlice({
@@ -21,15 +22,25 @@ export const authSlice = createSlice({
       state.user = action.payload
     },
     setPermissions: (state, action: PayloadAction<string[]>) => {
-      console.log('set permi')
       state.permissions = action.payload
     },
-    setAccess: (state, action: PayloadAction<string>) => {
-      state.access = action.payload
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload
+      if(state.token){
+        localStorage.setItem('token', state.token)
+      } else {
+        localStorage.removeItem('token')
+      }
     },
   },
 })
 
+export const selectUser = (state: RootState) => state.auth.user;
+
+export const selectPermissions = (state: RootState) => state.auth.permissions;
+
+export const selectToken = (state: RootState) => state.auth.token;
+
 // Action creators are generated for each case reducer function
-export const { setUser, setPermissions, setAccess } = authSlice.actions
+export const { setUser, setPermissions, setToken } = authSlice.actions
 export default authSlice.reducer

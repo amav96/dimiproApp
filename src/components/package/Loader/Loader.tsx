@@ -1,6 +1,6 @@
 import './Loader.scss'
 
-const Loader = () => {
+export function Loader() {
   return (
     <div className="lds-spinner">
       <div></div>
@@ -18,5 +18,3 @@ const Loader = () => {
     </div>
   );
 };
-
-export default Loader;

@@ -12,12 +12,12 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
     urlIndex,
     page,
     limit,
-    keyPage = '_page',
-    keyLimit = '_limit',
+    keyPage = 'page',
+    keyLimit = 'limit',
     requestConfiguration,
     searchIcon,
     searchable,
-    modelKey = 'data',
+    modelKey = 'items',
     header,
     headerSticky
   } = props;
@@ -33,15 +33,17 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
   const pagination = useRef<{
     page: number,
     limit: number,
-    count: 0
+    count: 0,
+    has_next_page: boolean
   }>({
     page: 1,
     limit: 10,
-    count: 0
+    count: 0,
+    has_next_page: false
   })
   const loading = useRef<boolean>(false)
   const changePage = () => {
-    if(!loading.current){
+    if(!loading.current && pagination.current.has_next_page){
       pagination.current.page++
       applyLookFor(currentFilters.current)
     }
@@ -83,20 +85,17 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
                   ? result
                   : result && result[modelKey as keyof object] && Array.isArray(result[modelKey as keyof object])
                   ? result[modelKey as keyof object] : result
-
                   if(firstLook){
-                    setLocalItems(result)
+                    setLocalItems(data)
                   }else {
                     setLocalItems((prev) => ([...prev,... data]))
                   }
-
                   if(result?.pagination){
-                      const pagination : any = result?.pagination
-                      pagination.current.page = 1
-                      pagination.current.limit = pagination.limit
-                      pagination.current.count = pagination.count
+                      pagination.current.page = result.pagination.page
+                      pagination.current.limit = result.pagination.limit
+                      pagination.current.count = result.pagination.count
+                      pagination.current.has_next_page = result.pagination.has_next_page
                   }
-                  // emit("getItems", localItems.value)
               }
           } catch (error) {
               alert(error)
