@@ -1,6 +1,7 @@
 import { BaseProps } from '@packageTypes'
 
 export interface PropsSelect extends BaseProps {
+    placeholder?: string;
     options?: Array<any>;
     label?: string;
     trackBy?: string;

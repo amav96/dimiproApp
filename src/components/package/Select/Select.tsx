@@ -19,7 +19,8 @@ interface styleList {
 const validate =  new Validator();
 export function Select(props: PropsSelect) {
     const {
-        placeholder = 'Seleccione opción',
+        icon,
+        placeholder = props.placeholder || 'Seleccione opción',
         cols =  'c-col-span-12',
         value,
         onChange,
@@ -302,6 +303,7 @@ export function Select(props: PropsSelect) {
 
   return (
     <div ref={SelectMain} id={`${name}`} className={`Select_container ${cols}`}>
+        {icon && <img className='Select__icon' src={icon} />}
         <div  className={`Select controlSelect `}>
             <div className={'Select__itemSelect'} >
                 {
