@@ -296,6 +296,10 @@
   margin: 0.5rem;
 }
 
+.c-m-4 {
+  margin: 1rem;
+}
+
 .c-mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -317,6 +321,10 @@
 
 .c-mb-3 {
   margin-bottom: 0.75rem;
+}
+
+.c-mb-4 {
+  margin-bottom: 1rem;
 }
 
 .c-mb-6 {
@@ -466,7 +474,7 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  padding-top: 20px;
+  // padding-top: 20px;
 }
 
 .AppMain__layer {
@@ -480,11 +488,12 @@
   flex: 1;
   flex-direction: column;
   position: relative;
-  overflow-y: auto;
+  // overflow-y: auto;
 }
 .AppMain__layer__PageAndTopBar {
   flex: 1;
-  padding: 0 20px;
+  overflow-y: auto;
+  // padding: 0 20px;
 }
 
 .HomePageContent {

@@ -5,8 +5,8 @@ import { isEmpty } from "@services/utils/Validations";
 import { Validator } from '@services/utils/Validator';
 import { PropsInput, Validations } from '@packageTypes'
 import { removeDuplicates } from '@services/utils/Property';
-import IconOpenEye from '../../../../public/icons/eye-open.svg'
-import IconCloseEye from '../../../../public/icons/eye-close.svg'
+import IconOpenEye from './eye-open.svg'
+import IconCloseEye from './eye-close.svg'
 
 const validate =  new Validator();
 export function Input(props: PropsInput) {
@@ -19,7 +19,8 @@ export function Input(props: PropsInput) {
         validations,
         disabled = false,
         errors,
-        type
+        type,
+        customClass = ''
     } = props;
     const [localErrors, setLocalErrors] = useState<Array<string>>([])
 
@@ -66,7 +67,7 @@ export function Input(props: PropsInput) {
     }, [errors])
 
     return (
-    <div className={`Input controlInput ${cols}`}>
+    <div className={`Input controlInput ${cols} ${customClass}`}>
         <input
         className="Input__input"
         placeholder={placeholder}

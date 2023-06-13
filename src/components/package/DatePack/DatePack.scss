@@ -1,3 +1,13 @@
+.DatePack{
+    
+    &__input {
+        width: 100%;
+        padding: 8.5px;
+        border-radius: 6.5px;
+        background: var(--background-grey-light);
+    }
+}
+
 .controlInput{
     display: flex;
     flex-direction: column;

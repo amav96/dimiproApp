@@ -1,17 +1,14 @@
-import $http from "../AxiosInstance";
+import $http from "../services/AxiosInstance";
 // import { ErrorApi } from "../../types/Api";
-import { User } from "../../types/user.type";
-import { Permission } from "../../types/permission.type";
+import { User } from "../types/user.type";
 import { Routes } from "@services/utils/Routes";
 
 
 interface ResponseLogin {
-    error? : {
-        errors : any
-    },
+    errors : any
     token?: string,
     user? : User,
-    permissions? : Permission[],
+    permissions? : string[],
     access?: string,
     refresh?: string
 }
@@ -22,7 +19,7 @@ class AuthenticationApi {
       const response = await $http.post(Routes.AUTH.LOGIN, params);
       return response.data;
     } catch (error : any) {
-      return { error };
+      return error;
     }
   }
 
@@ -31,7 +28,7 @@ class AuthenticationApi {
       const response = await $http.post("api/logout");
       return response.data;
     } catch (error : any) {
-      return { error };
+      return error;
     }
   }
 
@@ -40,7 +37,7 @@ class AuthenticationApi {
       const response = await $http.post("api/checkToken");
       return response.data;
     } catch (error : any) {
-      return { error };
+      return error;
     }
   }
 

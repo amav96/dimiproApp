@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { Abm } from '@package'
+
 import { Routes } from '@services/utils/Routes'
 import { authorization } from '@services/utils/Autorizathion'
 import { AbmModalFormExternal, AbmTableAliveProps, GlobalInputs } from '@packageTypes'
@@ -134,7 +135,7 @@ export function Users() {
     headerSticky: true
   })
   return (
-    <div className='c-m-2'>
+    <div className='c-m-4'>
       <div className="c-my-2">
         <h2 className='c-text-xl'>Dashboard usuarios</h2>
       </div>

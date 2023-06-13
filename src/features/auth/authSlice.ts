@@ -2,11 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {User} from '../../types/user.type'
 
 interface AuthState {
-    user: User | null
+  user: User | null,
+  permissions: string[],
+  access: string,
 }
 
 const initialState: AuthState = {
-    user: null,
+  user: null,
+  permissions: [],
+  access : ''
 }
 
 export const authSlice = createSlice({
@@ -16,9 +20,16 @@ export const authSlice = createSlice({
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload
     },
+    setPermissions: (state, action: PayloadAction<string[]>) => {
+      console.log('set permi')
+      state.permissions = action.payload
+    },
+    setAccess: (state, action: PayloadAction<string>) => {
+      state.access = action.payload
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setUser } = authSlice.actions
+export const { setUser, setPermissions, setAccess } = authSlice.actions
 export default authSlice.reducer

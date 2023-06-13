@@ -15,6 +15,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
+      "@repositories/*": ["src/repositories/*"],
       "@services/*": ["src/services/*"],
       "@package": ["src/components/package"],
       "@packageTypes": ["src/packageTypes"]

@@ -37,7 +37,8 @@ export interface BaseProps {
   validations?: Validations;
   errors?: Array<string>;
   cols?: string;
-  formatValue?: Function
+  formatValue?: Function,
+  customClass?: string
 }
 
 // -----------------Form--------------------

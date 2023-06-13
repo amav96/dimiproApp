@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Form, Button } from "@package";
 import { Slot, GlobalInputs } from "@packageTypes";
-import { Link } from "react-router-dom";
-import AuthenticationApi from "@services/api/authApi";
+import { Link, useNavigate } from "react-router-dom";
+import AuthenticationApi from "@repositories/auth.repository";
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import {setUser} from '../../features/auth/authSlice'
+import {setUser, setPermissions, setAccess } from '../../features/auth/authSlice'
+import {  toast } from 'react-toastify';
+
 
 const authController = new AuthenticationApi()
 export function LoginForm() {
-
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const [inputs, setInputs] = useState<Array<GlobalInputs | Slot>>([
     {
@@ -24,6 +26,7 @@ export function LoginForm() {
           required: true,
         },
       },
+      customClass: 'c-mb-4'
     },
     {
       key: "password",
@@ -39,18 +42,44 @@ export function LoginForm() {
     },
   ]);
 
+  const [loading, setLoading] = useState<boolean>(false)
   const onSubmit = async (data: any) => {
+
     const { items } = data;
+    setLoading(true);
     const response = await authController.login(items)
-    if(response.user){
-      dispatch(setUser(response.user))
+    setLoading(false);
+    console.log(response)
+    if(response.errors){
+      toast(`🦄 ${response.errors.message || 'Contraseña o usuario incorrecto'}`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    } else {
+      if(response.user){
+        dispatch(setUser(response.user))
+      }
+      if(response.access){
+        dispatch(setAccess(response.access))
+      }
+      if(response.permissions){
+        dispatch(setPermissions(response.permissions))
+      }
+      navigate('/users')
     }
-    console.log({response})
+
   };
 
   
 
   return (
+    
     <div className="c-mt-4 c-mb-2 c-mx-2">
       {
         <Form
@@ -60,7 +89,7 @@ export function LoginForm() {
           <Link to="/forgot-password" className="forgot-password">
             ¿Olvidaste tu contraseña?
           </Link>
-          <Button customClass="btn-primary">Iniciar sesión</Button>
+          <Button disabled={loading} customClass="btn-primary">Iniciar sesión</Button>
         </Form>
       }
     </div>

@@ -11,7 +11,8 @@ export function Button(props: PropsButton) {
       customClass = '',
       type = "submit",
       onClick,
-      children
+      children,
+      disabled
   } = props;
 
   const handleClick = () => {
@@ -24,6 +25,7 @@ export function Button(props: PropsButton) {
     <button
     onClick={handleClick}
     className={`${backgroundColor} ${borderColor} ${padding} ${customClass}`}
+    disabled={disabled}
     type={type} >
         {children && (
           <span>
