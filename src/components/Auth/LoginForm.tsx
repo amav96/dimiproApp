@@ -17,7 +17,6 @@ export function LoginForm() {
     {
       key: "email",
       placeholder: "Email",
-      title: "email",
       name: "email",
       value: "",
       type: "email",

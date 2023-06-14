@@ -270,9 +270,10 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
               </div>
             )
           }else {
-            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text' || input.type === 'email' || input.type === 'password'))){
+            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text' || input.type === 'email' || input.type === 'password' || input.type === 'number'))){
               return (
                 <Input
+                icon={input.icon}
                 key={index}
                 type={generatedInputs[index].type}
                 value={formValues[input.key]}
@@ -283,11 +284,13 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
                 />
               )
             } else if (input.type === 'textarea'){
               return (
                 <Textarea
+                icon={input.icon}
                 key={index}
                 type={generatedInputs[index].type}
                 value={formValues[input.key]}
@@ -298,6 +301,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
                 />
               )
             } else if (input.type === 'datetime'){
@@ -315,11 +319,13 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
                 />
               )
             } else if (input.type === 'select'){
               return (
                 <Select
+                icon={generatedInputs[index].icon}
                 key={index}
                 type={generatedInputs[index].type}
                 placeholder={generatedInputs[index].placeholder}
@@ -334,6 +340,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
                 />
               )
             } else if (input.type === 'check' || input.type === 'switch'){
@@ -348,11 +355,13 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 onChange={ (value: object | Array<object>) => handleChangeSwitch(value, input)}
                 cols={generatedInputs[index].cols}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
                 />
               )
             } else if (input.type === 'file' ){
               return(
                 <File
+                icon={generatedInputs[index].icon}
                 key={`file-${index}`}
                 type={generatedInputs[index].type}
                 name={generatedInputs[index].name}
@@ -361,6 +370,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 validations={generatedInputs[index].validations}
                 cols={generatedInputs[index].cols}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
               />
               )
             }

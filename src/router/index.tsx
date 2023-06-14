@@ -5,6 +5,7 @@ import  {Login}  from "@views/Auth/Login";
 import  {Logout}  from "@views/Auth/Logout";
 import { AccesoDenegado } from "@views/Helpers/AccesoDenegado";
 import ProtectRoute from "./ProtectRoute";
+import AddContract from "@views/Add-Contract/AddContract";
 
 export function Router() {
   return (
@@ -16,7 +17,7 @@ export function Router() {
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/forgot-password" element={<Login />} />
-      {/* <Route path="/add-contract" element={<AddContract />} /> */}
+      <Route path="/add-contract" element={<AddContract />} />
       <Route path="/acceso-denegado" element={<AccesoDenegado />} />
     </Routes>
   );
