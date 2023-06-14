@@ -17,17 +17,17 @@ class AuthenticationRepository {
     try {
       const response = await $http.post(Routes.AUTH.LOGIN, params);
       return response.data;
-    } catch (error : any) {
-      return error;
+    } catch (errors : any) {
+      return errors;
     }
   }
 
-  async permissions(): Promise<{permissions : string[]}> {
+  async permissions(): Promise<{permissions : string[] , errors?: any}> {
     try {
       const response = await $http.get(Routes.AUTH.PERMISSIONS);
       return response.data;
-    } catch (error : any) {
-      return error;
+    } catch (errors : any) {
+      return errors;
     }
   }
 
@@ -35,8 +35,8 @@ class AuthenticationRepository {
     try {
       const response = await $http.post("api/logout");
       return response.data;
-    } catch (error : any) {
-      return error;
+    } catch (errors : any) {
+      return errors;
     }
   }
 
@@ -44,8 +44,8 @@ class AuthenticationRepository {
     try {
       const response = await $http.post("api/checkToken");
       return response.data;
-    } catch (error : any) {
-      return error;
+    } catch (errors : any) {
+      return errors;
     }
   }
 

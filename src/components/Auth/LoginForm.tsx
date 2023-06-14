@@ -50,14 +50,7 @@ export function LoginForm() {
     const response = await authController.login(items)
     if(response.errors){
       toast(`🦄 ${response.errors.message}`, {
-        position: "top-right",
         autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
         });
     } else {
       if(response.user){

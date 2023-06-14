@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import baseApiUrl from "../../../services/BaseApiUrl";
-import { Router } from "../../../../src/router";
-import { SideBar } from "../SideBar";
-import { NavBar } from "../NavBar";
+import baseApiUrl from "../services/BaseApiUrl";
+import { Router } from "../router";
+import { SideBar } from "../components/package/SideBar";
+import { NavBar } from "../components/package/NavBar";
 
 function MainPage() {
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ function MainPage() {
         image: baseApiUrl + "/icons/logout.svg",
         visible: true,
         name: "logout",
-        path: "/login",
+        path: "/logout",
         onNavigate: (data: any) => {
           navigate(data.path);
         },

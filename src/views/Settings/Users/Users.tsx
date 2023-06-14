@@ -7,8 +7,13 @@ import { AbmModalFormExternal, AbmTableAliveProps, GlobalInputs } from '@package
 import baseApiUrl from '@services/BaseApiUrl'
 import { Role } from 'src/types/role.type'
 import { formatDateTime } from '@services/utils/Formatters'
+import useDataProviders from '@hooks/useDataProviders'
 
 export function Users() {
+
+  const{ test } = useDataProviders()
+  test()
+
   const formInputs: GlobalInputs[] = ([
     {
       key: 'firstName',
