@@ -1,20 +1,20 @@
 import { GlobalInputs, Slot } from '../Form/FormType';
 
-import ExporterIcon from '../../../../public/icons/form/exporter.svg';
-import ProductIcon from '../../../../public/icons/form/product.svg';
-import TypeIcon from '../../../../public/icons/form/type.svg';
-import CaliberIcon from '../../../../public/icons/form/caliber.svg';
-import CropIcon from '../../../../public/icons/form/calendar.svg';
-import PackagingIcon from '../../../../public/icons/form/packaging.svg';
-import QtyIcon from '../../../../public/icons/form/weight.svg';
-import BrokerIcon from '../../../../public/icons/form/broker.svg';
-import PercentageIcon from '../../../../public/icons/form/percentage.svg';
-import PriceIcon from '../../../../public/icons/form/price.svg';
-import CoinIcon from '../../../../public/icons/form/coin.svg';
-import PaymentMethodIcon from '../../../../public/icons/form/payment-method.svg';
-import SurveyorIcon from '../../../../public/icons/form/surveyor.svg';
-import ConditionsIcon from '../../../../public/icons/form/conditions.svg';
-import FileIcon from '../../../../public/icons/form/file.svg';
+import ExporterIcon from '/icons/form/exporter.svg';
+import ProductIcon from '/icons/form/product.svg';
+import TypeIcon from '/icons/form/type.svg';
+import CaliberIcon from '/icons/form/caliber.svg';
+import CropIcon from '/icons/form/calendar.svg';
+import PackagingIcon from '/icons/form/packaging.svg';
+import QtyIcon from '/icons/form/weight.svg';
+import BrokerIcon from '/icons/form/broker.svg';
+import PercentageIcon from '/icons/form/percentage.svg';
+import PriceIcon from '/icons/form/price.svg';
+import CoinIcon from '/icons/form/coin.svg';
+import PaymentMethodIcon from '/icons/form/payment-method.svg';
+import SurveyorIcon from '/icons/form/surveyor.svg';
+import ConditionsIcon from '/icons/form/conditions.svg';
+import FileIcon from '/icons/form/file.svg';
 
 export const formData: Array<GlobalInputs | Slot> = [
   {
@@ -26,6 +26,12 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar exportador",
+    title: "Exportador:",
+    validations: {
+      rules: {
+        required: true,
+      },
+    },
     options: [
       {
         name: "Hesar hnos.",
@@ -50,6 +56,12 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar importador",
+    title: "Importador:",
+    validations: {
+      rules: {
+        required: true,
+      },
+    },
     options: [
       {
         name: "Prozis",
@@ -74,6 +86,12 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar producto",
+    title: "Producto:",
+    validations: {
+      rules: {
+        required: true,
+      },
+    },
     options: [
       {
         name: "Maní",
@@ -90,6 +108,12 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar tipo",
+    title: "Tipo:",
+    validations: {
+      rules: {
+        required: true,
+      },
+    },
     options: [
       {
         name: "Blanched",
@@ -110,6 +134,12 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar calibre",
+    title: "Calibre:",
+    validations: {
+      rules: {
+        required: true,
+      },
+    },
     options: [
       {
         name: "38/42",
@@ -129,7 +159,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     icon: CropIcon,
     key: "crop",
     placeholder: "Agregar fecha de cosecha",
-    title: "Crop",
+    title: "Crop:",
     name: "crop",
     value: "",
     type: "text",
@@ -148,6 +178,12 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar packaging",
+    title: "Packaging:",
+    validations: {
+      rules: {
+        required: true,
+      },
+    },
     options: [
       {
         name: "Bags x 25kg",
@@ -167,7 +203,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     icon: QtyIcon,
     key: "tn",
     placeholder: "Cantidad de toneladas",
-    title: "tn",
+    title: "Toneladas:",
     name: "tn",
     value: "",
     type: "number",
@@ -181,15 +217,10 @@ export const formData: Array<GlobalInputs | Slot> = [
     icon: BrokerIcon,
     key: "broker",
     placeholder: "Broker",
-    title: "broker",
+    title: "Broker:",
     name: "broker",
     value: "",
     type: "select",
-    validations: {
-      rules: {
-        required: true,
-      },
-    },
     options: [
       {
         name: "Broker 1",
@@ -209,21 +240,16 @@ export const formData: Array<GlobalInputs | Slot> = [
     icon: PercentageIcon,
     key: "porcentaje",
     placeholder: "Comisión del Broker (%)",
-    title: "porcentaje",
+    title: "Porcentaje:",
     name: "porcentaje",
     value: "",
     type: "number",
-    validations: {
-      rules: {
-        required: true,
-      },
-    },
   },
   {
     icon: PriceIcon,
     key: "precio",
     placeholder: "Precio",
-    title: "precio",
+    title: "Precio:",
     name: "precio",
     value: "",
     type: "number",
@@ -237,7 +263,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     icon: CoinIcon,
     key: "moneda",
     placeholder: "Seleccionar moneda",
-    title: "moneda",
+    title: "Moneda:",
     name: "moneda",
     value: "",
     type: "select",
@@ -261,7 +287,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     icon: PaymentMethodIcon,
     key: "metodoPago",
     placeholder: "Seleccionar metodo de pago",
-    title: "metodoPago",
+    title: "Método de pago:",
     name: "metodoPago",
     value: "",
     type: "select",
@@ -284,8 +310,8 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: SurveyorIcon,
     key: "surveyors",
-    placeholder: "Seleccionar surveyors",
-    title: "surveyors",
+    placeholder: "Seleccionar surveyor",
+    title: "Surveyor:",
     name: "surveyors",
     value: "",
     type: "select",
@@ -313,7 +339,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     icon: ConditionsIcon,
     key: "condiciones",
     placeholder: "Agregar condiciones",
-    title: "condiciones",
+    title: "Condiciones:",
     name: "condiciones",
     value: "",
     type: "textarea",
@@ -327,7 +353,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     icon: FileIcon,
     key: "documentos",
     placeholder: "Agregar documentos",
-    title: "documentos",
+    title: "Documentos:",
     name: "documentos",
     value: "",
     type: "file",

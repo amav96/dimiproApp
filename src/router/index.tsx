@@ -11,7 +11,7 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/users" replace />} />
-      <Route element={<ProtectRoute gate={"index_users"} />}>
+      <Route element={<ProtectRoute gate={"users_index"} />}>
         <Route path="/users" element={<Users />} />
       </Route>
       <Route path="/login" element={<Login />} />

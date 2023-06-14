@@ -10,6 +10,9 @@ const FormContract = () => {
   return (
     <div>
       <Form inputs={inputs}>
+        <span className="text-required">
+          <span>*</span> Los campos son obligatorios
+        </span>
         <Button type="submit" customClass={"btn-primary"}>
           Crear contrato
         </Button>

@@ -1,193 +1,192 @@
+.Select_container {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
 
-
-.Select_container{
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
+  .container {
     display: flex;
     align-items: center;
     gap: 8px;
+  }
 
-    .Select__icon {
-        width: 26px;
-        height: 26px;
-        object-fit: cover;
-    }
+  .Select__icon {
+    width: 26px;
+    height: 26px;
+    object-fit: cover;
+  }
 }
 
 .Select {
-    width: 100%;
+  width: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: default;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  min-height: 43px;
+  position: relative;
+  transition: all 100ms ease 0s;
+  background: var(--white);
+  border: 1px solid var(--black);
+  border-radius: 6.5px;
+  outline: 0px !important;
+  padding: 1.5px 0px;
+
+  &__itemSelect {
     -webkit-box-align: center;
     align-items: center;
-    cursor: default;
     display: flex;
+    flex: 1 1 0%;
     flex-wrap: wrap;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    min-height: 43px;
     position: relative;
-    transition: all 100ms ease 0s;
-    background: var(--white);
-    border: 1px solid var(--black);
-    border-radius: 6.5px;
-    outline: 0px !important;
-    padding: 1.5px 0px;
-
-    &__itemSelect {
-            -webkit-box-align: center;
-            align-items: center;
-            display: flex;
-            flex: 1 1 0%;
-            flex-wrap: wrap;
-            position: relative;
-            overflow: hidden;
-            padding: 2px 8px;
-            box-sizing: border-box;
-
-            &__inputContainer::after{
-                content: attr(data-value) " ";
-                visibility: hidden;
-                white-space: pre;
-                grid-area: 1 / 2 / auto / auto;
-                font: inherit;
-                min-width: 2px;
-                border: 0px;
-                margin: 0px;
-                outline: 0px;
-                padding: 0px;
-            }
-
-            &__inputContainer {
-                visibility: visible;
-
-                flex: 1 1 auto;
-                display: inline-grid;
-                grid-area: 1 / 1 / 2 / 3;
-                grid-template-columns: 0px min-content;
-                margin: 2px;
-                padding-bottom: 2px;
-                padding-top: 2px;
-                color: rgb(51, 51, 51);
-                box-sizing: border-box;
-
-
-                &__input {
-                    color: inherit;
-                    background: 0px center;
-                    opacity: 1;
-                    // width: 100%;
-                    grid-area: 1 / 2 / auto / auto;
-                    font: inherit;
-                    min-width: 8px;
-                    border: 0px;
-                    margin: 0px;
-                    outline: 0px;
-                    padding: 0px;
-                    // object-fit: contain;
-                }
-
-                &__input:focus {
-                    border-color: inherit;
-                    -webkit-box-shadow: none;
-                    box-shadow: none;
-                }
-
-            }
-
-            &__multiValue{
-                display: flex;
-                min-width: 0px;
-                background-color: var(--background-hover-sidebar);
-                border-radius: 2px;
-                margin: 2px;
-                box-sizing: border-box;
-
-                &__label {
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    border-radius: 2px;
-                    color: rgb(51, 51, 51);
-                    font-size: 85%;
-                    padding: 3px 3px 3px 6px;
-                    box-sizing: border-box;
-                }
-                &__remove {
-                    -webkit-box-align: center;
-                    align-items: center;
-                    display: flex;
-                    border-radius: 2px;
-                    padding-left: 4px;
-                    padding-right: 4px;
-                    box-sizing: border-box;
-                    cursor: pointer;
-                }
-            }
-    }
-
-    &__select{
-        width: 100%;
-        padding: 6px;
-        background:var(--background-grey-light);
-    }
-}
-
-.controlSelect{
-    -webkit-box-align: center;
-    align-items: center;
-    align-self: stretch;
-    display: flex;
+    overflow: hidden;
+    padding: 2px 8px;
     box-sizing: border-box;
 
-    &__indicatorContainer{
-        img {
-            color: rgb(204, 204, 204);
-        }
+    &__inputContainer::after {
+      content: attr(data-value) " ";
+      visibility: hidden;
+      white-space: pre;
+      grid-area: 1 / 2 / auto / auto;
+      font: inherit;
+      min-width: 2px;
+      border: 0px;
+      margin: 0px;
+      outline: 0px;
+      padding: 0px;
+    }
+
+    &__inputContainer {
+      visibility: visible;
+
+      flex: 1 1 auto;
+      display: inline-grid;
+      grid-area: 1 / 1 / 2 / 3;
+      grid-template-columns: 0px min-content;
+      margin: 2px;
+      padding-bottom: 2px;
+      padding-top: 2px;
+      color: rgb(51, 51, 51);
+      box-sizing: border-box;
+
+      &__input {
+        color: inherit;
+        background: 0px center;
+        opacity: 1;
+        // width: 100%;
+        grid-area: 1 / 2 / auto / auto;
+        font: inherit;
+        min-width: 8px;
+        border: 0px;
+        margin: 0px;
+        outline: 0px;
+        padding: 0px;
+        // object-fit: contain;
+      }
+
+      &__input:focus {
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+
+    &__multiValue {
+      display: flex;
+      min-width: 0px;
+      background-color: var(--background-hover-sidebar);
+      border-radius: 2px;
+      margin: 2px;
+      box-sizing: border-box;
+
+      &__label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border-radius: 2px;
+        color: rgb(51, 51, 51);
+        font-size: 85%;
+        padding: 3px 3px 3px 6px;
+        box-sizing: border-box;
+      }
+      &__remove {
+        -webkit-box-align: center;
+        align-items: center;
         display: flex;
-        transition: color 150ms ease 0s;
-        
-        padding: 8px;
+        border-radius: 2px;
+        padding-left: 4px;
+        padding-right: 4px;
         box-sizing: border-box;
         cursor: pointer;
+      }
     }
+  }
 
-    &__indicatorSeparator{
-        align-self: stretch;
-        width: 1px;
-        background-color: rgb(204, 204, 204);
-        margin-bottom: 8px;
-        margin-top: 8px;
-        box-sizing: border-box;
-    }
+  &__select {
+    width: 100%;
+    padding: 6px;
+    background: var(--background-grey-light);
+  }
+}
 
-    &__text{
-        margin-top:4px;
-        font-size: 15.5px;
-        color: var(--red);
+.controlSelect {
+  -webkit-box-align: center;
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  box-sizing: border-box;
+
+  &__indicatorContainer {
+    img {
+      color: rgb(204, 204, 204);
     }
+    display: flex;
+    transition: color 150ms ease 0s;
+
+    padding: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  &__indicatorSeparator {
+    align-self: stretch;
+    width: 1px;
+    background-color: rgb(204, 204, 204);
+    margin-bottom: 8px;
+    margin-top: 8px;
+    box-sizing: border-box;
+  }
+
+  &__text {
+    margin-top: 4px;
+    font-size: 15.5px;
+    color: var(--red);
+  }
 }
 
 // LISTA
 
-.Select__menu{
-    position: fixed;
-    background: white;
-    top: 48px;
-    box-shadow: 0px 5px 10px rgba(0,0,0,0.12);
-    width: 100%;
-    max-height: 300px;
-    overflow-y: auto;
-    transition: all 0.1s;
-    contain: content;
-    z-index: 200;
+.Select__menu {
+  position: fixed;
+  background: white;
+  top: 48px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  transition: all 0.1s;
+  contain: content;
+  z-index: 200;
 
-    &__itemContainer{
-        padding:5px 6px;
-        cursor: pointer;
-    }
+  &__itemContainer {
+    padding: 5px 6px;
+    cursor: pointer;
+  }
 }
 
-.Select__menu__itemContainer:hover{
-    background-color: var(--background-hover-sidebar);
-    font-weight: 600;
+.Select__menu__itemContainer:hover {
+  background-color: var(--background-hover-sidebar);
+  font-weight: 600;
 }

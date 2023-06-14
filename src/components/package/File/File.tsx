@@ -18,6 +18,7 @@ export function File(props: PropsFile) {
     disabled = false,
     errors,
     type,
+    title,
     accept = [
       "application/vnd.ms-excel",
       "application/pdf",
@@ -113,6 +114,10 @@ export function File(props: PropsFile) {
 
   return (
     <div className={`File ${cols}`}>
+      <div className="label-container">
+            {title && <label className='label'>{title}</label> }
+            {validations?.rules?.required && <span className="required">*</span>}
+      </div>
       <div className="container">
         {icon && <img src={icon} alt="icon" className="File__icon" />}
         <div

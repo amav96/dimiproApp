@@ -8,7 +8,6 @@ export function ForgotPasswordForm() {
     {
       key: "email",
       placeholder: "Email",
-      title: "email",
       name: "email",
       value: "",
       type: "email",

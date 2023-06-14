@@ -284,6 +284,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
                 />
               )
             } else if (input.type === 'textarea'){
@@ -300,6 +301,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
                 />
               )
             } else if (input.type === 'datetime'){
@@ -317,6 +319,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
                 />
               )
             } else if (input.type === 'select'){
@@ -337,6 +340,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 cols={generatedInputs[index].cols}
                 errors={generatedInputs[index].errors}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
                 />
               )
             } else if (input.type === 'check' || input.type === 'switch'){
@@ -351,6 +355,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 onChange={ (value: object | Array<object>) => handleChangeSwitch(value, input)}
                 cols={generatedInputs[index].cols}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
                 />
               )
             } else if (input.type === 'file' ){
@@ -365,6 +370,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 validations={generatedInputs[index].validations}
                 cols={generatedInputs[index].cols}
                 customClass={generatedInputs[index].customClass}
+                title={generatedInputs[index].title}
               />
               )
             }

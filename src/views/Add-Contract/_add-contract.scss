@@ -9,17 +9,50 @@
     gap: 22px;
     margin-top: 40px;
 
+    .label-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+      margin-left: 38px;
+      font-size: 15px;
+      font-weight: 500;
+
+      .label {
+        font-size: 15px;
+        display: block;
+      }
+
+      .required {
+        color: #ff0000;
+        margin-left: 4px;
+      }
+    }
+
     .Select_container,
     .controlInput,
     .File {
-      grid-column: span 6/span 6;
+      grid-column: span 6 / span 6;
       height: fit-content;
+      gap: 0;
 
       .controlInput__text {
         margin-left: 32px;
       }
     }
 
+    .Select__menu {
+      margin-left: 36px;
+    }
+  }
+
+  .text-required {
+    margin-top: 40px;
+    display: block;
+    font-size: 15px;
+
+    span {
+      color: #ff0000;
+    }
   }
 
   .btn-primary {

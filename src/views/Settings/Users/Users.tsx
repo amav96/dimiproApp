@@ -13,7 +13,6 @@ export function Users() {
     {
       key: 'firstName',
       placeholder : 'Nombre',
-      title: 'Nombre',
       name: 'firstName',
       value: '',
       type: 'text',
@@ -27,7 +26,6 @@ export function Users() {
     {
       key: 'lastName',
       placeholder : 'Apellido',
-      title: 'Apellido',
       name: 'lastName',
       value: '',
       type: 'text',
@@ -41,7 +39,6 @@ export function Users() {
     {
       key: 'email',
       placeholder : 'Email',
-      title: 'Email',
       name: 'email',
       value: '',
       type: 'text',
@@ -58,7 +55,6 @@ export function Users() {
     {
       key: 'firstName',
       placeholder : 'Nombre',
-      title: 'Nombre',
       name: 'firstName',
       value: '',
       type: 'text',
@@ -67,7 +63,6 @@ export function Users() {
     {
       key: 'lastName',
       placeholder : 'Apellido',
-      title: 'Apellido',
       name: 'lastName',
       value: '',
       type: 'text',
@@ -76,7 +71,6 @@ export function Users() {
     {
       key: 'email',
       placeholder : 'Email',
-      title: 'Email',
       name: 'email',
       value: '',
       type: 'text',

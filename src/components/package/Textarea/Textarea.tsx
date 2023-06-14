@@ -19,7 +19,8 @@ export function Textarea(props: PropsTextArea) {
         disabled = false,
         errors,
         type,
-        colsArea
+        colsArea,
+        title
     } = props;
     const [localErrors, setLocalErrors] = useState<Array<string>>([])
 
@@ -63,6 +64,10 @@ export function Textarea(props: PropsTextArea) {
 
     return (
     <div className={`Textarea controlInput ${cols}`}>
+        <div className="label-container">
+            {title && <label className='label'>{title}</label> }
+            {validations?.rules?.required && <span className="required">*</span>}
+        </div>
         <div className="container">
             {icon && <img src={icon} alt="icon" className='input_icon' />}
             <textarea
