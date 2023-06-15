@@ -5,7 +5,11 @@ import { Routes } from "@services/utils/Routes";
 
 
 interface ResponseLogin {
-    errors : any
+    errors : {
+      message?: string,
+      email?: string[],
+      password?: string[]
+    }
     token?: string,
     user? : User,
     permissions? : string[],

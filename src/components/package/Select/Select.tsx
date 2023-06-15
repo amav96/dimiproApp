@@ -45,6 +45,7 @@ export function Select(props: PropsSelect) {
 
   const [localOptions, setLocalOptions] = useState<Array<any>>([]);
   useEffect(() => {
+    console.log({selectOptions: options})
     if (options) {
       setLocalOptions(options);
     }

@@ -1,60 +1,103 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Abm } from '@package'
-
 import { Routes } from '@services/utils/Routes'
 import { authorization } from '@services/utils/Autorizathion'
-import { AbmModalFormExternal, AbmTableAliveProps, GlobalInputs } from '@packageTypes'
+import { AbmTableAliveProps, GlobalInputs } from '@packageTypes'
 import baseApiUrl from '@services/BaseApiUrl'
-import { Role } from 'src/types/role.type'
+import { Role } from '../../../types/role.type'
 import { formatDateTime } from '@services/utils/Formatters'
-import useDataProviders from '@hooks/useDataProviders'
+import useDataProvider from '@hooks/useDataProvider'
+import { useAppSelector } from '../../../hooks'
+import { RootState } from '../../../store'
 
 export function Users() {
 
-  const{ test } = useDataProviders()
-  test()
+  const{ getDataProviders } = useDataProvider()
+  const roles = useAppSelector((state: RootState) => state.dataProviders.roles);
+  useEffect(() => {
+    getDataProviders(['roles', 'packagings'])
+  }, [])
 
-  const formInputs: GlobalInputs[] = ([
-    {
-      key: 'firstName',
-      placeholder : 'Nombre',
-      name: 'firstName',
-      value: '',
-      type: 'text',
-      cols: 'c-col-span-4',
-      validations: {
-        rules: {
-          required: true
+  useEffect(() => {
+    // Actualizar formInputs cuando cambie roles
+    setFormInputs((prevInputs) =>
+      prevInputs.map((input) => {
+        if (input.key === 'roles') {
+          console.log({
+            ...input,
+            options: roles,
+          })
+          return {
+            ...input,
+            options: roles,
+          };
         }
-      }
-    },
-    {
-      key: 'lastName',
-      placeholder : 'Apellido',
-      name: 'lastName',
-      value: '',
-      type: 'text',
-      cols: 'c-col-span-4',
-      validations: {
-        rules: {
-          required: true
-        }
-      }
-    },
-    {
-      key: 'email',
-      placeholder : 'Email',
-      name: 'email',
-      value: '',
-      type: 'text',
-      cols: 'c-col-span-4',
-      validations: {
-        rules: {
-          required: true
-        }
-      }
-    },
-  ])
+        return input;
+      })
+    );
+  }, [roles]);
+
+  const dataInputs: GlobalInputs[] = useMemo(
+    () => [
+      {
+        key: 'firstName',
+        placeholder: 'Nombre',
+        name: 'firstName',
+        value: '',
+        type: 'text',
+        cols: 'c-col-span-4',
+        validations: {
+          rules: {
+            required: true,
+          },
+        },
+      },
+      {
+        key: 'lastName',
+        placeholder: 'Apellido',
+        name: 'lastName',
+        value: '',
+        type: 'text',
+        cols: 'c-col-span-4',
+        validations: {
+          rules: {
+            required: true,
+          },
+        },
+      },
+      {
+        key: 'email',
+        placeholder: 'Email',
+        name: 'email',
+        value: '',
+        type: 'text',
+        cols: 'c-col-span-4',
+        validations: {
+          rules: {
+            required: true,
+          },
+        },
+      },
+      {
+        key: 'roles',
+        placeholder: 'Roles',
+        name: 'roles',
+        value: [],
+        type: 'select',
+        multiple: true,
+        cols: 'c-col-span-4',
+        options: roles,
+        validations: {
+          rules: {
+            required: true,
+          },
+        },
+      },
+    ],
+    [roles]
+  );
+  
+  const [formInputs, setFormInputs] = useState<GlobalInputs[]>(dataInputs);
 
   const filterForms : GlobalInputs[] = ([
     {
@@ -82,41 +125,6 @@ export function Users() {
       cols: 'c-col-span-4'
     },
   ])
-
-  const [propModalForm, setPropModalForm] = useState<AbmModalFormExternal>({
-    inputs: formInputs,
-    urlStore: Routes.USERS.STORE,
-    urlUpdate: Routes.USERS.UPDATE,
-    urlShow: Routes.USERS.SHOW,
-    modelShowKey: 'user',
-    afterUpdate: (data: any) => {
-      console.log('data after update',data)
-    },
-    afterStore: (data: any) => {
-      console.log('data after store',data)
-    },
-    showRequestConfiguration : {
-      method: 'GET',
-      headers: {
-        Authorization: authorization(),
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    },
-    updateRequestConfiguration : {
-      method: 'PATCH',
-      headers: {
-        Authorization: authorization(),
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    },
-    storeRequestConfiguration : {
-      method: 'POST',
-      headers: {
-        Authorization: authorization(),
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    }
-  })
 
   const [propTable, setPropTable] = useState<AbmTableAliveProps>({
     columns: useMemo(() => [
@@ -164,7 +172,40 @@ export function Users() {
       </div>
       <Abm
       table={propTable}
-      modalForm={propModalForm}
+      modalForm={{
+        inputs: formInputs,
+        urlStore: Routes.USERS.STORE,
+        urlUpdate: Routes.USERS.UPDATE,
+        urlShow: Routes.USERS.SHOW,
+        modelShowKey: 'user',
+        afterUpdate: (data: any) => {
+          console.log('data after update',data)
+        },
+        afterStore: (data: any) => {
+          console.log('data after store',data)
+        },
+        showRequestConfiguration : {
+          method: 'GET',
+          headers: {
+            Authorization: authorization(),
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        },
+        updateRequestConfiguration : {
+          method: 'PATCH',
+          headers: {
+            Authorization: authorization(),
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        },
+        storeRequestConfiguration : {
+          method: 'POST',
+          headers: {
+            Authorization: authorization(),
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        }
+      }}
       />
     </div>
   )

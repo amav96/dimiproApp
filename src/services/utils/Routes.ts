@@ -18,5 +18,8 @@ export const Routes = {
         UPDATE: baseApiUrl + '/api/v1/user',
         SHOW: baseApiUrl + '/api/v1/user',
         DELETE: baseApiUrl + '/api/v1/user',
+    },
+    DATA_PROVIDER: {
+        INDEX: baseApiUrl + '/api/v1/dataProviders',
     }
 }
