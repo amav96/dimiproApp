@@ -26,7 +26,7 @@ export default defineConfig({
       { find: '@', replacement: '/src' },
       { find: '@package', replacement: '/src/components/package' },
       { find: '@services', replacement: '/src/services' },
-      { find: '@features', replacement: '/src/features' },
+      { find: '@store', replacement: '/src/store' },
       { find: '@hooks', replacement: '/src/hooks' },
       { find: '@views', replacement: '/src/views' },
       { find: '@repositories', replacement: '/src/repositories' },

@@ -4,7 +4,7 @@ import { Slot, GlobalInputs } from "@packageTypes";
 import { Link, useNavigate } from "react-router-dom";
 import AuthenticationRepository from "@repositories/auth.repository";
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import {setUser, setPermissions, setToken } from '@features/auth/authSlice'
+import {setUser, setPermissions, setToken } from '@store/auth/authSlice'
 import {  toast } from 'react-toastify';
 
 

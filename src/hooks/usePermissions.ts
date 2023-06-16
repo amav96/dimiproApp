@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useSelector } from 'react-redux';
-import { selectPermissions } from "@features/auth/authSlice";
+import { selectPermissions } from "@store/auth/authSlice";
 import AuthenticationRepository from "@repositories/auth.repository";
-import {setPermissions} from '@features/auth/authSlice'
+import {setPermissions} from '@store/auth/authSlice'
 import { useAppSelector, useAppDispatch } from "../hooks";
 
 const authenticationRepository = new AuthenticationRepository()
