@@ -18,4 +18,6 @@ export interface PropsModalForm {
     afterStore?: Function,
     handleUpdateErrors? : Function,
     handleStoreErrors? : Function,
+    closable?: boolean,
+    title?:string
 }

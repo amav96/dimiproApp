@@ -286,6 +286,9 @@
 .c-justify-center {
   justify-content: center;
 }
+.c-justify-space {
+  justify-content: space-between;
+}
 .c-items-center {
   align-items: center;
 }
@@ -457,6 +460,10 @@
 }
 .c-w-fit {
   width: fit-content;
+}
+
+.c-cursor-pointer {
+  cursor: pointer;
 }
 
 .AppRoot-fullPage {

@@ -1,4 +1,5 @@
 import { Packaging } from "./packaging.types"
+import { Country } from "./places.type"
 import { Role } from "./role.type"
 
 export interface DataProvider {
@@ -7,8 +8,9 @@ export interface DataProvider {
     }
     dataProviders: {
         roles: Role[]
-        packagings: Packaging[]
+        packagings: Packaging[],
+        countries: Country[]
     }
 }
 
-export type ModelsDataProvider = 'roles' | 'packagings'
+export type ModelsDataProvider = 'roles' | 'packagings' | 'countries'

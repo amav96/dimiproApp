@@ -1,3 +1,4 @@
+import { City, Country, State } from "./places.type";
 
 
 export interface Prefix {
@@ -6,13 +7,13 @@ export interface Prefix {
 }
 
 export interface User  {
-  firstName: string,
   lastName: string,
   email: string,
   companyName: string,
   postalCode: string,
-  countryId: number,
-  cityId: number,
+  country: Country,
+  state: State,
+  city: City,
   vat?: string,
   roles: string[],
   phoneNumber: number,
@@ -21,4 +22,3 @@ export interface User  {
   created_at: Date,
   updated_at: Date,
 }
-

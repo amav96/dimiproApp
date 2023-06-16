@@ -45,7 +45,6 @@ export function Select(props: PropsSelect) {
 
   const [localOptions, setLocalOptions] = useState<Array<any>>([]);
   useEffect(() => {
-    console.log({selectOptions: options})
     if (options) {
       setLocalOptions(options);
     }
@@ -290,15 +289,18 @@ export function Select(props: PropsSelect) {
     // buscamos los objetos en el listado de opciones para setear los objetos encontrados como valor
     if (options) {
       let val: Array<object> | Array<string> | object;
-      const lookFor = options.filter((option) =>
-        ArrayProperties.includes(option[trackBy])
+      const lookFor = options.filter((option) =>{
+        return  ArrayProperties.includes(option[trackBy])
+       }
       );
       val = [
         ...value.filter(
-          (val: object | Array<number | string>) => typeof val !== "number"
+          (val: object | Array<number | string>) => typeof val !== "number" && typeof val !== "string"
         ),
         ...lookFor,
       ];
+      
+      // val = [...lookFor,];
       if (onChange) {
         onChange({ value: val, index: null });
       }
@@ -330,15 +332,15 @@ export function Select(props: PropsSelect) {
       multiple &&
       Array.isArray(value) &&
       value.length > 0 &&
-      value.some((v) => typeof v === "number")
+      value.some((v) => typeof v === "number" || typeof v === "string")
     ) {
       lookForObjectsByPropertiesArray(
-        value.filter((v) => typeof v === "number")
+        value.filter((v) => typeof v === "number" || typeof v === "string")
       );
     } else if (
       !multiple &&
       !Array.isArray(value) &&
-      typeof value === "number"
+      (typeof value === "number" || typeof value === "string")
     ) {
       lookForObjectByValue(value);
     }

@@ -35,6 +35,8 @@ export function Abm(props: AbmProps) {
       onCloseModal,
       afterUpdate,
       afterStore,
+      closable,
+      title
     }
   } = props;
 
@@ -53,6 +55,7 @@ export function Abm(props: AbmProps) {
     onCloseModal,
     afterUpdate,
     afterStore,
+    title,
   })
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
@@ -240,6 +243,8 @@ export function Abm(props: AbmProps) {
       onCloseModal={handleOnCloseModal}
       afterUpdate={handleUpdate}
       afterStore={handleStore}
+      closable={closable}
+      title={title}
       />
 
       <Dialog

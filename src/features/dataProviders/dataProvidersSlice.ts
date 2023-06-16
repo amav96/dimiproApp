@@ -1,16 +1,18 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {Role} from '../../types/role.type'
-import { RootState } from 'src/store'
-import { Packaging } from 'src/types/packaging.types'
+import { Packaging } from '../..//types/packaging.types'
+import { Country } from '../../types/places.type'
 
 interface dataProviderState {
  roles: Role[] | [],
- packagings: Packaging[] | []
+ packagings: Packaging[] | [],
+ countries: Country[] | []
 }
 
 const initialState: dataProviderState = {
  roles: [],
- packagings: []
+ packagings: [],
+ countries: []
 }
 
 export const dataProvidersSlice = createSlice({
@@ -23,10 +25,13 @@ export const dataProvidersSlice = createSlice({
     setPackagings: (state, action: PayloadAction<Packaging[] | []>) => {
       state.packagings = action.payload
     },
+    setCountries: (state, action: PayloadAction<Country[] | []>) => {
+      state.countries = action.payload
+    },
   },
 })
 
 
 // Action creators are generated for each case reducer function
-export const { setRoles, setPackagings } = dataProvidersSlice.actions
+export const { setRoles, setPackagings, setCountries  } = dataProvidersSlice.actions
 export default dataProvidersSlice.reducer

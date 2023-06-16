@@ -24,7 +24,9 @@ export function ModalForm(props: PropsModalForm) {
     afterUpdate,
     afterStore,
     handleUpdateErrors,
-    handleStoreErrors
+    handleStoreErrors,
+    closable,
+    title
  } = props;
 
  
@@ -266,6 +268,8 @@ export function ModalForm(props: PropsModalForm) {
   return (
     <Modal
     isOpen={internalVisible}
+    closable={closable}
+    title={title}
     closeModal={hideModal}
     >
       <div className="c-p-4">

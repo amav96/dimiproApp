@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { GlobalInputs, Slot } from "../Form/FormType";
-import { Form } from "../Form/Form";
+import { GlobalInputs, Slot } from "../package/Form/Form.type";
+import { Form } from "../package/Form/Form";
 import { formData } from "./formData";
-import { Button } from "../Button";
+import { Button } from "../package/Button";
 
 const FormContract = () => {
   const [inputs, setInputs] = useState<Array<GlobalInputs | Slot>>(formData);

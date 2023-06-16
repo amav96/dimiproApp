@@ -15,7 +15,7 @@ export function Users() {
   const{ getDataProviders } = useDataProvider()
   const roles = useAppSelector((state: RootState) => state.dataProviders.roles);
   useEffect(() => {
-    getDataProviders(['roles', 'packagings'])
+    getDataProviders(['roles', 'countries'])
   }, [])
 
   useEffect(() => {
@@ -23,10 +23,6 @@ export function Users() {
     setFormInputs((prevInputs) =>
       prevInputs.map((input) => {
         if (input.key === 'roles') {
-          console.log({
-            ...input,
-            options: roles,
-          })
           return {
             ...input,
             options: roles,
@@ -93,6 +89,52 @@ export function Users() {
           },
         },
       },
+      {
+        key: 'companyName',
+        placeholder: 'Nombre compañia',
+        name: 'companyName',
+        value: '',
+        type: 'text',
+        cols: 'c-col-span-4',
+        validations: {
+          rules: {
+            required: true,
+          },
+        },
+      },
+      {
+        key: 'vat',
+        placeholder: 'Vat',
+        name: 'vat',
+        value: '',
+        type: 'text',
+        cols: 'c-col-span-4',
+      },
+      {
+        key: 'prefix',
+        placeholder: 'prefijo',
+        name: 'prefix',
+        value: [],
+        options: [
+          { id:1,
+            name: '+549'
+          },
+          { id:2,
+            name: '+549'
+          },
+        ],
+        type: 'select',
+        cols: 'c-col-span-4',
+      },
+      {
+        key: 'phoneNumber',
+        placeholder: 'telefono',
+        name: 'phoneNumber',
+        value: '',
+        type: 'text',
+        cols: 'c-col-span-4',
+      },
+      
     ],
     [roles]
   );
@@ -177,6 +219,8 @@ export function Users() {
         urlStore: Routes.USERS.STORE,
         urlUpdate: Routes.USERS.UPDATE,
         urlShow: Routes.USERS.SHOW,
+        closable: true,
+        title: 'Guardar usuario',
         modelShowKey: 'user',
         afterUpdate: (data: any) => {
           console.log('data after update',data)

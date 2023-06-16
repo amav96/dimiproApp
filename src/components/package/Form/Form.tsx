@@ -34,7 +34,6 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
 
 
   useEffect(() => {
-    console.log(inputs)
     inputs.forEach(({key}, i) => {
       const index = generatedInputs.map((m) => m.key).indexOf(key);
       if (index > -1) {

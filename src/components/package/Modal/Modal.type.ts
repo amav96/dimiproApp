@@ -5,7 +5,10 @@ export interface PropModal {
     children?: JSX.Element | JSX.Element[],
     overlay?: string,
     closeModal?: Function,
-    keep?: Boolean
+    keep?: Boolean,
+    closable?: Boolean,
+    title?: string
+    
 }
 
 export interface ModalPortalProps {

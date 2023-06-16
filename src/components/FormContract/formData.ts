@@ -1,4 +1,4 @@
-import { GlobalInputs, Slot } from '../Form/FormType';
+import { GlobalInputs, Slot } from '../package/Form/Form.type';
 
 import ExporterIcon from '/icons/form/exporter.svg';
 import ProductIcon from '/icons/form/product.svg';
