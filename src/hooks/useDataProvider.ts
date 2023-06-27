@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import {setRoles, setPackagings, setCountries} from '@features/dataProviders/dataProvidersSlice'
+import {setRoles, setPackagings, setCountries} from '@store/dataProviders/dataProvidersSlice'
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { RootState } from "src/store";
 import { ModelsDataProvider } from "src/types/dataProvider.type";

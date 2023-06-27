@@ -78,6 +78,20 @@ export const formData: Array<GlobalInputs | Slot> = [
     ],
   },
   {
+    icon: CropIcon,
+    key: "nameContract",
+    placeholder: "Nombre de contrato",
+    title: "Nombre de contrato:",
+    name: "nameContract",
+    value: "",
+    type: "text",
+    validations: {
+      rules: {
+        required: true,
+      },
+    },
+  },
+  {
     icon: ProductIcon,
     key: "producto",
     name: "producto",

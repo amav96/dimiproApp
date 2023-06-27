@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {Role} from '../../types/role.type'
-import { Packaging } from '../..//types/packaging.types'
+import { Packaging } from '../../types/packaging.types'
 import { Country } from '../../types/places.type'
 
 interface dataProviderState {
