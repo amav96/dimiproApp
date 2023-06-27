@@ -12,7 +12,10 @@ export function Router() {
     <Routes>
       <Route path="/" element={<Navigate to="/users" replace />} />
       <Route element={<ProtectRoute gate={"users_index"} />}>
-        <Route path="/users" element={<Users />} />
+        <Route path="/ajustes/users" element={<Users />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"companies_index"} />}>
+        <Route path="/ajustes/companies" element={<Users />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />

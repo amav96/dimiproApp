@@ -90,19 +90,6 @@ export function Users() {
         },
       },
       {
-        key: 'companyName',
-        placeholder: 'Nombre compañia',
-        name: 'companyName',
-        value: '',
-        type: 'text',
-        cols: 'c-col-span-4',
-        validations: {
-          rules: {
-            required: true,
-          },
-        },
-      },
-      {
         key: 'vat',
         placeholder: 'Vat',
         name: 'vat',

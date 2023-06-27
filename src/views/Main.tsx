@@ -47,9 +47,18 @@ function MainPage() {
         visible: true,
         subSection: [
           {
-            title: "Usuarios",
+            title: "Users",
             image: baseApiUrl + "/icons/lista.svg",
-            path: "/users",
+            path: "/ajustes/users",
+            onNavigate: (data: any) => {
+              console.log('hello', data)
+              navigate(data.path);
+            },
+          },
+          {
+            title: 'Companies',
+            image: baseApiUrl + "/icons/lista.svg",
+            path: "/ajustes/companies",
             onNavigate: (data: any) => {
               console.log('hello', data)
               navigate(data.path);
