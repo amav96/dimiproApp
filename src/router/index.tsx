@@ -1,11 +1,11 @@
 
 import { Routes, Route, Navigate} from "react-router-dom";
-import { Home } from "@views/Home";
 import { Users } from "@views/Settings/Users/Users";
 import  {Login}  from "@views/Auth/Login";
 import { AccesoDenegado } from "@views/Helpers/AccesoDenegado";
 import ProtectRoute from "./ProtectRoute";
 import AddContract from "@views/Add-Contract/AddContract";
+import ListContacts from "@views/List-Contracts/ListContacts";
 
 export function Router() {
   return (
@@ -17,6 +17,7 @@ export function Router() {
       <Route path="/login" element={<Login />} />
       <Route path="/forgot-password" element={<Login />} />
       <Route path="/add-contract" element={<AddContract />} />
+      <Route path="/list-contracts" element={<ListContacts />} />
       <Route path="/acceso-denegado" element={<AccesoDenegado />} />
     </Routes>
   );
