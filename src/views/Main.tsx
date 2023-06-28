@@ -29,7 +29,11 @@ function MainPage() {
         title: "Lista de contratos",
         image: baseApiUrl + "/icons/lista.svg",
         visible: true,
-        
+        name: "listContracts",
+        path: "/list-contracts",
+        onNavigate: (data: any) => {
+          navigate(data.path);
+        }
       },
       {
         title: "Agregar contrato",
