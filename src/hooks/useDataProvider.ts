@@ -1,57 +1,75 @@
 import { useEffect } from "react";
-import {setRoles, setPackagings, setCountries} from '@store/dataProviders/dataProvidersSlice'
+import { setRoles, setPackagings, setCountries, setPaymentMethods, setSurveyors, setCurrencies, setCompanies, setProducts } from '@store/dataProviders/dataProvidersSlice'
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { RootState } from "src/store";
 import { ModelsDataProvider } from "src/types/dataProvider.type";
 import DataProviderRepository from "@repositories/dataProvider.repository";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
-const dataProviderController = new DataProviderRepository()
-export default function useDataProvider () {
+const dataProviderController = new DataProviderRepository();
 
-  const dispatch = useAppDispatch()
-  const roles = useAppSelector((state: RootState) => state.dataProviders.roles)
-  const packagings = useAppSelector((state: RootState) => state.dataProviders.packagings)
-  const countries = useAppSelector((state: RootState) => state.dataProviders.countries)
+export default function useDataProvider() {
+  const dispatch = useAppDispatch();
 
-  let requestModels: ModelsDataProvider[] = []
+  const dataProviders = {
+    roles: {
+      state: useAppSelector((state: RootState) => state.dataProviders.roles),
+      action: setRoles,
+    },
+    packagings: {
+      state: useAppSelector((state: RootState) => state.dataProviders.packagings),
+      action: setPackagings,
+    },
+    countries: {
+      state: useAppSelector((state: RootState) => state.dataProviders.countries),
+      action: setCountries,
+    },
+    paymentMethods: {
+      state: useAppSelector((state: RootState) => state.dataProviders.paymentMethods),
+      action: setPaymentMethods,
+    },
+    surveyors: {
+      state: useAppSelector((state: RootState) => state.dataProviders.surveyors),
+      action: setSurveyors,
+    },
+    currencies: {
+      state: useAppSelector((state: RootState) => state.dataProviders.currencies),
+      action: setCurrencies,
+    },
+    companies: {
+      state: useAppSelector((state: RootState) => state.dataProviders.companies),
+      action: setCompanies,
+    },
+    products: {
+      state: useAppSelector((state: RootState) => state.dataProviders.products),
+      action: setProducts,
+    },
+  };
 
   const getDataProviders = async (models: ModelsDataProvider[]) => {
-    models.forEach((model : string) => {
-      if(model === 'roles' && roles.length === 0){
-        requestModels.push('roles')
-      }
-      if(model === 'packagings' && packagings.length === 0){
-        requestModels.push('packagings')
-      }
-      if(model === 'countries' && countries.length === 0){
-        requestModels.push('countries')
-      }
-    })
-    if(requestModels.length > 0){
-      const response = await dataProviderController.index({models: requestModels.toString()})
-      if(response.errors){
+    const requestModels: ModelsDataProvider[] = models.filter((model) => {
+      return dataProviders[model].state.length === 0;
+    });
+
+    if (requestModels.length > 0) {
+      const response = await dataProviderController.index({ models: requestModels.toString() });
+
+      if (response.errors) {
         toast(`🦄 ${response.errors.message || 'Ha ocurrido un error al traer los proveedores de data'}`, {
-            autoClose: 2000,
+          autoClose: 2000,
         });
       } else {
         Object.keys(response.dataProviders).forEach((k) => {
-          if(k === 'roles'){
-            dispatch(setRoles(response.dataProviders.roles))
+          if (k in dataProviders) {
+            // @ts-ignore
+            dispatch(dataProviders[k].action(response.dataProviders[k]));
           }
-          if(k === 'packagings'){
-            dispatch(setPackagings(response.dataProviders.packagings))
-          }
-          if(k === 'countries'){
-            dispatch(setCountries(response.dataProviders.countries))
-          }
-        })
+        });        
       }
     }
-  }
-
+  };
 
   return {
-    getDataProviders
-  }
+    getDataProviders,
+  };
 }

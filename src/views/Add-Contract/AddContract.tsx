@@ -1,4 +1,4 @@
-import FormContract from '../../components/FormContract/FormContract'
+import {FormContract} from '../../components/FormContract/FormContract'
 import './_add-contract.scss'
 
 const AddContract = () => {

@@ -19,7 +19,7 @@ import FileIcon from '/icons/form/file.svg';
 export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: ExporterIcon,
-    key: "exportador",
+    key: "exporters",
     name: "exportador",
     value: [],
     type: "select",
@@ -32,24 +32,11 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
-    options: [
-      {
-        name: "Hesar hnos.",
-        id: 1,
-      },
-      {
-        name: "CTA",
-        id: 2,
-      },
-      {
-        name: "Nutrin",
-        id: 3,
-      },
-    ],
+    options: [],
   },
   {
     icon: ExporterIcon,
-    key: "importador",
+    key: "importers",
     name: "importador",
     value: [],
     type: "select",
@@ -62,20 +49,7 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
-    options: [
-      {
-        name: "Prozis",
-        id: 1,
-      },
-      {
-        name: "Bredabest",
-        id: 2,
-      },
-      {
-        name: "Gateway",
-        id: 3,
-      },
-    ],
+    options: [],
   },
   {
     icon: CropIcon,
@@ -93,7 +67,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: ProductIcon,
-    key: "producto",
+    key: "products",
     name: "producto",
     value: [],
     type: "select",
@@ -115,7 +89,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: TypeIcon,
-    key: "tipo",
+    key: "types",
     name: "tipo",
     value: [],
     type: "select",
@@ -128,20 +102,11 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
-    options: [
-      {
-        name: "Blanched",
-        id: 1,
-      },
-      {
-        name: "Raw",
-        id: 2,
-      },
-    ],
+    options: [],
   },
   {
     icon: CaliberIcon,
-    key: "calibre",
+    key: "calibers",
     name: "calibre",
     value: [],
     type: "select",
@@ -154,20 +119,7 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
-    options: [
-      {
-        name: "38/42",
-        id: 1,
-      },
-      {
-        name: "40/50",
-        id: 2,
-      },
-      {
-        name: "Birdfood",
-        id: 3,
-      },
-    ],
+    options: [],
   },
   {
     icon: CropIcon,
@@ -185,8 +137,8 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: PackagingIcon,
-    key: "packaging",
-    name: "packaging",
+    key: "packagings",
+    name: "packagings",
     value: [],
     type: "select",
     multiple: false,
@@ -198,20 +150,7 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
-    options: [
-      {
-        name: "Bags x 25kg",
-        id: 1,
-      },
-      {
-        name: "Bags x 50kg",
-        id: 2,
-      },
-      {
-        name: "Big bags x 1250kg",
-        id: 3,
-      },
-    ],
+    options: [],
   },
   {
     icon: QtyIcon,
@@ -229,26 +168,13 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: BrokerIcon,
-    key: "broker",
+    key: "brokers",
     placeholder: "Broker",
     title: "Broker:",
     name: "broker",
     value: "",
     type: "select",
-    options: [
-      {
-        name: "Broker 1",
-        id: 1,
-      },
-      {
-        name: "Broker 2",
-        id: 2,
-      },
-      {
-        name: "Broker 3",
-        id: 3,
-      },
-    ],
+    options: [],
   },
   {
     icon: PercentageIcon,
@@ -275,7 +201,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: CoinIcon,
-    key: "moneda",
+    key: "currencies",
     placeholder: "Seleccionar moneda",
     title: "Moneda:",
     name: "moneda",
@@ -286,20 +212,11 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
-    options: [
-      {
-        name: "USD",
-        id: 1,
-      },
-      {
-        name: "EUR",
-        id: 2,
-      },
-    ],
+    options: [],
   },
   {
     icon: PaymentMethodIcon,
-    key: "metodoPago",
+    key: "paymentMethods",
     placeholder: "Seleccionar metodo de pago",
     title: "Método de pago:",
     name: "metodoPago",
@@ -310,16 +227,7 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
-    options: [
-      {
-        name: "Transferencia",
-        id: 1,
-      },
-      {
-        name: "Cheque",
-        id: 2,
-      },
-    ],
+    options: [],
   },
   {
     icon: SurveyorIcon,
@@ -334,20 +242,7 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
-    options: [
-      {
-        name: "JLA",
-        id: 1,
-      },
-      {
-        name: "SGS",
-        id: 2,
-      },
-      {
-        name: "Bureau Veritas",
-        id: 3,
-      },
-    ],
+    options: [],
   },
   {
     icon: ConditionsIcon,
