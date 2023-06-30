@@ -14,10 +14,10 @@ export const Routes = {
     },
     USERS: {
         INDEX: baseApiUrl + '/api/v1/users',
-        STORE: baseApiUrl + '/api/v1/user',
-        UPDATE: baseApiUrl + '/api/v1/user',
-        SHOW: baseApiUrl + '/api/v1/user',
-        DELETE: baseApiUrl + '/api/v1/user',
+        STORE: baseApiUrl + '/api/v1/users',
+        UPDATE: baseApiUrl + '/api/v1/users',
+        SHOW: baseApiUrl + '/api/v1/users',
+        DELETE: baseApiUrl + '/api/v1/users',
     },
     DATA_PROVIDER: {
         INDEX: baseApiUrl + '/api/v1/dataProviders',

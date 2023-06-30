@@ -1,12 +1,9 @@
 import { City, Country, State } from "./places.type";
-
-
-export interface Prefix {
-  _id: string,
-  name: string
-}
+import { Prefix } from "./prefix.type";
 
 export interface User  {
+  _id?:string,
+  id?:string,
   lastName: string,
   email: string,
   companyName: string,

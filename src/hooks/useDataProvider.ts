@@ -1,5 +1,15 @@
 import { useEffect } from "react";
-import { setRoles, setPackagings, setCountries, setPaymentMethods, setSurveyors, setCurrencies, setCompanies, setProducts } from '@store/dataProviders/dataProvidersSlice'
+import {
+  setRoles,
+  setPackagings,
+  setCountries,
+  setPaymentMethods,
+  setSurveyors,
+  setCurrencies,
+  setCompanies,
+  setProducts,
+  setPrefixs
+} from '@store/dataProviders/dataProvidersSlice'
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { RootState } from "src/store";
 import { ModelsDataProvider } from "src/types/dataProvider.type";
@@ -44,12 +54,14 @@ export default function useDataProvider() {
       state: useAppSelector((state: RootState) => state.dataProviders.products),
       action: setProducts,
     },
+    prefixs: {
+      state: useAppSelector((state: RootState) => state.dataProviders.prefixs),
+      action: setPrefixs,
+    },
   };
 
   const getDataProviders = async (models: ModelsDataProvider[]) => {
-    const requestModels: ModelsDataProvider[] = models.filter((model) => {
-      return dataProviders[model].state.length === 0;
-    });
+    const requestModels: ModelsDataProvider[] = models.filter((model) => dataProviders[model].state.length === 0);
 
     if (requestModels.length > 0) {
       const response = await dataProviderController.index({ models: requestModels.toString() });
@@ -64,7 +76,7 @@ export default function useDataProvider() {
             // @ts-ignore
             dispatch(dataProviders[k].action(response.dataProviders[k]));
           }
-        });        
+        });
       }
     }
   };

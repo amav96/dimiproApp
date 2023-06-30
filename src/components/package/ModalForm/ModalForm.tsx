@@ -13,7 +13,10 @@ export function ModalForm(props: PropsModalForm) {
     urlUpdate,
     isEditMode = false,
     urlShow,
-    modelShowKey = 'data',
+    modelStore = 'data',
+    modelUpdate = 'data',
+    modelDelete = 'data',
+    modelShow = 'data',
     visible,
     resetAfterClose,
     showRequestConfiguration,
@@ -87,9 +90,8 @@ export function ModalForm(props: PropsModalForm) {
 
               const response = await fetch(urlStore, params);
               const result = await response.json();
-
               loading.current = false
-              const { data, error } = result
+              const { error } = result
               if(error){
                 if(handleStoreErrors){
                   handleStoreErrors({
@@ -105,7 +107,12 @@ export function ModalForm(props: PropsModalForm) {
                 }
               }else {
                 if(afterStore){
-                  afterStore(result)
+                  if(typeof result === 'object'){
+                    afterStore(result[modelStore])
+                  } else {
+                    afterStore(result)
+                  }
+                  
                 }
               }
             } catch (error) {
@@ -132,6 +139,7 @@ export function ModalForm(props: PropsModalForm) {
     if(!loading.current){
         loading.current = true
         const { items, isFormValid } = data
+        console.log(data)
         if(isFormValid !== undefined && !isFormValid){
           if(handleUpdateErrors){
             handleUpdateErrors({
@@ -173,7 +181,11 @@ export function ModalForm(props: PropsModalForm) {
                 }
               }else {
                 if(afterUpdate){
-                  afterUpdate(result)
+                  if(typeof result === 'object'){
+                    afterUpdate(result[modelUpdate])
+                  } else {
+                    afterUpdate(result)
+                  }
                 }
               }
             } catch (error) {
@@ -207,13 +219,15 @@ export function ModalForm(props: PropsModalForm) {
       }
       const response = await fetch(urlShow, params);
       let result = await response.json();
-      result = result[modelShowKey]
+      
+      result = result[modelShow]
       loadingEntity.current = false
       if(result) completeEntity(result)
     }
   }
 
   const completeEntity = (data : object) => {
+    
     generatedForm.forEach((val, index) => {
       if(data.hasOwnProperty(val.key)){
           let property = data[val.key as keyof object];
@@ -263,8 +277,6 @@ export function ModalForm(props: PropsModalForm) {
     })
   }
 
-  const refModalForm = useRef<HTMLFormElement | null>(null)
-
   return (
     <Modal
     isOpen={internalVisible}
@@ -279,6 +291,7 @@ export function ModalForm(props: PropsModalForm) {
         onSubmit={handleSubmit}
         >
           <Button
+          disabled={loading.current}
           customClass={'c-mt-4 c-mr-4'}
           >
             Enviar formulario

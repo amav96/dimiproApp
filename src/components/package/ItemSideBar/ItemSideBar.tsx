@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { ItemSideBarProps } from '@packageTypes'
-import './SideBar.scss'
-import { useNavigate } from 'react-router-dom';
+import '../SideBar/SideBar.scss'
 
 export function ItemSideBar(props: ItemSideBarProps) {
 
@@ -17,7 +16,6 @@ export function ItemSideBar(props: ItemSideBarProps) {
       onNavigate
     } = props;
 
-    const navigate = useNavigate();
 
     const styleToSection = () => {
         return {
@@ -67,10 +65,10 @@ export function ItemSideBar(props: ItemSideBarProps) {
         >
             <div
             className="SidebarResizableContainer__item__box"
-            onClick={handleNavigation}
             >
                 <div
                 style={styleToSection()}
+                onClick={handleNavigation}
                 className="SidebarResizableContainer__item__box__item">
                     <div className="SidebarResizableContainer__item__box__item__boxImg">
                         <img src={image} />

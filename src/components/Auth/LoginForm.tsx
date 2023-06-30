@@ -61,7 +61,7 @@ export function LoginForm() {
       if(response.permissions){
         dispatch(setPermissions(response.permissions))
       }
-      navigate('/users')
+      navigate('/ajustes/users')
     }
 
   };

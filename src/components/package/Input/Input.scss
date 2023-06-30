@@ -31,3 +31,19 @@
         color: var(--red);
     }
 }
+
+.Input {
+    position: relative;
+    .password-icon {
+      position: absolute;
+      top: 14px;
+      right: 1rem;
+      cursor: pointer;
+
+      img {
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+      }
+    }
+  }

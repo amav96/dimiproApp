@@ -6,17 +6,8 @@ import { PaymentMethod } from "../../types/paymentMethod.type";
 import { Surveyor } from "../../types/surveyor.type";
 import { Currency } from "../../types/currency.type";
 import { Product } from "../../types/product.type";
-
-interface dataProviderState {
-  roles: Role[] | [];
-  packagings: Packaging[] | [];
-  countries: Country[] | [];
-  paymentMethods: PaymentMethod[] | [];
-  surveyors: Surveyor[] | [];
-  currencies: Currency[] | [];
-  companies: any[] | [];
-  products: Product[] | [];
-}
+import { GenericModel } from "../../types/genericModel.type";
+import { dataProviderState } from "../../types/dataProvider.type";
 
 const initialState: dataProviderState = {
   roles: [],
@@ -27,6 +18,7 @@ const initialState: dataProviderState = {
   currencies: [],
   companies: [],
   products: [],
+  prefixs: []
 };
 
 export const dataProvidersSlice = createSlice({
@@ -57,6 +49,9 @@ export const dataProvidersSlice = createSlice({
     setProducts: (state, action: PayloadAction<Product[] | []>) => {
       state.products = action.payload;
     },
+    setPrefixs: (state, action: PayloadAction<GenericModel[] | []>) => {
+      state.prefixs = action.payload;
+    },
   },
 });
 
@@ -70,5 +65,6 @@ export const {
   setCurrencies,
   setCompanies,
   setProducts,
+  setPrefixs,
 } = dataProvidersSlice.actions;
 export default dataProvidersSlice.reducer;

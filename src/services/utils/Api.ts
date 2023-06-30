@@ -47,11 +47,8 @@ export const serializeParams = async (params : object, config: Config = {} ) :Pr
     } else {
         Object.keys(params).forEach((key) => {
             let currentParam : any = params[key as keyof object];
-            if(typeof currentParam === 'object' && Array.isArray(currentParam)){
-                build[key as keyof object] = currentParam.toString()
-            }else{
-                build[key as keyof object] = currentParam
-            }
+            build[key as keyof object] = currentParam
+            
         })
     }
     return build

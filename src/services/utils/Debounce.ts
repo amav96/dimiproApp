@@ -1,4 +1,4 @@
-const debounce = (fn: Function, delay: number = 0, immediate: boolean = false) => {
+const debounce = (fn: any, delay: number = 0, immediate: boolean = false) => {
     let timeout: any;
     return (...args: any) => {
       if (immediate && !timeout) fn(...args);

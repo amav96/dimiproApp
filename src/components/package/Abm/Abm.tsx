@@ -27,7 +27,9 @@ export function Abm(props: AbmProps) {
       urlStore,
       urlUpdate,
       urlShow,
-      modelShowKey,
+      modelStore,
+      modelUpdate,
+      modelShow,
       resetAfterClose,
       showRequestConfiguration,
       storeRequestConfiguration,
@@ -45,7 +47,7 @@ export function Abm(props: AbmProps) {
     urlStore,
     urlUpdate,
     urlShow,
-    modelShowKey,
+    modelShow,
     isEditMode: false,
     visible: false,
     resetAfterClose,
@@ -71,6 +73,7 @@ export function Abm(props: AbmProps) {
   const refTableAlive = useRef<HTMLFormElement | null>(null)
   const handleStore = (data: any) => {
     if(addItemAfterStore){
+      console.log(data)
       const currentItems = refTableAlive?.current?.localItems;
       setLocalItems((prev) => ([...[data],...prev,...currentItems]))
     }
@@ -233,7 +236,9 @@ export function Abm(props: AbmProps) {
       urlStore={modalFormData.urlStore}
       urlUpdate={modalFormData.urlUpdate}
       urlShow={modalFormData.urlShow}
-      modelShowKey={modalFormData.modelShowKey}
+      modelShow={modalFormData.modelShow}
+      modelStore={modalFormData.modelStore}
+      modelUpdate={modalFormData.modelUpdate}
       isEditMode={modalFormData.isEditMode}
       visible={modalFormData.visible}
       resetAfterClose={modalFormData.resetAfterClose}

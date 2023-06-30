@@ -55,7 +55,6 @@ function MainPage() {
             image: baseApiUrl + "/icons/lista.svg",
             path: "/ajustes/users",
             onNavigate: (data: any) => {
-              console.log('hello', data)
               navigate(data.path);
             },
           },
@@ -64,7 +63,6 @@ function MainPage() {
             image: baseApiUrl + "/icons/lista.svg",
             path: "/ajustes/companies",
             onNavigate: (data: any) => {
-              console.log('hello', data)
               navigate(data.path);
             },
           },

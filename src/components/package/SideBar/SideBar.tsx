@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { SideBarProps } from '@packageTypes'
-import { ItemSideBar } from './ItemSideBar';
+import { ItemSideBar } from '@package';
 import './SideBar.scss'
 
 export function SideBar(props: SideBarProps) {

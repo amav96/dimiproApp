@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Abm } from '@package'
+import { Abm, Layout } from '@package'
 import { Routes } from '@services/utils/Routes'
 import { authorization } from '@services/utils/Autorizathion'
 import { AbmTableAliveProps, GlobalInputs } from '@packageTypes'
@@ -9,13 +9,16 @@ import { formatDateTime } from '@services/utils/Formatters'
 import useDataProvider from '@hooks/useDataProvider'
 import { useAppSelector } from '../../../hooks'
 import { RootState } from '../../../store'
+import { Company } from '../../../types/company.type';
 
 export function Users() {
 
   const{ getDataProviders } = useDataProvider()
   const roles = useAppSelector((state: RootState) => state.dataProviders.roles);
+  const companies = useAppSelector((state: RootState) => state.dataProviders.companies);
+  const prefixs = useAppSelector((state: RootState) => state.dataProviders.prefixs);
   useEffect(() => {
-    getDataProviders(['roles', 'countries'])
+    getDataProviders(['roles', 'companies', 'prefixs'])
   }, [])
 
   useEffect(() => {
@@ -26,6 +29,18 @@ export function Users() {
           return {
             ...input,
             options: roles,
+          };
+        }
+        if (input.key === 'company') {
+          return {
+            ...input,
+            options: companies,
+          };
+        }
+        if (input.key === 'prefix') {
+          return {
+            ...input,
+            options: prefixs,
           };
         }
         return input;
@@ -75,14 +90,27 @@ export function Users() {
         },
       },
       {
+        key: 'company',
+        placeholder: 'Compañia',
+        name: 'company',
+        trackBy: '_id',
+        value: [],
+        type: 'select',
+        cols: 'c-col-span-4',
+        options: companies,
+        formatValue : (value: Company) => value.id
+      },
+      {
         key: 'roles',
         placeholder: 'Roles',
         name: 'roles',
+        trackBy: '_id',
         value: [],
         type: 'select',
         multiple: true,
         cols: 'c-col-span-4',
         options: roles,
+        formatValue : (value: Role[]) => value.map((v:Role) => v.id),
         validations: {
           rules: {
             required: true,
@@ -90,26 +118,12 @@ export function Users() {
         },
       },
       {
-        key: 'vat',
-        placeholder: 'Vat',
-        name: 'vat',
-        value: '',
-        type: 'text',
-        cols: 'c-col-span-4',
-      },
-      {
         key: 'prefix',
-        placeholder: 'prefijo',
+        placeholder: 'Prefijo/Codigo País',
         name: 'prefix',
+        label: 'fullName',
         value: [],
-        options: [
-          { id:1,
-            name: '+549'
-          },
-          { id:2,
-            name: '+549'
-          },
-        ],
+        options: prefixs,
         type: 'select',
         cols: 'c-col-span-4',
       },
@@ -121,9 +135,24 @@ export function Users() {
         type: 'text',
         cols: 'c-col-span-4',
       },
-      
+      {
+        key: 'password',
+        placeholder: 'Clave',
+        name: 'password',
+        value: '',
+        type: 'password',
+        cols: 'c-col-span-4',
+      },
+      {
+        key: 'confirmPassword',
+        placeholder: 'Confirmar Clave',
+        name: 'confirmPassword',
+        value: '',
+        type: 'password',
+        cols: 'c-col-span-4',
+      },
     ],
-    [roles]
+    [roles,companies,prefixs]
   );
   
   const [formInputs, setFormInputs] = useState<GlobalInputs[]>(dataInputs);
@@ -161,11 +190,24 @@ export function Users() {
       {key: 'lastName', title: 'Apellido' },
       {key: 'email', title: 'Email' },
       {key: 'roles', title: 'Roles', format: (value: Role[]) => {
-        return value.map((rol) => {
-          return rol.name
-        }).toString()
+        if(value){
+          return value.map((rol) => {
+            return rol.name
+          }).toString()
+        } else {
+          return ''
+        }
+        
       }},
-      {key: 'createdAt', title: 'creado', format:(value: string) => formatDateTime(value) },
+      {key: 'company', title: 'Compañia', format: (value: Company) => {
+        if(value){
+          return value.name
+        } else {
+          return 's/e'
+        }
+        
+      }},
+      {key: 'createdAt', title: 'creado', format:(value: string) => formatDateTime(value) || '' },
       {key: 'edit', title: 'Editar'},
     ],[]),
     urlIndex: Routes.USERS.INDEX,
@@ -179,14 +221,6 @@ export function Users() {
     searchable: true,
     addItemAfterStore: true,
     updateItemAfterUpdate: true,
-    // deleteItemAfterDelete: true,
-    // urlDelete: 'https://jsonplaceholder.typicode.com/posts',
-    // deleteRequestConfiguration: {
-    //   method: 'DELETE',
-    //   headers: {
-    //     Authorization: authorization()
-    //   }
-    // },
     afterDelete : (data: any) => {
       console.log('data after delete',data)
     },
@@ -195,10 +229,7 @@ export function Users() {
     headerSticky: true
   })
   return (
-    <div className='c-m-4'>
-      <div className="c-my-2">
-        <h2 className='c-text-xl'>Usuarios</h2>
-      </div>
+    <Layout title={'Users'} >
       <Abm
       table={propTable}
       modalForm={{
@@ -208,7 +239,6 @@ export function Users() {
         urlShow: Routes.USERS.SHOW,
         closable: true,
         title: 'Guardar usuario',
-        modelShowKey: 'user',
         afterUpdate: (data: any) => {
           console.log('data after update',data)
         },
@@ -219,25 +249,25 @@ export function Users() {
           method: 'GET',
           headers: {
             Authorization: authorization(),
-            'Content-Type': 'application/json; charset=UTF-8'
+            'Content-Type': 'application/json'
           }
         },
         updateRequestConfiguration : {
           method: 'PATCH',
           headers: {
             Authorization: authorization(),
-            'Content-Type': 'application/json; charset=UTF-8'
+            'Content-Type': 'application/json'
           }
         },
         storeRequestConfiguration : {
           method: 'POST',
           headers: {
             Authorization: authorization(),
-            'Content-Type': 'application/json; charset=UTF-8'
+            'Content-Type': 'application/json'
           }
         }
       }}
       />
-    </div>
+    </Layout>
   )
 }

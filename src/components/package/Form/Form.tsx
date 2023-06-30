@@ -330,6 +330,8 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 type={generatedInputs[index].type}
                 placeholder={generatedInputs[index].placeholder}
                 name={generatedInputs[index].name}
+                label={generatedInputs[index].label}
+                trackBy={generatedInputs[index].trackBy}
                 options={generatedInputs[index].options}
                 value={formValues[input.key]}
                 onChange={(e : onChangeSelect) => onChangeSelect(e,input)}

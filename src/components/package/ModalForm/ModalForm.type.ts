@@ -5,7 +5,10 @@ export interface PropsModalForm {
     urlStore: string
     urlUpdate: string,
     urlShow?: string,
-    modelShowKey? : string,
+    modelStore? : string,
+    modelUpdate? : string,
+    modelDelete? : string,
+    modelShow? : string,
     isEditMode: boolean,
     visible: boolean,
     resetAfterClose? : boolean,

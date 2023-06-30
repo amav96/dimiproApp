@@ -6,6 +6,7 @@ import { Validator } from "@services/utils/Validator";
 import { Validations, PropsSelect } from "@packageTypes";
 import times from "./times.svg";
 import arrowDown from "./arrow-down.svg";
+import debounce from "@services/utils/Debounce";
 
 interface styleList {
   top?: string | number;
@@ -37,13 +38,28 @@ export function Select(props: PropsSelect) {
   } = props;
 
   const [localValue, setLocalValue] = useState("");
-
+ 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
-    setLocalValue(evt.target.value);
-    filterOptions(localValue);
+    const value = evt.target.value;
+    setLocalValue(value);
+    if(value && options){
+      debounce(() => filterOptions(value), 200)();
+    } else if(options) {
+      setLocalOptions(options);
+        if(!showMenu){
+          setShowMenu(true)
+        }
+    }
+    
   };
 
   const [localOptions, setLocalOptions] = useState<Array<any>>([]);
+  useEffect(() => {
+    if (localOptions) {
+      calculateMenuPosition()
+    }
+  }, [localOptions]);
+
   useEffect(() => {
     if (options) {
       setLocalOptions(options);
@@ -51,8 +67,8 @@ export function Select(props: PropsSelect) {
   }, [options]);
 
   const filterOptions = (needle: string): void => {
-    if (needle !== "") {
-      const looking = localOptions.filter((val) => {
+    if(options){
+      const looking = options.filter((val) => {
         if (typeof val === "number") {
           return val === Number(needle);
         } else if (typeof val === "string") {
@@ -309,7 +325,6 @@ export function Select(props: PropsSelect) {
       }
     }
   };
-
   const lookForObjectByValue = (value: number | string) => {
     // cuando seteamos un numero como value. Ejemplo: Pais = { value : 1}
     if (options) {
@@ -323,6 +338,21 @@ export function Select(props: PropsSelect) {
       }
     }
   };
+
+  const lookForObjectByObject = (value: object) => {
+    // cuando seteamos un numero como value. Ejemplo: Pais = { value : 1}
+    if (options) {
+      const lookFor = options.filter((option) => value[trackBy as keyof object] === option[trackBy])[0];
+      if (onChange) {
+        onChange({ value: lookFor, index: null });
+      }
+      if (validations) {
+        handleValidations(lookFor, validations);
+      }
+    }
+  };
+
+  
 
   useEffect(() => {
     if (!multiple && value && !isEmpty(value)) {
@@ -343,6 +373,12 @@ export function Select(props: PropsSelect) {
       (typeof value === "number" || typeof value === "string")
     ) {
       lookForObjectByValue(value);
+    } else if (
+      !multiple &&
+      !Array.isArray(value) &&
+      (typeof value === "object")
+    ) {
+      lookForObjectByObject(value);
     }
   }, [value]);
 
