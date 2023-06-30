@@ -1,8 +1,11 @@
-import  { useRef, useState } from 'react'
+import  { useEffect, useRef, useState } from 'react'
 import { Dialog, Button, ModalForm, TableAlive } from '@package';
 import { PropsModalForm, AbmProps } from '@packageTypes'
 
+
 export function Abm(props: AbmProps) {
+
+  
   const {
     table: {
       columns,
@@ -36,7 +39,9 @@ export function Abm(props: AbmProps) {
       updateRequestConfiguration,
       onCloseModal,
       afterUpdate,
+      beforeUpdate,
       afterStore,
+      beforeStore,
       closable,
       title
     }
@@ -56,7 +61,9 @@ export function Abm(props: AbmProps) {
     updateRequestConfiguration,
     onCloseModal,
     afterUpdate,
+    beforeUpdate,
     afterStore,
+    beforeStore,
     title,
   })
 
@@ -73,19 +80,22 @@ export function Abm(props: AbmProps) {
   const refTableAlive = useRef<HTMLFormElement | null>(null)
   const handleStore = (data: any) => {
     if(addItemAfterStore){
-      console.log(data)
-      const currentItems = refTableAlive?.current?.localItems;
-      setLocalItems((prev) => ([...[data],...prev,...currentItems]))
+      if(!data.errors && !data.error){
+        const currentItems = refTableAlive?.current?.localItems;
+        setLocalItems((prev) => ([...[data],...prev,...currentItems]))
+      }
     }
     if(modalFormData.afterStore){
       modalFormData.afterStore(data)
     }
 
-    setModalFormData((prev) => ({
-      ...prev,
-      visible: false,
-      isEditMode: false
-    }))
+    if(!data.errors && !data.error){
+      setModalFormData((prev) => ({
+        ...prev,
+        visible: false,
+        isEditMode: false
+      }))
+    }
   }
 
   const onOpenUpdate = (data: any) => {
@@ -248,6 +258,8 @@ export function Abm(props: AbmProps) {
       onCloseModal={handleOnCloseModal}
       afterUpdate={handleUpdate}
       afterStore={handleStore}
+      beforeUpdate={beforeUpdate}
+      beforeStore={beforeStore}
       closable={closable}
       title={title}
       />

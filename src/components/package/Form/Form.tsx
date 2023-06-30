@@ -113,10 +113,29 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
 
       const keys = Object.keys(formValues);
       for (let i = 0; i < keys.length; i += 1) {
-        setFormValues((prev : any) => ({
-          ...prev,
-          [keys[i]]: ''
-        }))
+        const key = keys[i];
+        const value = formValues[key];
+        if (Array.isArray(value)) {
+          setFormValues((prev: any) => ({
+            ...prev,
+            [key]: []
+          }));
+        } else if (typeof value === 'object' && value !== null) {
+          setFormValues((prev: any) => ({
+            ...prev,
+            [key]: {}
+          }));
+        } else if (typeof value === 'string') {
+          setFormValues((prev: any) => ({
+            ...prev,
+            [key]: ''
+          }));
+        } else {
+          setFormValues((prev: any) => ({
+            ...prev,
+            [key]: null
+          }));
+        }
       }
 
       generatedInputs.forEach((val, index) => {

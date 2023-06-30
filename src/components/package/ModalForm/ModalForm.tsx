@@ -5,6 +5,7 @@ import { serializeParams } from '@services/utils/Api';
 import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
 
+
 export function ModalForm(props: PropsModalForm) {
 
   const {
@@ -25,7 +26,9 @@ export function ModalForm(props: PropsModalForm) {
     updateDefaultParams,
     onCloseModal,
     afterUpdate,
+    beforeUpdate,
     afterStore,
+    beforeStore,
     handleUpdateErrors,
     handleStoreErrors,
     closable,
@@ -68,15 +71,15 @@ export function ModalForm(props: PropsModalForm) {
     if(!loading.current){
         loading.current = true
         const { items, isFormValid } = data
+        if(beforeStore){
+          beforeStore({
+            type: 'formInvalid',
+            message: 'Must fill the form correctly',
+            ...data
+          })
+        }
         if(isFormValid !== undefined && !isFormValid){
-          if(handleStoreErrors){
-            handleStoreErrors({
-              type: 'formInvalid',
-              message: 'Must fill the form correctly',
-              ...items,
-              ...isFormValid
-            })
-          }
+          loading.current = false
         } else {
             try {
               const formParams = await serializeParams({...items})
@@ -91,18 +94,14 @@ export function ModalForm(props: PropsModalForm) {
               const response = await fetch(urlStore, params);
               const result = await response.json();
               loading.current = false
-              const { error } = result
-              if(error){
-                if(handleStoreErrors){
-                  handleStoreErrors({
+              const { error, errors } = result
+              if(error || errors){
+                if(afterStore){
+                  afterStore({
                     type: 'serverMessage',
                     message: 'An error has occurred with the server',
-                    ...items,
-                    ...isFormValid,
-                    ...{ server : {
-                        ...error
-                      }
-                    }
+                    ...data,
+                    ...result,
                   })
                 }
               }else {
@@ -112,22 +111,15 @@ export function ModalForm(props: PropsModalForm) {
                   } else {
                     afterStore(result)
                   }
-                  
                 }
               }
             } catch (error) {
                 loading.current = false
-                if(handleStoreErrors){
-                  handleStoreErrors({
+                if(afterStore){
+                  afterStore({
                     type: 'serverError',
                     message: 'An error has occurred with the server',
-                    ...items,
-                    ...isFormValid,
-                    ...{ 
-                      server : {
-                        error
-                      }
-                    }
+                    ...data
                   })
                 }
             }
@@ -139,17 +131,15 @@ export function ModalForm(props: PropsModalForm) {
     if(!loading.current){
         loading.current = true
         const { items, isFormValid } = data
-        console.log(data)
+        if(beforeUpdate){
+          beforeUpdate({
+            type: 'formInvalid',
+            message: 'Must fill the form correctly',
+            ...data
+          })
+        }
         if(isFormValid !== undefined && !isFormValid){
-          if(handleUpdateErrors){
-            handleUpdateErrors({
-              type: 'formInvalid',
-              message: 'Must fill the form correctly',
-              ...items,
-              ...isFormValid
-            })
-          }
-            // ('Debes llenar el formulario correctamente');
+          loading.current = false
         } else {
             try {
               const formParams = await serializeParams({...items})
@@ -165,24 +155,20 @@ export function ModalForm(props: PropsModalForm) {
               const result = await response.json();
 
               loading.current = false
-              const { data, error } = result
-              if(error){
-                if(handleUpdateErrors){
-                  handleUpdateErrors({
+              const { error, errors } = result
+              if(error || errors){
+                if(afterUpdate){
+                  afterUpdate({
                     type: 'serverMessage',
                     message: 'An error has occurred with the server',
-                    ...items,
-                    ...isFormValid,
-                    ...{ server : {
-                        ...error
-                      }
-                    }
+                    ...data,
+                    ...result,
                   })
                 }
               }else {
                 if(afterUpdate){
                   if(typeof result === 'object'){
-                    afterUpdate(result[modelUpdate])
+                    afterUpdate(result[modelStore])
                   } else {
                     afterUpdate(result)
                   }
@@ -190,17 +176,11 @@ export function ModalForm(props: PropsModalForm) {
               }
             } catch (error) {
                 loading.current = false
-                if(handleUpdateErrors){
-                  handleUpdateErrors({
+                if(afterUpdate){
+                  afterUpdate({
                     type: 'serverError',
                     message: 'An error has occurred with the server',
-                    ...items,
-                    ...isFormValid,
-                    ...{ 
-                      server : {
-                        error
-                      }
-                    }
+                    ...data
                   })
                 }
             }
@@ -294,7 +274,7 @@ export function ModalForm(props: PropsModalForm) {
           disabled={loading.current}
           customClass={'c-mt-4 c-mr-4'}
           >
-            Enviar formulario
+            Enviar
           </Button>
         </Form>
         }

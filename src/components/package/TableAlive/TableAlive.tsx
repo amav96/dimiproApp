@@ -88,6 +88,7 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
                   if(firstLook){
                     setLocalItems(data)
                   }else {
+                    // lo hace asi, para mantener los registros anteriores mientras estoy escroleando, y mergeo todo
                     setLocalItems((prev) => ([...prev,... data]))
                   }
                   if(result?.pagination){
@@ -113,6 +114,7 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
   }
 
   const resetLookFor = async () => {
+    setLocalItems([])
     await refForm?.current?.resetValues()
     pagination.current.page = 1
     await applyLookFor()
