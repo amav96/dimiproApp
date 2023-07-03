@@ -41,9 +41,8 @@ export function Table(props: TableProps<string>) {
           offsetHeightTableMain = tableMain.offsetHeight;
         }
         // Number(scrollbar.height) son los pixeles que se le suman o restan al table-wrapper
-        let calculateOffsetHeightTableMain =
-          offsetHeightTableMain + Number(scrollbar.height);
-
+        // let calculateOffsetHeightTableMain = offsetHeightTableMain + Number(scrollbar.height);
+        let calculateOffsetHeightTableMain = offsetHeightTableMain;
         // si el desplazamiento superior de la envoltura mas la altura de compensacion de envoltura es igual a la altura de compensacion de la tabla
         if (
           scrollTopTableWrapper + offsetHeightTableWrapper >=

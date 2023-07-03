@@ -4,12 +4,12 @@ import { Routes } from '@services/utils/Routes'
 import { authorization } from '@services/utils/Autorizathion'
 import { GlobalInputs } from '@packageTypes'
 import baseApiUrl from '@services/BaseApiUrl'
-import { Role } from '../../../types/role.type'
+import { Role } from '../../types/role.type'
 import { formatDateTime } from '@services/utils/Formatters'
 import useDataProvider from '@hooks/useDataProvider'
-import { useAppSelector } from '../../../hooks'
-import { RootState } from '../../../store'
-import { Company } from '../../../types/company.type';
+import { useAppSelector } from '../../hooks'
+import { RootState } from '../../store'
+import { Company } from '../../types/company.type';
 import {  toast } from 'react-toastify';
 
 export function Users() {
@@ -76,7 +76,7 @@ export function Users() {
   const [formCrud, setFormCrud] = useState<GlobalInputs[]>([
       {
         key: 'firstName',
-        placeholder: 'Nombre',
+        placeholder: 'firstName',
         name: 'firstName',
         value: '',
         type: 'text',
@@ -89,7 +89,7 @@ export function Users() {
       },
       {
         key: 'lastName',
-        placeholder: 'Apellido',
+        placeholder: 'LastName',
         name: 'lastName',
         value: '',
         type: 'text',
@@ -115,7 +115,7 @@ export function Users() {
       },
       {
         key: 'company',
-        placeholder: 'Compañia',
+        placeholder: 'Company',
         name: 'company',
         trackBy: '_id',
         value: [],
@@ -143,7 +143,7 @@ export function Users() {
       },
       {
         key: 'prefix',
-        placeholder: 'Prefijo/Codigo País',
+        placeholder: 'Prefix|Code',
         name: 'prefix',
         label: 'fullName',
         value: [],
@@ -153,7 +153,7 @@ export function Users() {
       },
       {
         key: 'phoneNumber',
-        placeholder: 'telefono',
+        placeholder: 'phone Number',
         name: 'phoneNumber',
         value: '',
         type: 'text',
@@ -161,7 +161,7 @@ export function Users() {
       },
       {
         key: 'password',
-        placeholder: 'Clave',
+        placeholder: 'Password',
         name: 'password',
         value: '',
         type: 'password',
@@ -169,7 +169,7 @@ export function Users() {
       },
       {
         key: 'confirmPassword',
-        placeholder: 'Confirmar Clave',
+        placeholder: 'Confirm Password',
         name: 'confirmPassword',
         value: '',
         type: 'password',
@@ -181,7 +181,7 @@ export function Users() {
   const [formFilter, setFormFilter] = useState<GlobalInputs[]>([
     {
       key: 'firstName',
-      placeholder : 'Nombre',
+      placeholder : 'FirstName',
       name: 'firstName',
       value: '',
       type: 'text',
@@ -189,7 +189,7 @@ export function Users() {
     },
     {
       key: 'lastName',
-      placeholder : 'Apellido',
+      placeholder : 'LastName',
       name: 'lastName',
       value: '',
       type: 'text',
@@ -205,7 +205,7 @@ export function Users() {
     },
     {
       key: 'company',
-      placeholder: 'Compañia',
+      placeholder: 'Company',
       name: 'company',
       trackBy: '_id',
       value: [],
@@ -246,8 +246,8 @@ export function Users() {
       <Abm
       table={{
         columns: useMemo(() => [
-          {key: 'firstName', title: 'Nombre'},
-          {key: 'lastName', title: 'Apellido' },
+          {key: 'firstName', title: 'FirstName'},
+          {key: 'lastName', title: 'LastName' },
           {key: 'email', title: 'Email' },
           {key: 'roles', title: 'Roles', format: (value: Role[]) => {
             if(value){
@@ -259,7 +259,7 @@ export function Users() {
             }
             
           }},
-          {key: 'company', title: 'Compañia', format: (value: Company) => {
+          {key: 'company', title: 'Company', format: (value: Company) => {
             if(value){
               return value.name
             } else {
@@ -267,7 +267,7 @@ export function Users() {
             }
             
           }},
-          {key: 'createdAt', title: 'creado', format:(value: string) => formatDateTime(value) || '' },
+          {key: 'createdAt', title: 'Created', format:(value: string) => formatDateTime(value) || '' },
           {key: 'edit', title: 'Editar'},
         ],[]),
         urlIndex: Routes.USERS.INDEX,
@@ -296,7 +296,7 @@ export function Users() {
         closable: true,
         title: 'Guardar usuario',
         afterUpdate: (data: any) => {
-          if(data.errors || data.error || data.type !== ''){
+          if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
               autoClose: 5000,
               theme: 'colored'

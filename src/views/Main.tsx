@@ -51,9 +51,17 @@ function MainPage() {
         visible: true,
         subSection: [
           {
-            title: "Users",
+            title: 'Calibers',
+            image: baseApiUrl + "/icons/machine.svg",
+            path: "/ajustes/calibers",
+            onNavigate: (data: any) => {
+              navigate(data.path);
+            },
+          },
+          {
+            title: 'Categories',
             image: baseApiUrl + "/icons/lista.svg",
-            path: "/ajustes/users",
+            path: "/ajustes/categories",
             onNavigate: (data: any) => {
               navigate(data.path);
             },
@@ -62,6 +70,62 @@ function MainPage() {
             title: 'Companies',
             image: baseApiUrl + "/icons/lista.svg",
             path: "/ajustes/companies",
+            onNavigate: (data: any) => {
+              navigate(data.path);
+            },
+          },
+          {
+            title: 'Currencies',
+            image: baseApiUrl + "/icons/lista.svg",
+            path: "/ajustes/currencies",
+            onNavigate: (data: any) => {
+              navigate(data.path);
+            },
+          },
+          {
+            title: 'Packagings',
+            image: baseApiUrl + "/icons/lista.svg",
+            path: "/ajustes/packagings",
+            onNavigate: (data: any) => {
+              navigate(data.path);
+            },
+          },
+          {
+            title: 'Payment Methods',
+            image: baseApiUrl + "/icons/lista.svg",
+            path: "/ajustes/paymentMethods",
+            onNavigate: (data: any) => {
+              navigate(data.path);
+            },
+          },
+          {
+            title: 'Products',
+            image: baseApiUrl + "/icons/lista.svg",
+            path: "/ajustes/products",
+            onNavigate: (data: any) => {
+              navigate(data.path);
+            },
+          },
+          {
+            title: 'Surveyors',
+            image: baseApiUrl + "/icons/lista.svg",
+            path: "/ajustes/surveyors",
+            onNavigate: (data: any) => {
+              navigate(data.path);
+            },
+          },
+          {
+            title: 'Packagings',
+            image: baseApiUrl + "/icons/Home.svg",
+            path: "/ajustes/packagings",
+            onNavigate: (data: any) => {
+              navigate(data.path);
+            },
+          },
+          {
+            title: "Users",
+            image: baseApiUrl + "/icons/perfil.svg",
+            path: "/ajustes/users",
             onNavigate: (data: any) => {
               navigate(data.path);
             },

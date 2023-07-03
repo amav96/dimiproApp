@@ -8,6 +8,7 @@ export interface AbmTableAliveProps extends TableAliveProps<string> {
   deleteIcon?: string,
   storeIcon?: string,
   urlDelete?: string,
+  modelDelete?: string
   deleteRequestConfiguration?: requestConfiguration,
   afterDelete?: Function;
 }

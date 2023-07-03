@@ -19,6 +19,7 @@ export function Abm(props: AbmProps) {
       updateItemAfterUpdate,
       deleteItemAfterDelete,
       afterDelete,
+      modelDelete = 'data',
       updateIcon,
       deleteIcon,
       storeIcon,
@@ -82,7 +83,7 @@ export function Abm(props: AbmProps) {
     if(addItemAfterStore){
       if(!data.errors && !data.error){
         const currentItems = refTableAlive?.current?.localItems;
-        setLocalItems((prev) => ([...[data],...prev,...currentItems]))
+        setLocalItems(() => ([...[data],...currentItems]))
       }
     }
     if(modalFormData.afterStore){
@@ -148,22 +149,41 @@ export function Abm(props: AbmProps) {
           const response = await fetch(url, params);
           const result = await response.json();
           loadingDelete.current = false
-          if(!result){
-            alert(result)
-          } else {
-            if(deleteItemAfterDelete){
-              const currentItems = refTableAlive?.current?.localItems.filter((value : any) => value.id !== item.id );
-              setLocalItems(currentItems)
-            }
-            if(afterDelete){
-              afterDelete(deleteData.resource)
-            }
-            setDeleteData((prev) => ({
-              ...prev,
-              resource: null,
-              isOpen: false,
-            }))
-          }
+
+          const { error, errors } = result
+              if(error || errors){
+                if(afterDelete){
+                  afterDelete({
+                    type: 'serverMessage',
+                    message: 'An error has occurred with the server',
+                    ...data,
+                    ...result,
+                  })
+                }
+              }else {
+
+                setDeleteData((prev) => ({
+                  ...prev,
+                  resource: null,
+                  isOpen: false,
+                }))
+
+                if(deleteItemAfterDelete){
+                  const currentItems = refTableAlive?.current?.localItems.filter((value : any) => value.id !== item.id );
+                  setLocalItems(currentItems)
+                }
+
+                if(afterDelete){
+                  if(typeof result === 'object'){
+                    afterDelete(result[modelDelete])
+                  } else {
+                    afterDelete(result)
+                  }
+                }
+
+              }
+
+          
         } catch (error) {
           alert(error)
           loadingDelete.current = false

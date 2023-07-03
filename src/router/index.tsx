@@ -1,6 +1,6 @@
 
 import { Routes, Route, Navigate} from "react-router-dom";
-import { Users } from "@views/Settings/User/Users";
+import { Users } from "@views/Settings/Users";
 import  {Login}  from "@views/Auth/Login";
 import  {Logout}  from "@views/Auth/Logout";
 import { AccesoDenegado } from "@views/Helpers/AccesoDenegado";
@@ -8,7 +8,14 @@ import ProtectRoute from "./ProtectRoute";
 import AddContract from "@views/Add-Contract/AddContract";
 import ListContacts from "@views/List-Contracts/ListContacts";
 import { NotFound } from "@views/Helpers/NotFound";
-import { Companies } from "@views/Settings/Company/Companies";
+import { Companies } from "@views/Settings/Companies";
+import { Packagings } from "@views/Settings/Packagings";
+import { Calibers } from "@views/Settings/Calibers";
+import { Currencies } from "@views/Settings/Currencies";
+import { PaymentMethods } from "@views/Settings/PaymentMethods";
+import { Products } from "@views/Settings/Products";
+import { Surveyors } from "@views/Settings/Surveyors";
+import { Categories } from "@views/Settings/Categories";
 
 export function Router() {
   return (
@@ -19,6 +26,27 @@ export function Router() {
       </Route>
       <Route element={<ProtectRoute gate={"companies_index"} />}>
         <Route path="/ajustes/companies" element={<Companies />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"categories_index"} />}>
+        <Route path="/ajustes/categories" element={<Categories />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"packagings_index"} />}>
+        <Route path="/ajustes/packagings" element={<Packagings />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"calibers_index"} />}>
+        <Route path="/ajustes/calibers" element={<Calibers />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"currencies_index"} />}>
+        <Route path="/ajustes/currencies" element={<Currencies />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"payment_methods_index"} />}>
+        <Route path="/ajustes/paymentMethods" element={<PaymentMethods />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"products_index"} />}>
+        <Route path="/ajustes/products" element={<Products />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"surveyors_index"} />}>
+        <Route path="/ajustes/surveyors" element={<Surveyors />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
