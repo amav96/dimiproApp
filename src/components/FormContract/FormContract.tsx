@@ -30,6 +30,12 @@ export const FormContract = () => {
   const products = useAppSelector(
     (state: RootState) => state.dataProviders.products
   );
+  const calibers = useAppSelector(
+    (state: RootState) => state.dataProviders.calibers
+  );
+  const categories = useAppSelector(
+    (state: RootState) => state.dataProviders.categories
+  );
 
   useEffect(() => {
     getDataProviders([
@@ -39,6 +45,8 @@ export const FormContract = () => {
       "currencies",
       "companies",
       "products",
+      "calibers",
+      "categories",
     ]);
   }, []);
 
@@ -51,10 +59,8 @@ export const FormContract = () => {
       exporters: companies.filter((company: any) => company.exporter === 1),
       importers: companies.filter((company: any) => company.importer === 1),
       products,
-      types: products.map((product: any) => product.category),
-      calibers: products.flatMap((product: any) =>
-        product.category.calibers.map((caliber: any) => caliber)
-      ),
+      calibers,
+      categories,
       brokers: companies.filter((company: any) => company.broker === 1),
     };
 
@@ -65,8 +71,12 @@ export const FormContract = () => {
         options: optionsMap[input.key] || input.options,
       }))
     );
-  }, [packagings, paymentMethods, surveyors, currencies, companies, products]);
+    console.log(categories);
+    
+  }, [packagings, paymentMethods, surveyors, currencies, companies, products, calibers, categories]);
 
+  
+  
   return (
     <div>
       <Form inputs={inputs}>

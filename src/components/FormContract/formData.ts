@@ -89,7 +89,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: TypeIcon,
-    key: "types",
+    key: "categories",
     name: "tipo",
     value: [],
     type: "select",

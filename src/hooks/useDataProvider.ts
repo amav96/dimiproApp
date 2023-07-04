@@ -8,7 +8,9 @@ import {
   setCurrencies,
   setCompanies,
   setProducts,
-  setPrefixs
+  setPrefixs,
+  setCalibers,
+  setCategories
 } from '@store/dataProviders/dataProvidersSlice'
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { RootState } from "src/store";
@@ -57,6 +59,14 @@ export default function useDataProvider() {
     prefixs: {
       state: useAppSelector((state: RootState) => state.dataProviders.prefixs),
       action: setPrefixs,
+    },
+    calibers: {
+      state: useAppSelector((state: RootState) => state.dataProviders.calibers),
+      action: setCalibers,
+    },
+    categories: {
+      state: useAppSelector((state: RootState) => state.dataProviders.categories),
+      action: setCategories,
     },
   };
 

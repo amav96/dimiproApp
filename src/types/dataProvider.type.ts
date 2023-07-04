@@ -16,7 +16,9 @@ export interface dataProviderState {
   currencies: Currency[] | [];
   companies: any[] | [];
   products: Product[] | [];
-  prefixs: GenericModel[]
+  prefixs: GenericModel[];
+  calibers: GenericModel[];
+  categories: GenericModel[];
 }
 
 export interface DataProvider {
@@ -37,3 +39,5 @@ export type ModelsDataProvider =
   | "companies"
   | "products"
   | "prefixs"
+  | "calibers"
+  | "categories"
