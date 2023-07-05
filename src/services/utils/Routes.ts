@@ -40,6 +40,13 @@ export const Routes = {
         SHOW: baseApiUrl + '/api/v1/companies',
         DELETE: baseApiUrl + '/api/v1/companies',
     },
+    CONTRACTS: {
+        INDEX: baseApiUrl + '/api/v1/contracts',
+        STORE: baseApiUrl + '/api/v1/contracts',
+        UPDATE: baseApiUrl + '/api/v1/contracts',
+        SHOW: baseApiUrl + '/api/v1/contracts',
+        DELETE: baseApiUrl + '/api/v1/contracts',
+    },
     CURRENCIES: {
         INDEX: baseApiUrl + '/api/v1/currencies',
         STORE: baseApiUrl + '/api/v1/currencies',
