@@ -1,39 +1,46 @@
-import { useState, useEffect } from "react";
-import { GlobalInputs, Slot } from "../package/Form/Form.type";
-import { Form } from "../package/Form/Form";
-import { formData } from "./formData";
-import { Button } from "../package/Button";
 import useDataProvider from "@hooks/useDataProvider";
+import baseApiUrl from "@services/BaseApiUrl";
+import { authorization } from "@services/utils/Autorizathion";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useAppSelector } from "../../../src/hooks";
 import { RootState } from "../../../src/store";
+import { Button } from "../package/Button";
+import { Form } from "../package/Form/Form";
+import { GlobalInputs, Slot } from "../package/Form/Form.type";
+import { formData } from "./formData";
+import { useNavigate } from "react-router-dom";
 
 export const FormContract = () => {
   const [inputs, setInputs] = useState<Array<GlobalInputs | Slot>>(formData);
 
+  const navigate = useNavigate();
+
   const { getDataProviders } = useDataProvider();
 
-  const packagings = useAppSelector(
+  const packaging = useAppSelector(
     (state: RootState) => state.dataProviders.packagings
   );
-  const paymentMethods = useAppSelector(
+  const paymentMethod = useAppSelector(
     (state: RootState) => state.dataProviders.paymentMethods
   );
-  const surveyors = useAppSelector(
+  const surveyor = useAppSelector(
     (state: RootState) => state.dataProviders.surveyors
   );
-  const currencies = useAppSelector(
+  const currency = useAppSelector(
     (state: RootState) => state.dataProviders.currencies
   );
   const companies = useAppSelector(
     (state: RootState) => state.dataProviders.companies
   );
-  const products = useAppSelector(
+  const product = useAppSelector(
     (state: RootState) => state.dataProviders.products
   );
   const calibers = useAppSelector(
     (state: RootState) => state.dataProviders.calibers
   );
-  const categories = useAppSelector(
+  const category = useAppSelector(
     (state: RootState) => state.dataProviders.categories
   );
 
@@ -52,16 +59,16 @@ export const FormContract = () => {
 
   useEffect(() => {
     const optionsMap: any = {
-      packagings,
-      paymentMethods,
-      surveyors,
-      currencies,
-      exporters: companies.filter((company: any) => company.exporter === 1),
-      importers: companies.filter((company: any) => company.importer === 1),
-      products,
+      packaging,
+      paymentMethod,
+      surveyor,
+      currency,
+      exporter: companies.filter((company: any) => company.exporter === 1),
+      importer: companies.filter((company: any) => company.importer === 1),
+      product,
       calibers,
-      categories,
-      brokers: companies.filter((company: any) => company.broker === 1),
+      category,
+      broker: companies.filter((company: any) => company.broker === 1),
     };
 
     setInputs((prevInputs) =>
@@ -71,15 +78,50 @@ export const FormContract = () => {
         options: optionsMap[input.key] || input.options,
       }))
     );
-    console.log(categories);
-    
-  }, [packagings, paymentMethods, surveyors, currencies, companies, products, calibers, categories]);
+  }, [
+    packaging,
+    paymentMethod,
+    surveyor,
+    currency,
+    companies,
+    product,
+    calibers,
+    category,
+  ]);
 
-  
-  
+  const onSubmit = async (data: any) => {
+    try {
+      if (data.isFormValid === true) {
+        const config = {
+          headers: {
+            Authorization: authorization(),
+          },
+        };
+
+        const response = await axios.post(
+          `${baseApiUrl}/api/v1/contracts`,
+          data.items,
+          config
+        );
+
+        if (response.status === 201 || response.status === 200) {
+          toast.success("Contrato creado correctamente");
+          navigate("/list-contracts");
+        } else {
+          toast.error("Error al crear contrato");
+        }
+      } else {
+        toast.error("Error al crear contrato");
+      }
+    } catch (error) {
+      console.error("Error al realizar la solicitud POST:", error);
+      toast.error("Error al crear contrato");
+    }
+  };
+
   return (
     <div>
-      <Form inputs={inputs}>
+      <Form inputs={inputs} onSubmit={onSubmit}>
         <span className="text-required">
           <span>*</span> Los campos son obligatorios
         </span>

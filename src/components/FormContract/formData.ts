@@ -19,14 +19,15 @@ import FileIcon from '/icons/form/file.svg';
 export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: ExporterIcon,
-    key: "exporters",
-    name: "exportador",
+    key: "exporter",
+    name: "exporter",
     value: [],
     type: "select",
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar exportador",
     title: "Exportador:",
+    formatValue: (value: any) => value?.id,
     validations: {
       rules: {
         required: true,
@@ -36,14 +37,15 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: ExporterIcon,
-    key: "importers",
-    name: "importador",
+    key: "importer",
+    name: "importer",
     value: [],
     type: "select",
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar importador",
     title: "Importador:",
+    formatValue: (value: any) => value?.id,
     validations: {
       rules: {
         required: true,
@@ -53,10 +55,10 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: CropIcon,
-    key: "nameContract",
+    key: "name",
     placeholder: "Nombre de contrato",
     title: "Nombre de contrato:",
-    name: "nameContract",
+    name: "name",
     value: "",
     type: "text",
     validations: {
@@ -67,14 +69,15 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: ProductIcon,
-    key: "products",
-    name: "producto",
+    key: "product",
+    name: "product",
     value: [],
     type: "select",
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar producto",
     title: "Producto:",
+    formatValue: (value: any) => value?.id,
     validations: {
       rules: {
         required: true,
@@ -89,14 +92,15 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: TypeIcon,
-    key: "categories",
-    name: "tipo",
+    key: "category",
+    name: "category",
     value: [],
     type: "select",
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar tipo",
     title: "Tipo:",
+    formatValue: (value: any) => value?.id,
     validations: {
       rules: {
         required: true,
@@ -107,13 +111,14 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: CaliberIcon,
     key: "calibers",
-    name: "calibre",
+    name: "calibers",
     value: [],
     type: "select",
-    multiple: false,
+    multiple: true,
     clearable: true,
     placeholder: "Seleccionar calibre",
     title: "Calibre:",
+    formatValue : (value: any[]) => value.map((v:any) => v.id),
     validations: {
       rules: {
         required: true,
@@ -128,7 +133,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     title: "Crop:",
     name: "crop",
     value: "",
-    type: "text",
+    type: "datetime",
     validations: {
       rules: {
         required: true,
@@ -137,14 +142,15 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: PackagingIcon,
-    key: "packagings",
-    name: "packagings",
+    key: "packaging",
+    name: "packaging",
     value: [],
     type: "select",
     multiple: false,
     clearable: true,
     placeholder: "Seleccionar packaging",
     title: "Packaging:",
+    formatValue: (value: any) => value?.id,
     validations: {
       rules: {
         required: true,
@@ -154,12 +160,13 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: QtyIcon,
-    key: "tn",
+    key: "quantity",
     placeholder: "Cantidad de toneladas",
     title: "Toneladas:",
-    name: "tn",
+    name: "quantity",
     value: "",
     type: "number",
+    formatValue: (value: any) => Number(value),
     validations: {
       rules: {
         required: true,
@@ -168,29 +175,30 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: BrokerIcon,
-    key: "brokers",
+    key: "broker",
     placeholder: "Broker",
     title: "Broker:",
     name: "broker",
     value: "",
     type: "select",
+    formatValue: (value: any) => value?._id,
     options: [],
   },
   {
     icon: PercentageIcon,
-    key: "porcentaje",
+    key: "brokerPercent",
     placeholder: "Comisión del Broker (%)",
     title: "Porcentaje:",
-    name: "porcentaje",
+    name: "brokerPercent",
     value: "",
     type: "number",
   },
   {
     icon: PriceIcon,
-    key: "precio",
+    key: "price",
     placeholder: "Precio",
     title: "Precio:",
-    name: "precio",
+    name: "price",
     value: "",
     type: "number",
     validations: {
@@ -201,12 +209,13 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: CoinIcon,
-    key: "currencies",
+    key: "currency",
     placeholder: "Seleccionar moneda",
     title: "Moneda:",
-    name: "moneda",
+    name: "currency",
     value: "",
     type: "select",
+    formatValue: (value: any) => value?.id,
     validations: {
       rules: {
         required: true,
@@ -216,12 +225,13 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: PaymentMethodIcon,
-    key: "paymentMethods",
+    key: "paymentMethod",
     placeholder: "Seleccionar metodo de pago",
     title: "Método de pago:",
-    name: "metodoPago",
+    name: "paymentMethod",
     value: "",
     type: "select",
+    formatValue: (value: any) => value?.id,
     validations: {
       rules: {
         required: true,
@@ -231,12 +241,13 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: SurveyorIcon,
-    key: "surveyors",
+    key: "surveyor",
     placeholder: "Seleccionar surveyor",
     title: "Surveyor:",
-    name: "surveyors",
+    name: "surveyor",
     value: "",
     type: "select",
+    formatValue: (value: any) => value?.id,
     validations: {
       rules: {
         required: true,
@@ -246,10 +257,10 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: ConditionsIcon,
-    key: "condiciones",
+    key: "specifications",
     placeholder: "Agregar condiciones",
     title: "Condiciones:",
-    name: "condiciones",
+    name: "specifications",
     value: "",
     type: "textarea",
     validations: {
@@ -260,16 +271,16 @@ export const formData: Array<GlobalInputs | Slot> = [
   },
   {
     icon: FileIcon,
-    key: "documentos",
+    key: "documents",
     placeholder: "Agregar documentos",
     title: "Documentos:",
-    name: "documentos",
+    name: "documents",
     value: "",
     type: "file",
-    validations: {
-      rules: {
-        required: true,
-      },
-    },
+    // validations: {
+    //   rules: {
+    //     required: true,
+    //   },
+    // },
   },
 ];
