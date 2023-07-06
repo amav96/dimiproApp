@@ -1,9 +1,9 @@
 import { GlobalInputs, requestConfiguration } from '@packageTypes'
 
 export interface PropsModalForm {
-    inputs: Array<GlobalInputs>;
-    urlStore: string
-    urlUpdate: string,
+    inputs?: Array<GlobalInputs>;
+    urlStore?: string
+    urlUpdate?: string,
     urlShow?: string,
     modelStore? : string,
     modelUpdate? : string,
@@ -25,4 +25,5 @@ export interface PropsModalForm {
     handleStoreErrors? : Function,
     closable?: boolean,
     title?:string
+    header?: any
 }

@@ -38,7 +38,7 @@ export function ModalForm(props: PropsModalForm) {
  
  const [generatedForm, setGeneratedForm] = useState<Array<GlobalInputs>>([])
   useEffect(() => {
-     inputs.forEach(({key}, i) => {
+     inputs?.forEach(({key}, i) => {
        const index = generatedForm.map((m) => m.key).indexOf(key);
        if (index > -1) {
          setGeneratedForm((prevState) => 

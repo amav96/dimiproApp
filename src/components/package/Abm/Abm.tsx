@@ -45,7 +45,7 @@ export function Abm(props: AbmProps) {
       beforeStore,
       closable,
       title
-    }
+    } = {}
   } = props;
 
   const [modalFormData, setModalFormData] = useState<PropsModalForm>({
@@ -104,8 +104,8 @@ export function Abm(props: AbmProps) {
       ...prev,
       visible: true,
       isEditMode: true,
-      urlShow: props.modalForm.urlShow + '/' + data.item.id,
-      urlUpdate: props.modalForm.urlUpdate + '/' + data.item.id
+      urlShow: props.modalForm?.urlShow + '/' + data.item.id,
+      urlUpdate: props.modalForm?.urlUpdate + '/' + data.item.id
     }))
   }
 

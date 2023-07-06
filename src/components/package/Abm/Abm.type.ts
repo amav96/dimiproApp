@@ -17,5 +17,5 @@ export type AbmModalFormExternal = Omit<PropsModalForm, 'isEditMode' | 'visible'
 
 export interface AbmProps {
   table: AbmTableAliveProps;
-  modalForm: AbmModalFormExternal;
+  modalForm?: AbmModalFormExternal;
 }
