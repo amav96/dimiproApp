@@ -3,22 +3,16 @@ import { Abm, Layout } from "@package";
 import { GlobalInputs, Slot } from "@packageTypes";
 import baseApiUrl from "@services/BaseApiUrl";
 import { authorization } from "@services/utils/Autorizathion";
-import { formatDateTime } from "@services/utils/Formatters";
 import { Routes } from "@services/utils/Routes";
 import { useEffect, useMemo, useState } from "react";
-import { toast } from "react-toastify";
-import { formData } from "../../components/FormContract/formData";
 import { useAppSelector } from "../../hooks";
 import { RootState } from "../../store";
 import "./_list-contracts.scss";
 import { dataTable } from "./dataTable";
 
 const ListContacts = () => {
-  const [formCrud, setFormCrud] =
-    useState<Array<GlobalInputs | Slot>>(formData);
-
   const { getDataProviders } = useDataProvider();
-  
+
   const companies = useAppSelector(
     (state: RootState) => state.dataProviders.companies
   );
@@ -27,10 +21,7 @@ const ListContacts = () => {
   );
 
   useEffect(() => {
-    getDataProviders([
-      "companies",
-      "products"
-    ]);
+    getDataProviders(["companies", "products"]);
 
     setFormFilter((prevInputs) =>
       prevInputs.map((input) => {
@@ -102,7 +93,7 @@ const ListContacts = () => {
             updateIcon: baseApiUrl + "/icons/editar.svg",
             deleteIcon: baseApiUrl + "/icons/basura.svg",
             headerSticky: true,
-          }} 
+          }}
         />
       </Layout>
     </div>
