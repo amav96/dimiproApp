@@ -1,7 +1,6 @@
 import useDataProvider from "@hooks/useDataProvider";
 import baseApiUrl from "@services/BaseApiUrl";
-import { authorization } from "@services/utils/Autorizathion";
-import axios from "axios";
+import $http from "@services/AxiosInstance";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../../../src/hooks";
@@ -92,16 +91,9 @@ export const FormContract = () => {
   const onSubmit = async (data: any) => {
     try {
       if (data.isFormValid === true) {
-        const config = {
-          headers: {
-            Authorization: authorization(),
-          },
-        };
-
-        const response = await axios.post(
+        const response = await $http.post(
           `${baseApiUrl}/api/v1/contracts`,
           data.items,
-          config
         );
 
         if (response.status === 201 || response.status === 200) {

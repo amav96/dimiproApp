@@ -1,4 +1,4 @@
-import $http from "../services/AxiosInstance";
+import $http from "@services/AxiosInstance";
 import { Routes } from "@services/utils/Routes";
 import { DataProvider } from "src/types/dataProvider.type";
 
