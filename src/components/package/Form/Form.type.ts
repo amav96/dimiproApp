@@ -61,4 +61,8 @@ export interface GlobalInputs extends
   slot?: boolean;
 }
 
+export type field<K extends string | number> = {
+  [key in K]: ((data : { input: GlobalInputs, formValues: any} ) => React.ReactNode) | undefined;
+}
+
 // ----------------------------------------------

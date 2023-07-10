@@ -1,6 +1,7 @@
 import { GlobalInputs, requestConfiguration } from '@packageTypes'
+import { field } from '../Form/Form.type';
 
-export interface PropsModalForm {
+export interface PropsModalForm<K extends string | number> {
     inputs?: Array<GlobalInputs>;
     urlStore?: string
     urlUpdate?: string,
@@ -25,5 +26,6 @@ export interface PropsModalForm {
     handleStoreErrors? : Function,
     closable?: boolean,
     title?:string
-    header?: any
+    header?: any,
+    scopedFields?: field<K>,
 }

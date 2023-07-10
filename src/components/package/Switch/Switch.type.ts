@@ -5,6 +5,7 @@ export interface PropsSwitch extends BaseProps {
     label?: string;
     trackBy?: string;
     onSwitch?: Function;
+    defaultValue?: any
   }
   
   export interface PropsSwitchKey extends PropsSwitch {

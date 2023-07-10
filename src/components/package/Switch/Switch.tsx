@@ -12,6 +12,7 @@ export function Switch(props: PropsSwitch) {
     trackBy = 'id',
     onChange,
     value = {},
+    defaultValue
   } = props;
 
   const [switched, setSwitched] = useState<boolean>(false);
@@ -86,6 +87,14 @@ export function Switch(props: PropsSwitch) {
       handleValue()
     }
   }, [value])
+
+  useEffect(() => {
+    if((value === null || value === undefined || value === '') && value !== defaultValue){
+      if(onChange){
+        onChange(defaultValue)
+      }
+    }
+  }, [])
 
   const active = () : boolean => {
     if(switched){

@@ -84,5 +84,6 @@ export const Routes = {
     },
     DATA_PROVIDER: {
         INDEX: baseApiUrl + '/api/v1/dataProviders',
-    }
+    },
+    baseApiUrl: baseApiUrl + '/api/v1/',
 }

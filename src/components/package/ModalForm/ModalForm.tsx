@@ -6,7 +6,7 @@ import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
 
 
-export function ModalForm(props: PropsModalForm) {
+export function ModalForm(props: PropsModalForm<string | number>) {
 
   const {
     inputs,
@@ -32,16 +32,17 @@ export function ModalForm(props: PropsModalForm) {
     handleUpdateErrors,
     handleStoreErrors,
     closable,
-    title
+    title,
+    scopedFields
  } = props;
 
- 
+
  const [generatedForm, setGeneratedForm] = useState<Array<GlobalInputs>>([])
   useEffect(() => {
      inputs?.forEach(({key}, i) => {
        const index = generatedForm.map((m) => m.key).indexOf(key);
        if (index > -1) {
-         setGeneratedForm((prevState) => 
+         setGeneratedForm((prevState) =>
              prevState.map((obj,i) => {
                if(i === index){
                  return {...obj, ...inputs[i] }
@@ -68,7 +69,7 @@ export function ModalForm(props: PropsModalForm) {
 
   const loading = useRef<boolean>(false);
   const save = async (data : any) => {
-    if(!loading.current){
+    if(!loading.current && urlStore){
         loading.current = true
         const { items, isFormValid } = data
         if(beforeStore){
@@ -85,7 +86,7 @@ export function ModalForm(props: PropsModalForm) {
               const formParams = await serializeParams({...items})
               let params = {
                   ...{
-                      method: "POST", 
+                      method: "POST",
                       body: formParams instanceof FormData ? formParams : JSON.stringify(formParams)
                   },
                   ...storeRequestConfiguration,
@@ -128,7 +129,7 @@ export function ModalForm(props: PropsModalForm) {
   }
 
   const update = async (data : any) => {
-    if(!loading.current){
+    if(!loading.current && urlUpdate){
         loading.current = true
         const { items, isFormValid } = data
         if(beforeUpdate){
@@ -145,7 +146,7 @@ export function ModalForm(props: PropsModalForm) {
               const formParams = await serializeParams({...items})
               let params = {
                   ...{
-                      method: "PATCH", 
+                      method: "PATCH",
                       body: formParams instanceof FormData ? formParams : JSON.stringify(formParams)
                   },
                   ...updateRequestConfiguration,
@@ -199,7 +200,7 @@ export function ModalForm(props: PropsModalForm) {
       }
       const response = await fetch(urlShow, params);
       let result = await response.json();
-      
+
       result = result[modelShow]
       loadingEntity.current = false
       if(result) completeEntity(result)
@@ -207,11 +208,11 @@ export function ModalForm(props: PropsModalForm) {
   }
 
   const completeEntity = (data : object) => {
-    
+
     generatedForm.forEach((val, index) => {
       if(data.hasOwnProperty(val.key)){
           let property = data[val.key as keyof object];
-          setGeneratedForm((prevState) => 
+          setGeneratedForm((prevState) =>
               prevState.map((obj,i) => {
               if(i === index){
                 return {...obj, ...{ value: property} }
@@ -269,6 +270,7 @@ export function ModalForm(props: PropsModalForm) {
         <Form
         inputs={generatedForm}
         onSubmit={handleSubmit}
+        scopedFields={scopedFields}
         >
           <Button
           disabled={loading.current}

@@ -47,6 +47,7 @@ export function LoginForm() {
     const { items } = data;
     setLoading(true);
     const response = await authController.login(items)
+    setLoading(false);
     if(response.errors){
       toast(`🦄 ${response.errors.message}`, {
         autoClose: 2000,

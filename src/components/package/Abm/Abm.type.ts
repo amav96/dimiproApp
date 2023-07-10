@@ -13,7 +13,7 @@ export interface AbmTableAliveProps extends TableAliveProps<string> {
   afterDelete?: Function;
 }
 
-export type AbmModalFormExternal = Omit<PropsModalForm, 'isEditMode' | 'visible'>;
+export type AbmModalFormExternal = Omit<PropsModalForm<string | number>, 'isEditMode' | 'visible'>;
 
 export interface AbmProps {
   table: AbmTableAliveProps;

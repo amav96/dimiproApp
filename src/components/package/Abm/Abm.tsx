@@ -5,7 +5,7 @@ import { PropsModalForm, AbmProps } from '@packageTypes'
 
 export function Abm(props: AbmProps) {
 
-  
+
   const {
     table: {
       columns,
@@ -44,11 +44,12 @@ export function Abm(props: AbmProps) {
       afterStore,
       beforeStore,
       closable,
-      title
+      title,
+      scopedFields
     } = {}
   } = props;
 
-  const [modalFormData, setModalFormData] = useState<PropsModalForm>({
+  const [modalFormData, setModalFormData] = useState<PropsModalForm<string | number>>({
     inputs,
     urlStore,
     urlUpdate,
@@ -66,6 +67,7 @@ export function Abm(props: AbmProps) {
     afterStore,
     beforeStore,
     title,
+    scopedFields
   })
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
@@ -183,7 +185,7 @@ export function Abm(props: AbmProps) {
 
               }
 
-          
+
         } catch (error) {
           alert(error)
           loadingDelete.current = false
@@ -249,13 +251,17 @@ export function Abm(props: AbmProps) {
       requestConfiguration={requestConfiguration}
       header={(
         <div className="c-flex c-justify-end">
-          <Button
-          type={'button'}
-          customClass={'c-mb-3 c-w-40 c-flex c-justify-center btn-primary'}
-          onClick={onOpenStore}
-          >
-            { storeIcon ? (<img src={storeIcon} alt="Eliminar"/>) : (<span>Crear <strong>+</strong></span>)}
-          </Button>
+          {
+            urlStore && (
+              <Button
+              type={'button'}
+              customClass={'c-mb-3 c-w-40 c-flex c-justify-center btn-primary'}
+              onClick={onOpenStore}
+              >
+                { storeIcon ? (<img src={storeIcon} alt="Eliminar"/>) : (<span>Crear <strong>+</strong></span>)}
+              </Button>
+            )
+          }
         </div>
       )}
       headerSticky={headerSticky}
@@ -271,6 +277,7 @@ export function Abm(props: AbmProps) {
       modelUpdate={modalFormData.modelUpdate}
       isEditMode={modalFormData.isEditMode}
       visible={modalFormData.visible}
+      scopedFields={modalFormData.scopedFields}
       resetAfterClose={modalFormData.resetAfterClose}
       showRequestConfiguration={modalFormData.showRequestConfiguration}
       storeRequestConfiguration={modalFormData.storeRequestConfiguration}

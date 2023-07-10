@@ -6,11 +6,8 @@ import { PropsSelectKey, onChangeSelect,PropsDateKey,PropsFileKey,PropsSwitchKey
 import { DatePack } from '../DatePack/DatePack';
 import { Validator } from '@services/utils/Validator';
 import { isEmpty } from '@services/utils/Validations';
+import { field } from './Form.type';
 
-
-type field<K extends string | number> = {
-  [key in K]: ((data : { input: GlobalInputs, formValues: any} ) => React.ReactNode) | undefined;
-}
 
 interface Props<K extends string | number > {
   inputs: Array<GlobalInputs | Slot>,
@@ -23,7 +20,7 @@ type keyValue<K extends string | number> = {
   [key in K]: string | number | Array<any> | object;
 }
 export const Form = forwardRef(function Form(props: Props<string | number>, ref: React.Ref<HTMLFormElement>) {
-  const { 
+  const {
     inputs,
     scopedFields,
     children,
@@ -31,14 +28,14 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
   } = props;
   const [generatedInputs, setGeneratedInputs] = useState<Array<GlobalInputs>>([])
   const [formValues, setFormValues] = useState<any>({})
-
+  
 
   useEffect(() => {
     inputs.forEach(({key}, i) => {
       const index = generatedInputs.map((m) => m.key).indexOf(key);
       if (index > -1) {
         let updateInput : GlobalInputs = inputs[i] as GlobalInputs
-        setGeneratedInputs((prevState) => 
+        setGeneratedInputs((prevState) =>
             prevState.map((obj,i) => {
               if(i === index){
                 return {...obj, ...inputs[i] }
@@ -46,7 +43,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
             return obj
           })
         )
-        
+
         if (updateInput.value && updateInput.value !== undefined) {
           setFormValues((prev: keyValue<string | number>) => ({
             ...prev,
@@ -181,8 +178,9 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
       let currentInput = generatedInputs[index]
       if(currentInput.validations){
         validator.validate(formValues[currentInput.key], currentInput.validations);
+        console.log(formValues[currentInput.key], currentInput.validations, currentInput.key)
         if(!isEmpty(validator.getErrors())){
-          setGeneratedInputs((prevState) => 
+          setGeneratedInputs((prevState) =>
               prevState.map((obj,i) => {
                 if(i === index){
                   return {...obj, ...{errors : validator.getErrors()} }
@@ -278,7 +276,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
       <div className='Form c-grid c-grid-cols-12 c-gap-2'>
       {
         generatedInputs.filter((val) => val.hidden === undefined || val.hidden === false)
-        .map((input, index) => {
+        .map((input, index) => {console.log('render')
           if(input.slot && scopedFields?.[input.key]){
             return(
               <div
@@ -289,7 +287,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
               </div>
             )
           }else {
-            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text' || input.type === 'email' || input.type === 'password' || input.type === 'number'))){
+            if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text' || input.type === 'color' || input.type === 'email' || input.type === 'password' || input.type === 'number'))){
               return (
                 <Input
                 icon={input.icon}
@@ -373,6 +371,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 label={generatedInputs[index].label}
                 option={generatedInputs[index].option}
                 value={formValues[input.key]}
+                defaultValue={generatedInputs[index].defaultValue}
                 onChange={ (value: object | Array<object>) => handleChangeSwitch(value, input)}
                 cols={generatedInputs[index].cols}
                 customClass={generatedInputs[index].customClass}
@@ -401,7 +400,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
       </div>
       {children}
     </form>
-    
+
   )
 })
 

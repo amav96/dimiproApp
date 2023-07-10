@@ -1,21 +1,22 @@
+import { useEffect, useState, useMemo } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../src/hooks";
+import { RootState } from "../../../src/store";
 import useDataProvider from "@hooks/useDataProvider";
 import baseApiUrl from "@services/BaseApiUrl";
 import $http from "@services/AxiosInstance";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { useAppSelector } from "../../../src/hooks";
-import { RootState } from "../../../src/store";
 import { Button } from "../package/Button";
 import { Form } from "../package/Form/Form";
 import { GlobalInputs, Slot } from "../package/Form/Form.type";
 import { formData } from "./formData";
-import { useNavigate } from "react-router-dom";
+
+interface FormContractProps {}
 
 export const FormContract = () => {
   const [inputs, setInputs] = useState<Array<GlobalInputs | Slot>>(formData);
 
   const navigate = useNavigate();
-
   const { getDataProviders } = useDataProvider();
 
   const packaging = useAppSelector(
@@ -56,8 +57,8 @@ export const FormContract = () => {
     ]);
   }, []);
 
-  useEffect(() => {
-    const optionsMap: any = {
+  const optionsMap = useMemo(
+    () => ({
       packaging,
       paymentMethod,
       surveyor,
@@ -68,8 +69,20 @@ export const FormContract = () => {
       calibers,
       category,
       broker: companies.filter((company: any) => company.broker === 1),
-    };
+    }),
+    [
+      packaging,
+      paymentMethod,
+      surveyor,
+      currency,
+      companies,
+      product,
+      calibers,
+      category,
+    ]
+  );
 
+  useEffect(() => {
     setInputs((prevInputs) =>
       prevInputs.map((input) => ({
         ...input,
@@ -77,23 +90,14 @@ export const FormContract = () => {
         options: optionsMap[input.key] || input.options,
       }))
     );
-  }, [
-    packaging,
-    paymentMethod,
-    surveyor,
-    currency,
-    companies,
-    product,
-    calibers,
-    category,
-  ]);
+  }, [optionsMap]);
 
   const onSubmit = async (data: any) => {
     try {
       if (data.isFormValid === true) {
         const response = await $http.post(
           `${baseApiUrl}/api/v1/contracts`,
-          data.items,
+          data.items
         );
 
         if (response.status === 201 || response.status === 200) {
@@ -117,7 +121,7 @@ export const FormContract = () => {
         <span className="text-required">
           <span>*</span> Los campos son obligatorios
         </span>
-        <Button type="submit" customClass={"btn-primary"}>
+        <Button type="submit" customClass="btn-primary">
           Crear contrato
         </Button>
       </Form>
