@@ -63,7 +63,8 @@ const ListContacts = () => {
         if(value){
           return value.map((v) => v._id).toString()
         }
-          return []
+        
+        return []
       },
     },
     {

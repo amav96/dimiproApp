@@ -23,6 +23,8 @@ export function Table(props: TableProps<string>) {
     } else if (items) {
       setLocalItems(items);
     }
+    console.log("items", items);
+    
   }, [items]);
 
   const scrollTable = useCallback(() => {
@@ -71,7 +73,7 @@ export function Table(props: TableProps<string>) {
 
   return (
     <div className="table-wrapper" onScroll={debounce(scrollTable, 300)}>
-      <>{localItems.length === 0 && <Loader />}</>
+      {localItems.length === 0 && <Loader />}
       <style>
         {`.table-wrapper::-webkit-scrollbar {
           height: ${scrollbar.height}px;
