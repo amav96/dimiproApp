@@ -9,6 +9,7 @@ import { useAppSelector } from "../../hooks";
 import { RootState } from "../../store";
 import "./_list-contracts.scss";
 import { dataTable } from "./dataTable";
+import { Company } from "src/types/company.type";
 
 const ListContacts = () => {
   const { getDataProviders } = useDataProvider();
@@ -50,20 +51,36 @@ const ListContacts = () => {
       cols: "c-col-span-4",
     },
     {
-      key: "exporter",
-      placeholder: "Search by exporter",
-      name: "exporter",
-      value: "",
-      type: "text",
-      cols: "c-col-span-4",
+      key: 'exporter',
+      placeholder: 'Search by exporter',
+      name: 'exporter',
+      trackBy: '_id',
+      value: [],
+      type: 'select',
+      multiple: true,
+      cols: 'c-col-span-4',
+      formatValue : (value: Company[]) => {
+        if(value){
+          return value.map((v) => v._id).toString()
+        }
+          return []
+      },
     },
     {
-      key: "importer",
-      placeholder: "Search by importer",
-      name: "importer",
-      value: "",
-      type: "text",
-      cols: "c-col-span-4",
+      key: 'importer',
+      placeholder: 'Search by importer',
+      name: 'importer',
+      trackBy: '_id',
+      value: [],
+      type: 'select',
+      multiple: true,
+      cols: 'c-col-span-4',
+      formatValue : (value: Company[]) => {
+        if(value){
+          return value.map((v) => v._id).toString()
+        }
+          return []
+      },
     },
   ]);
 
