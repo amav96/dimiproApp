@@ -45,7 +45,7 @@ export function Abm(props: AbmProps) {
       beforeStore,
       closable,
       title
-    } = {}
+      } = {}
   } = props;
 
   const [modalFormData, setModalFormData] = useState<PropsModalForm>({
@@ -220,7 +220,16 @@ export function Abm(props: AbmProps) {
     }
   }
 
+  const onOpenPdf = (data: any) => {
+    window.open(`/pdf/${data.item._id}`)
+  }
+
   const [scopedColumns, setScopedColumns] = useState({
+    pdf: (item: any) => (
+      <Button type="button" onClick={() => onOpenPdf(item)}>
+        Ver pdf
+      </Button>
+    ),
     edit: (item: any) => (
       <Button type="button" onClick={() => onOpenUpdate(item)}>
         {updateIcon ? <img src={updateIcon} alt="Editar" /> : <span>Editar</span>}

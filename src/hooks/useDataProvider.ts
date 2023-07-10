@@ -10,7 +10,8 @@ import {
   setProducts,
   setPrefixs,
   setCalibers,
-  setCategories
+  setCategories,
+  setContracts
 } from '@store/dataProviders/dataProvidersSlice'
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { RootState } from "src/store";
@@ -68,6 +69,10 @@ export default function useDataProvider() {
       state: useAppSelector((state: RootState) => state.dataProviders.categories),
       action: setCategories,
     },
+    contracts: {
+      state: useAppSelector((state: RootState) => state.dataProviders.contracts),
+      action: setContracts,
+    }
   };
 
   const getDataProviders = async (models: ModelsDataProvider[]) => {

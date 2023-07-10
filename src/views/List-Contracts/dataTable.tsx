@@ -88,9 +88,6 @@ export const dataTable = [
   {
     key: "pdf",
     title: "PDF",
-    format: (value: any) => {
-      return <a href={value}>View pdf</a>;
-    },
   },
   { key: "edit", title: "Edit" },
   { key: "delete", title: "Delete" },

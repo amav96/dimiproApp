@@ -21,6 +21,7 @@ const initialState: dataProviderState = {
   prefixs: [],
   calibers: [],
   categories: [],
+  contracts: []
 };
 
 export const dataProvidersSlice = createSlice({
@@ -59,6 +60,9 @@ export const dataProvidersSlice = createSlice({
     },
     setCategories: (state, action: PayloadAction<GenericModel[] | []>) => {
       state.categories = action.payload;
+    },
+    setContracts: (state, action: PayloadAction<any[] | []>) => {
+      state.contracts = action.payload;
     }
   },
 });
@@ -75,6 +79,7 @@ export const {
   setProducts,
   setPrefixs,
   setCalibers,
-  setCategories
+  setCategories,
+  setContracts
 } = dataProvidersSlice.actions;
 export default dataProvidersSlice.reducer;

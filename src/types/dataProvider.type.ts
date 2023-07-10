@@ -19,6 +19,7 @@ export interface dataProviderState {
   prefixs: GenericModel[];
   calibers: GenericModel[];
   categories: GenericModel[];
+  contracts: any[];
 }
 
 export interface DataProvider {
@@ -41,3 +42,4 @@ export type ModelsDataProvider =
   | "prefixs"
   | "calibers"
   | "categories"
+  | "contracts";
