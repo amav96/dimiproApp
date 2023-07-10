@@ -16,15 +16,26 @@ export function Table(props: TableProps<string>) {
   } = props;
 
   const [localItems, setLocalItems] = useState<Array<any>>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [searchNoResults, setSearchNoResults] = useState<boolean>(false);
 
   useEffect(() => {
     if (items?.length === 0 && localItems.length > 0) {
       setLocalItems([]);
+      setSearchNoResults(true);
     } else if (items) {
       setLocalItems(items);
+      setSearchNoResults(false);
+    } else {
+      setLocalItems([]);
+      setSearchNoResults(true);
     }
-    console.log("items", items);
-    
+
+    if (items?.length === 0 && localItems.length === 0) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
   }, [items]);
 
   const scrollTable = useCallback(() => {
@@ -73,7 +84,8 @@ export function Table(props: TableProps<string>) {
 
   return (
     <div className="table-wrapper" onScroll={debounce(scrollTable, 300)}>
-      {localItems.length === 0 && <Loader />}
+      {loading && <Loader />}
+      {!loading && searchNoResults && <div className="no-results"><p>No se encontraron resultados</p></div>}
       <style>
         {`.table-wrapper::-webkit-scrollbar {
           height: ${scrollbar.height}px;

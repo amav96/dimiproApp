@@ -16,6 +16,18 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .no-results {
+    background-color: rgb(255, 84, 84);
+    padding: 4px 16px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    
+    p {
+      color: #fff;
+      font-size: 14px;
+    }
+  }
 }
 
 .table-main {
