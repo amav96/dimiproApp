@@ -1,6 +1,6 @@
 import useDataProvider from "@hooks/useDataProvider";
 import { Abm, Layout } from "@package";
-import { GlobalInputs, Slot } from "@packageTypes";
+import { GlobalInputs } from "@packageTypes";
 import baseApiUrl from "@services/BaseApiUrl";
 import { authorization } from "@services/utils/Autorizathion";
 import { Routes } from "@services/utils/Routes";
@@ -18,6 +18,9 @@ const ListContacts = () => {
   );
   const product = useAppSelector(
     (state: RootState) => state.dataProviders.products
+  );
+  const contracts = useAppSelector(
+    (state: RootState) => state.dataProviders.contracts
   );
 
   useEffect(() => {
@@ -42,6 +45,10 @@ const ListContacts = () => {
       })
     );
   }, [companies, product]);
+
+  useEffect(() => {
+    getDataProviders(["contracts"]);
+  }, [contracts]);
 
   const [formFilter, setFormFilter] = useState<GlobalInputs[]>([
     {

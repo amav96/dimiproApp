@@ -16,6 +16,7 @@ import { PaymentMethods } from "@views/Settings/PaymentMethods";
 import { Products } from "@views/Settings/Products";
 import { Surveyors } from "@views/Settings/Surveyors";
 import { Categories } from "@views/Settings/Categories";
+import PDFcontract from "@views/List-Contracts/PDFcontract";
 
 export function Router() {
   return (
@@ -55,6 +56,7 @@ export function Router() {
       <Route path="/list-contracts" element={<ListContacts />} />
       <Route path="/acceso-denegado" element={<AccesoDenegado />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/pdf/:id" element={<PDFcontract />} />
       
     </Routes>
   );
