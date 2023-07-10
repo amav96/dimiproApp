@@ -16,12 +16,6 @@ const ListContacts = () => {
   const companies = useAppSelector(
     (state: RootState) => state.dataProviders.companies
   );
-  const product = useAppSelector(
-    (state: RootState) => state.dataProviders.products
-  );
-  const contracts = useAppSelector(
-    (state: RootState) => state.dataProviders.contracts
-  );
 
   useEffect(() => {
     getDataProviders(["companies", "products"]);
@@ -34,21 +28,17 @@ const ListContacts = () => {
             options: companies.filter((company: any) => company.exporter === 1),
           };
         }
-        if (input.key === "product") {
+        if (input.key === "importer") {
           return {
             ...input,
-            options: product,
+            options: companies.filter((company: any) => company.importer === 1),
           };
         }
 
         return input;
       })
     );
-  }, [companies, product]);
-
-  useEffect(() => {
-    getDataProviders(["contracts"]);
-  }, [contracts]);
+  }, [companies]);
 
   const [formFilter, setFormFilter] = useState<GlobalInputs[]>([
     {
