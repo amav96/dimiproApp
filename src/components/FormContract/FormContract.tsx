@@ -93,11 +93,32 @@ export const FormContract = () => {
   }, [optionsMap]);
 
   const onSubmit = async (data: any) => {
+    const { items } = data;
+
     try {
       if (data.isFormValid === true) {
+        const formData = new FormData();
+
+        for (const key in items) {
+          if (key === "documents") {
+            items.documents.forEach((image: File, index: number) => {
+              formData.append(`documents[${index}]`, image);
+            });
+          } else if (key === "calibers") {
+            const calibers = Array.isArray(items.calibers)
+              ? items.calibers
+              : [items.calibers];
+            calibers.forEach((caliber: string, index: number) => {
+              formData.append(`calibers[${index}]`, caliber);
+            });
+          } else {
+            formData.append(key, items[key]);
+          }
+        }
+
         const response = await $http.post(
           `${baseApiUrl}/api/v1/contracts`,
-          data.items
+          formData
         );
 
         if (response.status === 201 || response.status === 200) {
