@@ -89,6 +89,6 @@ export const dataTable = [
     key: "pdf",
     title: "PDF",
   },
-  // { key: "edit", title: "Edit" },
-  // { key: "delete", title: "Delete" },
+  { key: "edit", title: "Edit" },
+  { key: "delete", title: "Delete" },
 ];

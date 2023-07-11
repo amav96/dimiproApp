@@ -10,6 +10,7 @@ import { RootState } from "../../store";
 import "./_list-contracts.scss";
 import { dataTable } from "./dataTable";
 import { Company } from "src/types/company.type";
+import { toast } from "react-toastify";
 
 const ListContacts = () => {
   const { getDataProviders } = useDataProvider();
@@ -51,43 +52,43 @@ const ListContacts = () => {
       cols: "c-col-span-2",
     },
     {
-      key: 'exporter',
-      placeholder: 'Search by exporter',
-      name: 'exporter',
-      trackBy: '_id',
+      key: "exporter",
+      placeholder: "Search by exporter",
+      name: "exporter",
+      trackBy: "_id",
       value: [],
-      type: 'select',
+      type: "select",
       multiple: true,
-      cols: 'c-col-span-2',
-      formatValue : (value: Company[]) => {
-        if(value){
-          return value.map((v) => v._id).toString()
+      cols: "c-col-span-2",
+      formatValue: (value: Company[]) => {
+        if (value) {
+          return value.map((v) => v._id).toString();
         }
-        
-        return []
+
+        return [];
       },
     },
     {
-      key: 'importer',
-      placeholder: 'Search by importer',
-      name: 'importer',
-      trackBy: '_id',
+      key: "importer",
+      placeholder: "Search by importer",
+      name: "importer",
+      trackBy: "_id",
       value: [],
-      type: 'select',
+      type: "select",
       multiple: true,
-      cols: 'c-col-span-2',
-      formatValue : (value: Company[]) => {
-        if(value){
-          return value.map((v) => v._id).toString()
+      cols: "c-col-span-2",
+      formatValue: (value: Company[]) => {
+        if (value) {
+          return value.map((v) => v._id).toString();
         }
-          return []
+        return [];
       },
     },
   ]);
 
   const onOpenPdf = (data: any) => {
-    window.open(`/pdf/${data.item._id}`)
-  }
+    window.open(`/pdf/${data.item._id}`);
+  };
 
   return (
     <div className="list-contracts__container">
@@ -106,8 +107,27 @@ const ListContacts = () => {
             searchable: true,
             addItemAfterStore: true,
             updateItemAfterUpdate: true,
+            urlDelete: Routes.CONTRACTS.DELETE,
+            deleteItemAfterDelete: true,
+            deleteRequestConfiguration: {
+              method: "DELETE",
+              headers: {
+                Authorization: authorization(),
+                "Content-Type": "application/json",
+              },
+            },
             afterDelete: (data: any) => {
-              console.log("data after delete", data);
+              if (!data || data.errors || data.error) {
+                toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+                  autoClose: 5000,
+                  theme: "colored",
+                });
+              } else {
+                toast(`Eliminado correctamente correctamente`, {
+                  autoClose: 2000,
+                  theme: "dark",
+                });
+              }
             },
             scopedColumns: {
               pdf: (item: any) => (
