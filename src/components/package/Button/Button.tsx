@@ -1,4 +1,5 @@
 import { PropsButton } from '@packageTypes'
+import React from 'react';
 
 export function Button(props: PropsButton) {
 
@@ -12,7 +13,8 @@ export function Button(props: PropsButton) {
       type = "submit",
       onClick,
       children,
-      disabled
+      disabled,
+      style
   } = props;
 
   const handleClick = () => {
@@ -23,14 +25,15 @@ export function Button(props: PropsButton) {
 
   return (
     <button
+    style={style}
     onClick={handleClick}
     className={`${backgroundColor} ${borderColor} ${padding} ${customClass}`}
     disabled={disabled}
     type={type} >
         {children && (
-          <span>
+          <React.Fragment>
             {children}
-          </span>
+          </React.Fragment>
         )}
     </button>
   )

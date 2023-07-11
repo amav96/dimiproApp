@@ -1,11 +1,9 @@
 import  { useEffect, useRef, useState } from 'react'
 import { Dialog, Button, ModalForm, TableAlive } from '@package';
 import { PropsModalForm, AbmProps } from '@packageTypes'
-
+import './Abm.scss'
 
 export function Abm(props: AbmProps) {
-
-
   const {
     table: {
       columns,
@@ -18,6 +16,7 @@ export function Abm(props: AbmProps) {
       addItemAfterStore,
       updateItemAfterUpdate,
       deleteItemAfterDelete,
+      scopedColumns = {},
       afterDelete,
       modelDelete = 'data',
       updateIcon,
@@ -222,26 +221,23 @@ export function Abm(props: AbmProps) {
     }
   }
 
-  const onOpenPdf = (data: any) => {
-    window.open(`/pdf/${data.item._id}`)
-  }
-
-  const [scopedColumns, setScopedColumns] = useState({
-    pdf: (item: any) => (
-      <Button type="button" onClick={() => onOpenPdf(item)}>
-        Ver pdf
-      </Button>
-    ),
-    edit: (item: any) => (
-      <Button type="button" onClick={() => onOpenUpdate(item)}>
-        {updateIcon ? <img src={updateIcon} alt="Editar" /> : <span>Editar</span>}
-      </Button>
-    ),
-    delete: (item: any) => (
-      <Button type="button" onClick={() => onOpenDelete(item)}>
-        {deleteIcon ? <img src={deleteIcon} alt="Eliminar" /> : <span>Eliminar</span>}
-      </Button>
-    ),
+  const [internalScopedColumns, setInternalScopedColumns] = useState({
+    ...scopedColumns,
+    ...(urlUpdate && {
+      edit: (item: any) => (
+        <Button style={{ width: '40px' }} type="button" onClick={() => onOpenUpdate(item)}>
+          {updateIcon ? <img src={updateIcon} alt="Editar" /> : <span>Editar</span>}
+        </Button>
+      ),
+    }),
+    ...(urlDelete && {
+      delete: (item: any) => (
+        <Button style={{width:'40px'}} type="button" onClick={() => onOpenDelete(item)}>
+          {deleteIcon ? <img 
+           src={deleteIcon} alt="Eliminar" /> : <span>Eliminar</span>}
+        </Button>
+      )
+    })
   });
 
 
@@ -254,7 +250,7 @@ export function Abm(props: AbmProps) {
       inputs={filterInputs}
       columns={columns}
       searchIcon={searchIcon}
-      scopedColumns={scopedColumns}
+      scopedColumns={internalScopedColumns}
       urlIndex={urlIndex}
       searchable={searchable}
       requestConfiguration={requestConfiguration}

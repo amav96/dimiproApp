@@ -1,5 +1,5 @@
 import useDataProvider from "@hooks/useDataProvider";
-import { Abm, Layout } from "@package";
+import { Abm, Button, Layout } from "@package";
 import { GlobalInputs } from "@packageTypes";
 import baseApiUrl from "@services/BaseApiUrl";
 import { authorization } from "@services/utils/Autorizathion";
@@ -58,7 +58,7 @@ const ListContacts = () => {
       value: [],
       type: 'select',
       multiple: true,
-      cols: 'c-col-span-4',
+      cols: 'c-col-span-2',
       formatValue : (value: Company[]) => {
         if(value){
           return value.map((v) => v._id).toString()
@@ -75,7 +75,7 @@ const ListContacts = () => {
       value: [],
       type: 'select',
       multiple: true,
-      cols: 'c-col-span-4',
+      cols: 'c-col-span-2',
       formatValue : (value: Company[]) => {
         if(value){
           return value.map((v) => v._id).toString()
@@ -84,6 +84,10 @@ const ListContacts = () => {
       },
     },
   ]);
+
+  const onOpenPdf = (data: any) => {
+    window.open(`/pdf/${data.item._id}`)
+  }
 
   return (
     <div className="list-contracts__container">
@@ -105,7 +109,14 @@ const ListContacts = () => {
             afterDelete: (data: any) => {
               console.log("data after delete", data);
             },
-            updateIcon: baseApiUrl + "/icons/editar.svg",
+            scopedColumns: {
+              pdf: (item: any) => (
+                <Button style={{width:'40px'}} type="button" onClick={() => onOpenPdf(item)}>
+                  <img  src={baseApiUrl + '/icons/pdf.svg'} alt="Editar" />
+                </Button>
+              ),
+            },
+            updateIcon: baseApiUrl + '/icons/editar.svg',
             deleteIcon: baseApiUrl + "/icons/basura.svg",
             headerSticky: true,
           }}

@@ -8,5 +8,6 @@ export interface PropsButton {
     type?: "button" | "submit",
     onClick?: Function,
     children: JSX.Element | JSX.Element[] | string,
-    disabled?: boolean
+    disabled?: boolean,
+    style?: object
 }
