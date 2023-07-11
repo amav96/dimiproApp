@@ -1,13 +1,23 @@
 const isFileInParams = (params: any) => {
     let hasFile = false
     let array = Object.keys(params);
-    for (let index = 0; index < array.length; index++) {
-        const k = array[index];
-        const param: object | Array<any> = params[k as keyof object];
-        if(typeof param === 'object' && Array.isArray(param) && param.some((val : any) => val.type && val.type.split('/')[0] === 'image')){
-            hasFile = true
-            break
+    let availablesFiles = ['image','pdf','csv','excel'];
+    try {
+        for (let index = 0; index < array.length; index++) {
+            const k = array[index];
+            const param: any | Array<any> = params[k as keyof object];
+
+            if(typeof param === 'object' &&
+            (
+                (Array.isArray(param) && param.some((val : any) => val.type &&  availablesFiles.includes(val.type?.split('/')[0])))  ||
+                availablesFiles.includes(param.type?.split('/')[0])
+            )){
+                hasFile = true
+                break
+            }
         }
+    } catch (error) {
+        console.log(error)
     }
     return hasFile
 }
@@ -21,7 +31,6 @@ const appendForm = async (params : any, deepFileInArray: boolean = false) :Promi
             Array.isArray(param) &&
             (deepFileInArray || (Array.isArray(param) &&  param.some((val : any) => val.type.split('/')[0] === 'image')))){
                 param.forEach((element: any, i: number) => {
-                    console.log(element);
                     formData.append(`${key}[${i}]`, element);
                 });
         }else {
@@ -32,7 +41,7 @@ const appendForm = async (params : any, deepFileInArray: boolean = false) :Promi
     });
 }
 
-interface Config { 
+interface Config {
     multipleFile?: boolean,
     appendForm?: boolean
 }
@@ -47,8 +56,11 @@ export const serializeParams = async (params : object, config: Config = {} ) :Pr
     } else {
         Object.keys(params).forEach((key) => {
             let currentParam : any = params[key as keyof object];
-            build[key as keyof object] = currentParam
-            
+            if(typeof currentParam === 'object' && Array.isArray(currentParam)){
+                build[key as keyof object] = currentParam.toString()
+            }else{
+                build[key as keyof object] = currentParam
+            }
         })
     }
     return build

@@ -1,5 +1,5 @@
 import useDataProvider from "@hooks/useDataProvider";
-import { Abm, Button, Layout } from "@package";
+import { Abm, Button, Layout, Modal } from "@package";
 import { GlobalInputs } from "@packageTypes";
 import baseApiUrl from "@services/BaseApiUrl";
 import { authorization } from "@services/utils/Autorizathion";
@@ -11,8 +11,13 @@ import "./_list-contracts.scss";
 import { dataTable } from "./dataTable";
 import { Company } from "src/types/company.type";
 import { toast } from "react-toastify";
+import ModalDocs from "../../components/Modals/ModalDocs";
+
 
 const ListContacts = () => {
+  const [IsOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [dataDocuments, setDataDocuments] = useState<any>([]);
+
   const { getDataProviders } = useDataProvider();
 
   const companies = useAppSelector(
@@ -20,7 +25,7 @@ const ListContacts = () => {
   );
 
   useEffect(() => {
-    getDataProviders(["companies", "products"]);
+    getDataProviders(["companies"]);
 
     setFormFilter((prevInputs) =>
       prevInputs.map((input) => {
@@ -36,10 +41,12 @@ const ListContacts = () => {
             options: companies.filter((company: any) => company.importer === 1),
           };
         }
-
+        
         return input;
       })
-    );
+      );
+      
+      
   }, [companies]);
 
   const [formFilter, setFormFilter] = useState<GlobalInputs[]>([
@@ -86,10 +93,23 @@ const ListContacts = () => {
     },
   ]);
 
+  const openModal = () => {
+    setIsOpenModal(true);
+  };
+
+  const closeModal = () => {
+    setIsOpenModal(false);
+  };
+
   const onOpenPdf = (data: any) => {
     window.open(`/pdf/${data.item._id}`);
   };
 
+  const onOpenDocument = (data: any) => {
+    setDataDocuments(data.item);   
+    setIsOpenModal(true);
+  }
+ 
   return (
     <div className="list-contracts__container">
       <Layout title="Lista de contratos">
@@ -135,6 +155,11 @@ const ListContacts = () => {
                   <img  src={baseApiUrl + '/icons/pdf.svg'} alt="Editar" />
                 </Button>
               ),
+              documents: (item: any) => (
+                <Button style={{width:'40px'}} type="button" onClick={() => onOpenDocument(item)}>
+                  Ver doc
+                </Button>
+              )
             },
             updateIcon: baseApiUrl + '/icons/editar.svg',
             deleteIcon: baseApiUrl + "/icons/basura.svg",
@@ -142,6 +167,11 @@ const ListContacts = () => {
           }}
         />
       </Layout>
+      <ModalDocs
+        open={IsOpenModal}
+        onClose={closeModal}
+        data={dataDocuments}
+        />
     </div>
   );
 };

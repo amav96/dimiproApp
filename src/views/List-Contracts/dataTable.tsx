@@ -86,6 +86,13 @@ export const dataTable = [
     format: (value: string) => formatDateTime(value) || "",
   },
   {
+    key: "documents",
+    title: "Documents",
+    // format: (value: any) => {
+    //   return <a href={value.map((document: any) => import.meta.env.VITE_BUCKET_URL + '/' + document.path)}>{value.map((document: any) => import.meta.env.VITE_BUCKET_URL + '/' + document.path)}</a>;
+    // }
+  },
+  {
     key: "pdf",
     title: "PDF",
   },

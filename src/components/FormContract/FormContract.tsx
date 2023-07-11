@@ -101,8 +101,13 @@ export const FormContract = () => {
 
         for (const key in items) {
           if (key === "documents") {
-            items.documents.forEach((image: File, index: number) => {
-              formData.append(`documents[${index}]`, image);
+            items.documents.forEach((file: File, index: number) => {
+              if (
+                file.type.includes("image") ||
+                file.type === "application/pdf"
+              ) {
+                formData.append(`documents[${index}]`, file);
+              }
             });
           } else if (key === "calibers") {
             const calibers = Array.isArray(items.calibers)
