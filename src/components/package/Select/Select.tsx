@@ -274,7 +274,6 @@ export function Select(props: PropsSelect) {
 
   const handleValidations = (value: object, validations: Validations) => {
     validate.validate(value, validations);
-    console.log(value, validate.getErrors())
     const hasErrors = validate.getErrors();
     if (!isEmpty(hasErrors)) {
       setLocalErrors(hasErrors);
@@ -353,6 +352,9 @@ export function Select(props: PropsSelect) {
   };
 
   useEffect(() => {
+    if(name === 'country'){
+      console.log(value)
+    }
     if (!multiple && value && !isEmpty(value)) {
       setLocalValue(value[label as keyof object]);
     }

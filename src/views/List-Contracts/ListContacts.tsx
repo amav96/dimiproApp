@@ -48,7 +48,7 @@ const ListContacts = () => {
       name: "name",
       value: "",
       type: "text",
-      cols: "c-col-span-4",
+      cols: "c-col-span-2",
     },
     {
       key: 'exporter',

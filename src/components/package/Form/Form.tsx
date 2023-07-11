@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from 'react'
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef } from 'react'
 import { Input, Textarea, Select, Switch, File } from '@package';
 import './Form.scss'
 import { useState } from 'react';
@@ -28,7 +28,8 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
   } = props;
   const [generatedInputs, setGeneratedInputs] = useState<Array<GlobalInputs>>([])
   const [formValues, setFormValues] = useState<any>({})
-  
+  const memoizedFormValues = useMemo(() => formValues, [formValues]);
+  const memoizedGeneratedInputs = useMemo(() => generatedInputs, [generatedInputs]);
 
   useEffect(() => {
     inputs.forEach(({key}, i) => {
@@ -44,7 +45,8 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
           })
         )
 
-        if (updateInput.value && updateInput.value !== undefined) {
+        if ((updateInput.value && updateInput.value !== undefined && !Array.isArray(updateInput.value)) || 
+          (updateInput.value && Array.isArray(updateInput.value) && updateInput.value.length > 0)) {
           setFormValues((prev: keyValue<string | number>) => ({
             ...prev,
             [key]: updateInput.value
@@ -196,7 +198,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
     return result
   }
 
-  const handleChangeInput = (evt: React.ChangeEvent<HTMLInputElement>, input: PropsInputKey) => {
+  const handleChangeInput = useCallback((evt: React.ChangeEvent<HTMLInputElement>, input: PropsInputKey) => {
     const { name: key , value } = evt.target;
     setFormValues((prev: keyValue<string | number>) => ({
       ...prev,
@@ -205,9 +207,9 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
     if(input.onInput){
       input.onInput({value, input})
     }
-  }
+  },[])
 
-  const handleChangeTextarea = (evt: React.ChangeEvent<HTMLInputElement>, input: PropsTextAreaKey) => {
+  const handleChangeTextarea = useCallback((evt: React.ChangeEvent<HTMLInputElement>, input: PropsTextAreaKey) => {
     const { name: key , value } = evt.target;
     setFormValues((prev: keyValue<string | number>) => ({
       ...prev,
@@ -216,9 +218,9 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
     if(input.onTextarea){
       input.onTextarea({value, input})
     }
-  }
+  },[])
 
-  const handleChangeDate = (date : Date, input: PropsDateKey):void => {
+  const handleChangeDate = useCallback((date : Date, input: PropsDateKey):void => {
     setFormValues((prev: keyValue<string | number>) => ({
       ...prev,
       [input.key]: date,
@@ -226,9 +228,9 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
     if(input.onDate){
       input.onDate({value: date, input})
     }
-  }
+  },[])
 
-  const onChangeSelect = (data: onChangeSelect, input: PropsSelectKey):void => {
+  const onChangeSelect = useCallback((data: onChangeSelect, input: PropsSelectKey):void => {
     setFormValues((prev: keyValue<string | number>) => ({
       ...prev,
       [input.key]: data.value,
@@ -236,15 +238,15 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
     if(input.onSelect){
       input.onSelect({...data, ...{input: input}})
     }
-  }
+  },[])
 
-  const onRemoveSelect = (data: onChangeSelect, input: PropsSelectKey):void => {
+  const onRemoveSelect = useCallback((data: onChangeSelect, input: PropsSelectKey):void => {
     if(input.onRemove){
       input.onRemove({ ...data, ...{input: input}})
     }
-  }
+  },[])
 
-  const handleChangeSwitch = (value: object | number | boolean , input: PropsSwitchKey) :void => {
+  const handleChangeSwitch = useCallback((value: object | number | boolean , input: PropsSwitchKey) :void => {
     if(typeof value === 'number' || typeof value === 'object' || typeof value === 'boolean'){
       setFormValues((prev: keyValue<string | number>) => ({
         ...prev,
@@ -254,29 +256,28 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
         input.onSwitch({value, input})
       }
     }
-  }
+  },[])
 
-  const handleChangeFile = (value: Array<any>, input : PropsFileKey) => {
+  const handleChangeFile = useCallback((value: Array<any>, input : PropsFileKey) => {
     setFormValues((prev: keyValue<string | number>) => {
         return ({
           ...prev,
           [input.key]:  value,
         })
     });
-  }
+  },[])
 
   //@ts-ignore
   useImperativeHandle(ref, () => ({
     resetValues: resetValues,
   }));
 
-
   return (
     <form onSubmit={handleSubmit} ref={ref}>
       <div className='Form c-grid c-grid-cols-12 c-gap-2'>
       {
-        generatedInputs.filter((val) => val.hidden === undefined || val.hidden === false)
-        .map((input, index) => {console.log('render')
+        memoizedGeneratedInputs.filter((val) => val.hidden === undefined || val.hidden === false)
+        .map((input, index) => {
           if(input.slot && scopedFields?.[input.key]){
             return(
               <div
@@ -290,107 +291,107 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
             if(!input.hasOwnProperty('type') || (input.hasOwnProperty('type') && (input.type === 'text' || input.type === 'color' || input.type === 'email' || input.type === 'password' || input.type === 'number'))){
               return (
                 <Input
-                icon={input.icon}
+                icon={memoizedGeneratedInputs[index].icon}
                 key={index}
-                type={generatedInputs[index].type}
-                value={formValues[input.key]}
-                name={generatedInputs[index].name}
-                placeholder={generatedInputs[index].placeholder}
+                type={memoizedGeneratedInputs[index].type}
+                value={memoizedFormValues[input.key]}
+                name={memoizedGeneratedInputs[index].name}
+                placeholder={memoizedGeneratedInputs[index].placeholder}
                 onChange={(e : React.ChangeEvent<HTMLInputElement>) => handleChangeInput(e,input)}
-                validations={generatedInputs[index].validations}
-                cols={generatedInputs[index].cols}
-                errors={generatedInputs[index].errors}
-                customClass={generatedInputs[index].customClass}
-                title={generatedInputs[index].title}
+                validations={memoizedGeneratedInputs[index].validations}
+                cols={memoizedGeneratedInputs[index].cols}
+                errors={memoizedGeneratedInputs[index].errors}
+                customClass={memoizedGeneratedInputs[index].customClass}
+                title={memoizedGeneratedInputs[index].title}
                 />
               )
             } else if (input.type === 'textarea'){
               return (
                 <Textarea
-                icon={input.icon}
+                icon={memoizedGeneratedInputs[index].icon}
                 key={index}
-                type={generatedInputs[index].type}
-                value={formValues[input.key]}
-                name={generatedInputs[index].name}
-                placeholder={generatedInputs[index].placeholder}
+                type={memoizedGeneratedInputs[index].type}
+                value={memoizedFormValues[input.key]}
+                name={memoizedGeneratedInputs[index].name}
+                placeholder={memoizedGeneratedInputs[index].placeholder}
                 onChange={(e : React.ChangeEvent<HTMLInputElement>) => handleChangeTextarea(e,input)}
-                validations={generatedInputs[index].validations}
-                cols={generatedInputs[index].cols}
-                errors={generatedInputs[index].errors}
-                customClass={generatedInputs[index].customClass}
-                title={generatedInputs[index].title}
+                validations={memoizedGeneratedInputs[index].validations}
+                cols={memoizedGeneratedInputs[index].cols}
+                errors={memoizedGeneratedInputs[index].errors}
+                customClass={memoizedGeneratedInputs[index].customClass}
+                title={memoizedGeneratedInputs[index].title}
                 />
               )
             } else if (input.type === 'datetime'){
               return (
                 <DatePack
                 key={index}
-                type={generatedInputs[index].type}
-                value={formValues[input.key]}
-                name={generatedInputs[index].name}
-                placeholder={generatedInputs[index].placeholder}
+                type={memoizedGeneratedInputs[index].type}
+                value={memoizedFormValues[input.key]}
+                name={memoizedGeneratedInputs[index].name}
+                placeholder={memoizedGeneratedInputs[index].placeholder}
                 onChange={(e : any) => handleChangeDate(e,input)}
-                dateFormat={generatedInputs[index].dateFormat}
-                showTimeSelect={generatedInputs[index].showTimeSelect}
-                validations={generatedInputs[index].validations}
-                cols={generatedInputs[index].cols}
-                errors={generatedInputs[index].errors}
-                customClass={generatedInputs[index].customClass}
-                title={generatedInputs[index].title}
+                dateFormat={memoizedGeneratedInputs[index].dateFormat}
+                showTimeSelect={memoizedGeneratedInputs[index].showTimeSelect}
+                validations={memoizedGeneratedInputs[index].validations}
+                cols={memoizedGeneratedInputs[index].cols}
+                errors={memoizedGeneratedInputs[index].errors}
+                customClass={memoizedGeneratedInputs[index].customClass}
+                title={memoizedGeneratedInputs[index].title}
                 />
               )
             } else if (input.type === 'select'){
               return (
                 <Select
-                icon={generatedInputs[index].icon}
+                icon={memoizedGeneratedInputs[index].icon}
                 key={index}
-                type={generatedInputs[index].type}
-                placeholder={generatedInputs[index].placeholder}
-                name={generatedInputs[index].name}
-                label={generatedInputs[index].label}
-                trackBy={generatedInputs[index].trackBy}
-                options={generatedInputs[index].options}
-                value={formValues[input.key]}
+                type={memoizedGeneratedInputs[index].type}
+                placeholder={memoizedGeneratedInputs[index].placeholder}
+                name={memoizedGeneratedInputs[index].name}
+                label={memoizedGeneratedInputs[index].label}
+                trackBy={memoizedGeneratedInputs[index].trackBy}
+                options={memoizedGeneratedInputs[index].options}
+                value={memoizedFormValues[input.key]}
                 onChange={(e : onChangeSelect) => onChangeSelect(e,input)}
                 onRemove={(e : onChangeSelect) => onRemoveSelect(e,input)}
-                multiple={generatedInputs[index].multiple}
-                clearable={generatedInputs[index].clearable}
-                validations={generatedInputs[index].validations}
-                cols={generatedInputs[index].cols}
-                errors={generatedInputs[index].errors}
-                customClass={generatedInputs[index].customClass}
-                title={generatedInputs[index].title}
+                multiple={memoizedGeneratedInputs[index].multiple}
+                clearable={memoizedGeneratedInputs[index].clearable}
+                validations={memoizedGeneratedInputs[index].validations}
+                cols={memoizedGeneratedInputs[index].cols}
+                errors={memoizedGeneratedInputs[index].errors}
+                customClass={memoizedGeneratedInputs[index].customClass}
+                title={memoizedGeneratedInputs[index].title}
                 />
               )
             } else if (input.type === 'check' || input.type === 'switch'){
               return(
                 <Switch
                 key={index}
-                type={generatedInputs[index].type}
-                name={generatedInputs[index].name}
-                label={generatedInputs[index].label}
-                option={generatedInputs[index].option}
-                value={formValues[input.key]}
-                defaultValue={generatedInputs[index].defaultValue}
+                type={memoizedGeneratedInputs[index].type}
+                name={memoizedGeneratedInputs[index].name}
+                label={memoizedGeneratedInputs[index].label}
+                option={memoizedGeneratedInputs[index].option}
+                value={memoizedFormValues[input.key]}
+                defaultValue={memoizedGeneratedInputs[index].defaultValue}
                 onChange={ (value: object | Array<object>) => handleChangeSwitch(value, input)}
-                cols={generatedInputs[index].cols}
-                customClass={generatedInputs[index].customClass}
-                title={generatedInputs[index].title}
+                cols={memoizedGeneratedInputs[index].cols}
+                customClass={memoizedGeneratedInputs[index].customClass}
+                title={memoizedGeneratedInputs[index].title}
                 />
               )
             } else if (input.type === 'file' ){
               return(
                 <File
-                icon={generatedInputs[index].icon}
+                icon={memoizedGeneratedInputs[index].icon}
                 key={`file-${index}`}
-                type={generatedInputs[index].type}
-                name={generatedInputs[index].name}
-                value={formValues[input.key]}
+                type={memoizedGeneratedInputs[index].type}
+                name={memoizedGeneratedInputs[index].name}
+                value={memoizedFormValues[input.key]}
                 onChange={ (value: Array<any> | Array<object>) => handleChangeFile(value, input)}
-                validations={generatedInputs[index].validations}
-                cols={generatedInputs[index].cols}
-                customClass={generatedInputs[index].customClass}
-                title={generatedInputs[index].title}
+                validations={memoizedGeneratedInputs[index].validations}
+                cols={memoizedGeneratedInputs[index].cols}
+                customClass={memoizedGeneratedInputs[index].customClass}
+                title={memoizedGeneratedInputs[index].title}
               />
               )
             }
