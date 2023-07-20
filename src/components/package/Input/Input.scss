@@ -28,7 +28,10 @@
     &__text{
         margin-top:4px;
         font-size: 15.5px;
-        color: var(--red);
+        color: $color-white;
+        background-color: $color-no-results;
+        border-radius: 4px;
+        padding: 2px 8px;
     }
 }
 

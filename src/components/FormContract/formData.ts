@@ -277,10 +277,10 @@ export const formData: Array<GlobalInputs | Slot> = [
     name: "documents",
     value: "",
     type: "file",
-    // validations: {
-    //   rules: {
-    //     required: true,
-    //   },
-    // },
+    validations: {
+      rules: {
+        required: true,
+      },
+    },
   },
 ];

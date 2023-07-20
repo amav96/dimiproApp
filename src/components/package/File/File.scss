@@ -6,12 +6,13 @@
     border-radius: 35px;
     width: 21rem;
     height: 4rem;
-
+    background-color: $color-gray-soft;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
+    color: $color-white;
 
     &__img {
       display: flex;
@@ -31,9 +32,9 @@
     gap: 8px;
 
     .File__icon {
-        width: 26px;
-        height: 26px;
-        object-fit: cover;
+      width: 26px;
+      height: 26px;
+      object-fit: cover;
     }
   }
 }
@@ -53,6 +54,9 @@
   &__text {
     margin-top: 4px;
     font-size: 15.5px;
-    color: var(--red);
+    color: $color-white;
+    background-color: $color-no-results;
+    border-radius: 4px;
+    padding: 2px 8px;
   }
 }

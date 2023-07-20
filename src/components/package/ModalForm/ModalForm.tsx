@@ -274,7 +274,7 @@ export function ModalForm(props: PropsModalForm<string | number>) {
         >
           <Button
           disabled={loading.current}
-          customClass={'c-mt-4 c-mr-4'}
+          customClass={'c-mt-4 c-mr-4 btn-primary'}
           >
             Enviar
           </Button>

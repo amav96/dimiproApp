@@ -475,6 +475,7 @@
   position: absolute;
   right: 0;
   top: 0;
+  background-color: $color-black;
 }
 
 .AppMain {
@@ -716,26 +717,25 @@ button,
 }
 
 .btn-primary {
-  background-color: var(--black);
-  color: var(--white);
-  border: 1px solid var(--black);
+  background-color: $color-violet;
+  color: $color-white;
+  border: 1px solid $color-violet;
   transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-  background-color: var(--white);
-  color: var(--black);
+  background-color: $color-violet-hover;
 }
 
 .btn-secondary {
-  background-color: var(--white);
+  background-color: $color-white;
   color: var(--black);
   border: 1px solid var(--black);
   transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background-color: var(--black);
+  background-color: $color-violet-hover;
   color: var(--white);
 }
 
@@ -858,13 +858,19 @@ textarea {
   width: 100%;
   padding: 8.5px;
   border-radius: 6.5px;
-  background: var(--white);
-  border: 1px solid var(--black);
+  background: $color-gray-soft;
+  border: 1px solid $color-gray-light;
+  color: $color-white;
+
+  &:focus {
+    border: 2px solid $color-violet;
+  }
 }
 
 input::placeholder,
 textarea::placeholder {
   opacity: 1; /* 1 */
+  color: $color-white;
 }
 
 /*

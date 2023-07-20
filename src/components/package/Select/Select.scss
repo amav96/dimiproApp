@@ -28,11 +28,16 @@
   min-height: 43px;
   position: relative;
   transition: all 100ms ease 0s;
-  background: var(--white);
-  border: 1px solid var(--black);
+  background: $color-gray-soft;
+  border: 1px solid $color-gray-light;
   border-radius: 6.5px;
   outline: 0px !important;
   padding: 1.5px 0px;
+
+  &:focus {
+    border: 1px solid $color-violet;
+    outline: 1px solid $color-violet;
+  }
 
   &__itemSelect {
     -webkit-box-align: center;
@@ -72,7 +77,7 @@
       box-sizing: border-box;
 
       &__input {
-        color: inherit;
+        color: $color-white;
         background: 0px center;
         opacity: 1;
         // width: 100%;
@@ -87,7 +92,8 @@
       }
 
       &__input:focus {
-        border-color: inherit;
+        border-color: none;
+        border: none;
         -webkit-box-shadow: none;
         box-shadow: none;
       }
@@ -96,7 +102,7 @@
     &__multiValue {
       display: flex;
       min-width: 0px;
-      background-color: var(--background-hover-sidebar);
+      background-color: $color-violet-hover;
       border-radius: 2px;
       margin: 2px;
       box-sizing: border-box;
@@ -106,7 +112,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         border-radius: 2px;
-        color: rgb(51, 51, 51);
+        color: $color-white;
         font-size: 85%;
         padding: 3px 3px 3px 6px;
         box-sizing: border-box;
@@ -162,7 +168,11 @@
   &__text {
     margin-top: 4px;
     font-size: 15.5px;
-    color: var(--red);
+    color: $color-white;
+    background-color: $color-no-results;
+    padding: 2px 8px;
+    margin-left: 36px;
+    border-radius: 4px;
   }
 }
 
@@ -170,7 +180,8 @@
 
 .Select__menu {
   position: fixed;
-  background: white;
+  background: $color-gray-soft;
+  color: $color-white;
   top: 48px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.12);
   width: 100%;
@@ -187,6 +198,6 @@
 }
 
 .Select__menu__itemContainer:hover {
-  background-color: var(--background-hover-sidebar);
+  background-color: $color-violet-hover;
   font-weight: 600;
 }

@@ -42,15 +42,14 @@ export function Dialog(props: DialogProp) {
               <div className="c-flex c-flex-row c-justify-end">
                 <Button
                 textColor={'c-text-white'}
-                backgroundColor={'c-bg-green'}
+                customClass='btn-primary'
                 onClick={handleConfirm}
                 >
                   {textConfirm}
                 </Button>
                 <Button
                 textColor={'c-text-white'}
-                backgroundColor={'c-bg-red'}
-                customClass="c-mx-2"
+                customClass="c-mx-2 btn-secondary"
                 onClick={hideModal}
                 >
                   {textCancel}

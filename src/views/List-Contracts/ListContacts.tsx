@@ -56,7 +56,7 @@ const ListContacts = () => {
       name: "name",
       value: "",
       type: "text",
-      cols: "c-col-span-2",
+      cols: "c-col-span-4",
     },
     {
       key: "exporter",
@@ -66,7 +66,7 @@ const ListContacts = () => {
       value: [],
       type: "select",
       multiple: true,
-      cols: "c-col-span-2",
+      cols: "c-col-span-4",
       formatValue: (value: Company[]) => {
         if (value) {
           return value.map((v) => v._id).toString();
@@ -83,7 +83,7 @@ const ListContacts = () => {
       value: [],
       type: "select",
       multiple: true,
-      cols: "c-col-span-2",
+      cols: "c-col-span-4",
       formatValue: (value: Company[]) => {
         if (value) {
           return value.map((v) => v._id).toString();

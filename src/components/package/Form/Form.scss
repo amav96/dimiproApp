@@ -1,13 +1,11 @@
-
-
-.Form{
-    display:grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
+.Form {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
 .label-global {
-    font-size: 18px;
-    margin-left: 12px;
-    font-weight: 400;
-    color: var(--text-black);
+  font-size: 18px;
+  margin-left: 12px;
+  font-weight: 400;
+  color: var(--text-black);
 }

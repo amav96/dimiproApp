@@ -20,6 +20,7 @@
       .label {
         font-size: 15px;
         display: block;
+        color: $color-white;
       }
 
       .required {
@@ -38,6 +39,12 @@
 
       .controlInput__text {
         margin-left: 32px;
+        margin-top:4px;
+        font-size: 15.5px;
+        color: $color-white;
+        background-color: $color-no-results;
+        border-radius: 4px;
+        padding: 2px 8px;
       }
     }
 
@@ -50,6 +57,7 @@
     margin-top: 40px;
     display: block;
     font-size: 15px;
+    color: $color-white;
 
     span {
       color: #ff0000;

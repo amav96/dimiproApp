@@ -5,9 +5,9 @@ export function Button(props: PropsButton) {
 
   const {
       text,
-      textColor= 'c-text-black',
+      textColor= 'c-text-white',
       backgroundColor = 'background-white',
-      borderColor = 'c-border-black c-border-rounded-l',
+      borderColor = 'c-border-rounded-l',
       padding = 'c-p-y-3 c-p-x-4',
       customClass = '',
       type = "submit",

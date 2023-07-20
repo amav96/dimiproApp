@@ -1,20 +1,38 @@
-.DatePack{
-    
-    &__input {
-        width: 100%;
-        padding: 8.5px;
-        border-radius: 6.5px;
-        background: var(--background-grey-light);
-    }
+.DatePack {
+  &__input {
+    width: 100%;
+    padding: 8.5px;
+    border-radius: 6.5px;
+    background: $color-gray-soft;
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .Select__icon {
+    width: 26px;
+    height: 26px;
+    object-fit: cover;
+  }
 }
 
-.controlInput{
-    display: flex;
-    flex-direction: column;
+.controlInput {
+  display: flex;
+  flex-direction: column;
 
-    &__text{
-        margin-top:4px;
-        font-size: 15.5px;
-        color: var(--red);
-    }
+  &__text {
+    margin-top: 4px;
+    font-size: 15.5px;
+    color: $color-white;
+    background-color: $color-no-results;
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
 }

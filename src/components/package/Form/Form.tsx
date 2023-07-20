@@ -338,6 +338,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 errors={memoizedGeneratedInputs[index].errors}
                 customClass={memoizedGeneratedInputs[index].customClass}
                 title={memoizedGeneratedInputs[index].title}
+                icon={memoizedGeneratedInputs[index].icon}
                 />
               )
             } else if (input.type === 'select'){

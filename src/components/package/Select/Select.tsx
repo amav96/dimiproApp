@@ -413,7 +413,7 @@ export function Select(props: PropsSelect) {
                         onClick={() => removeMultipleOptions(val, index)}
                         className="Select__itemSelect__multiValue__remove"
                       >
-                        <img style={{ width: "9px" }} src={times} />
+                        <img style={{ width: "16px" }} src={times} />
                       </div>
                     </div>
                   ))
@@ -467,7 +467,7 @@ export function Select(props: PropsSelect) {
                   onClick={removeAll}
                   className="controlSelect__indicatorContainer"
                 >
-                  <img style={{ width: "9px" }} src={times} />
+                  <img style={{ width: "16px" }} src={times} />
                 </div>
               )
             }
@@ -476,7 +476,7 @@ export function Select(props: PropsSelect) {
               onClick={handleOnOpenCloseMenu}
               className="controlSelect__indicatorContainer"
             >
-              <img style={{ width: "9px" }} src={arrowDown} />
+              <img style={{ width: "16px" }} src={arrowDown} />
             </div>
           </div>
         </div>
