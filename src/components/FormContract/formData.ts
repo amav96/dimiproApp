@@ -129,11 +129,11 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: CropIcon,
     key: "crop",
-    placeholder: "Agregar fecha de cosecha",
+    placeholder: "Agregar año de cosecha",
     title: "Crop:",
     name: "crop",
     value: "",
-    type: "datetime",
+    type: "text",
     validations: {
       rules: {
         required: true,

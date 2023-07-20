@@ -127,17 +127,29 @@ export const FormContract = () => {
         );
 
         if (response.status === 201 || response.status === 200) {
-          toast.success("Contrato creado correctamente");
+          toast.success("Contrato creado correctamente", {
+            autoClose: 3000,
+            theme: "dark",
+          });
           navigate("/list-contracts");
         } else {
-          toast.error("Error al crear contrato");
+          toast.error("Error al crear contrato", {
+            autoClose: 3000,
+            theme: "dark",
+          });
         }
       } else {
-        toast.error("Error al crear contrato");
+        toast.error("Error al crear contrato", {
+          autoClose: 3000,
+          theme: "dark",
+        });
       }
     } catch (error) {
       console.error("Error al realizar la solicitud POST:", error);
-      toast.error("Error al crear contrato");
+      toast.error("Error al crear contrato", {
+        autoClose: 3000,
+        theme: "dark",
+      });
     }
   };
 

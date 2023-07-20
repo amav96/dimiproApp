@@ -1,8 +1,7 @@
-
-import { Routes, Route, Navigate} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Users } from "@views/Settings/Users";
-import  {Login}  from "@views/Auth/Login";
-import  {Logout}  from "@views/Auth/Logout";
+import { Login } from "@views/Auth/Login";
+import { Logout } from "@views/Auth/Logout";
 import { AccesoDenegado } from "@views/Helpers/AccesoDenegado";
 import ProtectRoute from "./ProtectRoute";
 import AddContract from "@views/Add-Contract/AddContract";
@@ -49,15 +48,20 @@ export function Router() {
       <Route element={<ProtectRoute gate={"surveyors_index"} />}>
         <Route path="/ajustes/surveyors" element={<Surveyors />} />
       </Route>
+      <Route element={<ProtectRoute gate={"contracts_index"} />}>
+        <Route path="/add-contract" element={<AddContract />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"contracts_index"} />}>
+        <Route path="/list-contracts" element={<ListContacts />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"contracts_index"} />}>
+        <Route path="/pdf/:id" element={<PDFcontract />} />
+      </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/forgot-password" element={<Login />} />
-      <Route path="/add-contract" element={<AddContract />} />
-      <Route path="/list-contracts" element={<ListContacts />} />
       <Route path="/acceso-denegado" element={<AccesoDenegado />} />
       <Route path="*" element={<NotFound />} />
-      <Route path="/pdf/:id" element={<PDFcontract />} />
-      
     </Routes>
   );
 }

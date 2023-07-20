@@ -1,21 +1,23 @@
 import useDataProvider from "@hooks/useDataProvider";
-import { Abm, Button, Layout, Modal } from "@package";
+import { Abm, Button, Layout } from "@package";
 import { GlobalInputs } from "@packageTypes";
 import baseApiUrl from "@services/BaseApiUrl";
 import { authorization } from "@services/utils/Autorizathion";
 import { Routes } from "@services/utils/Routes";
 import { useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
+import { Company } from "src/types/company.type";
+import { formData } from "../../components/FormContract/formData";
+import ModalDocs from "../../components/Modals/ModalDocs";
 import { useAppSelector } from "../../hooks";
 import { RootState } from "../../store";
 import "./_list-contracts.scss";
 import { dataTable } from "./dataTable";
-import { Company } from "src/types/company.type";
-import { toast } from "react-toastify";
-import ModalDocs from "../../components/Modals/ModalDocs";
-
 
 const ListContacts = () => {
   const [IsOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [inputsModalForm, setInputsModalForm] =
+    useState<Array<GlobalInputs | any>>(formData);
   const [dataDocuments, setDataDocuments] = useState<any>([]);
 
   const { getDataProviders } = useDataProvider();
@@ -23,6 +25,76 @@ const ListContacts = () => {
   const companies = useAppSelector(
     (state: RootState) => state.dataProviders.companies
   );
+
+  const packaging = useAppSelector(
+    (state: RootState) => state.dataProviders.packagings
+  );
+  const paymentMethod = useAppSelector(
+    (state: RootState) => state.dataProviders.paymentMethods
+  );
+  const surveyor = useAppSelector(
+    (state: RootState) => state.dataProviders.surveyors
+  );
+  const currency = useAppSelector(
+    (state: RootState) => state.dataProviders.currencies
+  );
+  const product = useAppSelector(
+    (state: RootState) => state.dataProviders.products
+  );
+  const calibers = useAppSelector(
+    (state: RootState) => state.dataProviders.calibers
+  );
+  const category = useAppSelector(
+    (state: RootState) => state.dataProviders.categories
+  );
+
+  useEffect(() => {
+    getDataProviders([
+      "packagings",
+      "paymentMethods",
+      "surveyors",
+      "currencies",
+      "companies",
+      "products",
+      "calibers",
+      "categories",
+    ]);
+  }, []);
+
+  const optionsMap = useMemo(
+    () => ({
+      packaging,
+      paymentMethod,
+      surveyor,
+      currency,
+      exporter: companies.filter((company: any) => company.exporter === 1),
+      importer: companies.filter((company: any) => company.importer === 1),
+      product,
+      calibers,
+      category,
+      broker: companies.filter((company: any) => company.broker === 1),
+    }),
+    [
+      packaging,
+      paymentMethod,
+      surveyor,
+      currency,
+      companies,
+      product,
+      calibers,
+      category,
+    ]
+  );
+
+  useEffect(() => {
+    setInputsModalForm((prevInputs) =>
+      prevInputs.map((input) => ({
+        ...input,
+        // @ts-ignore
+        options: optionsMap[input.key] || input.options,
+      }))
+    );
+  }, [optionsMap]);
 
   useEffect(() => {
     getDataProviders(["companies"]);
@@ -41,12 +113,10 @@ const ListContacts = () => {
             options: companies.filter((company: any) => company.importer === 1),
           };
         }
-        
+
         return input;
       })
-      );
-      
-      
+    );
   }, [companies]);
 
   const [formFilter, setFormFilter] = useState<GlobalInputs[]>([
@@ -106,10 +176,10 @@ const ListContacts = () => {
   };
 
   const onOpenDocument = (data: any) => {
-    setDataDocuments(data.item);   
+    setDataDocuments(data.item);
     setIsOpenModal(true);
-  }
- 
+  };
+
   return (
     <div className="list-contracts__container">
       <Layout title="Lista de contratos">
@@ -151,27 +221,87 @@ const ListContacts = () => {
             },
             scopedColumns: {
               pdf: (item: any) => (
-                <Button style={{width:'40px'}} type="button" onClick={() => onOpenPdf(item)}>
-                  <img  src={baseApiUrl + '/icons/pdf.svg'} alt="Editar" />
+                <Button
+                  style={{ width: "40px" }}
+                  type="button"
+                  onClick={() => onOpenPdf(item)}
+                >
+                  <img src={baseApiUrl + "/icons/pdf.svg"} alt="Editar" />
                 </Button>
               ),
               documents: (item: any) => (
-                <Button style={{width:'40px'}} type="button" onClick={() => onOpenDocument(item)}>
+                <Button
+                  style={{ width: "40px" }}
+                  type="button"
+                  onClick={() => onOpenDocument(item)}
+                >
                   Ver doc
                 </Button>
-              )
+              ),
             },
-            updateIcon: baseApiUrl + '/icons/editar.svg',
+            updateIcon: baseApiUrl + "/icons/editar.svg",
             deleteIcon: baseApiUrl + "/icons/basura.svg",
             headerSticky: true,
           }}
+          modalForm={{
+            inputs: inputsModalForm,
+            urlStore: Routes.CONTRACTS.STORE,
+            urlUpdate: Routes.CONTRACTS.UPDATE,
+            urlShow: Routes.CONTRACTS.SHOW,
+            closable: true,
+            title: "Editar contrato",
+            afterUpdate: (data: any) => {
+              if (data.errors || data.error) {
+                toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+                  autoClose: 5000,
+                  theme: "colored",
+                });
+              } else {
+                toast(`Guardado correctamente`, {
+                  autoClose: 2000,
+                  theme: "dark",
+                });
+              }
+            },
+            afterStore: (data: any) => {
+              console.log(data);
+              if (data.errors || data.error) {
+                toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+                  autoClose: 5000,
+                  theme: "colored",
+                });
+              } else {
+                toast(`Guardado correctamente`, {
+                  autoClose: 2000,
+                  theme: "dark",
+                });
+              }
+            },
+            showRequestConfiguration: {
+              method: "GET",
+              headers: {
+                Authorization: authorization(),
+                "Content-Type": "application/json",
+              },
+            },
+            updateRequestConfiguration: {
+              method: "PATCH",
+              headers: {
+                Authorization: authorization(),
+                "Content-Type": "application/json",
+              },
+            },
+            storeRequestConfiguration: {
+              method: "POST",
+              headers: {
+                Authorization: authorization(),
+                "Content-Type": "application/json",
+              },
+            },
+          }}
         />
       </Layout>
-      <ModalDocs
-        open={IsOpenModal}
-        onClose={closeModal}
-        data={dataDocuments}
-        />
+      <ModalDocs open={IsOpenModal} onClose={closeModal} data={dataDocuments} />
     </div>
   );
 };

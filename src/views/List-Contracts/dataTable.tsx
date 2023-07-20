@@ -42,11 +42,6 @@ export const dataTable = [
   {
     key: "crop",
     title: "Crop",
-    format: (value: any) => {
-      const dateStr = value;
-      const date = new Date(dateStr);
-      return date.getFullYear() ? date.getFullYear() : "s/n";
-    },
   },
   {
     key: "quantity",

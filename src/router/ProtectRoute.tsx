@@ -31,6 +31,7 @@ const ProtectRoute: React.FC<ProtectRouteProps> = ({ gate }) => {
     // Renderiza un componente de carga o una pantalla de espera mientras se verifica los permisos
     return (<Loader />);
   }
+  
   return hasAccess.current ? <Outlet /> : <Navigate to="/acceso-denegado" />;
 };
 
