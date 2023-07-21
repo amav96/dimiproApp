@@ -174,6 +174,16 @@ export const formData: Array<GlobalInputs | Slot> = [
     },
   },
   {
+    icon: QtyIcon,
+    key: "margenPercentage",
+    placeholder: "Escribe sólo el número",
+    title: "Margen de error (%):",
+    name: "margenPercentage",
+    value: "",
+    type: "number",
+    formatValue: (value: any) => Number(value),
+  },
+  {
     icon: BrokerIcon,
     key: "broker",
     placeholder: "Broker",
@@ -254,6 +264,52 @@ export const formData: Array<GlobalInputs | Slot> = [
       },
     },
     options: [],
+  },
+  {
+    icon: CropIcon,
+    key: "insurance",
+    placeholder: "Agregar seguro",
+    title: "Insurance:",
+    name: "insurance",
+    value: "",
+    type: "text",
+  },
+  {
+    icon: CropIcon,
+    key: "shippingDate",
+    placeholder: "Ej: December 2023",
+    title: "Shipping Date:",
+    name: "shippingDate",
+    value: "",
+    type: "text",
+    validations: {
+      rules: {
+        required: true,
+      },
+    }
+  },
+  {
+    icon: CropIcon,
+    key: "destination",
+    placeholder: "Ej: Livorno - Italy",
+    title: "Agregar destino:",
+    name: "destination",
+    value: "",
+    type: "text",
+    validations: {
+      rules: {
+        required: true,
+      },
+    }
+  },
+  {
+    icon: CropIcon,
+    key: "salesConditions",
+    placeholder: "Ej: FCA General Deheza",
+    title: "Sales Conditions:",
+    name: "salesConditions",
+    value: "",
+    type: "text",
   },
   {
     icon: ConditionsIcon,

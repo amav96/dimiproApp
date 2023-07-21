@@ -21,5 +21,6 @@ export interface Company  {
   exporter: number,
   importer: number,
   broker: number,
-  media?: Media
+  media?: Media,
+  website?: string,
 }

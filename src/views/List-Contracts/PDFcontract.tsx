@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
   },
   labelWidth: {
     minWidth: 150,
+  },
+  fontText: {
+    fontSize: 10,
   }
 });
 
@@ -124,7 +127,7 @@ const PDFcontract = () => {
                 <Text>Contacto</Text>
                 <View style={styles.paragraph}>
                   <Text>{contract?.broker?.email}</Text>
-                  <Text>www.webdelaempresa.com</Text>
+                  <Text>{contract?.broker?.website}</Text>
                 </View>
               </View>
             </View>
@@ -225,7 +228,7 @@ const PDFcontract = () => {
                     {contract?.product?.name},{" "}
                     {contract?.category?.name},{" "}
                     {contract?.calibers?.map((caliber: any) => caliber.name)},{" "}
-                    {"Grade 1"}
+                    Crop: {contract?.crop}
                   </Text>
                 </View>
               </View>
@@ -243,7 +246,7 @@ const PDFcontract = () => {
                   }}
                 >
                   <Text>
-                    {contract?.quantity} Tons. (+/-5%)
+                    {contract?.quantity} Tons. (+/-{contract?.margenPercentage}%)
                   </Text>
                 </View>
               </View>
@@ -261,7 +264,8 @@ const PDFcontract = () => {
                   }}
                 >
                   <Text>
-                    {contract?.currency?.nameShort}{" "}{contract?.price}/ton
+                    {contract?.currency?.nameShort}{" "}{contract?.price}/ton{" "}-{" "}
+                    {contract?.salesConditions}
                   </Text>
                 </View>
               </View>
@@ -279,7 +283,7 @@ const PDFcontract = () => {
                   }}
                 >
                   <Text>
-                    CIUDAD - PAÍS
+                    {contract?.destination}
                   </Text>
                 </View>
               </View>
@@ -315,7 +319,7 @@ const PDFcontract = () => {
                   }}
                 >
                   <Text>
-                    DECEMBER 2022
+                    {contract?.shippingDate}
                   </Text>
                 </View>
               </View>
@@ -354,6 +358,24 @@ const PDFcontract = () => {
                 >
                   <Text>
                     {contract?.paymentMethod?.name}
+                  </Text>
+                </View>
+              </View>
+              {/* INSURANCE */}
+              <View
+                style={[
+                  styles.spaceTop,
+                  { display: "flex", flexDirection: "row" },
+                ]}
+              >
+                <Text style={styles.labelWidth}>Insurance/Seguro:</Text>
+                <View
+                  style={{
+                    marginLeft: 40,
+                  }}
+                >
+                  <Text>
+                    {contract?.insurance}
                   </Text>
                 </View>
               </View>

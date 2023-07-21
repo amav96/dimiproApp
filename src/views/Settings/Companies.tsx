@@ -141,6 +141,14 @@ export function Companies() {
         },
       },
       {
+        key: 'website',
+        placeholder : 'Website',
+        name: 'website',
+        value: '',
+        type: 'text',
+        cols: 'c-col-span-4',
+      },
+      {
         key: 'postalCode',
         placeholder : 'postal Code',
         name: 'postalCode',
