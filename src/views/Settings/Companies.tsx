@@ -186,6 +186,19 @@ export function Companies() {
         clearable: true,
       },
       {
+        key: 'address',
+        placeholder: 'Address',
+        name: 'address',
+        value: '',
+        type: 'text',
+        cols: 'c-col-span-4',
+        validations: {
+          rules: {
+            required: true,
+          }
+        }
+      },
+      {
         key: 'prefix',
         placeholder: 'Prefix|Code',
         name: 'prefix',

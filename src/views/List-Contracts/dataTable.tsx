@@ -74,6 +74,13 @@ export const dataTable = [
   {
     key: "specifications",
     title: "Specifications",
+    format: (value: string) => {
+      if (value.length > 50) {
+        return value.substr(0, 35) + "...";
+      } else {
+        return value;
+      }
+    }
   },
   {
     key: "createdAt",
