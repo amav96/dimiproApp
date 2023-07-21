@@ -24,19 +24,6 @@ export function Packagings() {
           },
         },
       },
-      {
-        key: 'kg',
-        placeholder: 'Kg',
-        name: 'kg',
-        value: '',
-        type: 'text',
-        cols: 'c-col-span-4',
-        validations: {
-          rules: {
-            required: true,
-          },
-        },
-      }
     ]
   );
 
@@ -49,14 +36,6 @@ export function Packagings() {
       type: 'text',
       cols: 'c-col-span-4'
     },
-    {
-      key: 'kg',
-      placeholder : 'Kg',
-      name: 'kg',
-      value: '',
-      type: 'text',
-      cols: 'c-col-span-4'
-    }
   ])
 
   return (
@@ -65,7 +44,6 @@ export function Packagings() {
       table={{
         columns: useMemo(() => [
           {key: 'name', title: 'Name'},
-          {key: 'kg', title: 'Kg' },
           {key: 'createdAt', title: 'created', format:(value: string) => formatDateTime(value) || '' },
           {key: 'edit', title: 'Edit'},
           {key: 'delete', title: 'Delete'},

@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#111111",
+    color: "#fff",
     padding: 10,
   },
   paragraph: {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   },
   fontText: {
     fontSize: 10,
-  }
+  },
 });
 
 function formatDate(inputDate: string) {
@@ -68,10 +69,6 @@ function formatDate(inputDate: string) {
 
   return `${month} ${day} ${year}`;
 }
-
-const inputDate = "2023-07-21T01:26:57.830Z";
-const formattedDate = formatDate(inputDate);
-console.log(formattedDate); // Output: "JULY 21 2023"
 
 const PDFcontract = () => {
   const { getDataProviders } = useDataProvider();
@@ -113,7 +110,10 @@ const PDFcontract = () => {
               }}
             >
               <View>
-                <Text>ADDRESS</Text>
+                <Text style={{
+                  fontSize: 16,
+                  fontWeight: "bold"
+                }}>ADDRESS</Text>
                 <Text style={styles.paragraph}>
                   {contract?.broker?.address} {contract?.broker?.city?.name}{" "}
                   {contract?.broker?.vat} {contract?.broker?.country?.iso2}
@@ -124,7 +124,10 @@ const PDFcontract = () => {
                   marginLeft: 20,
                 }}
               >
-                <Text>Contacto</Text>
+                <Text style={{
+                  fontSize: 16,
+                  fontWeight: "bold"
+                }}>Contact</Text>
                 <View style={styles.paragraph}>
                   <Text>{contract?.broker?.email}</Text>
                   <Text>{contract?.broker?.website}</Text>
@@ -133,7 +136,7 @@ const PDFcontract = () => {
             </View>
           </View>
           {/* BODY */}
-          <View style={[styles.body, { fontSize: 12 }]}>
+          <View style={[styles.body, { fontSize: 10, lineHeight: 1.2 }]}>
             <View
               style={{
                 display: "flex",
@@ -180,8 +183,8 @@ const PDFcontract = () => {
                     {contract?.exporter?.postalCode}
                   </Text>
                   <Text>
-                    {contract?.exporter?.city?.name}{" "}-{" "}
-                    {contract?.exporter?.state?.name}{" "}-{" "}
+                    {contract?.exporter?.city?.name} -{" "}
+                    {contract?.exporter?.state?.name} -{" "}
                     {contract?.exporter?.country?.name}{" "}
                   </Text>
                 </View>
@@ -205,8 +208,8 @@ const PDFcontract = () => {
                     {contract?.importer?.postalCode}
                   </Text>
                   <Text>
-                    {contract?.importer?.city?.name}{" "}-{" "}
-                    {contract?.importer?.state?.name}{" "}-{" "}
+                    {contract?.importer?.city?.name} -{" "}
+                    {contract?.importer?.state?.name} -{" "}
                     {contract?.importer?.country?.name}{" "}
                   </Text>
                 </View>
@@ -225,8 +228,7 @@ const PDFcontract = () => {
                   }}
                 >
                   <Text>
-                    {contract?.product?.name},{" "}
-                    {contract?.category?.name},{" "}
+                    {contract?.product?.name}, {contract?.category?.name},{" "}
                     {contract?.calibers?.map((caliber: any) => caliber.name)},{" "}
                     Crop: {contract?.crop}
                   </Text>
@@ -246,12 +248,13 @@ const PDFcontract = () => {
                   }}
                 >
                   <Text>
-                    {contract?.quantity} Tons. (+/-{contract?.margenPercentage}%)
+                    {contract?.quantity} Tons. (+/-{contract?.margenPercentage}
+                    %)
                   </Text>
                 </View>
               </View>
-               {/* PRICE */}
-               <View
+              {/* PRICE */}
+              <View
                 style={[
                   styles.spaceTop,
                   { display: "flex", flexDirection: "row" },
@@ -264,7 +267,7 @@ const PDFcontract = () => {
                   }}
                 >
                   <Text>
-                    {contract?.currency?.nameShort}{" "}{contract?.price}/ton{" "}-{" "}
+                    {contract?.currency?.nameShort} {contract?.price}/ton -{" "}
                     {contract?.salesConditions}
                   </Text>
                 </View>
@@ -282,9 +285,7 @@ const PDFcontract = () => {
                     marginLeft: 40,
                   }}
                 >
-                  <Text>
-                    {contract?.destination}
-                  </Text>
+                  <Text>{contract?.destination}</Text>
                 </View>
               </View>
               {/* PACKAGING */}
@@ -300,9 +301,7 @@ const PDFcontract = () => {
                     marginLeft: 40,
                   }}
                 >
-                  <Text>
-                    {contract?.packaging?.name}
-                  </Text>
+                  <Text>{contract?.packaging?.name}</Text>
                 </View>
               </View>
               {/* SHIPMENT */}
@@ -318,9 +317,7 @@ const PDFcontract = () => {
                     marginLeft: 40,
                   }}
                 >
-                  <Text>
-                    {contract?.shippingDate}
-                  </Text>
+                  <Text>{contract?.shippingDate}</Text>
                 </View>
               </View>
               {/* SPECIFICATIONS */}
@@ -336,9 +333,11 @@ const PDFcontract = () => {
                     marginLeft: 40,
                   }}
                 >
-                  <Text style={{
-                    maxWidth: "60%"
-                  }}>
+                  <Text
+                    style={{
+                      maxWidth: "60%",
+                    }}
+                  >
                     {contract?.specifications}
                   </Text>
                 </View>
@@ -356,9 +355,7 @@ const PDFcontract = () => {
                     marginLeft: 40,
                   }}
                 >
-                  <Text>
-                    {contract?.paymentMethod?.name}
-                  </Text>
+                  <Text>{contract?.paymentMethod?.name}</Text>
                 </View>
               </View>
               {/* INSURANCE */}
@@ -374,9 +371,23 @@ const PDFcontract = () => {
                     marginLeft: 40,
                   }}
                 >
-                  <Text>
-                    {contract?.insurance}
-                  </Text>
+                  <Text>{contract?.insurance}</Text>
+                </View>
+              </View>
+              {/* PERCENTAGE BROKER */}
+              <View
+                style={[
+                  styles.spaceTop,
+                  { display: "flex", flexDirection: "row" },
+                ]}
+              >
+                <Text style={styles.labelWidth}>Commision/Comisión:</Text>
+                <View
+                  style={{
+                    marginLeft: 40,
+                  }}
+                >
+                  <Text>{contract?.brokerPercent} %</Text>
                 </View>
               </View>
               {/* Thanks */}
@@ -386,9 +397,58 @@ const PDFcontract = () => {
                   { display: "flex", flexDirection: "row", marginTop: 40 },
                 ]}
               >
-                <Text style={styles.labelWidth}>Thanks for the bussiness. Best regards</Text>
+                <Text style={styles.labelWidth}>
+                  Thanks for the bussiness. Best regards
+                </Text>
               </View>
             </View>
+            {/* SIGNATURES */}
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                width: "60%",
+                marginLeft: "auto",
+                marginTop: 40,
+              }}
+            >
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text>___________________</Text>
+                <Text
+                  style={{
+                    marginTop: 4,
+                  }}
+                >
+                  Accepted by seller
+                </Text>
+              </View>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text>_________________</Text>
+                <Text
+                  style={{
+                    marginTop: 4,
+                  }}
+                >
+                  Accepted by buyer
+                </Text>
+              </View>
+            </View>
+            {/* FOOTER */}
           </View>
         </Page>
       </Document>

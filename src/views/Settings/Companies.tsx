@@ -222,7 +222,7 @@ export function Companies() {
         name: 'phoneNumber',
         value: '',
         type: 'text',
-        cols: 'c-col-span-4',
+        cols: 'c-col-span-6',
       },
       {
         key: 'vat',
@@ -230,7 +230,15 @@ export function Companies() {
         name: 'vat',
         value: '',
         type: 'text',
-        cols: 'c-col-span-4',
+        cols: 'c-col-span-6',
+      },
+      {
+        key: 'logo',
+        placeholder: 'Logo',
+        name: 'logo',
+        value: '',
+        type: 'text',
+        cols: 'c-col-span-6',
       },
       {
         key: 'exporter',
@@ -263,14 +271,6 @@ export function Companies() {
         cols: 'c-col-span-2'
       },
       {
-        key: 'logo',
-        placeholder: 'Logo',
-        name: 'logo',
-        value: '',
-        type: 'text',
-        cols: 'c-col-span-12',
-      },
-      {
         slot: true,
         key: 'spaceColor',
         value: '',
@@ -282,7 +282,7 @@ export function Companies() {
         name: 'color',
         value: '',
         type: 'color',
-        cols: 'c-col-span-4',
+        cols: 'c-col-span-6',
       },
     ]
   );
