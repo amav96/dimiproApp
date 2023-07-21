@@ -263,13 +263,14 @@
 }
 
 .c-gap-2 {
-  gap: 0.5rem;
+  gap: 16px;
 }
 
 /* flex */
 
 .c-flex {
   display: flex;
+  height: 100%;
 }
 
 .c-flex-col {
@@ -915,3 +916,4 @@ video {
 [hidden] {
   display: none;
 }
+

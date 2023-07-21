@@ -12,6 +12,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        position: relative;
     }
 
     .input_icon {
@@ -39,7 +40,7 @@
     position: relative;
     .password-icon {
       position: absolute;
-      top: 14px;
+      top: 12px;
       right: 1rem;
       cursor: pointer;
 
