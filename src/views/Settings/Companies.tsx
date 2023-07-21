@@ -121,6 +121,7 @@ export function Companies() {
         value: '',
         type: 'text',
         cols: 'c-col-span-4',
+        title: 'Name:',
         validations: {
           rules: {
             required: true,
@@ -129,11 +130,12 @@ export function Companies() {
       },
       {
         key: 'email',
-        placeholder : 'Email',
+        placeholder : 'E-mail',
         name: 'email',
         value: '',
         type: 'text',
         cols: 'c-col-span-4',
+        title: 'E-mail:',
         validations: {
           rules: {
             required: true,
@@ -144,14 +146,16 @@ export function Companies() {
         key: 'website',
         placeholder : 'Website',
         name: 'website',
+        title: 'Website:',
         value: '',
         type: 'text',
         cols: 'c-col-span-4',
       },
       {
         key: 'postalCode',
-        placeholder : 'postal Code',
+        placeholder : 'Postal Code',
         name: 'postalCode',
+        title: 'Postal Code:',
         value: '',
         type: 'text',
         cols: 'c-col-span-4'
@@ -164,6 +168,7 @@ export function Companies() {
         options: countries,
         type: 'select',
         cols: 'c-col-span-4',
+        title: 'Country:',
         clearable: true,
         onSelect : onCountry,
         validations: {
@@ -179,19 +184,31 @@ export function Companies() {
         value: [],
         options: [],
         type: 'select',
+        title: 'State:',
         cols: 'c-col-span-4',
         clearable: true,
-        onSelect : onState
+        onSelect : onState,
+        validations: {
+          rules: {
+            required: true,
+          },
+        },
       },
       {
         key: 'city',
         placeholder: 'City',
         name: 'city',
+        title: 'City:',
         value: [],
         options: [],
         type: 'select',
         cols: 'c-col-span-4',
         clearable: true,
+        validations: {
+          rules: {
+            required: true,
+          },
+        },
       },
       {
         key: 'address',
@@ -200,6 +217,7 @@ export function Companies() {
         value: '',
         type: 'text',
         cols: 'c-col-span-4',
+        title: 'Address:',
         validations: {
           rules: {
             required: true,
@@ -211,6 +229,7 @@ export function Companies() {
         placeholder: 'Prefix|Code',
         name: 'prefix',
         label: 'fullName',
+        title: 'Prefix|Code:',
         value: [],
         options: prefixs,
         type: 'select',
@@ -218,11 +237,17 @@ export function Companies() {
       },
       {
         key: 'phoneNumber',
-        placeholder: 'phone Number',
+        placeholder: 'Phone Number',
         name: 'phoneNumber',
         value: '',
         type: 'text',
-        cols: 'c-col-span-6',
+        cols: 'c-col-span-4',
+        title: 'Phone Number:',
+        validations: {
+          rules: {
+            required: true,
+          },
+        },
       },
       {
         key: 'vat',
@@ -230,7 +255,8 @@ export function Companies() {
         name: 'vat',
         value: '',
         type: 'text',
-        cols: 'c-col-span-6',
+        title: 'Vat:',
+        cols: 'c-col-span-4',
       },
       {
         key: 'logo',
@@ -238,7 +264,8 @@ export function Companies() {
         name: 'logo',
         value: '',
         type: 'text',
-        cols: 'c-col-span-6',
+        cols: 'c-col-span-4',
+        title: 'Logo:',
       },
       {
         key: 'exporter',
@@ -248,7 +275,7 @@ export function Companies() {
         defaultValue: 0,
         value: null,
         type: 'switch',
-        cols: 'c-col-span-2'
+        cols: 'c-col-span-2',
       },
       {
         key: 'importer',
@@ -258,7 +285,7 @@ export function Companies() {
         defaultValue: 0,
         value: null,
         type: 'switch',
-        cols: 'c-col-span-2'
+        cols: 'c-col-span-2',
       },
       {
         key: 'broker',
@@ -268,13 +295,7 @@ export function Companies() {
         defaultValue: 0,
         value: null,
         type: 'switch',
-        cols: 'c-col-span-2'
-      },
-      {
-        slot: true,
-        key: 'spaceColor',
-        value: '',
-        name: 'spaceColor'
+        cols: 'c-col-span-2',
       },
       {
         key: 'color',
@@ -283,6 +304,7 @@ export function Companies() {
         value: '',
         type: 'color',
         cols: 'c-col-span-6',
+        title: 'Color:',
       },
     ]
   );
@@ -413,10 +435,7 @@ export function Companies() {
         urlUpdate: Routes.COMPANIES.UPDATE,
         urlShow: Routes.COMPANIES.SHOW,
         closable: true,
-        title: 'Guardar usuario',
-        scopedFields: {
-          spaceColor : (data: any) => (<div>Color</div>) 
-        },
+        title: 'Save Company',
         afterUpdate: (data: any) => {
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {

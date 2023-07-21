@@ -127,7 +127,7 @@ const PDFcontract = () => {
                 <Text style={{
                   fontSize: 16,
                   fontWeight: "bold"
-                }}>Contact</Text>
+                }}>CONTACT</Text>
                 <View style={styles.paragraph}>
                   <Text>{contract?.broker?.email}</Text>
                   <Text>{contract?.broker?.website}</Text>
