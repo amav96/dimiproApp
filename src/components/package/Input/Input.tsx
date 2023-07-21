@@ -92,16 +92,16 @@ export function Input(props: PropsInput) {
           disabled={disabled}
           type={showPassword ? "text" : type}
         />
+        {type === "password" && (
+          <span className="password-icon" onClick={togglePasswordVisibility}>
+            {showPassword ? (
+              <img src={IconCloseEye} alt="Ocultar contraseña" />
+            ) : (
+              <img src={IconOpenEye} alt="Mostrar contraseña" />
+            )}
+          </span>
+        )}
       </div>
-      {type === "password" && (
-        <span className="password-icon" onClick={togglePasswordVisibility}>
-          {showPassword ? (
-            <img src={IconCloseEye} alt="Ocultar contraseña" />
-          ) : (
-            <img src={IconOpenEye} alt="Mostrar contraseña" />
-          )}
-        </span>
-      )}
       {
         // mostrar errores
         Array.isArray(localErrors) &&
