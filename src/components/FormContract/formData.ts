@@ -223,7 +223,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     placeholder: "Seleccionar moneda",
     title: "Moneda:",
     name: "currency",
-    value: "",
+    value: [],
     type: "select",
     formatValue: (value: any) => value?.id,
     validations: {
@@ -239,7 +239,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     placeholder: "Seleccionar metodo de pago",
     title: "Método de pago:",
     name: "paymentMethod",
-    value: "",
+    value: [],
     type: "select",
     formatValue: (value: any) => value?.id,
     validations: {
@@ -255,15 +255,15 @@ export const formData: Array<GlobalInputs | Slot> = [
     placeholder: "Seleccionar surveyor",
     title: "Surveyor:",
     name: "surveyor",
-    value: "",
+    value: [],
     type: "select",
     formatValue: (value: any) => value?.id,
+    options: [],
     validations: {
       rules: {
         required: true,
       },
     },
-    options: [],
   },
   {
     icon: CropIcon,
