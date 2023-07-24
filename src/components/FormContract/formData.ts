@@ -206,7 +206,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: PriceIcon,
     key: "price",
-    placeholder: "Precio",
+    placeholder: "Precio x ton",
     title: "Precio:",
     name: "price",
     value: "",

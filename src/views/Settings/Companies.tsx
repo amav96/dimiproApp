@@ -297,15 +297,15 @@ export function Companies() {
         type: 'switch',
         cols: 'c-col-span-2',
       },
-      {
-        key: 'color',
-        placeholder: 'Color',
-        name: 'color',
-        value: '',
-        type: 'color',
-        cols: 'c-col-span-6',
-        title: 'Color:',
-      },
+      // {
+      //   key: 'color',
+      //   placeholder: 'Color',
+      //   name: 'color',
+      //   value: '',
+      //   type: 'color',
+      //   cols: 'c-col-span-6',
+      //   title: 'Color:',
+      // },
     ]
   );
 

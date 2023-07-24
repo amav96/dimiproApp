@@ -59,7 +59,7 @@ function MainPage() {
             },
           },
           {
-            title: 'Categories',
+            title: 'Product Types',
             image: baseApiUrl + "/icons/lista.svg",
             path: "/ajustes/categories",
             onNavigate: (data: any) => {

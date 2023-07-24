@@ -91,7 +91,7 @@ export function Calibers() {
         urlUpdate: Routes.CALIBERS.UPDATE,
         urlShow: Routes.CALIBERS.SHOW,
         closable: true,
-        title: 'Guardar usuario',
+        title: 'Save calibers',
         afterUpdate: (data: any) => {
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
