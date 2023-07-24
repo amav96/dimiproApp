@@ -189,7 +189,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     placeholder: "Broker",
     title: "Broker:",
     name: "broker",
-    value: "",
+    value: [],
     type: "select",
     formatValue: (value: any) => value?._id,
     options: [],
