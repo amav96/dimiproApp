@@ -257,7 +257,6 @@ export function Users() {
       cols: "c-col-span-4",
       options: roles,
       formatValue: (value: Role[]) => {
-        console.log(value);
         if (value) {
           return value.map((v) => v._id).toString();
         }

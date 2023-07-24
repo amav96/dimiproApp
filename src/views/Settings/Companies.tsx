@@ -343,7 +343,7 @@ export function Companies() {
       multiple: true,
       type: 'select',
       cols: 'c-col-span-4',
-      formatValue : (value: Country[]) => value.map((v:Country) => v.id),
+      formatValue : (value: Country[]) => value.map((v:Country) => v.id) || [],
     },
     {
       key: 'exporter',

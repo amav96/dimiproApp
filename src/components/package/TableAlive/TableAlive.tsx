@@ -68,7 +68,8 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
               }
 
               Object.keys(queryParams).forEach((k) => {
-                  if(queryParams[k as keyof object] === null || queryParams[k as keyof object] === ''){
+                let param = queryParams[k as keyof object] as any;
+                  if(param === null || param === '' || (Array.isArray(param) && param.length === 0)){
                       delete queryParams[k as keyof object]
                   }
               })
