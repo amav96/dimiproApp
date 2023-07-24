@@ -33,6 +33,7 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
 
   useEffect(() => {
     inputs.forEach(({key}, i) => {
+      console.log('edoiti')
       const index = generatedInputs.map((m) => m.key).indexOf(key);
       if (index > -1) {
         let updateInput : GlobalInputs = inputs[i] as GlobalInputs
@@ -180,7 +181,6 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
       let currentInput = generatedInputs[index]
       if(currentInput.validations){
         validator.validate(formValues[currentInput.key], currentInput.validations);
-        console.log(formValues[currentInput.key], currentInput.validations, currentInput.key)
         if(!isEmpty(validator.getErrors())){
           setGeneratedInputs((prevState) =>
               prevState.map((obj,i) => {

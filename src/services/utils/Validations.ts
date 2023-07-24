@@ -11,6 +11,8 @@ export const isEmpty = (value: any) : boolean => { // Return true if condition s
   switch(typeof value){
     case "string":
         return !value || value.length === 0;
+    case "number":
+        return !value;
     case "object":
         if(Array.isArray(value)) return value.length === 0
         else return Object.keys(value).length === 0
