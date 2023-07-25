@@ -7,14 +7,14 @@ import { Routes } from "@services/utils/Routes";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { Company } from "src/types/company.type";
-import { formData } from "../../components/FormContract/formData";
-import ModalDocs from "../../components/Modals/ModalDocs";
-import { useAppSelector } from "../../hooks";
-import { RootState } from "../../store";
-import "./_list-contracts.scss";
+import { formData } from "../../../components/FormContract/formData";
+import ModalDocs from "../../../components/Modals/ModalDocs";
+import { useAppSelector } from "../../../hooks";
+import { RootState } from "../../../store";
+import "./_listContracts.scss";
 import { dataTable } from "./dataTable";
 
-const ListContacts = () => {
+const ListContracts = () => {
   const [IsOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [inputsModalForm, setInputsModalForm] =
     useState<Array<GlobalInputs | any>>(formData);
@@ -180,6 +180,10 @@ const ListContacts = () => {
     setIsOpenModal(true);
   };
 
+  const onShow = (data: any) => {
+    console.log(data)
+  }
+
   return (
     <div className="list-contracts__container">
       <Layout title="Lista de contratos">
@@ -245,7 +249,6 @@ const ListContacts = () => {
           }}
           modalForm={{
             inputs: inputsModalForm,
-            urlStore: Routes.CONTRACTS.STORE,
             urlUpdate: Routes.CONTRACTS.UPDATE,
             urlShow: Routes.CONTRACTS.SHOW,
             closable: true,
@@ -298,6 +301,7 @@ const ListContacts = () => {
                 "Content-Type": "application/json",
               },
             },
+            onShow: onShow
           }}
         />
       </Layout>
@@ -306,4 +310,4 @@ const ListContacts = () => {
   );
 };
 
-export default ListContacts;
+export default ListContracts;

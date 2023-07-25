@@ -4,10 +4,10 @@ import { Login } from "@views/Auth/Login";
 import { Logout } from "@views/Auth/Logout";
 import { AccesoDenegado } from "@views/Helpers/AccesoDenegado";
 import ProtectRoute from "./ProtectRoute";
-import AddContract from "@views/Add-Contract/AddContract";
-import ListContacts from "@views/List-Contracts/ListContacts";
+import AddContract from "@views/Contracts/AddContract/AddContract";
+import ListContracts from "@views/Contracts/ListContracts/ListContracts";
 import { NotFound } from "@views/Helpers/NotFound";
-import { Companies } from "@views/Settings/Companies";
+import { Companies } from "@views/Settings/Companies/Companies";
 import { Packagings } from "@views/Settings/Packagings";
 import { Calibers } from "@views/Settings/Calibers";
 import { Currencies } from "@views/Settings/Currencies";
@@ -15,7 +15,7 @@ import { PaymentMethods } from "@views/Settings/PaymentMethods";
 import { Products } from "@views/Settings/Products";
 import { Surveyors } from "@views/Settings/Surveyors";
 import { Categories } from "@views/Settings/Categories";
-import PDFcontract from "@views/List-Contracts/PDFcontract";
+import PDFcontract from "@views/Contracts/PDFcontract";
 
 export function Router() {
   return (
@@ -52,7 +52,7 @@ export function Router() {
         <Route path="/add-contract" element={<AddContract />} />
       </Route>
       <Route element={<ProtectRoute gate={"contracts_index"} />}>
-        <Route path="/list-contracts" element={<ListContacts />} />
+        <Route path="/list-contracts" element={<ListContracts />} />
       </Route>
       <Route element={<ProtectRoute gate={"contracts_index"} />}>
         <Route path="/pdf/:id" element={<PDFcontract />} />

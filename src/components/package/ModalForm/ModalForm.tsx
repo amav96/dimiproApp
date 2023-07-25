@@ -33,7 +33,8 @@ export function ModalForm(props: PropsModalForm<string | number>) {
     handleStoreErrors,
     closable,
     title,
-    scopedFields
+    scopedFields,
+    onShow
  } = props;
 
 
@@ -202,6 +203,9 @@ export function ModalForm(props: PropsModalForm<string | number>) {
       let result = await response.json();
 
       result = result[modelShow]
+      if(onShow){
+        onShow(result)
+      }
       loadingEntity.current = false
       if(result) completeEntity(result)
     }

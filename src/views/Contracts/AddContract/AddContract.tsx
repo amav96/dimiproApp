@@ -1,6 +1,6 @@
 import { Layout } from '@package'
-import {FormContract} from '../../components/FormContract/FormContract'
-import './_add-contract.scss'
+import {FormContract} from '../../../components/FormContract/FormContract'
+import './_addContract.scss'
 
 const AddContract = () => {
   return (

@@ -28,4 +28,5 @@ export interface PropsModalForm<K extends string | number> {
     title?:string
     header?: any,
     scopedFields?: field<K>,
+    onShow?: Function
 }

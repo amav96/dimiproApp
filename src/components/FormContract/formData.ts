@@ -25,6 +25,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     type: "select",
     multiple: false,
     clearable: true,
+    trackBy: '_id',
     placeholder: "Seleccionar exportador",
     title: "Exportador:",
     formatValue: (value: any) => value?.id,
@@ -34,6 +35,7 @@ export const formData: Array<GlobalInputs | Slot> = [
       },
     },
     options: [],
+    cols: "c-col-span-6",
   },
   {
     icon: ExporterIcon,
@@ -43,6 +45,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     type: "select",
     multiple: false,
     clearable: true,
+    trackBy: '_id',
     placeholder: "Seleccionar importador",
     title: "Importador:",
     formatValue: (value: any) => value?.id,
@@ -52,6 +55,7 @@ export const formData: Array<GlobalInputs | Slot> = [
       },
     },
     options: [],
+    cols: "c-col-span-6",
   },
   {
     icon: CropIcon,
@@ -66,6 +70,7 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
+    cols: "c-col-span-6",
   },
   {
     icon: ProductIcon,
@@ -75,6 +80,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     type: "select",
     multiple: false,
     clearable: true,
+    trackBy: '_id',
     placeholder: "Seleccionar producto",
     title: "Producto:",
     formatValue: (value: any) => value?.id,
@@ -83,12 +89,8 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
-    options: [
-      {
-        name: "Maní",
-        id: 1,
-      },
-    ],
+    options: [],
+    cols: "c-col-span-6",
   },
   {
     icon: TypeIcon,
@@ -98,15 +100,17 @@ export const formData: Array<GlobalInputs | Slot> = [
     type: "select",
     multiple: false,
     clearable: true,
+    trackBy: '_id',
     placeholder: "Seleccionar tipo",
     title: "Tipo:",
-    formatValue: (value: any) => value?.id,
+    formatValue: (value: any) => value?.id || value?._id,
     validations: {
       rules: {
         required: true,
       },
     },
     options: [],
+    cols: "c-col-span-6",
   },
   {
     icon: CaliberIcon,
@@ -116,6 +120,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     type: "select",
     multiple: true,
     clearable: true,
+    trackBy: '_id',
     placeholder: "Seleccionar calibre",
     title: "Calibre:",
     formatValue : (value: any[]) => value.map((v:any) => v.id),
@@ -125,6 +130,7 @@ export const formData: Array<GlobalInputs | Slot> = [
       },
     },
     options: [],
+    cols: "c-col-span-6",
   },
   {
     icon: CropIcon,
@@ -139,6 +145,7 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
+    cols: "c-col-span-6",
   },
   {
     icon: PackagingIcon,
@@ -148,6 +155,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     type: "select",
     multiple: false,
     clearable: true,
+    trackBy: '_id',
     placeholder: "Seleccionar packaging",
     title: "Packaging:",
     formatValue: (value: any) => value?.id,
@@ -157,6 +165,7 @@ export const formData: Array<GlobalInputs | Slot> = [
       },
     },
     options: [],
+    cols: "c-col-span-6",
   },
   {
     icon: QtyIcon,
@@ -172,6 +181,7 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
+    cols: "c-col-span-6",
   },
   {
     icon: QtyIcon,
@@ -182,6 +192,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     value: "",
     type: "number",
     formatValue: (value: any) => Number(value),
+    cols: "c-col-span-6",
   },
   {
     icon: BrokerIcon,
@@ -193,6 +204,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     type: "select",
     formatValue: (value: any) => value?._id,
     options: [],
+    cols: "c-col-span-6",
   },
   {
     icon: PercentageIcon,
@@ -202,6 +214,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     name: "brokerPercent",
     value: "",
     type: "number",
+    cols: "c-col-span-6",
   },
   {
     icon: PriceIcon,
@@ -216,15 +229,17 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
+    cols: "c-col-span-6",
   },
   {
     icon: CoinIcon,
     key: "currency",
-    placeholder: "Seleccionar moneda",
-    title: "Moneda:",
+    placeholder: "Currency",
+    title: "Currency:",
     name: "currency",
     value: [],
     type: "select",
+    trackBy: '_id',
     formatValue: (value: any) => value?.id,
     validations: {
       rules: {
@@ -232,15 +247,17 @@ export const formData: Array<GlobalInputs | Slot> = [
       },
     },
     options: [],
+    cols: "c-col-span-6",
   },
   {
     icon: PaymentMethodIcon,
     key: "paymentMethod",
-    placeholder: "Seleccionar metodo de pago",
-    title: "Método de pago:",
+    placeholder: "Payment Method",
+    title: "Payment Method:",
     name: "paymentMethod",
     value: [],
     type: "select",
+    trackBy: '_id',
     formatValue: (value: any) => value?.id,
     validations: {
       rules: {
@@ -248,6 +265,7 @@ export const formData: Array<GlobalInputs | Slot> = [
       },
     },
     options: [],
+    cols: "c-col-span-6",
   },
   {
     icon: SurveyorIcon,
@@ -257,6 +275,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     name: "surveyor",
     value: [],
     type: "select",
+    trackBy: '_id',
     formatValue: (value: any) => value?.id,
     options: [],
     validations: {
@@ -264,6 +283,7 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
+    cols: "c-col-span-6",
   },
   {
     icon: CropIcon,
@@ -273,6 +293,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     name: "insurance",
     value: "",
     type: "text",
+    cols: "c-col-span-6",
   },
   {
     icon: CropIcon,
@@ -286,7 +307,8 @@ export const formData: Array<GlobalInputs | Slot> = [
       rules: {
         required: true,
       },
-    }
+    },
+    cols: "c-col-span-6",
   },
   {
     icon: CropIcon,
@@ -300,7 +322,8 @@ export const formData: Array<GlobalInputs | Slot> = [
       rules: {
         required: true,
       },
-    }
+    },
+    cols: "c-col-span-6",
   },
   {
     icon: CropIcon,
@@ -310,6 +333,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     name: "salesConditions",
     value: "",
     type: "text",
+    cols: "c-col-span-6",
   },
   {
     icon: ConditionsIcon,
@@ -324,6 +348,7 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
+    cols: "c-col-span-6",
   },
   {
     icon: FileIcon,
@@ -338,5 +363,6 @@ export const formData: Array<GlobalInputs | Slot> = [
         required: true,
       },
     },
+    cols: "c-col-span-6",
   },
 ];

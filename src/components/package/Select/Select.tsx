@@ -143,13 +143,13 @@ export function Select(props: PropsSelect) {
         if (SelectMenu.current.clientHeight > selectPosition.top) {
           pos.top = `${positionDownSelect}px`;
           pos.maxHeight = `${selectPosition.top}px`;
-          pos.width = `${icon ? selectPosition.width - 43 : selectPosition.width}px`;
+          pos.width = `${icon ? selectPosition.width : selectPosition.width}px`;
         } else {
           pos.top = `${realListPosition}px`;
           pos.maxHeight = `${
             selectPosition.top > 304 ? 304 : selectPosition.top
           }px`;
-          pos.width = `${icon ? selectPosition.width - 43 : selectPosition.width}px`;
+          pos.width = `${icon ? selectPosition.width : selectPosition.width}px`;
           pos.height = `${
             SelectMenu.current.clientHeight > 304 ? "304px" : "auto"
           }`;
@@ -157,15 +157,15 @@ export function Select(props: PropsSelect) {
       } else if (selectPosition.bottom > 304) {
         pos.top = `${positionDownSelect}px`;
         pos.maxHeight = `304px`;
-        pos.width = `${icon ? selectPosition.width - 43 : selectPosition.width}px`;
+        pos.width = `${icon ? selectPosition.width : selectPosition.width}px`;
       } else if (selectPosition.bottom < 304 && selectPosition.top < 200) {
         pos.top = `${positionDownSelect}px`;
         pos.maxHeight = `304px`;
-        pos.width = `${icon ? selectPosition.width - 43 : selectPosition.width}px`;
+        pos.width = `${icon ? selectPosition.width : selectPosition.width}px`;
       } else {
         pos.top = `${realListPosition}px`;
         pos.maxHeight = `${selectPosition.top}px`;
-        pos.width = `${icon ? selectPosition.width - 43 : selectPosition.width}px`;
+        pos.width = `${icon ? selectPosition.width : selectPosition.width}px`;
       }
     }
     setPositionListStyle((prev) => ({ ...prev, ...pos }));
@@ -352,8 +352,9 @@ export function Select(props: PropsSelect) {
   };
 
   useEffect(() => {
-    if(name === 'country'){
+    if(name === 'product'){
       console.log(value)
+      console.log(options)
     }
     if (!multiple && value && !isEmpty(value)) {
       setLocalValue(value[label as keyof object]);

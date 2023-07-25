@@ -8,8 +8,8 @@ import { formatDateTime } from '@services/utils/Formatters'
 import {  toast } from 'react-toastify';
 import './Companies.scss'
 import useDataProvider from '@hooks/useDataProvider'
-import { useAppSelector } from '../../hooks'
-import { RootState } from '../../store'
+import { useAppSelector } from '../../../hooks'
+import { RootState } from '../../../store'
 import PlaceRepository from '@repositories/places.repository'
 import { Country } from 'src/types/places.type'
 

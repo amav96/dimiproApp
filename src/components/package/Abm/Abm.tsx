@@ -44,7 +44,8 @@ export function Abm(props: AbmProps) {
       beforeStore,
       closable,
       title,
-      scopedFields
+      scopedFields,
+      onShow
       } = {}
   } = props;
 
@@ -66,7 +67,8 @@ export function Abm(props: AbmProps) {
     afterStore,
     beforeStore,
     title,
-    scopedFields
+    scopedFields,
+    onShow
   })
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
@@ -294,6 +296,7 @@ export function Abm(props: AbmProps) {
       beforeStore={beforeStore}
       closable={closable}
       title={title}
+      onShow={onShow}
       />
 
       <Dialog
