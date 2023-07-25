@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../src/hooks";
@@ -11,7 +11,6 @@ import { Form } from "../package/Form/Form";
 import { GlobalInputs, Slot } from "../package/Form/Form.type";
 import { formData } from "./formData";
 
-interface FormContractProps {}
 
 export const FormContract = () => {
   const [inputs, setInputs] = useState<Array<GlobalInputs | Slot>>(formData);
@@ -92,10 +91,12 @@ export const FormContract = () => {
     );
   }, [optionsMap]);
 
+  const sendingContract = useRef<boolean>(false);
   const onSubmit = async (data: any) => {
     const { items } = data;
 
     try {
+      if(sendingContract.current) return 
       if (data.isFormValid === true) {
         const formData = new FormData();
 
@@ -121,10 +122,12 @@ export const FormContract = () => {
           }
         }
 
+        sendingContract.current = true
         const response = await $http.post(
           `${baseApiUrl}/api/v1/contracts`,
           formData
         );
+        sendingContract.current = false
 
         if (response.status === 201 || response.status === 200) {
           toast.success("Contrato creado correctamente", {
@@ -145,6 +148,7 @@ export const FormContract = () => {
         });
       }
     } catch (error) {
+      sendingContract.current = false
       console.error("Error al realizar la solicitud POST:", error);
       toast.error("Error al crear contrato", {
         autoClose: 3000,
@@ -159,7 +163,7 @@ export const FormContract = () => {
         <span className="text-required">
           <span>*</span> Los campos son obligatorios
         </span>
-        <Button type="submit" customClass="btn-primary">
+        <Button disabled={sendingContract.current} type="submit" customClass="btn-primary">
           Crear contrato
         </Button>
       </Form>

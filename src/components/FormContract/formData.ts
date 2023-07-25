@@ -28,7 +28,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     trackBy: '_id',
     placeholder: "Seleccionar exportador",
     title: "Exportador:",
-    formatValue: (value: any) => value?.id,
+    formatValue: (value: any) => value?._id,
     validations: {
       rules: {
         required: true,
@@ -48,7 +48,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     trackBy: '_id',
     placeholder: "Seleccionar importador",
     title: "Importador:",
-    formatValue: (value: any) => value?.id,
+    formatValue: (value: any) => value?._id,
     validations: {
       rules: {
         required: true,
@@ -68,6 +68,8 @@ export const formData: Array<GlobalInputs | Slot> = [
     validations: {
       rules: {
         required: true,
+        min: 4,
+        max: 4
       },
     },
     cols: "c-col-span-6",
@@ -83,7 +85,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     trackBy: '_id',
     placeholder: "Seleccionar producto",
     title: "Producto:",
-    formatValue: (value: any) => value?.id,
+    formatValue: (value: any) => value?._id,
     validations: {
       rules: {
         required: true,
@@ -103,7 +105,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     trackBy: '_id',
     placeholder: "Seleccionar tipo",
     title: "Tipo:",
-    formatValue: (value: any) => value?.id || value?._id,
+    formatValue: (value: any) => value?._id,
     validations: {
       rules: {
         required: true,
@@ -123,7 +125,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     trackBy: '_id',
     placeholder: "Seleccionar calibre",
     title: "Calibre:",
-    formatValue : (value: any[]) => value.map((v:any) => v.id),
+    formatValue : (value: any[]) => value.map((v:any) => v.id ?? v._id),
     validations: {
       rules: {
         required: true,
@@ -158,7 +160,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     trackBy: '_id',
     placeholder: "Seleccionar packaging",
     title: "Packaging:",
-    formatValue: (value: any) => value?.id,
+    formatValue: (value: any) => value?._id,
     validations: {
       rules: {
         required: true,
@@ -240,7 +242,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     value: [],
     type: "select",
     trackBy: '_id',
-    formatValue: (value: any) => value?.id,
+    formatValue: (value: any) => value?._id,
     validations: {
       rules: {
         required: true,
@@ -258,7 +260,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     value: [],
     type: "select",
     trackBy: '_id',
-    formatValue: (value: any) => value?.id,
+    formatValue: (value: any) => value?._id,
     validations: {
       rules: {
         required: true,
@@ -276,7 +278,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     value: [],
     type: "select",
     trackBy: '_id',
-    formatValue: (value: any) => value?.id,
+    formatValue: (value: any) => value?._id,
     options: [],
     validations: {
       rules: {

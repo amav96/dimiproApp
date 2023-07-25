@@ -102,10 +102,6 @@ export function File(props: PropsFile) {
   };
 
   const checkIt = () => {
-    // if(validations !== undefined){
-    //   console.log('checkin')
-    //   handleValidations(value, validations);
-    // }
     document.body.onfocus = null;
   };
 

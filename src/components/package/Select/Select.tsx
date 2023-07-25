@@ -352,10 +352,6 @@ export function Select(props: PropsSelect) {
   };
 
   useEffect(() => {
-    if(name === 'product'){
-      console.log(value)
-      console.log(options)
-    }
     if (!multiple && value && !isEmpty(value)) {
       setLocalValue(value[label as keyof object]);
     }

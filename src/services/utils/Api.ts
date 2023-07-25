@@ -9,9 +9,10 @@ const isFileInParams = (params: any) => {
 
             if(typeof param === 'object' &&
             (
-                (Array.isArray(param) && param.some((val : any) => val.type &&  availablesFiles.includes(val.type?.split('/')[0])))  ||
-                availablesFiles.includes(param.type?.split('/')[0])
+                (Array.isArray(param) && param.some((val : any) => val?.type &&  availablesFiles.includes(val?.type?.split('/')[0])))  ||
+                (param.type && availablesFiles.includes(param.type?.split('/')[0]))
             )){
+                console.log('down')
                 hasFile = true
                 break
             }
@@ -23,13 +24,14 @@ const isFileInParams = (params: any) => {
 }
 
 const appendForm = async (params : any, deepFileInArray: boolean = false) :Promise<FormData> =>  {
+    let availablesFiles = ['image','pdf','csv','excel'];
     return new Promise((resolve) => {
       const formData = new FormData();
       Object.keys(params).forEach((key) => {
         const param = params[key as keyof object];
         if(typeof param === 'object' &&
             Array.isArray(param) &&
-            (deepFileInArray || (Array.isArray(param) &&  param.some((val : any) => val.type.split('/')[0] === 'image')))){
+            (deepFileInArray || (Array.isArray(param) &&  param.some((val : any) => availablesFiles.includes(val?.type?.split('/')[0]))))){
                 param.forEach((element: any, i: number) => {
                     formData.append(`${key}[${i}]`, element);
                 });
