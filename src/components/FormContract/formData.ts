@@ -68,8 +68,6 @@ export const formData: Array<GlobalInputs | Slot> = [
     validations: {
       rules: {
         required: true,
-        min: 4,
-        max: 4
       },
     },
     cols: "c-col-span-6",

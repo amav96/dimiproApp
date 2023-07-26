@@ -20,17 +20,17 @@ export default function usePermissions () {
           errors
          } = await authenticationRepository.permissions()
 
-         if(errors.message === 'Usuario no autenticado'){
-          toast(`🦄 ${errors.message || 'No estas autenticado'}`, {
-            position: "top-right",
-            autoClose: 1000,
-          });
-          navigate('/login')
-          return false
-         }
-
+         
          if(errors){
+           if(errors.message === 'Usuario no autenticado'){
             toast(`🦄 ${errors.message || 'No estas autenticado'}`, {
+              position: "top-right",
+              autoClose: 1000,
+            });
+            navigate('/login')
+            return false
+           }
+           toast(`🦄 ${errors.message || 'No estas autenticado'}`, {
               position: "top-right",
               autoClose: 1000,
             });
