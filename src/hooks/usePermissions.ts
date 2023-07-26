@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { selectPermissions } from "@store/auth/authSlice";
 import AuthenticationRepository from "@repositories/auth.repository";
@@ -20,6 +19,15 @@ export default function usePermissions () {
           permissions: serverPermissions ,
           errors
          } = await authenticationRepository.permissions()
+
+         if(errors.message === 'Usuario no autenticado'){
+          toast(`🦄 ${errors.message || 'No estas autenticado'}`, {
+            position: "top-right",
+            autoClose: 1000,
+          });
+          navigate('/login')
+          return false
+         }
 
          if(errors){
             toast(`🦄 ${errors.message || 'No estas autenticado'}`, {
