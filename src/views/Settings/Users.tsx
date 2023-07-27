@@ -173,6 +173,7 @@ export function Users() {
       value: "",
       type: "text",
       cols: "c-col-span-4",
+      formatValue: (value: string) => Number(value),
     },
     {
       key: "password",

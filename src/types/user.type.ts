@@ -7,7 +7,7 @@ export interface User  {
   firstName: string,
   lastName: string,
   email: string,
-  companyName: string,
+  company: string,
   postalCode: string,
   country: Country,
   state: State,
