@@ -105,14 +105,23 @@ export function File(props: PropsFile) {
     document.body.onfocus = null;
   };
 
+  const removeFile = (index: number) => {
+    const updatedFiles = [...value];
+    updatedFiles.splice(index, 1);
+    if (onChange) {
+      onChange(updatedFiles);
+    }
+  };
+
+
   const allowedFiles = (files: Array<File>) =>
     [...files].filter((f) => accept.includes(f.type as AcceptTypes));
 
   return (
     <div className={`File ${cols}`}>
       <div className="label-container">
-            {title && <label className='label'>{title}</label> }
-            {validations?.rules?.required && <span className="required">*</span>}
+        {title && <label className="label">{title}</label>}
+        {validations?.rules?.required && <span className="required">*</span>}
       </div>
       <div className="container">
         {icon && <img src={icon} alt="icon" className="File__icon" />}
@@ -135,7 +144,11 @@ export function File(props: PropsFile) {
             </div>
             <div className="File__box__text">
               {!isEmpty(value) ? (
-                <span> Archivos seleccionados </span>
+                <>
+                  {value.map((file: any, index: number) => (
+                    <span key={index} className="name-file">{file.name}</span>
+                  ))}
+                </>
               ) : (
                 <div className="text-center">
                   <span

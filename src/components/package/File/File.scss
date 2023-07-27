@@ -5,7 +5,7 @@
     padding: 10px 10px;
     border-radius: 35px;
     width: 21rem;
-    height: 4rem;
+    height: auto;
     background-color: $color-gray-soft;
     display: flex;
     flex-direction: column;
@@ -20,9 +20,14 @@
     }
     &__text {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       margin-top: 2px;
       cursor: pointer;
+
+      .name-file {
+        font-size: 12px;
+      }
     }
   }
 
