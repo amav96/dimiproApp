@@ -7,18 +7,20 @@ import { Routes } from "@services/utils/Routes";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { Company } from "src/types/company.type";
-import { formData } from "../../../components/FormContract/formData";
 import ModalDocs from "../../../components/Modals/ModalDocs";
 import { useAppSelector } from "../../../hooks";
 import { RootState } from "../../../store";
 import "./_listContracts.scss";
 import { dataTable } from "./dataTable";
+import { inputsEdit } from "./inputsModalForm";
 
 const ListContracts = () => {
   const [IsOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [inputsModalForm, setInputsModalForm] =
-    useState<Array<GlobalInputs | any>>(formData);
+    useState<Array<GlobalInputs | any>>(inputsEdit);
   const [dataDocuments, setDataDocuments] = useState<any>([]);
+  const [data, setData] = useState<any>(dataTable);
+ 
 
   const { getDataProviders } = useDataProvider();
 
@@ -189,7 +191,7 @@ const ListContracts = () => {
       <Layout title="Lista de contratos">
         <Abm
           table={{
-            columns: useMemo(() => dataTable, []),
+            columns: useMemo(() => dataTable, [formFilter, dataTable]),
             urlIndex: Routes.CONTRACTS.INDEX,
             requestConfiguration: {
               method: "GET",

@@ -41,6 +41,10 @@ export const selectPermissions = (state: RootState) => state.auth.permissions;
 
 export const selectToken = (state: RootState) => state.auth.token;
 
+export const editUser = (updatedUser: User) => (dispatch: any , getState: any) => {
+  dispatch(setUser(updatedUser));
+}
+
 // Action creators are generated for each case reducer function
 export const { setUser, setPermissions, setToken } = authSlice.actions
 export default authSlice.reducer

@@ -16,6 +16,7 @@ import { Products } from "@views/Settings/Products";
 import { Surveyors } from "@views/Settings/Surveyors";
 import { Categories } from "@views/Settings/Categories";
 import PDFcontract from "@views/Contracts/PDFcontract";
+import Profile from "@views/Profile/Profile";
 
 export function Router() {
   return (
@@ -57,6 +58,7 @@ export function Router() {
       <Route element={<ProtectRoute gate={"contracts_index"} />}>
         <Route path="/pdf/:id" element={<PDFcontract />} />
       </Route>
+      <Route path="profile" element={<Profile />} />
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/forgot-password" element={<Login />} />

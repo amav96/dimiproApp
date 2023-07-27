@@ -22,10 +22,12 @@
     padding: 4px 16px;
     margin-bottom: 8px;
     border-radius: 4px;
+    display: block;
+    width: fit-content;
     
     p {
       color: #fff;
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 }
