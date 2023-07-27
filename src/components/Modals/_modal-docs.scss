@@ -84,6 +84,29 @@
           }
         }
       }
+
+      form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 24px;
+
+        .Form {
+          width: 100%;
+
+          .File {
+            width: 100%;
+            grid-column: span 12/span 12;
+            .label-container {
+              display: none;
+            }
+          }
+        }
+
+        .btn-primary {
+          width: 100%;
+        }
+      }
     }
   }
 }
