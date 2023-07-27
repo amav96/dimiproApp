@@ -87,7 +87,6 @@
 
       form {
         display: flex;
-        align-items: center;
         gap: 8px;
         margin-top: 24px;
 
@@ -99,6 +98,12 @@
             grid-column: span 12/span 12;
             .label-container {
               display: none;
+            }
+
+            .File__box {
+              background-color: $color-white;
+              color: $color-black;
+              height: 3rem;
             }
           }
         }
