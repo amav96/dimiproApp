@@ -13,28 +13,16 @@ export function Table(props: TableProps<string>) {
     onChangePage,
     headerSticky,
     scrollbar = { height: "8", width: "8" },
+    loading = false
   } = props;
 
   const [localItems, setLocalItems] = useState<Array<any>>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [searchNoResults, setSearchNoResults] = useState<boolean>(false);
 
   useEffect(() => {
-    if (items?.length === 0 && localItems.length > 0) {
-      setLocalItems([]);
-      setSearchNoResults(true);
-    } else if (items) {
-      setLocalItems(items);
-      setSearchNoResults(false);
-    } else {
-      setLocalItems([]);
-      setSearchNoResults(true);
-    }
-
-    if (items?.length === 0 && localItems.length === 0) {
-      setLoading(true);
-    } else {
-      setLoading(false);
+    if(items?.length === 0 && localItems.length > 0){
+      setLocalItems([])
+    } else if(items){
+      setLocalItems(items)
     }
   }, [items]);
 
@@ -84,8 +72,8 @@ export function Table(props: TableProps<string>) {
 
   return (
     <div className="table-wrapper" onScroll={debounce(scrollTable, 300)}>
+      {!loading && localItems.length === 0 && <div className="no-results"><p>No se encontraron resultados</p></div>}
       {loading && <Loader />}
-      {!loading && searchNoResults && <div className="no-results"><p>No se encontraron resultados</p></div>}
       <style>
         {`.table-wrapper::-webkit-scrollbar {
           height: ${scrollbar.height}px;

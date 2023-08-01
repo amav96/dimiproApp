@@ -171,6 +171,7 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
       columns={columns}
       scopedColumns={scopedColumns}
       onChangePage={() => changePage()}
+      loading={loading.current}
       />
     </div>
   )

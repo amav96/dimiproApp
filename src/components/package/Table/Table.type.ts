@@ -17,7 +17,8 @@ type column<K extends string | number> = {
     scrollbar?:{
       height?: string
       width?: string
-    }
+    },
+    loading?: boolean
   }
   export interface TableProps<K extends string | number> extends BaseTable<K> {
   }

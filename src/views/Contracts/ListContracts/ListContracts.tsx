@@ -19,9 +19,6 @@ const ListContracts = () => {
   const [inputsModalForm, setInputsModalForm] =
     useState<Array<GlobalInputs | any>>(inputsEdit);
   const [dataDocuments, setDataDocuments] = useState<any>([]);
-  const [data, setData] = useState<any>(dataTable);
- 
-
   const { getDataProviders } = useDataProvider();
 
   const companies = useAppSelector(
@@ -164,10 +161,6 @@ const ListContracts = () => {
       },
     },
   ]);
-
-  const openModal = () => {
-    setIsOpenModal(true);
-  };
 
   const closeModal = () => {
     setIsOpenModal(false);

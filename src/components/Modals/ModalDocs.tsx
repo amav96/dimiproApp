@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./_modal-docs.scss";
 import { Contract } from "src/types/contract.type";
 import { Button } from "../package/Button";
@@ -42,7 +42,7 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
         setContract((prevData) => ({
           ...prevData,
           documents: prevData?.documents?.filter(
-            (doc: any) => doc.id !== idDoc
+            (doc: any) => doc.uuid !== idDoc
           ),
         }));
         toast.success("Documento eliminado exitosamente.", {
@@ -60,9 +60,10 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
     }
   };
 
+  const [loadingDocument, setLoadingDocument] = useState(false);
   const addDoc = async (idContract: string | undefined, files: any) => {
+    if(loadingDocument) return
     try {
-      // @ts-ignore
       if (files.isFormValid === false) {
         toast.error("El formulario no es válido.", {
           autoClose: 3000,
@@ -77,7 +78,7 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
           formData.append(`documents[${index}]`, file);
         }
       });
-
+      setLoadingDocument(true);
       const response = await $http.post(
         `${baseApiUrl}/api/v1/contracts/add-documents/${idContract}`,
         formData,
@@ -87,6 +88,7 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
           },
         }
       );
+      setLoadingDocument(false);
 
       if (response.status === 200) {
         setContract((prevData: any) => ({
@@ -104,6 +106,7 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
         });
       }
     } catch (error: any) {
+      setLoadingDocument(false);
       throw new Error(error);
     }
   };
@@ -136,7 +139,8 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
                   <div>
                     <Button
                       type="button"
-                      onClick={() => deleteDoc(contract.id, doc.id)}
+                      customClass="c-bg-red c-text-white c-mx-2"
+                      onClick={() => deleteDoc(contract.id, doc.uuid)}
                     >
                       Eliminar
                     </Button>
@@ -157,7 +161,9 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
               addDoc(contract.id, data);
             }}
           >
-            <Button type="submit" customClass="btn-primary">Agregar</Button>
+            <Button disabled={loadingDocument} type="submit" customClass="btn-primary">
+              {loadingDocument ? 'Cargando' : 'Agregar'}
+            </Button>
           </Form>
         </div>
       </div>
