@@ -809,6 +809,10 @@ summary {
   display: list-item;
 }
 
+input[type="color"] {
+  height: 40px; /* Altura personalizada */
+}
+
 /*
 Removes the default spacing and border for appropriate elements.
 */

@@ -91,12 +91,12 @@ export const FormContract = () => {
     );
   }, [optionsMap]);
 
-  const sendingContract = useRef<boolean>(false);
+  const [sendingContract, setSendingContract] = useState<boolean>(false);
   const onSubmit = async (data: any) => {
     const { items } = data;
 
     try {
-      if(sendingContract.current) return 
+      if(sendingContract) return 
       if (data.isFormValid === true) {
         const formData = new FormData();
 
@@ -121,13 +121,12 @@ export const FormContract = () => {
             formData.append(key, items[key]);
           }
         }
-
-        sendingContract.current = true
+        setSendingContract(true);
         const response = await $http.post(
           `${baseApiUrl}/api/v1/contracts`,
           formData
         );
-        sendingContract.current = false
+        setSendingContract(false);
 
         if (response.status === 201 || response.status === 200) {
           toast.success("Contrato creado correctamente", {
@@ -148,8 +147,7 @@ export const FormContract = () => {
         });
       }
     } catch (error) {
-      sendingContract.current = false
-      console.error("Error al realizar la solicitud POST:", error);
+      setSendingContract(false);
       toast.error("Error al crear contrato", {
         autoClose: 3000,
         theme: "dark",
@@ -163,8 +161,10 @@ export const FormContract = () => {
         <span className="text-required">
           <span>*</span> Los campos son obligatorios
         </span>
-        <Button disabled={sendingContract.current} type="submit" customClass="btn-primary">
-          Crear contrato
+        <Button disabled={sendingContract} type="submit" customClass="btn-primary">
+          {
+            sendingContract ? 'Enviando...' : 'Crear contrato'
+          }
         </Button>
       </Form>
     </div>

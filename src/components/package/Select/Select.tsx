@@ -7,6 +7,7 @@ import { Validations, PropsSelect } from "@packageTypes";
 import times from "./times.svg";
 import arrowDown from "./arrow-down.svg";
 import debounce from "@services/utils/Debounce";
+import { removeAccents } from "@services/utils/Formatters";
 
 interface styleList {
   top?: string | number;
@@ -72,9 +73,9 @@ export function Select(props: PropsSelect) {
         if (typeof val === "number") {
           return val === Number(needle);
         } else if (typeof val === "string") {
-          return val.toLowerCase().indexOf(needle) > -1;
+          return removeAccents(val.toLowerCase()).indexOf(needle) > -1;
         } else if (typeof val === "object") {
-          return val[label].toLowerCase().indexOf(needle) > -1;
+          return removeAccents(val[label].toLowerCase()).indexOf(needle) > -1;
         }
       });
       if (!isEmpty(looking)) {

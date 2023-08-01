@@ -66,7 +66,6 @@ export function Companies() {
   const currentCountry = useRef<number>(0);
   const onCountry = async (data: any) => {
     try {
-      if(currentCountry.current === data.value.id) return
       currentCountry.current = data.value.id
       let result = await placeController.getStatesByCountry(data.value.id)
       const {states} = result
@@ -90,7 +89,6 @@ export function Companies() {
 
   const currentState = useRef<string>('');
   const onState = async (data: any) => {
-    if(currentState.current === data.value.iso2) return
     try {
       let result = await placeController.getCitiesByCountryAndState(currentCountry.current, data.value.iso2)
       currentState.current = data.value.iso2
@@ -188,11 +186,11 @@ export function Companies() {
         cols: 'c-col-span-4',
         clearable: true,
         onSelect : onState,
-        validations: {
-          rules: {
-            required: true,
-          },
-        },
+        // validations: {
+        //   rules: {
+        //     required: true,
+        //   },
+        // },
       },
       {
         key: 'city',
@@ -204,11 +202,11 @@ export function Companies() {
         type: 'select',
         cols: 'c-col-span-4',
         clearable: true,
-        validations: {
-          rules: {
-            required: true,
-          },
-        },
+        // validations: {
+        //   rules: {
+        //     required: true,
+        //   },
+        // },
       },
       {
         key: 'address',
@@ -297,15 +295,15 @@ export function Companies() {
         type: 'switch',
         cols: 'c-col-span-2',
       },
-      // {
-      //   key: 'color',
-      //   placeholder: 'Color',
-      //   name: 'color',
-      //   value: '',
-      //   type: 'color',
-      //   cols: 'c-col-span-6',
-      //   title: 'Color:',
-      // },
+      {
+        key: 'color',
+        placeholder: 'Color',
+        name: 'color',
+        value: '',
+        type: 'color',
+        cols: 'c-col-span-6',
+        title: 'Color:',
+      },
     ]
   );
 
@@ -376,6 +374,49 @@ export function Companies() {
       cols: 'c-col-span-2'
     }
   ])
+
+  const onShow = (data: any) => {
+    if(data.country?.id){
+      onCountry({
+      value: {
+        id: data.country.id
+      }
+      })
+    }
+    if(data.state?.iso2){
+      onState({
+        value: {
+          iso2: data.state.iso2
+        }
+      })
+    }
+    if(data.media.color){
+      setFormCrud((prevInputs) =>
+        prevInputs.map((input) => {
+          if(input.key === 'color'){
+            return {
+              ...input,
+              value: data.media.color
+            };
+          }
+          return input
+        })
+        )
+    }
+    if(data.media.logo){
+      setFormCrud((prevInputs) =>
+        prevInputs.map((input) => {
+          if(input.key === 'logo'){
+            return {
+              ...input,
+              value: data.media.logo
+            };
+          }
+          return input
+        })
+        )
+    }
+  }
 
   return (
     <Layout title={'Companies'} >
@@ -483,7 +524,8 @@ export function Companies() {
             Authorization: authorization(),
             'Content-Type': 'application/json'
           }
-        }
+        },
+        onShow: onShow
       }}
       />
     </Layout>
