@@ -144,10 +144,10 @@ export function Users() {
       trackBy: "_id",
       value: [],
       type: "select",
-      multiple: true,
+      multiple: false,
       cols: "c-col-span-4",
       options: roles,
-      formatValue: (value: Role[]) => value.map((v: Role) => v.id),
+      formatValue: (value: any) => value.id,
       validations: {
         rules: {
           required: true,
@@ -278,13 +278,9 @@ export function Users() {
               {
                 key: "roles",
                 title: "Roles",
-                format: (value: Role[]) => {
+                format: (value: any) => {
                   if (value) {
-                    return value
-                      .map((rol) => {
-                        return rol.name;
-                      })
-                      .toString();
+                    return value.name;
                   } else {
                     return "";
                   }
