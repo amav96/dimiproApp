@@ -1,0 +1,17 @@
+.HomePageContent__contentContainer {
+  .edit-form {
+    @media (max-width: $breakpoint-m) {
+      .Form {
+        > div {
+          grid-column: span 12 / span 12;
+        }
+      }
+    }
+  }
+  .create-btn-container {
+    @media (max-width: $breakpoint-m) {
+      justify-content: flex-start;
+      margin-top: 24px;
+    }
+  }
+}

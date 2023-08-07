@@ -257,7 +257,7 @@ export function Abm(props: AbmProps) {
       searchable={searchable}
       requestConfiguration={requestConfiguration}
       header={(
-        <div className="c-flex c-justify-end">
+        <div className="c-flex c-justify-end create-btn-container">
           {
             urlStore && (
               <Button

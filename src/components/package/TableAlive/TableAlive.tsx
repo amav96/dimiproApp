@@ -1,6 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { TableAliveProps } from '@packageTypes'
 import {Table, Form, Button} from '@package'
+import './_table_alive.scss'
 
 export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<string>, ref: React.Ref<HTMLFormElement>) {
   const {
@@ -139,7 +140,7 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
     <div >
       {
         inputs &&
-        <div className="c-flex c-flex-col ">
+        <div className="c-flex c-flex-col edit-form">
           <Form
           inputs={inputs}
           onSubmit={onSubmit}

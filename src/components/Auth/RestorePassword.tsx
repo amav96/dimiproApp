@@ -7,6 +7,7 @@ import { Form } from "../package/Form";
 import { GlobalInputs, Slot } from "../package/Form/Form.type";
 import { Layout } from "../package/Layout";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import './styles/_restore-password.scss'
 
 const RestorePassword = () => {
   const [isTokenValid, setisTokenValid] = useState(false);
@@ -102,7 +103,7 @@ const RestorePassword = () => {
   };
 
   return (
-    <Layout title="Restablecer contraseña">
+    <Layout title="Restablecer contraseña" customClass="restore-password-view">
       {isTokenValid ? (
         <Form inputs={inputs} onSubmit={onSubmit}>
           <Button customClass="btn-primary c-my-4">

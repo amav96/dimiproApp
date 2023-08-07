@@ -1,5 +1,4 @@
 .add-contract-container {
-  padding: 20px;
   h1 {
     font-weight: 600;
   }
@@ -8,6 +7,10 @@
     gap: 40px;
     margin-top: 40px;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    @media (max-width: $breakpoint-m) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
 
     .label-container {
       display: flex;
@@ -36,10 +39,13 @@
       grid-column: auto;
       height: fit-content;
       gap: 0;
+      @media (max-width: $breakpoint-m) {
+        grid-column: span 12 / span 12;
+      }
 
       .controlInput__text {
         margin-left: 32px;
-        margin-top:4px;
+        margin-top: 4px;
         font-size: 15.5px;
         color: $color-white;
         background-color: $color-no-results;
@@ -74,5 +80,8 @@
     min-height: 46px;
     text-transform: uppercase;
     font-weight: 500;
+    @media (max-width: $breakpoint-m) {
+      width: 100%;
+    }
   }
 }
