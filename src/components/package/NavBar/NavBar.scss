@@ -1,28 +1,42 @@
 .navbar-container {
-    height: 61px;
-    width: 100%;
-    background: $color-gray-soft;
-    border-radius: 0px;
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  height: 61px;
+  width: 100%;
+  background: $color-gray-soft;
+  border-radius: 0px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 
-    &__main{
-        display: flex;
-        padding: 10px 0;
-        img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            cursor: pointer;
-        }
-        &__title{
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            font-weight: 500;
-            font-size: 19px;
-        }
+  &__main {
+    display: flex;
+    padding: 10px;
+    @media (max-width: $breakpoint-m) {
+      width: 100%;
+      justify-content: space-between;
     }
-    
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      cursor: pointer;
+      @media (max-width: $breakpoint-m) {
+        height: auto;
+        width: auto;
+      }
+
+      &.navbar-menu__icon {
+        display: none;
+        @media (max-width: $breakpoint-m) {
+          display: block;
+        }
+      }
+    }
+    &__title {
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      font-size: 19px;
+    }
+  }
 }

@@ -7,11 +7,36 @@
   display: flex;
   justify-content: flex-end;
   position: relative;
-  transition: all 0.5s;
+  transition: all 0.3s;
+  @media (min-width: $breakpoint-m) {
+    width: 74px;
+    justify-content: center;
+    &:hover {
+      width: 138px;
+      .SidebarResizableContainer__item__box__item__title {
+        display: block;
+      }
+      .subSectionContainer{
+        display: flex;
+      }
+    }
+  }
+  @media (max-width: $breakpoint-m) {
+    position: absolute;
+    top: 65px;
+    z-index: 99;
+    display: none;
+    &.show {
+      display: block;
+    }
+  }
 
   &__sidebarWrapper {
     display: flex;
     transition: left 0.3s ease-in-out;
+    @media (max-width: $breakpoint-m) {
+      height: 100%;
+    }
   }
 
   &__sidebar {
@@ -45,11 +70,13 @@
 
         &__title {
           width: 95px;
-          // font-family: "Quicksand-Bold";
           font-style: normal;
           font-weight: 700;
           font-size: 13px;
           line-height: 18px;
+          @media (min-width: $breakpoint-m) {
+            display: none;
+          }
         }
 
         &__boxImg {
@@ -73,6 +100,11 @@
   align-items: center;
   width: 100%;
   transition: all 0.2s ease-in-out;
+  padding: 4px 0;
+  @media (min-width: $breakpoint-m) {
+    display: none;
+  }
+
 }
 
 .subSection {
@@ -80,7 +112,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 2px 4px;
+  padding: 4px;
   width: 85%;
   font-size: 14px;
 
