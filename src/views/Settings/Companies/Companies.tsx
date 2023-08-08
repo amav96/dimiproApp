@@ -257,15 +257,6 @@ export function Companies() {
         cols: 'c-col-span-4',
       },
       {
-        key: 'logo',
-        placeholder: 'Logo',
-        name: 'logo',
-        value: '',
-        type: 'text',
-        cols: 'c-col-span-4',
-        title: 'Logo:',
-      },
-      {
         key: 'exporter',
         label : 'Exporter',
         name: 'exporter',
@@ -294,15 +285,6 @@ export function Companies() {
         value: null,
         type: 'switch',
         cols: 'c-col-span-2',
-      },
-      {
-        key: 'color',
-        placeholder: 'Color',
-        name: 'color',
-        value: '',
-        type: 'color',
-        cols: 'c-col-span-6',
-        title: 'Color:',
       },
     ]
   );
