@@ -1,16 +1,49 @@
 import useDataProvider from "@hooks/useDataProvider";
 import {
   Document,
+  Image,
   PDFViewer,
   Page,
   StyleSheet,
   Text,
   View,
+  Font,
 } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../hooks";
 import { RootState } from "../../store";
 import { useParams } from "react-router-dom";
+import logo from "../../../public/icons/logo.png";
+import Inter from "../../assets/fonts/Inter-Regular.otf";
+import InterBlack from "../../assets/fonts/Inter-Black.otf";
+import InterSemiBold from "../../assets/fonts/Inter-SemiBold.otf";
+
+function formatDate(inputDate: string) {
+  const date = new Date(inputDate);
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Sumar 1 porque los meses van de 0 a 11
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const year = date.getUTCFullYear();
+
+  return `${month}/${day}/${year}`;
+}
+
+Font.register({
+  family: "Inter",
+  fonts: [
+    {
+      src: Inter,
+      fontWeight: 400,
+    },
+    {
+      src: InterBlack,
+      fontWeight: 700,
+    },
+    {
+      src: InterSemiBold,
+      fontWeight: 600,
+    },
+  ],
+});
 
 const styles = StyleSheet.create({
   page: {
@@ -22,18 +55,30 @@ const styles = StyleSheet.create({
   header: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "#111111",
-    color: "#fff",
+    justifyContent: "flex-end",
+    color: "#111",
     padding: 10,
   },
   paragraph: {
     fontSize: 10,
     marginTop: 4,
     maxWidth: "50%",
+    fontFamily: "Inter",
+    fontWeight: 600,
+  },
+  paragraphHeader: {
+    fontSize: 9,
+    marginTop: 4,
+    maxWidth: "100%",
+    width: "100%",
+    textAlign: "right",
+    display: "flex",
+    fontFamily: "Inter",
   },
   body: {
     padding: 20,
+    fontFamily: "Inter",
+    fontWeight: 400,
   },
   spaceTop: {
     marginTop: 20,
@@ -43,32 +88,9 @@ const styles = StyleSheet.create({
   },
   fontText: {
     fontSize: 10,
+    fontFamily: "Inter",
   },
 });
-
-function formatDate(inputDate: string) {
-  const months = [
-    "JANUARY",
-    "FEBRUARY",
-    "MARCH",
-    "APRIL",
-    "MAY",
-    "JUNE",
-    "JULY",
-    "AUGUST",
-    "SEPTEMBER",
-    "OCTOBER",
-    "NOVEMBER",
-    "DECEMBER",
-  ];
-
-  const date = new Date(inputDate);
-  const day = date.getUTCDate();
-  const month = months[date.getUTCMonth()];
-  const year = date.getUTCFullYear();
-
-  return `${month} ${day} ${year}`;
-}
 
 const PDFcontract = () => {
   const { getDataProviders } = useDataProvider();
@@ -79,6 +101,7 @@ const PDFcontract = () => {
   const contracts = useAppSelector(
     (state: RootState) => state.dataProviders.contracts
   );
+
   useEffect(() => {
     getDataProviders(["contracts"]);
     setData(contracts);
@@ -101,294 +124,347 @@ const PDFcontract = () => {
         <Page size="A4" style={styles.page}>
           {/* HEADER */}
           <View style={styles.header}>
-            <Text>{contract?.broker?.media?.logo}</Text>
             <View
               style={{
                 display: "flex",
+                justifyContent: "flex-end",
                 flexDirection: "row",
-                width: "50%",
+                maxWidth: "100%",
+                width: "100%",
               }}
             >
-              <View>
-                <Text style={{
-                  fontSize: 16,
-                  fontWeight: "bold"
-                }}>ADDRESS</Text>
-                <Text style={styles.paragraph}>
-                  {contract?.broker?.address} {contract?.broker?.city?.name}{" "}
-                  {contract?.broker?.vat} {contract?.broker?.country?.iso2}
-                </Text>
-              </View>
               <View
                 style={{
-                  marginLeft: 20,
+                  display: "flex",
+                  marginRight: 100,
                 }}
               >
-                <Text style={{
-                  fontSize: 16,
-                  fontWeight: "bold"
-                }}>CONTACT</Text>
-                <View style={styles.paragraph}>
-                  <Text>{contract?.broker?.email}</Text>
-                  <Text>{contract?.broker?.website}</Text>
-                </View>
+                <Text
+                  style={[
+                    styles.paragraphHeader,
+                    { fontWeight: "semibold", fontSize: 18, marginTop: 0 },
+                  ]}
+                >
+                  Dimipro S.r.l
+                </Text>
+                <Text style={styles.paragraphHeader}>
+                  Sede Operativa: Viale della Tuscia, Loc. colle Diana - 01015
+                  Sutri(VT)
+                </Text>
+                <Text style={styles.paragraphHeader}>
+                  vía Ariosto, 24 - 00185 Roma (RM) - Italy
+                </Text>
+                <Text style={styles.paragraphHeader}>Tel. 0761 696499</Text>
+                <Text style={styles.paragraphHeader}>
+                  e-mail: oridini@dimiproworld.com Pec: dimiprosrl@legalmail.it
+                  Internet: www.dimiproworld.com
+                </Text>
+                <Text style={styles.paragraphHeader}>
+                  C.F./P.Iva 09224961004
+                </Text>
               </View>
+              <Image
+                src={logo}
+                style={{ width: 100, height: 70, objectFit: "cover" }}
+              />
             </View>
           </View>
           {/* BODY */}
           <View style={[styles.body, { fontSize: 10, lineHeight: 1.2 }]}>
+            <Text style={{ fontWeight: "bold", fontSize: 14 }}>
+              SALES CONFIRMATION
+            </Text>
             <View
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-between",
+                marginTop: 8,
               }}
             >
               <View>
                 <View
                   style={{
                     display: "flex",
-                    flexDirection: "row",
                   }}
                 >
-                  <Text>{contract?.broker?.city?.name} </Text>
                   <Text>{formatDate(contract?.createdAt)}</Text>
                 </View>
-                <Text>To: {contract?.exporter?.name}</Text>
               </View>
-              <View>
-                <Text>Ref Nro. {contract?.name}</Text>
+              <View style={{ marginLeft: 30 }}>
+                <Text>n. {contract?.name}</Text>
               </View>
             </View>
-            <View style={styles.spaceTop}>
-              <Text>
-                We are glad to confirm following business concluded today:
-              </Text>
-              {/* EXPORT */}
+            <View>
               <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
               >
-                <Text style={styles.labelWidth}>Sellers/Vendedor:</Text>
+                {/* EXPORT */}
                 <View
-                  style={{
-                    marginLeft: 40,
-                  }}
+                  style={[
+                    styles.spaceTop,
+                    {
+                      display: "flex",
+                      flexDirection: "column",
+                      textTransform: "uppercase",
+                      fontWeight: "semibold",
+                      fontSize: 12,
+                      lineHeight: 1.4,
+                      border: "1px solid #000",
+                      width: "45%",
+                      padding: 4,
+                    },
+                  ]}
                 >
-                  <Text>{contract?.exporter?.name}</Text>
-                  <Text>
-                    {contract?.exporter?.address} CP:{" "}
-                    {contract?.exporter?.postalCode}
-                  </Text>
-                  <Text>
-                    {contract?.exporter?.city?.name} -{" "}
-                    {contract?.exporter?.state?.name} -{" "}
-                    {contract?.exporter?.country?.name}{" "}
-                  </Text>
+                  <Text>Seller:</Text>
+                  <View>
+                    <Text>{contract?.exporter?.name}</Text>
+                    <Text>
+                      {contract?.exporter?.address} CP:{" "}
+                      {contract?.exporter?.postalCode}
+                    </Text>
+                    <Text>
+                      {contract?.exporter?.city?.name} -{" "}
+                      {contract?.exporter?.state?.name} -{" "}
+                      {contract?.exporter?.country?.name}{" "}
+                    </Text>
+                  </View>
+                </View>
+                {/* IMPORTER */}
+                <View
+                  style={[
+                    styles.spaceTop,
+                    {
+                      display: "flex",
+                      flexDirection: "column",
+                      textTransform: "uppercase",
+                      fontWeight: "semibold",
+                      fontSize: 12,
+                      lineHeight: 1.4,
+                      border: "1px solid #000",
+                      width: "45%",
+                      padding: 4,
+                    },
+                  ]}
+                >
+                  <Text>BUYER:</Text>
+                  <View>
+                    <Text>{contract?.importer?.name}</Text>
+                    <Text>
+                      {contract?.importer?.address} CP:{" "}
+                      {contract?.importer?.postalCode}
+                    </Text>
+                    <Text>
+                      {contract?.importer?.city?.name} -{" "}
+                      {contract?.importer?.state?.name} -{" "}
+                      {contract?.importer?.country?.name}{" "}
+                    </Text>
+                  </View>
                 </View>
               </View>
-              {/* IMPORTER */}
               <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
+                style={{
+                  border: "1px solid #000",
+                  padding: 16,
+                  marginTop: 16,
+                  fontWeight: "semibold",
+                }}
               >
-                <Text style={styles.labelWidth}>Buyers/Comprador:</Text>
-                <View
-                  style={{
-                    marginLeft: 40,
-                  }}
-                >
-                  <Text>{contract?.importer?.name}</Text>
-                  <Text>
-                    {contract?.importer?.address} CP:{" "}
-                    {contract?.importer?.postalCode}
-                  </Text>
-                  <Text>
-                    {contract?.importer?.city?.name} -{" "}
-                    {contract?.importer?.state?.name} -{" "}
-                    {contract?.importer?.country?.name}{" "}
-                  </Text>
-                </View>
-              </View>
-              {/* PRODUCT */}
-              <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
-              >
-                <Text style={styles.labelWidth}>Commodity/Mercadería:</Text>
-                <View
-                  style={{
-                    marginLeft: 40,
-                  }}
-                >
-                  <Text>
-                    {contract?.product?.name}, {contract?.category?.name},{" "}
-                    {contract?.calibers?.map((caliber: any) => caliber.name)},{" "}
-                    Crop: {contract?.crop}
-                  </Text>
-                </View>
-              </View>
-              {/* QUANTITY */}
-              <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
-              >
-                <Text style={styles.labelWidth}>Quantity/Cantidad:</Text>
-                <View
-                  style={{
-                    marginLeft: 40,
-                  }}
-                >
-                  <Text>
-                    {contract?.quantity} Tons. (+/-{contract?.margenPercentage}
-                    %)
-                  </Text>
-                </View>
-              </View>
-              {/* PRICE */}
-              <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
-              >
-                <Text style={styles.labelWidth}>Price/Precio:</Text>
-                <View
-                  style={{
-                    marginLeft: 40,
-                  }}
-                >
-                  <Text>
-                    {contract?.currency?.nameShort} {contract?.price}/ton -{" "}
-                    {contract?.salesConditions}
-                  </Text>
-                </View>
-              </View>
-              {/* DESTINATION */}
-              <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
-              >
-                <Text style={styles.labelWidth}>Destination/Destino:</Text>
-                <View
-                  style={{
-                    marginLeft: 40,
-                  }}
-                >
-                  <Text>{contract?.destination}</Text>
-                </View>
-              </View>
-              {/* PACKAGING */}
-              <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
-              >
-                <Text style={styles.labelWidth}>Packaging/Envasado:</Text>
-                <View
-                  style={{
-                    marginLeft: 40,
-                  }}
-                >
-                  <Text>{contract?.packaging?.name}</Text>
-                </View>
-              </View>
-              {/* SHIPMENT */}
-              <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
-              >
-                <Text style={styles.labelWidth}>Shipment/Embarque:</Text>
-                <View
-                  style={{
-                    marginLeft: 40,
-                  }}
-                >
-                  <Text>{contract?.shippingDate}</Text>
-                </View>
-              </View>
-              {/* SPECIFICATIONS */}
-              <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
-              >
-                <Text style={styles.labelWidth}>Conditions/Condiciones:</Text>
-                <View
-                  style={{
-                    marginLeft: 40,
-                  }}
-                >
-                  <Text
+                {/* PRODUCT */}
+                <View style={[{ display: "flex", flexDirection: "row" }]}>
+                  <Text style={styles.labelWidth}>Commodity/Mercadería:</Text>
+                  <View
                     style={{
-                      maxWidth: "60%",
+                      marginLeft: 40,
                     }}
                   >
-                    {contract?.specifications}
-                  </Text>
+                    <Text>
+                      {contract?.product?.name}, {contract?.category?.name},{" "}
+                      {contract?.calibers?.map((caliber: any) => caliber.name)},{" "}
+                      Crop: {contract?.crop}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-              {/* PAYMENT */}
-              <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
-              >
-                <Text style={styles.labelWidth}>Payment/Pago:</Text>
+                {/* QUANTITY */}
                 <View
-                  style={{
-                    marginLeft: 40,
-                  }}
+                  style={[
+                    styles.spaceTop,
+                    { display: "flex", flexDirection: "row" },
+                  ]}
                 >
-                  <Text>{contract?.paymentMethod?.name}</Text>
+                  <Text style={styles.labelWidth}>Quantity/Cantidad:</Text>
+                  <View
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  >
+                    <Text>
+                      {contract?.quantity} Tons. (+/-
+                      {contract?.margenPercentage}
+                      %)
+                    </Text>
+                  </View>
                 </View>
-              </View>
-              {/* INSURANCE */}
-              <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
-              >
-                <Text style={styles.labelWidth}>Insurance/Seguro:</Text>
+                {/* PRICE */}
                 <View
-                  style={{
-                    marginLeft: 40,
-                  }}
+                  style={[
+                    styles.spaceTop,
+                    { display: "flex", flexDirection: "row" },
+                  ]}
                 >
-                  <Text>{contract?.insurance}</Text>
+                  <Text style={styles.labelWidth}>Price/Precio:</Text>
+                  <View
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  >
+                    <Text>
+                      {contract?.currency?.nameShort} {contract?.price}/ton -{" "}
+                      {contract?.salesConditions}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-              {/* PERCENTAGE BROKER */}
-              <View
-                style={[
-                  styles.spaceTop,
-                  { display: "flex", flexDirection: "row" },
-                ]}
-              >
-                <Text style={styles.labelWidth}>Commision/Comisión:</Text>
+                {/* DESTINATION */}
                 <View
-                  style={{
-                    marginLeft: 40,
-                  }}
+                  style={[
+                    styles.spaceTop,
+                    { display: "flex", flexDirection: "row" },
+                  ]}
                 >
-                  <Text>{contract?.brokerPercent} %</Text>
+                  <Text style={styles.labelWidth}>Destination/Destino:</Text>
+                  <View
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  >
+                    <Text>{contract?.destination}</Text>
+                  </View>
                 </View>
+                {/* PACKAGING */}
+                <View
+                  style={[
+                    styles.spaceTop,
+                    { display: "flex", flexDirection: "row" },
+                  ]}
+                >
+                  <Text style={styles.labelWidth}>Packaging/Envasado:</Text>
+                  <View
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  >
+                    <Text>{contract?.packaging?.name}</Text>
+                  </View>
+                </View>
+                {/* SHIPMENT */}
+                <View
+                  style={[
+                    styles.spaceTop,
+                    { display: "flex", flexDirection: "row" },
+                  ]}
+                >
+                  <Text style={styles.labelWidth}>Shipment/Embarque:</Text>
+                  <View
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  >
+                    <Text>{contract?.shippingDate}</Text>
+                  </View>
+                </View>
+                {/* SPECIFICATIONS */}
+                <View
+                  style={[
+                    styles.spaceTop,
+                    { display: "flex", flexDirection: "row" },
+                  ]}
+                >
+                  <Text style={styles.labelWidth}>Conditions/Condiciones:</Text>
+                  <View
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        maxWidth: "60%",
+                      }}
+                    >
+                      {contract?.specifications}
+                    </Text>
+                  </View>
+                </View>
+                {/* PAYMENT */}
+                <View
+                  style={[
+                    styles.spaceTop,
+                    { display: "flex", flexDirection: "row" },
+                  ]}
+                >
+                  <Text style={styles.labelWidth}>Payment/Pago:</Text>
+                  <View
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  >
+                    <Text>{contract?.paymentMethod?.name}</Text>
+                  </View>
+                </View>
+                {/* INSURANCE */}
+                <View
+                  style={[
+                    styles.spaceTop,
+                    { display: "flex", flexDirection: "row" },
+                  ]}
+                >
+                  <Text style={styles.labelWidth}>Insurance/Seguro:</Text>
+                  <View
+                    style={{
+                      marginLeft: 40,
+                    }}
+                  >
+                    <Text>{contract?.insurance}</Text>
+                  </View>
+                </View>
+                {/* BROKER */}
+                {contract?.broker?.name  && (
+                   <View
+                   style={[
+                     styles.spaceTop,
+                     { display: "flex", flexDirection: "row" },
+                   ]}
+                 >
+                   <Text style={styles.labelWidth}>Broker:</Text>
+                   <View
+                     style={{
+                       marginLeft: 40,
+                     }}
+                   >
+                     <Text>{contract?.broker?.name }</Text>
+                   </View>
+                 </View>
+                )}
+                {/* PERCENTAGE BROKER */}
+                {contract?.brokerPercent > 0 && (
+                  <View
+                    style={[
+                      styles.spaceTop,
+                      { display: "flex", flexDirection: "row" },
+                    ]}
+                  >
+                    <Text style={styles.labelWidth}>Commision/Comisión:</Text>
+                    <View
+                      style={{
+                        marginLeft: 40,
+                      }}
+                    >
+                      <Text>{contract?.brokerPercent} %</Text>
+                    </View>
+                  </View>
+                )}
               </View>
               {/* Thanks */}
               <View
