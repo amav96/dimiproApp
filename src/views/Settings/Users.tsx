@@ -293,7 +293,7 @@ export function Users() {
                   if (value) {
                     return value.name;
                   } else {
-                    return "s/e";
+                    return "None";
                   }
                 },
               },

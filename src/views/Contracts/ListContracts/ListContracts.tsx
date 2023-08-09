@@ -184,7 +184,7 @@ const ListContracts = () => {
       <Layout title="Lista de contratos">
         <Abm
           table={{
-            columns: useMemo(() => dataTable, [formFilter, dataTable]),
+            columns: dataTable,
             urlIndex: Routes.CONTRACTS.INDEX,
             requestConfiguration: {
               method: "GET",
