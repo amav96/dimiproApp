@@ -9,11 +9,20 @@ import { User } from "../../types/user.type";
 import $http from "@services/AxiosInstance";
 import baseApiUrl from "@services/BaseApiUrl";
 import { toast } from "react-toastify";
+import { Company } from "src/types/company.type";
+import useDataProvider from "@hooks/useDataProvider";
+import { RootState } from "src/store";
 
 const Profile = () => {
+  const { getDataProviders } = useDataProvider();
   const userRedux = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const [user, setUser] = useState<User | null>(userRedux);
+
+  const prefixs = useAppSelector(
+    (state: RootState) => state.dataProviders.prefixs
+  );
+
   const [inputs, setInputs] = useState<Array<any>>([
     {
       key: "firstName",
@@ -42,7 +51,32 @@ const Profile = () => {
       type: "text",
       cols: "c-col-span-6",
     },
+    {
+      key: "prefix",
+      placeholder: "Prefix|Code",
+      name: "prefix",
+      label: "fullName",
+      title: "Prefix|Code:",
+      value: [],
+      options: prefixs,
+      type: "select",
+      cols: "c-col-span-4",
+    },
+    {
+      key: "phoneNumber",
+      placeholder: "Phone Number",
+      title: "Phone Number:",
+      name: "phoneNumber",
+      value: user?.phoneNumber,
+      type: "text",
+      cols: "c-col-span-4",
+      formatValue: (value: string) => Number(value),
+    },
   ]);
+
+  useEffect(() => {
+    getDataProviders(["prefixs"]);
+  }, []);
 
   useEffect(() => {
     setUser(userRedux);
@@ -56,6 +90,8 @@ const Profile = () => {
       firstName: data.items.firstName,
       lastName: data.items.lastName,
       email: data.items.email,
+      phoneNumber: data.items.phoneNumber,
+      prefix: data.items.prefix,
     };
 
     try {
