@@ -392,6 +392,9 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
                 cols={memoizedGeneratedInputs[index].cols}
                 customClass={memoizedGeneratedInputs[index].customClass}
                 title={memoizedGeneratedInputs[index].title}
+                onRemove={memoizedGeneratedInputs[index].onRemove}
+                displayImages={memoizedGeneratedInputs[index].displayImages}
+                resetOnOpen={memoizedGeneratedInputs[index].resetOnOpen}
               />
               )
             }

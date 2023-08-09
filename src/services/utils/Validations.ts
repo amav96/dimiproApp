@@ -21,6 +21,7 @@ export const isEmpty = (value: any) : boolean => { // Return true if condition s
   }
 };
 
+
 export const isDate = (date: string): boolean => Boolean(Date.parse(date));
 
 export const minLength = (value: string, min: number): boolean => !isEmpty(value) && value.length >= min; // Return true if condition succed

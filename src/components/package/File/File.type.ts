@@ -3,7 +3,10 @@ import { BaseProps } from '@packageTypes'
 export interface PropsFile extends BaseProps {
     listenChange?: Function;
     listenForm?: Function;
-    accept?: Array<string>
+    onRemove?: Function;
+    accept?: Array<string>;
+    displayImages? : boolean,
+    resetOnOpen?: boolean
 }
 
 export interface PropsFileKey extends PropsFile {
