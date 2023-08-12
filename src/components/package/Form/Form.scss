@@ -1,12 +1,12 @@
 .Form {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  color: $color-white;
+  color: var(--c-text-form);
 }
 
 .label-global {
   font-size: 18px;
   margin-left: 12px;
   font-weight: 400;
-  color: var(--text-black);
+  color: var(--c-text-black);
 }

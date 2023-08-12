@@ -6,6 +6,7 @@ $breakpoint-l: 1024px;
 $color-white: #ffffff;
 $color-black: #000000;
 $color-gray-soft: #1F2937;
+$c-bg-thead: #1F2937;
 $color-gray-dark: #111827;
 $color-gray-light: #9CA3AF;
 $color-gray-hover: #6B7280;
@@ -13,3 +14,92 @@ $color-violet: #4A1D96;
 $color-violet-hover: #5521B5;
 
 $color-no-results: rgb(255, 84, 84);
+
+
+:root {
+    --black: #001b35;
+    --gray: #f0f3f4;
+    --grey-light: rgba(206, 214, 214, 0.781);
+    --black-web: #16212b;
+    --red: #d12f2d;
+    --white: #fff;
+    --blue: #1890ff;
+    --green: #40ce08;
+    --violet: #7508ce;
+    --blue-light: #1da1f2;
+
+    --c-text-black: var(--black);
+    --c-text-grey: var(--gray);
+    --c-text-grey-light: var(--grey-light);
+    --c-text-black-web: var(--black-web);
+    --c-text-red: var(--red);
+    --c-text-white: var(--white);
+    --c-text-blue: var(--blue);
+    --c-text-green: var(--green);
+    --c-text-violet: var(--viole);
+    --c-text-blue-light: var(--blue-light);
+    --c-text-light: var(--white);
+
+
+    // form
+    --c-text-form: var(--white);
+
+    // input
+    --c-bg-input: #1F2937;
+    --c-text-input: var(--white);
+    --c-input-focus: #5521B5;
+    --c-border-input: #9CA3AF;
+    --c-text-error-select: white;
+    --c-bg-error-input:rgb(255, 84, 84);
+
+    // select
+    --c-bg-select-list: #1F2937;
+    --c-bg-select-item-hover: #5521B5;
+    --c-bg-select: #1F2937;
+    --c-border-select: #9CA3AF;
+    --c-bg-multiValue-select: #5521B5;
+    --c-bg-label-multiValue-select: white;
+    --c-bg-indicatorSeparator-select:rgb(204, 204, 204);
+
+    // switch
+    --c-bg-switch-hover:#5521B5;
+
+    // datepack
+    --c-bg-datePack: #1F2937;
+    
+    // layout
+    --c-text-layout: var(--white);
+
+    // modal
+    --c-bg-modal: black;
+    --c-bg-modal-closeable:white;
+    --c-bs-modal-closeable:0px 5px 5px rgba(0, 0, 0, 0.1);
+    --c-text-modal-closeable: white;
+
+    // table
+    --c-bg-table-wrapper-scrollbar-thumb: #cfcece;
+    --c-bg-table-wrapper: #000000;
+    --c-bg-table-main: #1F2937; /* Color de fondo para table-main */
+    --c-text-table-main: white;
+    --c-bg-thead:red;
+
+
+    --c-background-black: var(--black);
+    --c-background-grey: var(--gray);
+    --c-background-grey-light: var(--grey-light);
+    --c-background-black-web: var(--black-web);
+    --c-background-red: var(--red);
+    --c-background-white: var(--white);
+    --c-background-blue: var(--blue);
+    --c-background-green: var(--green);
+    --c-background-violet: var(--violet);
+    --c-background-blue-light: var(--blue-light);
+    --c-background-primary: var(--white);
+    --c-background-hover-sidebar: #e8e8e8;
+
+    --c-bg-primary: #4A1D96;
+
+    --c-border-grey: var(--gray);
+    --c-border-table: #f3ebeb;
+
+  }

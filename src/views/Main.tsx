@@ -3,39 +3,71 @@ import baseApiUrl from "../services/BaseApiUrl";
 import { Router } from "../router";
 import { SideBar } from "../components/package/SideBar";
 import { NavBar } from "../components/package/NavBar";
+import usePermissions from '@hooks/usePermissions';
+import { Menu } from "@packageTypes";
 
 function MainPage() {
   const navigate = useNavigate();
   const location = useLocation();
+    const { hasPermissions } = usePermissions();
 
   const isLoginPath = location.pathname === "/login";
   const isForgotPasswordPath = location.pathname === "/forgot-password";
 
   const shouldShowSideBar = !isLoginPath && !isForgotPasswordPath;
 
-  const menu = {
-    top: [
-      {
-        title: "Home",
-        image: baseApiUrl + "/icons/Home.svg",
-        visible: true,
-        name: "dashboard",
-        path: "/",
-        onNavigate: (data: any) => {
-          navigate(data.path);
+  const getMenu = () : Menu => {
+
+    const menu: Menu = {
+      top: [
+        {
+          title: "Home",
+          image: baseApiUrl + "/icons/Home.svg",
+          visible: true,
+          name: "dashboard",
+          path: "/",
+          onNavigate: (data: any) => {
+            navigate(data.path);
+          },
         },
-      },
-      {
-        title: "Lista de contratos",
-        image: baseApiUrl + "/icons/lista.svg",
-        visible: true,
-        name: "listContracts",
-        path: "/list-contracts",
-        onNavigate: (data: any) => {
-          navigate(data.path);
+        {
+          title: "Lista de contratos",
+          image: baseApiUrl + "/icons/lista.svg",
+          visible: true,
+          name: "listContracts",
+          path: "/list-contracts",
+          onNavigate: (data: any) => {
+            navigate(data.path);
+          }
         }
-      },
-      {
+        
+      ],
+      above: [
+        {
+          title: "Perfil",
+          image: baseApiUrl + "/icons/perfil.svg",
+          visible: true,
+          name: "profile",
+          path: "/profile",
+          onNavigate: (data: any) => {
+            navigate(data.path);
+          },
+        },
+        {
+          title: "Cerrar sesión",
+          image: baseApiUrl + "/icons/logout.svg",
+          visible: true,
+          name: "logout",
+          path: "/logout",
+          onNavigate: (data: any) => {
+            navigate(data.path);
+          },
+        },
+      ],
+    };
+
+    if(hasPermissions('contracts_all')){
+      menu.top.push({
         title: "Agregar contrato",
         image: baseApiUrl + "/icons/circulo_sumar.svg",
         visible: true,
@@ -44,8 +76,11 @@ function MainPage() {
         onNavigate: (data: any) => {
           navigate(data.path);
         },
-      },
-      {
+      })
+    }
+
+    if(hasPermissions('settings_index')){
+      menu.top.push({
         title: "Ajustes",
         image: baseApiUrl + "/icons/ajustes.svg",
         visible: true,
@@ -56,7 +91,7 @@ function MainPage() {
             path: "/ajustes/calibers",
             onNavigate: (data: any) => {
               navigate(data.path);
-            },
+              },
           },
           {
             title: 'Product Types',
@@ -131,31 +166,10 @@ function MainPage() {
             },
           },
         ],
-      },
-    ],
-    above: [
-      {
-        title: "Perfil",
-        image: baseApiUrl + "/icons/perfil.svg",
-        visible: true,
-        name: "profile",
-        path: "/profile",
-        onNavigate: (data: any) => {
-          navigate(data.path);
-        },
-      },
-      {
-        title: "Cerrar sesión",
-        image: baseApiUrl + "/icons/logout.svg",
-        visible: true,
-        name: "logout",
-        path: "/logout",
-        onNavigate: (data: any) => {
-          navigate(data.path);
-        },
-      },
-    ],
-  };
+      },)
+    }
+    return menu
+  }
 
   return (
     <>
@@ -168,7 +182,7 @@ function MainPage() {
       {shouldShowSideBar && (
         <div className="AppMain">
           <div className="AppMain__layer">
-            <SideBar menu={menu} colorTextItem="#fff" />
+            <SideBar menu={getMenu()} colorTextItem="#fff" />
             <main className="AppMain__layer__PageAndTopBar">
               <div className="HomePageContent">
                 <div

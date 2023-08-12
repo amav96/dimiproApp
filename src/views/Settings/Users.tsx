@@ -183,11 +183,11 @@ export function Users() {
       value: "",
       type: "password",
       cols: "c-col-span-4",
-      validations: {
-        rules: {
-          required: true,
-        },
-      },
+      // validations: {
+      //   rules: {
+      //     required: true,
+      //   },
+      // },
     },
     {
       key: "confirmPassword",
@@ -197,11 +197,11 @@ export function Users() {
       value: "",
       type: "password",
       cols: "c-col-span-4",
-      validations: {
-        rules: {
-          required: true,
-        },
-      },
+      // validations: {
+      //   rules: {
+      //     required: true,
+      //   },
+      // },
     },
   ]);
 
@@ -237,7 +237,7 @@ export function Users() {
       trackBy: "_id",
       value: [],
       type: "select",
-      multiple: true,
+      multiple: false,
       cols: "c-col-span-4",
       options: companies,
       formatValue: (value: Company[]) => {

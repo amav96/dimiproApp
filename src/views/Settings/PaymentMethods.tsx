@@ -105,7 +105,7 @@ export function PaymentMethods() {
           }
         },
         afterStore: (data: any) => {
-          console.log(data)
+          
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
               autoClose: 5000,

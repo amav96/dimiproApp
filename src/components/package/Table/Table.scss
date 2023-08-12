@@ -1,5 +1,5 @@
 .table-wrapper::-webkit-scrollbar-thumb {
-  background: #cfcece;
+  background: var(--c-bg-table-wrapper-scrollbar-thumb);
   -webkit-border-radius: 1ex;
 }
 
@@ -7,7 +7,7 @@
   height: 33rem;
   overflow-y: scroll;
   overflow-x: auto;
-  background: $color-black;
+  background: var(--c-bg-table-wrapper);
   position: relative;
 
   .lds-spinner {
@@ -16,36 +16,20 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
-  .no-results {
-    background-color: $color-no-results;
-    padding: 4px 16px;
-    margin-bottom: 8px;
-    border-radius: 4px;
-    display: block;
-    width: fit-content;
-    
-    p {
-      color: #fff;
-      font-size: 16px;
-    }
-  }
 }
 
 .table-main {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  // border-top: 1px solid var(--border-table);
   font-size: 14px;
-  color: $color-white;
-  background-color: $color-gray-soft;
+  color: var(--c-text-table-main);
+  background-color: var(--c-bg-table-main);
   thead {
-    background-color: lighten($color: $color-gray-soft, $amount: 15%);
+    background-color: lighten($color: $c-bg-thead, $amount: 15%);
     tr {
       th {
         padding: 10px 15px;
-        // border-top: 1px solid var(--border-table);
         text-align: left;
         font-weight: 600;
       }
@@ -55,12 +39,10 @@
     tr {
       td {
         padding: 10px 15px;
-        border-top: 1px solid var(--border-table);
-        border-bottom: 1px solid var(--border-table);
+        border-top: 1px solid var(--c-border-table);
+        border-bottom: 1px solid var(--c-border-table);
         text-align: left;
         font-weight: 400;
-
-        
       }
     }
   }

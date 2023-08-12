@@ -156,7 +156,8 @@ export function Companies() {
         title: 'Postal Code:',
         value: '',
         type: 'text',
-        cols: 'c-col-span-4'
+        cols: 'c-col-span-4',
+        errors: ['estoe s un error']
       },
       {
         key: 'country',
@@ -473,7 +474,6 @@ export function Companies() {
           }
         },
         afterStore: (data: any) => {
-          console.log(data)
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
               autoClose: 5000,

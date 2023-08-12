@@ -3,7 +3,7 @@
     width: 100%;
     padding: 8.5px;
     border-radius: 6.5px;
-    background: $color-gray-soft;
+    background: var(--c-bg-datePack);
   }
 
   .react-datepicker-wrapper {
@@ -27,11 +27,11 @@
   display: flex;
   flex-direction: column;
 
-  &__text {
-    margin-top: 4px;
+  &__text{
+    margin-top:4px;
     font-size: 15.5px;
-    color: $color-white;
-    background-color: $color-no-results;
+    color: var(--c-text-error-select);
+    background-color: var(--c-bg-error-input);
     border-radius: 4px;
     padding: 2px 8px;
   }
