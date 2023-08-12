@@ -262,7 +262,7 @@ export function Abm(props: AbmProps) {
             urlStore && (
               <Button
               type={'button'}
-              customClass={'c-mb-3 c-w-40 c-flex c-justify-center btn-primary'}
+              customClass={'c-mb-3 c-w-40 c-flex c-justify-center'}
               onClick={onOpenStore}
               >
                 { storeIcon ? (<img src={storeIcon} alt="Eliminar"/>) : (<span>Crear <strong>+</strong></span>)}

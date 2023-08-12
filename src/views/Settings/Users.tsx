@@ -237,7 +237,7 @@ export function Users() {
       trackBy: "_id",
       value: [],
       type: "select",
-      multiple: true,
+      multiple: false,
       cols: "c-col-span-4",
       options: companies,
       formatValue: (value: Company[]) => {

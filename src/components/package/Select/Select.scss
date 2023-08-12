@@ -31,16 +31,11 @@
   min-height: 43px;
   position: relative;
   transition: all 100ms ease 0s;
-  background: $color-gray-soft;
-  border: 1px solid $color-gray-light;
+  background: var(--c-bg-select);
+  border: 1px solid var(--c-border-select);
   border-radius: 6.5px;
   outline: 0px !important;
   padding: 1.5px 0px;
-
-  &:focus {
-    border: 1px solid $color-violet;
-    outline: 1px solid $color-violet;
-  }
 
   &__itemSelect {
     -webkit-box-align: center;
@@ -76,11 +71,10 @@
       margin: 2px;
       padding-bottom: 2px;
       padding-top: 2px;
-      color: rgb(51, 51, 51);
       box-sizing: border-box;
 
       &__input {
-        color: $color-white;
+        color: var(--c-text-input);
         background: 0px center;
         opacity: 1;
         // width: 100%;
@@ -105,7 +99,7 @@
     &__multiValue {
       display: flex;
       min-width: 0px;
-      background-color: $color-violet-hover;
+      background-color: var(--c-bg-multiValue-select);
       border-radius: 2px;
       margin: 2px;
       box-sizing: border-box;
@@ -115,7 +109,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         border-radius: 2px;
-        color: $color-white;
+        color: var(--c-bg-label-multiValue-select);
         font-size: 85%;
         padding: 3px 3px 3px 6px;
         box-sizing: border-box;
@@ -136,7 +130,7 @@
   &__select {
     width: 100%;
     padding: 6px;
-    background: var(--background-grey-light);
+    background: var(--c-background-grey-light);
   }
 }
 
@@ -162,7 +156,7 @@
   &__indicatorSeparator {
     align-self: stretch;
     width: 1px;
-    background-color: rgb(204, 204, 204);
+    background-color: var(--c-bg-indicatorSeparator-select);
     margin-bottom: 8px;
     margin-top: 8px;
     box-sizing: border-box;
@@ -171,8 +165,8 @@
   &__text {
     margin-top: 4px;
     font-size: 15.5px;
-    color: $color-white;
-    background-color: $color-no-results;
+    color: var(--c-text-error-select);
+    background-color: var(--c-bg-error-input);
     padding: 2px 8px;
     margin-left: 36px;
     border-radius: 4px;
@@ -183,8 +177,7 @@
 
 .Select__menu {
   position: fixed;
-  background: $color-gray-soft;
-  color: $color-white;
+  background: var(--c-bg-select-list);
   top: 48px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.12);
   width: 100%;
@@ -201,6 +194,6 @@
 }
 
 .Select__menu__itemContainer:hover {
-  background-color: $color-violet-hover;
+  background-color: var(--c-bg-select-item-hover);
   font-weight: 600;
 }

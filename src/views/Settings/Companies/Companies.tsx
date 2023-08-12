@@ -156,7 +156,8 @@ export function Companies() {
         title: 'Postal Code:',
         value: '',
         type: 'text',
-        cols: 'c-col-span-4'
+        cols: 'c-col-span-4',
+        errors: ['estoe s un error']
       },
       {
         key: 'country',
