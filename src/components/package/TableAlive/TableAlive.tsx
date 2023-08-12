@@ -2,6 +2,7 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } f
 import { TableAliveProps } from '@packageTypes'
 import {Table, Form, Button} from '@package'
 import './_table_alive.scss'
+import { Loader } from "@package";
 
 export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<string>, ref: React.Ref<HTMLFormElement>) {
   const {
@@ -115,11 +116,14 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
     applyLookFor(data.items, true)
   }
 
+  const [reseting, setReseting] = useState<boolean>(false)
   const resetLookFor = async () => {
+    setReseting(true)
     setLocalItems([])
     await refForm?.current?.resetValues()
     pagination.current.page = 1
     await applyLookFor()
+    setReseting(false)
   }
 
   const refForm = useRef<HTMLFormElement | null>(null)
@@ -166,6 +170,8 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
       {
         header && header
       }
+      {!reseting && localItems.length === 0 && <div className="no-results"><p>No se encontraron resultados</p></div>}
+      {loading && <Loader />}
       <Table
       items={localItems}
       headerSticky={headerSticky}

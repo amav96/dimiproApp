@@ -183,11 +183,11 @@ export function Users() {
       value: "",
       type: "password",
       cols: "c-col-span-4",
-      validations: {
-        rules: {
-          required: true,
-        },
-      },
+      // validations: {
+      //   rules: {
+      //     required: true,
+      //   },
+      // },
     },
     {
       key: "confirmPassword",
@@ -197,11 +197,11 @@ export function Users() {
       value: "",
       type: "password",
       cols: "c-col-span-4",
-      validations: {
-        rules: {
-          required: true,
-        },
-      },
+      // validations: {
+      //   rules: {
+      //     required: true,
+      //   },
+      // },
     },
   ]);
 

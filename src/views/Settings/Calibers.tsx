@@ -105,8 +105,7 @@ export function Calibers() {
               });
           }
         },
-        afterStore: (data: any) => {
-          if(data.errors || data.error){
+        afterStore: (data: any) => {if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
               autoClose: 5000,
               theme: 'colored'

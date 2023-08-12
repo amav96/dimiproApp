@@ -13,7 +13,7 @@ export default function usePermissions () {
   const permissions = useSelector(selectPermissions);
   const navigate = useNavigate()
 
-  const hasPermissions = async (permission: string[] | string) : Promise<boolean>=> {
+  const hasOrGetPermissions = async (permission: string[] | string) : Promise<boolean>=> {
     if(!permissions || permissions.length === 0){
           const {
           permissions: serverPermissions ,
@@ -50,10 +50,14 @@ export default function usePermissions () {
     } else {
       return permissions.includes(permission)
     }
-    
+  }
+
+  const hasPermissions = (permission: string[] | string) : boolean => {
+    return permissions.includes(permission)
   }
 
   return {
+    hasOrGetPermissions,
     hasPermissions
   }
 }
