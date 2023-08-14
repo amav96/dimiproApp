@@ -477,12 +477,10 @@
   flex: 1;
   flex-direction: column;
   position: relative;
-  // overflow-y: auto;
 }
 .AppMain__layer__PageAndTopBar {
   flex: 1;
   overflow-y: auto;
-  // padding: 0 20px;
 }
 
 .HomePageContent {
@@ -499,7 +497,7 @@
 
 .Scrollable--vertical {
   min-height: 1px;
-  overflow-y: auto;
+  // overflow-y: auto;
 }
 
 @font-face {
