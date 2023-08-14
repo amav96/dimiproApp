@@ -71,7 +71,7 @@ $color-no-results: rgb(255, 84, 84);
     --c-bg-datePack: #1F2937;
     
     // layout
-    --c-text-layout: var(--white);
+    --c-text-layout: #4d545c;
 
     // modal
     --c-bg-modal: black;
@@ -87,13 +87,15 @@ $color-no-results: rgb(255, 84, 84);
     --c-bg-thead:red;
 
     // sidebar
-    --c-bg-sidebar: #1F2937;
-    --c-bg-sidebar-subSection-hover: #5521B5;
-    --c-text-sidebar-item: white;
+    --c-bg-sidebar: white;
+    --c-bg-sidebar-subSection-hover: #f7f7ff;
+    --c-text-sidebar-item: #53575e;
+    --c-color-border-right-sideBar: #e9e7f2;
 
     // navbar
-    --c-bg-navBar: #1F2937;
+    --c-bg-navBar: white;
     --c-text-navBar: white;
+    --c-color-border-bottom-navBar: #e9e7f2;
 
     // breakpoints
     --c-breakpoint-s : 480px;
@@ -117,5 +119,9 @@ $color-no-results: rgb(255, 84, 84);
 
     --c-border-grey: var(--gray);
     --c-border-table: #f3ebeb;
+
+    // app
+
+    --c-bg-root-app : rgba(124, 77, 255, 0.06);
 
   }

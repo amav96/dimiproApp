@@ -1,9 +1,10 @@
 .SidebarResizableContainer {
   background: var(--c-bg-sidebar);
-  height: calc(100vh - 75px); //DINAMICO X APP
-  border-radius: 0px 8px 8px 0px;
-  top: 7px; //DINAMICO X APP
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  height: calc(100vh - 61px); //DINAMICO X APP
+  // border-radius: 0px 8px 8px 0px;
+  //DINAMICO X APP
+  // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-right: 1px solid var(--c-color-border-right-sideBar);
   display: flex;
   justify-content: flex-end;
   position: relative;
@@ -70,10 +71,10 @@
 
         &__title {
           width: 95px;
-          font-style: normal;
-          font-weight: 700;
           font-size: 13px;
-          line-height: 18px;
+          font-weight: 400;
+          line-height: 1;
+          font-style: normal;
           @media (min-width: var(--c-breakpoint-m)) {
             display: none;
           }

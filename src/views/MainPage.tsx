@@ -22,7 +22,7 @@ function MainPage() {
       top: [
         {
           title: "Home",
-          image: baseApiUrl + "/icons/Home.svg",
+          image: baseApiUrl + "/icons/home-gray.svg",
           visible: true,
           name: "dashboard",
           path: "/",
@@ -32,7 +32,7 @@ function MainPage() {
         },
         {
           title: "Lista de contratos",
-          image: baseApiUrl + "/icons/lista.svg",
+          image: baseApiUrl + "/icons/lista-gray.svg",
           visible: true,
           name: "listContracts",
           path: "/list-contracts",
@@ -45,7 +45,7 @@ function MainPage() {
       above: [
         {
           title: "Perfil",
-          image: baseApiUrl + "/icons/perfil.svg",
+          image: baseApiUrl + "/icons/perfil-gray.svg",
           visible: true,
           name: "profile",
           path: "/profile",
@@ -55,7 +55,7 @@ function MainPage() {
         },
         {
           title: "Cerrar sesión",
-          image: baseApiUrl + "/icons/logout.svg",
+          image: baseApiUrl + "/icons/logout-gray.svg",
           visible: true,
           name: "logout",
           path: "/logout",
@@ -69,7 +69,7 @@ function MainPage() {
     if(hasPermissions('contracts_all')){
       menu.top.push({
         title: "Agregar contrato",
-        image: baseApiUrl + "/icons/circulo_sumar.svg",
+        image: baseApiUrl + "/icons/Agregar-gray.svg",
         visible: true,
         name: "addContract",
         path: "/add-contract",
@@ -82,7 +82,7 @@ function MainPage() {
     if(hasPermissions('settings_index')){
       menu.top.push({
         title: "Ajustes",
-        image: baseApiUrl + "/icons/ajustes.svg",
+        image: baseApiUrl + "/icons/ajustes-gray.svg",
         visible: true,
         subSection: [
           {
@@ -95,7 +95,7 @@ function MainPage() {
           },
           {
             title: 'Product Types',
-            image: baseApiUrl + "/icons/lista.svg",
+            image: baseApiUrl + "/icons/lista-gray.svg",
             path: "/ajustes/categories",
             onNavigate: (data: any) => {
               navigate(data.path);
@@ -103,7 +103,7 @@ function MainPage() {
           },
           {
             title: 'Companies',
-            image: baseApiUrl + "/icons/lista.svg",
+            image: baseApiUrl + "/icons/lista-gray.svg",
             path: "/ajustes/companies",
             onNavigate: (data: any) => {
               navigate(data.path);
@@ -111,7 +111,7 @@ function MainPage() {
           },
           {
             title: 'Currencies',
-            image: baseApiUrl + "/icons/lista.svg",
+            image: baseApiUrl + "/icons/lista-gray.svg",
             path: "/ajustes/currencies",
             onNavigate: (data: any) => {
               navigate(data.path);
@@ -151,7 +151,7 @@ function MainPage() {
           },
           {
             title: 'Packagings',
-            image: baseApiUrl + "/icons/Home.svg",
+            image: baseApiUrl + "/icons/Home-gray.svg",
             path: "/ajustes/packagings",
             onNavigate: (data: any) => {
               navigate(data.path);
@@ -159,7 +159,7 @@ function MainPage() {
           },
           {
             title: "Users",
-            image: baseApiUrl + "/icons/perfil.svg",
+            image: baseApiUrl + "/icons/perfil-gray.svg",
             path: "/ajustes/users",
             onNavigate: (data: any) => {
               navigate(data.path);

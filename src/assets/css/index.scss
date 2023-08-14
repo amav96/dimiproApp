@@ -47,10 +47,6 @@
   color: var(--c-text-light);
 }
 
-.c-text-layout{
-  color: var(--c-text-layout);
-}
-
 .c-text-white {
   color: var(--c-text-white);
 }
@@ -456,7 +452,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  background-color: $color-black;
+  background-color: var(--c-bg-root-app);
 }
 
 .AppMain {

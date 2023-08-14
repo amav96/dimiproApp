@@ -1,3 +1,5 @@
+import './Layout.scss'
+
 interface LayoutProps {
   title?: string;
   textColor?: string;

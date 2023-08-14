@@ -5,7 +5,8 @@
   border-radius: 0px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid var(--c-color-border-bottom-navBar);
+  // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 
   &__main {
     display: flex;
