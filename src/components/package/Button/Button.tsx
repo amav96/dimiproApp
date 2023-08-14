@@ -4,9 +4,8 @@ import React from 'react';
 export function Button(props: PropsButton) {
 
   const {
-      text,
-      textColor= 'c-text-light',
-      backgroundColor = 'c-bg-primary',
+      textColor= 'c-text-button',
+      backgroundColor = 'c-bg-button',
       borderColor = 'c-border-rounded-l',
       padding = 'c-p-y-3 c-p-x-4',
       customClass = '',

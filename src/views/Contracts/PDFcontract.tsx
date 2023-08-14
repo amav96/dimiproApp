@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { useAppSelector } from "../../hooks";
 import { RootState } from "../../store";
 import { useParams } from "react-router-dom";
-import logo from "../../../public/icons/logo.png";
+import logo from "../../public/icons/logo.png";
 import Inter from "../../assets/fonts/Inter-Regular.otf";
 import InterBlack from "../../assets/fonts/Inter-Black.otf";
 import InterSemiBold from "../../assets/fonts/Inter-SemiBold.otf";

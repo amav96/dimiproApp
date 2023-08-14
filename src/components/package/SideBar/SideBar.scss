@@ -1,5 +1,5 @@
 .SidebarResizableContainer {
-  background: $color-gray-soft;
+  background: var(--c-bg-sidebar);
   height: calc(100vh - 75px); //DINAMICO X APP
   border-radius: 0px 8px 8px 0px;
   top: 7px; //DINAMICO X APP
@@ -8,7 +8,7 @@
   justify-content: flex-end;
   position: relative;
   transition: all 0.3s;
-  @media (min-width: $breakpoint-m) {
+  @media (min-width: var(--c-breakpoint-m)) {
     width: 74px;
     justify-content: center;
     &:hover {
@@ -21,7 +21,7 @@
       }
     }
   }
-  @media (max-width: $breakpoint-m) {
+  @media (max-width: var(--c-breakpoint-m)) {
     position: absolute;
     top: 65px;
     z-index: 99;
@@ -34,7 +34,7 @@
   &__sidebarWrapper {
     display: flex;
     transition: left 0.3s ease-in-out;
-    @media (max-width: $breakpoint-m) {
+    @media (max-width: var(--c-breakpoint-m)) {
       height: 100%;
     }
   }
@@ -56,7 +56,7 @@
       flex-direction: column;
 
       &__item:hover {
-        background: $color-violet-hover;
+        background: var(--c-bg-sidebar-subSection-hover);
         // opacity: 0.2;
         border-radius: 15px;
       }
@@ -66,7 +66,7 @@
         align-items: center;
         padding: 0px 6px;
         gap: 8px;
-        color: $color-white;
+        color: var(--c-text-sidebar-item);
 
         &__title {
           width: 95px;
@@ -74,7 +74,7 @@
           font-weight: 700;
           font-size: 13px;
           line-height: 18px;
-          @media (min-width: $breakpoint-m) {
+          @media (min-width: var(--c-breakpoint-m)) {
             display: none;
           }
         }
@@ -101,7 +101,7 @@
   width: 100%;
   transition: all 0.2s ease-in-out;
   padding: 4px 0;
-  @media (min-width: $breakpoint-m) {
+  @media (min-width: var(--c-breakpoint-m)) {
     display: none;
   }
 
@@ -136,7 +136,7 @@
 }
 
 .subSection:hover {
-  background: $color-violet-hover;
+  background: var(--c-bg-sidebar-subSection-hover);
   border-radius: 5px;
 }
 

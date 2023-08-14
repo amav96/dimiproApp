@@ -1,7 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
-import MainPage from "./views/Main";
+import MainPage from "./views/MainPage";
 import { MenuProvider } from "./context/MenuContext";
-
 
 function App() {
   return (

@@ -5,8 +5,8 @@ import { Button } from "../package/Button";
 import baseApiUrl from "@services/BaseApiUrl";
 import $http from "@services/AxiosInstance";
 import { toast } from "react-toastify";
-import { File } from "../package/File";
 import { Form } from "../package/Form";
+import closeImg from './close.svg';
 
 interface ModalDocsProps {
   open: boolean;
@@ -119,7 +119,7 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
     <div className={`modal-docs ${open ? "modal-docs--open" : ""}`}>
       <div className="modal-docs--container">
         <button className="modal-close" type="button" onClick={onClose}>
-          <img src="/icons/close.svg" alt="Cerrar" />
+          <img src={closeImg} alt="Cerrar" />
         </button>
 
         <div className="modal-docs--title">

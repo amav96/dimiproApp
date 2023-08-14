@@ -1,8 +1,8 @@
 import { NavBarProps } from "@packageTypes";
 import "./NavBar.scss";
 import { useNavigate } from "react-router-dom";
-import menu from "../../../../public/icons/menu.svg";
-import menuClose from "../../../../public/icons/close-menu.svg";
+import menu from "./menu.svg";
+import menuClose from "./close-menu.svg";
 import { useMenu } from "../../../context/MenuContext";
 
 export function NavBar(props: NavBarProps) {

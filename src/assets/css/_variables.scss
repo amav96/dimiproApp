@@ -40,6 +40,9 @@ $color-no-results: rgb(255, 84, 84);
     --c-text-blue-light: var(--blue-light);
     --c-text-light: var(--white);
 
+    // button
+    --c-bg-button: #4A1D96;
+    --c-text-button:white;
 
     // form
     --c-text-form: var(--white);
@@ -83,6 +86,19 @@ $color-no-results: rgb(255, 84, 84);
     --c-text-table-main: white;
     --c-bg-thead:red;
 
+    // sidebar
+    --c-bg-sidebar: #1F2937;
+    --c-bg-sidebar-subSection-hover: #5521B5;
+    --c-text-sidebar-item: white;
+
+    // navbar
+    --c-bg-navBar: #1F2937;
+    --c-text-navBar: white;
+
+    // breakpoints
+    --c-breakpoint-s : 480px;
+    --c-breakpoint-m : 768px;
+    --c-breakpoint-l : 1024px;
 
     --c-background-black: var(--black);
     --c-background-grey: var(--gray);

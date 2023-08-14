@@ -439,6 +439,14 @@
   cursor: pointer;
 }
 
+// button
+
+.c-bg-button {
+  background: var(--c-bg-button);
+}
+.c-text-button {
+  color: var(--c-text-button)
+}
 .AppRoot-fullPage {
   bottom: 0;
   display: flex;

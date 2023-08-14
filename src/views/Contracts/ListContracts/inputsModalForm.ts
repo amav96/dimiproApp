@@ -1,19 +1,19 @@
 import { GlobalInputs, Slot } from '@packageTypes';
 
-import ExporterIcon from '/icons/form/exporter.svg';
-import ProductIcon from '/icons/form/product.svg';
-import TypeIcon from '/icons/form/type.svg';
-import CaliberIcon from '/icons/form/caliber.svg';
-import CropIcon from '/icons/form/calendar.svg';
-import PackagingIcon from '/icons/form/packaging.svg';
-import QtyIcon from '/icons/form/weight.svg';
-import BrokerIcon from '/icons/form/broker.svg';
-import PercentageIcon from '/icons/form/percentage.svg';
-import PriceIcon from '/icons/form/price.svg';
-import CoinIcon from '/icons/form/coin.svg';
-import PaymentMethodIcon from '/icons/form/payment-method.svg';
-import SurveyorIcon from '/icons/form/surveyor.svg';
-import ConditionsIcon from '/icons/form/conditions.svg';
+import ExporterIcon from '../../../public/icons/form/exporter.svg';
+import ProductIcon from '../../../public/icons/form/product.svg';
+import TypeIcon from '../../../public/icons/form/type.svg';
+import CaliberIcon from '../../../public/icons/form/caliber.svg';
+import CropIcon from '../../../public/icons/form/calendar.svg';
+import PackagingIcon from '../../../public/icons/form/packaging.svg';
+import QtyIcon from '../../../public/icons/form/weight.svg';
+import BrokerIcon from '../../../public/icons/form/broker.svg';
+import PercentageIcon from '../../../public/icons/form/percentage.svg';
+import PriceIcon from '../../../public/icons/form/price.svg';
+import CoinIcon from '../../../public/icons/form/coin.svg';
+import PaymentMethodIcon from '../../../public/icons/form/payment-method.svg';
+import SurveyorIcon from '../../../public/icons/form/surveyor.svg';
+import ConditionsIcon from '../../../public/icons/form/conditions.svg';
 
 export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
