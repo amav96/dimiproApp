@@ -47,7 +47,8 @@
   &__item {
     display: flex;
     align-items: center;
-    margin: 0px 10px 0px 10px;
+    width: 100%;
+    // margin: 0px 10px 0px 10px;
 
     transition: all 0.2s ease-in-out;
     cursor: pointer;
@@ -55,40 +56,48 @@
     &__box {
       display: flex;
       flex-direction: column;
+      flex: 1;
 
-      &__item:hover {
+       &__item:hover {
         background: var(--c-bg-sidebar-subSection-hover);
-        // opacity: 0.2;
-        border-radius: 15px;
       }
+
       &__item {
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 0px 6px;
-        gap: 8px;
         color: var(--c-text-sidebar-item);
 
-        &__title {
-          width: 95px;
-          font-size: 13px;
-          font-weight: 400;
-          line-height: 1;
-          font-style: normal;
-          @media (min-width: var(--c-breakpoint-m)) {
-            display: none;
-          }
-        }
+        &__minibox{
 
-        &__boxImg {
-          width: 28px;
-          height: 27px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-around;
+          padding: 0px 10px;
+          gap: 8px;
 
-          img {
-            width: 100%;
-            height: 100%;
+            &__title {
+              width: 95px;
+              font-size: 13px;
+              font-weight: 400;
+              line-height: 1;
+              font-style: normal;
+              @media (min-width: var(--c-breakpoint-m)) {
+                display: none;
+              }
+            }
+
+            &__boxImg {
+              width: 28px;
+              height: 27px;
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
           }
-        }
       }
     }
   }
@@ -113,14 +122,13 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 4px;
   width: 85%;
   font-size: 14px;
 
   &__title {
     // margin-left: 10px;
     text-align: left;
-    color: $color-white;
+    color: var(--c-text-sidebar-item);
     font-weight: 500;
     width: 100%;
   }
@@ -138,16 +146,13 @@
 
 .subSection:hover {
   background: var(--c-bg-sidebar-subSection-hover);
-  border-radius: 5px;
 }
 
 .Sidebar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 0px 20px 20px 0px;
   padding: 10px 0px;
-  padding-right: 1.5px; /* Increase/decrease this value for cross-browser compatibility */
 
   &__Top {
     overflow-y: auto;

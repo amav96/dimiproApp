@@ -34,11 +34,12 @@ export function SideBar(props: SideBarProps) {
             {menu &&
               menu.top &&
               menu.top.map((item, i) => (
+                
                 <ItemSideBar
                   key={i}
                   title={item.title}
                   image={item.image}
-                  // deployed={deployed}
+                  deployed={true}
                   colorTextItem={colorTextItem}
                   subSection={item.subSection}
                   name={item.name}
@@ -55,7 +56,7 @@ export function SideBar(props: SideBarProps) {
                   key={i}
                   title={item.title}
                   image={item.image}
-                  // deployed={deployed}
+                  deployed={true}
                   colorTextItem={colorTextItem}
                   name={item.name}
                   path={item.path}

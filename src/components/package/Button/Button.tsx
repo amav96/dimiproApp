@@ -1,5 +1,6 @@
 import { PropsButton } from '@packageTypes'
 import React from 'react';
+import './Button.scss'
 
 export function Button(props: PropsButton) {
 

@@ -6,7 +6,7 @@ $breakpoint-l: 1024px;
 $color-white: #ffffff;
 $color-black: #000000;
 $color-gray-soft: #1F2937;
-$c-bg-thead: #1F2937;
+$c-bg-thead: white;
 $color-gray-dark: #111827;
 $color-gray-light: #9CA3AF;
 $color-gray-hover: #6B7280;
@@ -41,24 +41,28 @@ $color-no-results: rgb(255, 84, 84);
     --c-text-light: var(--white);
 
     // button
-    --c-bg-button: #4A1D96;
+    --c-bg-button: rgb(124, 77, 255);
     --c-text-button:white;
+    --c-bg-button-filter:white;
+    --c-text-button-filter:black;
+    --c-bg-button-filter-remove:white;
+    --c-text-button-filter-remove:black;
 
     // form
-    --c-text-form: var(--white);
+    --c-text-form: #53575e;
 
     // input
-    --c-bg-input: #1F2937;
-    --c-text-input: var(--white);
-    --c-input-focus: #5521B5;
+    --c-bg-input: white;
+    --c-text-input: #53575e;
+    --c-input-focus: #9CA3AF;
     --c-border-input: #9CA3AF;
     --c-text-error-select: white;
     --c-bg-error-input:rgb(255, 84, 84);
 
     // select
-    --c-bg-select-list: #1F2937;
-    --c-bg-select-item-hover: #5521B5;
-    --c-bg-select: #1F2937;
+    --c-bg-select-list: white;
+    --c-bg-select-item-hover: #f7f7ff;
+    --c-bg-select: white;
     --c-border-select: #9CA3AF;
     --c-bg-multiValue-select: #5521B5;
     --c-bg-label-multiValue-select: white;
@@ -81,10 +85,10 @@ $color-no-results: rgb(255, 84, 84);
 
     // table
     --c-bg-table-wrapper-scrollbar-thumb: #cfcece;
-    --c-bg-table-wrapper: #000000;
-    --c-bg-table-main: #1F2937; /* Color de fondo para table-main */
-    --c-text-table-main: white;
-    --c-bg-thead:red;
+    --c-bg-table-wrapper: white;
+    --c-bg-table-main: white; /* Color de fondo para table-main */
+    --c-text-table-main: black;
+    --c-border-color-left-table:rgb(124, 77, 255);
 
     // sidebar
     --c-bg-sidebar: white;

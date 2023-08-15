@@ -152,14 +152,17 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
           >
             <div className="c-flex c-my-4">
               <Button
-              customClass={'btn-primary'}
+              backgroundColor={'c-bg-btn-filter'}
+              textColor={'c-text-btn-filter'}
               >
                 { searchIcon ? (<img src={searchIcon} alt="buscar"/>) : (<span>Buscar</span>)}
               </Button>
               <Button
               type={'button'}
               onClick={resetLookFor}
-              customClass={'c-mx-2 btn-secondary'}
+              customClass={'c-mx-2'}
+              backgroundColor={'c-bg-btn-filter-remove'}
+              textColor={'c-text-btn-filter-remove'}
               >
                 Limpiar filtros
               </Button>

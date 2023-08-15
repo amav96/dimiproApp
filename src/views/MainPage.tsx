@@ -119,7 +119,7 @@ function MainPage() {
           },
           {
             title: 'Packagings',
-            image: baseApiUrl + "/icons/lista.svg",
+            image: baseApiUrl + "/icons/lista-gray.svg",
             path: "/ajustes/packagings",
             onNavigate: (data: any) => {
               navigate(data.path);
@@ -127,7 +127,7 @@ function MainPage() {
           },
           {
             title: 'Payment Methods',
-            image: baseApiUrl + "/icons/lista.svg",
+            image: baseApiUrl + "/icons/lista-gray.svg",
             path: "/ajustes/paymentMethods",
             onNavigate: (data: any) => {
               navigate(data.path);
@@ -135,7 +135,7 @@ function MainPage() {
           },
           {
             title: 'Products',
-            image: baseApiUrl + "/icons/lista.svg",
+            image: baseApiUrl + "/icons/lista-gray.svg",
             path: "/ajustes/products",
             onNavigate: (data: any) => {
               navigate(data.path);
@@ -143,7 +143,7 @@ function MainPage() {
           },
           {
             title: 'Surveyors',
-            image: baseApiUrl + "/icons/lista.svg",
+            image: baseApiUrl + "/icons/lista-gray.svg",
             path: "/ajustes/surveyors",
             onNavigate: (data: any) => {
               navigate(data.path);
@@ -151,7 +151,7 @@ function MainPage() {
           },
           {
             title: 'Packagings',
-            image: baseApiUrl + "/icons/Home-gray.svg",
+            image: baseApiUrl + "/icons/lista-gray.svg",
             path: "/ajustes/packagings",
             onNavigate: (data: any) => {
               navigate(data.path);

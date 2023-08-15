@@ -9,6 +9,7 @@
   overflow-x: auto;
   background: var(--c-bg-table-wrapper);
   position: relative;
+  border-left: 3px solid var(--c-border-color-left-table);
 
   .lds-spinner {
     position: absolute;
@@ -25,6 +26,7 @@
   font-size: 14px;
   color: var(--c-text-table-main);
   background-color: var(--c-bg-table-main);
+  
   thead {
     background-color: lighten($color: $c-bg-thead, $amount: 15%);
     tr {
