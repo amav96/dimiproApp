@@ -40,13 +40,20 @@ $color-no-results: rgb(255, 84, 84);
     --c-text-blue-light: var(--blue-light);
     --c-text-light: var(--white);
 
+    // abm
+    --c-bg-button-filter:white;
+    --c-text-button-filter:black;
+
+    --c-bg-button-filter-remove:white;
+    --c-text-button-filter-remove:black;
+
+    --c-bg-button-store: rgb(124, 77, 255);
+    --c-text-button-store:white;
+
     // button
     --c-bg-button: rgb(124, 77, 255);
     --c-text-button:white;
-    --c-bg-button-filter:white;
-    --c-text-button-filter:black;
-    --c-bg-button-filter-remove:white;
-    --c-text-button-filter-remove:black;
+
 
     // form
     --c-text-form: #53575e;
@@ -73,15 +80,22 @@ $color-no-results: rgb(255, 84, 84);
 
     // datepack
     --c-bg-datePack: #1F2937;
-    
+
     // layout
     --c-text-layout: #4d545c;
 
     // modal
-    --c-bg-modal: black;
-    --c-bg-modal-closeable:white;
-    --c-bs-modal-closeable:0px 5px 5px rgba(0, 0, 0, 0.1);
-    --c-text-modal-closeable: white;
+    --c-bg-modal: white;
+    --c-bg-modal-closeable:black;
+    --c-bs-modal-closeable:0px 5px 5px white;
+    --c-text-modal-closeable: black;
+
+    // dialog
+
+    --c-bg-button-dialog-accept:rgb(255, 84, 84);
+    --c-text-button-dialog-accept:white;
+    --c-bg-button-dialog-cancel:rgb(0, 0, 0);
+    --c-text-button-dialog-cancel:white;
 
     // table
     --c-bg-table-wrapper-scrollbar-thumb: #cfcece;
@@ -89,6 +103,12 @@ $color-no-results: rgb(255, 84, 84);
     --c-bg-table-main: white; /* Color de fondo para table-main */
     --c-text-table-main: black;
     --c-border-color-left-table:rgb(124, 77, 255);
+
+    --c-bg-button-edit-table: #53575e;
+    --c-text-button-edit-table:white;
+
+    --c-bg-button-delete-table: white;
+    --c-text-button-delete-table:white;
 
     // sidebar
     --c-bg-sidebar: white;

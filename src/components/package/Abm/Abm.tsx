@@ -227,15 +227,27 @@ export function Abm(props: AbmProps) {
     ...scopedColumns,
     ...(urlUpdate && {
       edit: (item: any) => (
-        <Button style={{ width: '40px' }} type="button" onClick={() => onOpenUpdate(item)}>
+        <Button
+        style={{ width: '40px' }}
+        type="button"
+        backgroundColor='c-bg-button-edit-table'
+        textColor='c-text-button-edit-table'
+        onClick={() => onOpenUpdate(item)}
+        >
           {updateIcon ? <img src={updateIcon} alt="Editar" /> : <span>Editar</span>}
         </Button>
       ),
     }),
     ...(urlDelete && {
       delete: (item: any) => (
-        <Button style={{width:'40px'}} type="button" onClick={() => onOpenDelete(item)}>
-          {deleteIcon ? <img 
+        <Button
+        style={{width:'40px'}}
+        type="button"
+        backgroundColor='c-bg-button-delete-table'
+        textColor='c-text-button-delete-table'
+        onClick={() => onOpenDelete(item)}
+        >
+          {deleteIcon ? <img
            src={deleteIcon} alt="Eliminar" /> : <span>Eliminar</span>}
         </Button>
       )
@@ -262,6 +274,7 @@ export function Abm(props: AbmProps) {
             urlStore && (
               <Button
               type={'button'}
+              backgroundColor='c-bg-button-store'
               customClass={'c-mb-3 c-w-40 c-flex c-justify-center'}
               onClick={onOpenStore}
               >

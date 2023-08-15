@@ -157,7 +157,6 @@ export function Companies() {
         value: '',
         type: 'text',
         cols: 'c-col-span-4',
-        errors: ['estoe s un error']
       },
       {
         key: 'country',

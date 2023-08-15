@@ -2,7 +2,7 @@ import { PropModal } from "@packageTypes";
 import { ModalPortal } from "@package";
 import "./Modal.scss";
 import React from "react";
-import timesSolid from "./times-solid.svg";
+import timesSolid from "./times-solid-white.svg";
 
 export function Modal(props: PropModal) {
   const {
