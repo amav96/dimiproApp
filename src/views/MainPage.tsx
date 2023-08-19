@@ -31,7 +31,7 @@ function MainPage() {
           },
         },
         {
-          title: "Lista de contratos",
+          title: "Contracts list",
           image: baseApiUrl + "/icons/lista-gray.svg",
           visible: true,
           name: "listContracts",
@@ -44,7 +44,7 @@ function MainPage() {
       ],
       above: [
         {
-          title: "Perfil",
+          title: "Profile",
           image: baseApiUrl + "/icons/perfil-gray.svg",
           visible: true,
           name: "profile",
@@ -54,7 +54,7 @@ function MainPage() {
           },
         },
         {
-          title: "Cerrar sesión",
+          title: "Logout",
           image: baseApiUrl + "/icons/logout-gray.svg",
           visible: true,
           name: "logout",
