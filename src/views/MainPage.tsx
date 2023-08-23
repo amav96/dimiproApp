@@ -5,6 +5,7 @@ import { SideBar } from "../components/package/SideBar";
 import { NavBar } from "../components/package/NavBar";
 import usePermissions from '@hooks/usePermissions';
 import { Menu } from "@packageTypes";
+import { useState } from "react";
 
 function MainPage() {
   const navigate = useNavigate();
@@ -171,6 +172,8 @@ function MainPage() {
     return menu
   }
 
+  const [sideBarDeployed, setSideBarDeployed] = useState<boolean>(false)
+
   return (
     <>
       <NavBar
@@ -178,11 +181,18 @@ function MainPage() {
           "https://www.dimiproworld.com/wp-content/uploads/2018/10/adventure_logo_1-dimiopro.png"
         }
         title="Corporation"
+        displayMenu={sideBarDeployed}
+        setDisplayMenu={(value: boolean) => setSideBarDeployed(value)}
       />
       {shouldShowSideBar && (
         <div className="AppMain">
           <div className="AppMain__layer">
-            <SideBar menu={getMenu()} colorTextItem="#fff" />
+            <SideBar 
+            menu={getMenu()} 
+            getDeployed={(value: boolean) => setSideBarDeployed(value)}
+            externalDeployed={sideBarDeployed}
+            colorTextItem="#fff" 
+            />
             <main className="AppMain__layer__PageAndTopBar">
               <div className="HomePageContent">
                 <div

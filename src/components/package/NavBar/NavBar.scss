@@ -11,7 +11,7 @@
   &__main {
     display: flex;
     padding: 10px;
-    @media (max-width: var(--c-breakpoint-m)) {
+    @media (max-width: 768px) {
       width: 100%;
       justify-content: space-between;
     }
@@ -20,14 +20,14 @@
       width: 100%;
       object-fit: cover;
       cursor: pointer;
-      @media (max-width: var(--c-breakpoint-m)) {
+      @media (max-width: 768px) {
         height: auto;
         width: auto;
       }
 
       &.navbar-menu__icon {
         display: none;
-        @media (max-width: var(--c-breakpoint-m)) {
+        @media (max-width: 768px) {
           display: block;
         }
       }

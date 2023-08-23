@@ -24,5 +24,7 @@ export interface SideBarProps {
     background?: string,
     colorScrollBar?: string,
     colorTextItem?: string,
-    menu: Menu
+    menu: Menu,
+    getDeployed?: Function,
+    externalDeployed?: boolean
 }

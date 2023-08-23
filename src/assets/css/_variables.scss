@@ -122,9 +122,9 @@ $color-no-results: rgb(255, 84, 84);
     --c-color-border-bottom-navBar: #e9e7f2;
 
     // breakpoints
-    --c-breakpoint-s : 480px;
-    --c-breakpoint-m : 768px;
-    --c-breakpoint-l : 1024px;
+    --c-breakpoint-s : $breakpoint-s;
+    --c-breakpoint-m : $breakpoint-m;
+    --c-breakpoint-l : $breakpoint-l;
 
     --c-background-black: var(--black);
     --c-background-grey: var(--gray);

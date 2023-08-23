@@ -81,14 +81,14 @@ export function ItemSideBar(props: ItemSideBarProps) {
           <div>
           {
             deployed && subSection && !deployedSection
-            ? <div className="c-mx-2"><img src={arrowDown} /></div>
-            : subSection && deployedSection
-              ? <div className="c-mx-2"><img src={arrowUp} /></div>
+            ? <div className="c-mx-2"><img src={arrowUp} /></div>
+            : deployed && subSection && deployedSection
+              ? <div className="c-mx-2"><img src={arrowDown} /></div>
               : <div></div>
           }
           </div>
         </div>
-        {deployedSection && subSection && (
+        {deployed && deployedSection && subSection && (
           <div className="subSectionContainer">
             {subSection.map((section, index) => (
               <div

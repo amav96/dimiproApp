@@ -181,7 +181,7 @@ const ListContracts = () => {
 
   return (
     <div className="list-contracts__container">
-      <Layout title="Lista de contratos">
+      <Layout title="Contracts list">
         <Abm
           table={{
             columns: dataTable,

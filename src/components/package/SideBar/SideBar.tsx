@@ -1,32 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SideBarProps } from "@packageTypes";
 import { ItemSideBar } from "@package";
-import { useMenu } from "../../../context/MenuContext";
 import "./SideBar.scss";
 
 export function SideBar(props: SideBarProps) {
-  // const [deployed, setDeployed] = useState<boolean>(false);
-  // const open = () => {
-  //   if (!deployed) {
-  //     setDeployed(true);
-  //   }
-  // };
 
-  const { showSidebar } = useMenu();
+  const { colorTextItem, menu, getDeployed, externalDeployed  } = props;
 
-  // const close = () => {
-  //   if (deployed) {
-  //     setDeployed(false);
-  //   }
-  // };
+  useEffect(() => {
+    if(!externalDeployed){
+      close()
+    } else {
+      open()
+    }
+  }, [externalDeployed])
 
-  const { colorTextItem, menu } = props;
+  const [deployed, setDeployed] = useState<boolean>(false);
+
+  const open = () => {
+    if (!deployed) {
+      setDeployed(true);
+      if(getDeployed){
+        getDeployed(true);
+      }
+    }
+  };
+
+  const close = () => {
+    if (deployed) {
+      setDeployed(false);
+      if(getDeployed){
+        getDeployed(false);
+      }
+    }
+  };
+
+
 
   return (
-    <div className={`SidebarResizableContainer ${!showSidebar ? 'show' : ''}`}>
+    <div className={`SidebarResizableContainer ${!deployed ? 'show' : ''}`}>
       <div className="SidebarResizableContainer__sidebarWrapper">
         <div
-          // onMouseOver={open}
+          onMouseOver={open}
           onMouseLeave={close}
           className="Sidebar SidebarResizableContainer__sidebar"
         >
@@ -39,7 +54,7 @@ export function SideBar(props: SideBarProps) {
                   key={i}
                   title={item.title}
                   image={item.image}
-                  deployed={true}
+                  deployed={deployed}
                   colorTextItem={colorTextItem}
                   subSection={item.subSection}
                   name={item.name}
@@ -56,7 +71,7 @@ export function SideBar(props: SideBarProps) {
                   key={i}
                   title={item.title}
                   image={item.image}
-                  deployed={true}
+                  deployed={deployed}
                   colorTextItem={colorTextItem}
                   name={item.name}
                   path={item.path}
