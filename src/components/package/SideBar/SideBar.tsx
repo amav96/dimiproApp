@@ -38,7 +38,7 @@ export function SideBar(props: SideBarProps) {
 
 
   return (
-    <div className={`SidebarResizableContainer ${!deployed ? 'show' : ''}`}>
+    <div className={`SidebarResizableContainer ${deployed ? 'show' : ''}`}>
       <div className="SidebarResizableContainer__sidebarWrapper">
         <div
           onMouseOver={open}

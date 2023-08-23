@@ -9,7 +9,7 @@
   justify-content: flex-end;
   position: relative;
   transition: all 0.3s;
-  @media (min-width: var(--c-breakpoint-m)) {
+  @media (min-width:  $breakpoint-m) {
     width: 74px;
     justify-content: center;
     &:hover {
@@ -22,7 +22,7 @@
       }
     }
   }
-  @media (max-width: var(--c-breakpoint-m)) {
+  @media (max-width: $breakpoint-m) {
     position: absolute;
     top: 65px;
     z-index: 99;
@@ -35,7 +35,7 @@
   &__sidebarWrapper {
     display: flex;
     transition: left 0.3s ease-in-out;
-    @media (max-width: var(--c-breakpoint-m)) {
+    @media (max-width:  $breakpoint-m) {
       height: 100%;
     }
   }
@@ -83,7 +83,7 @@
               font-weight: 400;
               line-height: 1;
               font-style: normal;
-              @media (min-width: var(--c-breakpoint-m)) {
+              @media (min-width:  $breakpoint-m) {
                 display: none;
               }
             }
@@ -111,7 +111,7 @@
   width: 100%;
   transition: all 0.2s ease-in-out;
   padding: 4px 0;
-  @media (min-width: var(--c-breakpoint-m)) {
+  @media (min-width:  $breakpoint-m) {
     display: none;
   }
 
