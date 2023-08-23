@@ -438,7 +438,10 @@
 // button
 
 .c-bg-button {
-  background: var(--c-bg-button);
+  background: $c-bg-button;
+  &:hover {
+    background: darken($color: $c-bg-button, $amount: 10%)
+  }
 }
 .c-text-button {
   color: var(--c-text-button)

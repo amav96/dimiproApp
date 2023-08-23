@@ -1,19 +1,28 @@
 .c-bg-btn-filter{
-    background: var(--c-bg-button-filter);
+    background: $c-bg-button-filter;
+    &:hover {
+        background: lighten($color: $color-violet, $amount: 20%)
+    }
 }
 .c-text-btn-filter{
     color: var(--c-text-button-filter);
 }
 
 .c-bg-btn-filter-remove{
-    background: var(--c-bg-button-filter-remove);
+    background: $c-bg-button-filter;
+    &:hover {
+        background: lighten($color: $color-violet, $amount: 20%)
+    }
 }
 .c-text-btn-filter-remove{
     color: var(--c-text-button-filter-remove);
 }
 
 .c-bg-button-store{
-    background: var(--c-bg-button-store);
+    background: $c-bg-button-store;
+    &:hover {
+        background: darken($color: $c-bg-button-store, $amount: 10%)
+    }
 }
 
 .c-text-button-store{

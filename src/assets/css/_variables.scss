@@ -16,6 +16,13 @@ $color-violet-hover: #5521B5;
 $color-no-results: rgb(255, 84, 84);
 
 
+$c-bg-button-filter:#7508ce;
+$c-bg-button-filter-remove: #7508ce;
+
+$c-bg-button-store: rgb(124, 77, 255);
+$c-bg-button: rgb(124, 77, 255);
+
+
 :root {
     --black: #001b35;
     --gray: #f0f3f4;
@@ -41,17 +48,13 @@ $color-no-results: rgb(255, 84, 84);
     --c-text-light: var(--white);
 
     // abm
-    --c-bg-button-filter:white;
-    --c-text-button-filter:black;
+    --c-text-button-filter:white;
 
-    --c-bg-button-filter-remove:white;
-    --c-text-button-filter-remove:black;
+    --c-text-button-filter-remove:white;
 
-    --c-bg-button-store: rgb(124, 77, 255);
     --c-text-button-store:white;
 
     // button
-    --c-bg-button: rgb(124, 77, 255);
     --c-text-button:white;
 
 
