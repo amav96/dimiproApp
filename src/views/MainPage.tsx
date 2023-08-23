@@ -182,6 +182,7 @@ function MainPage() {
         }
         title="Corporation"
         displayMenu={sideBarDeployed}
+        shouldShowSideBar={shouldShowSideBar}
         setDisplayMenu={(value: boolean) => setSideBarDeployed(value)}
       />
       {shouldShowSideBar && (

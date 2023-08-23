@@ -3,4 +3,5 @@ export interface NavBarProps {
     title?: string,
     displayMenu?: boolean,
     setDisplayMenu?: Function
+    shouldShowSideBar: boolean
 }
