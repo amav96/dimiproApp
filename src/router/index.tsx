@@ -22,9 +22,9 @@ import RestorePassword from "../components/Auth/RestorePassword";
 export function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/ajustes/users" replace />} />
-      <Route element={<ProtectRoute gate={"users_index"} />}>
-        <Route path="/ajustes/users" element={<Users />} />
+      <Route path="/" element={<Navigate to="/list-contracts" replace />} />
+      <Route element={<ProtectRoute gate={"contracts_index"} />}>
+        <Route path="/ajustes/users" element={<ListContracts />} />
       </Route>
       <Route element={<ProtectRoute gate={"companies_index"} />}>
         <Route path="/ajustes/companies" element={<Companies />} />

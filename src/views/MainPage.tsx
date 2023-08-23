@@ -69,7 +69,7 @@ function MainPage() {
 
     if(hasPermissions('contracts_all')){
       menu.top.push({
-        title: "Agregar contrato",
+        title: "Add Contract",
         image: baseApiUrl + "/icons/Agregar-gray.svg",
         visible: true,
         name: "addContract",
@@ -82,13 +82,13 @@ function MainPage() {
 
     if(hasPermissions('settings_index')){
       menu.top.push({
-        title: "Ajustes",
+        title: "Settings",
         image: baseApiUrl + "/icons/ajustes-gray.svg",
         visible: true,
         subSection: [
           {
             title: 'Calibers',
-            image: baseApiUrl + "/icons/machine.svg",
+            image: baseApiUrl + "/icons/lista-gray.svg",
             path: "/ajustes/calibers",
             onNavigate: (data: any) => {
               navigate(data.path);
