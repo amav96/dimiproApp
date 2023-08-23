@@ -89,7 +89,7 @@ function MainPage() {
           {
             title: 'Calibers',
             image: baseApiUrl + "/icons/lista-gray.svg",
-            path: "/ajustes/calibers",
+            path: "/settings/calibers",
             onNavigate: (data: any) => {
               navigate(data.path);
               },
@@ -97,7 +97,7 @@ function MainPage() {
           {
             title: 'Product Types',
             image: baseApiUrl + "/icons/lista-gray.svg",
-            path: "/ajustes/categories",
+            path: "/settings/categories",
             onNavigate: (data: any) => {
               navigate(data.path);
             },
@@ -105,7 +105,7 @@ function MainPage() {
           {
             title: 'Companies',
             image: baseApiUrl + "/icons/lista-gray.svg",
-            path: "/ajustes/companies",
+            path: "/settings/companies",
             onNavigate: (data: any) => {
               navigate(data.path);
             },
@@ -113,7 +113,7 @@ function MainPage() {
           {
             title: 'Currencies',
             image: baseApiUrl + "/icons/lista-gray.svg",
-            path: "/ajustes/currencies",
+            path: "/settings/currencies",
             onNavigate: (data: any) => {
               navigate(data.path);
             },
@@ -121,7 +121,7 @@ function MainPage() {
           {
             title: 'Packagings',
             image: baseApiUrl + "/icons/lista-gray.svg",
-            path: "/ajustes/packagings",
+            path: "/settings/packagings",
             onNavigate: (data: any) => {
               navigate(data.path);
             },
@@ -129,7 +129,7 @@ function MainPage() {
           {
             title: 'Payment Methods',
             image: baseApiUrl + "/icons/lista-gray.svg",
-            path: "/ajustes/paymentMethods",
+            path: "/settings/paymentMethods",
             onNavigate: (data: any) => {
               navigate(data.path);
             },
@@ -137,7 +137,7 @@ function MainPage() {
           {
             title: 'Products',
             image: baseApiUrl + "/icons/lista-gray.svg",
-            path: "/ajustes/products",
+            path: "/settings/products",
             onNavigate: (data: any) => {
               navigate(data.path);
             },
@@ -145,7 +145,7 @@ function MainPage() {
           {
             title: 'Surveyors',
             image: baseApiUrl + "/icons/lista-gray.svg",
-            path: "/ajustes/surveyors",
+            path: "/settings/surveyors",
             onNavigate: (data: any) => {
               navigate(data.path);
             },
@@ -153,7 +153,7 @@ function MainPage() {
           {
             title: 'Packagings',
             image: baseApiUrl + "/icons/lista-gray.svg",
-            path: "/ajustes/packagings",
+            path: "/settings/packagings",
             onNavigate: (data: any) => {
               navigate(data.path);
             },
@@ -161,7 +161,7 @@ function MainPage() {
           {
             title: "Users",
             image: baseApiUrl + "/icons/perfil-gray.svg",
-            path: "/ajustes/users",
+            path: "/settings/users",
             onNavigate: (data: any) => {
               navigate(data.path);
             },
