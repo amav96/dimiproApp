@@ -11,15 +11,18 @@ import ModalDocs from "../../../components/Modals/ModalDocs";
 import { useAppSelector } from "../../../hooks";
 import { RootState } from "../../../store";
 import "./_listContracts.scss";
-import { dataTable } from "./dataTable";
+import { dataTable as data } from "./dataTable";
 import { inputsEdit } from "./inputsModalForm";
+import usePermissions from "@hooks/usePermissions";
 
 const ListContracts = () => {
   const [IsOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [inputsModalForm, setInputsModalForm] =
     useState<Array<GlobalInputs | any>>(inputsEdit);
   const [dataDocuments, setDataDocuments] = useState<any>([]);
+  const [dataTable, setDataTable] = useState<any>(data);
   const { getDataProviders } = useDataProvider();
+  const {hasPermissions} = usePermissions();
 
   const companies = useAppSelector(
     (state: RootState) => state.dataProviders.companies
@@ -117,6 +120,21 @@ const ListContracts = () => {
       })
     );
   }, [companies]);
+
+  useEffect(() => {
+    // Filtra las columnas que se van a mostrar en la tabla dependiendo si el usuario tiene permisos
+    const filteredDataTable = dataTable.filter((column: any) => {
+      if (column.key === "edit") {
+        return hasPermissions("contracts_update");
+      }
+      if (column.key === "delete") {
+        return hasPermissions("contracts_delete");
+      }
+      return true;
+    });
+
+    setDataTable(filteredDataTable);
+  }, []);
 
   const [formFilter, setFormFilter] = useState<GlobalInputs[]>([
     {
