@@ -3,6 +3,7 @@ import { TableProps } from "@packageTypes";
 import "./Table.scss";
 import debounce from "@services/utils/Debounce";
 import { getProperty } from "@services/utils/Property";
+import { Loader } from "../Loader";
 
 
 export function Table(props: TableProps<string>) {
@@ -72,6 +73,7 @@ export function Table(props: TableProps<string>) {
 
   return (
     <div className="table-wrapper" onScroll={debounce(scrollTable, 300)}>
+      {loading && <Loader />}
       <style>
         {`.table-wrapper::-webkit-scrollbar {
           height: ${scrollbar.height}px;

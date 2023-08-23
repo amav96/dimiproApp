@@ -170,11 +170,7 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
           </Form>
         </div>
       }
-      {
-        header && header
-      }
-      {!reseting && localItems.length === 0 && <div className="no-results"><p>No se encontraron resultados</p></div>}
-      {loading && <Loader />}
+      
       <Table
       items={localItems}
       headerSticky={headerSticky}
