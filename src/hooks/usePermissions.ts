@@ -21,15 +21,15 @@ export default function usePermissions () {
          } = await authenticationRepository.permissions()
 
          if(errors){
-           if(errors.message === 'Usuario no autenticado'){
-            toast(`🦄 ${errors.message || 'No estas autenticado'}`, {
+           if(errors.message === 'User no authenticated'){
+            toast(`🦄 ${errors.message || 'You are not authenticated'}`, {
               position: "top-right",
               autoClose: 1000,
             });
             navigate('/login')
             return false
            }
-           toast(`🦄 ${errors.message || 'No estas autenticado'}`, {
+           toast(`🦄 ${errors.message || 'You are not authenticated'}`, {
               position: "top-right",
               autoClose: 1000,
             });

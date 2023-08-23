@@ -29,7 +29,7 @@ export const dataTable = [
   },
   {
     key: "category",
-    title: "Type",
+    title: "Type Product",
     format: (value: any) => value.name,
   },
   {

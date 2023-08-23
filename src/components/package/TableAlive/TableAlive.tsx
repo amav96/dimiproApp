@@ -155,7 +155,7 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
               backgroundColor={'c-bg-btn-filter'}
               textColor={'c-text-btn-filter'}
               >
-                { searchIcon ? (<img src={searchIcon} alt="buscar"/>) : (<span>Buscar</span>)}
+                { searchIcon ? (<img src={searchIcon} alt="Search"/>) : (<span>Search</span>)}
               </Button>
               <Button
               type={'button'}
@@ -164,7 +164,7 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
               backgroundColor={'c-bg-btn-filter-remove'}
               textColor={'c-text-btn-filter-remove'}
               >
-                Limpiar filtros
+                Clean filters
               </Button>
             </div>
           </Form>

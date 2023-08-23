@@ -45,12 +45,12 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
             (doc: any) => doc.uuid !== idDoc
           ),
         }));
-        toast.success("Documento eliminado exitosamente.", {
+        toast.success("Successfully eliminated.", {
           autoClose: 3000,
           theme: "dark",
         });
       } else {
-        toast.success("Hubo un error al eliminar el documento.", {
+        toast.success("There was an error adding the documents.", {
           autoClose: 3000,
           theme: "dark",
         });
@@ -95,12 +95,12 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
           ...prevData,
           documents: response.data.contract.documents,
         }));
-        toast.success("Documentos agregados exitosamente.", {
+        toast.success("Documents successfully added.", {
           autoClose: 3000,
           theme: "dark",
         });
       } else {
-        toast.error("Hubo un error al agregar los documentos.", {
+        toast.error("There was an error adding the documents.", {
           autoClose: 3000,
           theme: "dark",
         });

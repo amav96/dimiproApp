@@ -135,20 +135,20 @@ export const FormContract = () => {
           });
           navigate("/list-contracts");
         } else {
-          toast.error("Error al crear contrato", {
+          toast.error("An error occurred when creating the contract", {
             autoClose: 3000,
             theme: "dark",
           });
         }
       } else {
-        toast.error("Error al crear contrato", {
+        toast.error("An error occurred when creating the contract", {
           autoClose: 3000,
           theme: "dark",
         });
       }
     } catch (error) {
       setSendingContract(false);
-      toast.error("Error al crear contrato", {
+      toast.error("An error occurred when creating the contract", {
         autoClose: 3000,
         theme: "dark",
       });
@@ -159,11 +159,11 @@ export const FormContract = () => {
     <div>
       <Form inputs={inputs} onSubmit={onSubmit}>
         <span className="text-required">
-          <span>*</span> Los campos son obligatorios
+          <span>*</span> The fields are required.
         </span>
         <Button disabled={sendingContract} type="submit" customClass="btn-primary">
           {
-            sendingContract ? 'Enviando...' : 'Crear contrato'
+            sendingContract ? 'Sending...' : 'Create contract'
           }
         </Button>
       </Form>

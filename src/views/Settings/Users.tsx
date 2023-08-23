@@ -302,7 +302,7 @@ export function Users() {
                 title: "Created",
                 format: (value: string) => formatDateTime(value) || "",
               },
-              { key: "edit", title: "Editar" },
+              { key: "edit", title: "Edit" },
             ],
             []
           ),
@@ -338,7 +338,7 @@ export function Users() {
                 theme: "colored",
               });
             } else {
-              toast(`Guardado correctamente`, {
+              toast(`Successfully saved`, {
                 autoClose: 2000,
                 theme: "dark",
               });
@@ -351,7 +351,7 @@ export function Users() {
                 theme: "colored",
               });
             } else {
-              toast(`Guardado correctamente`, {
+              toast(`Successfully saved`, {
                 autoClose: 2000,
                 theme: "dark",
               });

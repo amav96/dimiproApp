@@ -74,7 +74,7 @@ export function PaymentMethods() {
                   theme: 'colored'
                   });
               } else {
-                toast(`Eliminado correctamente correctamente`, {
+                toast(`Successfully eliminated`, {
                   autoClose: 2000,
                   theme: 'dark'
                   });
@@ -90,7 +90,7 @@ export function PaymentMethods() {
         urlUpdate: Routes.PAYMENTMETHODS.UPDATE,
         urlShow: Routes.PAYMENTMETHODS.SHOW,
         closable: true,
-        title: 'Guardar usuario',
+        title: 'Save Payment Method',
         afterUpdate: (data: any) => {
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
@@ -98,7 +98,7 @@ export function PaymentMethods() {
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });
@@ -112,7 +112,7 @@ export function PaymentMethods() {
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });

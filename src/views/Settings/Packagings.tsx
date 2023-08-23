@@ -75,7 +75,7 @@ export function Packagings() {
                   theme: 'colored'
                   });
               } else {
-                toast(`Eliminado correctamente correctamente`, {
+                toast(`Successfully eliminated`, {
                   autoClose: 2000,
                   theme: 'dark'
                   });
@@ -91,7 +91,7 @@ export function Packagings() {
         urlUpdate: Routes.PACKAGINGS.UPDATE,
         urlShow: Routes.PACKAGINGS.SHOW,
         closable: true,
-        title: 'Guardar usuario',
+        title: 'Save Packaging',
         afterUpdate: (data: any) => {
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
@@ -99,7 +99,7 @@ export function Packagings() {
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });
@@ -113,7 +113,7 @@ export function Packagings() {
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });

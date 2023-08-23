@@ -15,12 +15,12 @@ export function Login() {
       <div className="form-container">
         <div className="form-container__width">
           <h1 className="c-text-4xl c-mx-2">
-            {isLoginPath && "¡Bienvenido!"}
-            {isForgotPasswordPath && "Recuperar contraseña"}
+            {isLoginPath && "Welcome!"}
+            {isForgotPasswordPath && "Reset password."}
           </h1>
           <span className="c-mx-2 subtitle">
-            {isLoginPath && "Por favor ingresa tus credenciales para iniciar sesión."}
-            {isForgotPasswordPath && "Ingresa tu correo para recuperar tu contraseña."}
+            {isLoginPath && "Please enter your credentials to login."}
+            {isForgotPasswordPath && "Enter your email address to recover your password."}
           </span>
           {isLoginPath && <LoginForm />}
           {isForgotPasswordPath && <ForgotPasswordForm />}

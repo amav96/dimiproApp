@@ -78,9 +78,9 @@ export function LoginForm() {
           onSubmit={onSubmit}
         >
           <Link to="/forgot-password" className="forgot-password">
-            ¿Olvidaste tu contraseña?
+            Forgot your password?
           </Link>
-          <Button disabled={loading} customClass="btn-primary">Iniciar sesión</Button>
+          <Button disabled={loading} customClass="btn-primary">Login</Button>
         </Form>
       }
     </div>

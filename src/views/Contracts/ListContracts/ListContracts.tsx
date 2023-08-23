@@ -212,7 +212,7 @@ const ListContracts = () => {
                   theme: "colored",
                 });
               } else {
-                toast(`Eliminado correctamente correctamente`, {
+                toast(`Successfully eliminated`, {
                   autoClose: 2000,
                   theme: "dark",
                 });
@@ -225,7 +225,7 @@ const ListContracts = () => {
                   type="button"
                   onClick={() => onOpenPdf(item)}
                 >
-                  <img src={baseApiUrl + "/icons/pdf.svg"} alt="Editar" />
+                  <img src={baseApiUrl + "/icons/pdf.svg"} alt="Edit" />
                 </Button>
               ),
               documents: (item: any) => (
@@ -247,7 +247,7 @@ const ListContracts = () => {
             urlUpdate: Routes.CONTRACTS.UPDATE,
             urlShow: Routes.CONTRACTS.SHOW,
             closable: true,
-            title: "Editar contrato",
+            title: "Edit contrtact",
             afterUpdate: (data: any) => {
               if (data.errors || data.error) {
                 toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
@@ -255,7 +255,7 @@ const ListContracts = () => {
                   theme: "colored",
                 });
               } else {
-                toast(`Guardado correctamente`, {
+                toast(`Successfully saved`, {
                   autoClose: 2000,
                   theme: "dark",
                 });
@@ -269,7 +269,7 @@ const ListContracts = () => {
                   theme: "colored",
                 });
               } else {
-                toast(`Guardado correctamente`, {
+                toast(`Successfully saved`, {
                   autoClose: 2000,
                   theme: "dark",
                 });

@@ -25,8 +25,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar exportador",
-    title: "Exportador:",
+    placeholder: "Select exporter",
+    title: "Exporter:",
     formatValue: (value: any) => value?._id,
     validations: {
       rules: {
@@ -45,8 +45,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar importador",
-    title: "Importador:",
+    placeholder: "Select importer",
+    title: "Importer:",
     formatValue: (value: any) => value?._id,
     validations: {
       rules: {
@@ -59,8 +59,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: CropIcon,
     key: "name",
-    placeholder: "Nombre de contrato",
-    title: "Nombre de contrato:",
+    placeholder: "Enter the contract name",
+    title: "Contract Name:",
     name: "name",
     value: "",
     type: "text",
@@ -80,8 +80,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar producto",
-    title: "Producto:",
+    placeholder: "Select product",
+    title: "Product:",
     formatValue: (value: any) => value?._id,
     validations: {
       rules: {
@@ -100,8 +100,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar tipo",
-    title: "Tipo:",
+    placeholder: "Select product type",
+    title: "Product Type:",
     formatValue: (value: any) => value?._id,
     validations: {
       rules: {
@@ -120,8 +120,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
     multiple: true,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar calibre",
-    title: "Calibre:",
+    placeholder: "Select calibers",
+    title: "Calibers:",
     formatValue : (value: any[]) => value.map((v:any) => v.id ?? v._id),
     validations: {
       rules: {
@@ -134,7 +134,7 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: CropIcon,
     key: "crop",
-    placeholder: "Agregar año de cosecha",
+    placeholder: "Add crop year",
     title: "Crop:",
     name: "crop",
     value: "",
@@ -155,7 +155,7 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar packaging",
+    placeholder: "Select packaging",
     title: "Packaging:",
     formatValue: (value: any) => value?._id,
     validations: {
@@ -169,8 +169,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: QtyIcon,
     key: "quantity",
-    placeholder: "Cantidad de toneladas",
-    title: "Toneladas:",
+    placeholder: "Number of tons",
+    title: "Tons:",
     name: "quantity",
     value: "",
     type: "number",
@@ -185,8 +185,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: QtyIcon,
     key: "margenPercentage",
-    placeholder: "Escribe sólo el número",
-    title: "Margen de error (%):",
+    placeholder: "Enter only the number",
+    title: "Error margin (%):",
     name: "margenPercentage",
     value: "",
     type: "number",
@@ -196,7 +196,7 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: BrokerIcon,
     key: "broker",
-    placeholder: "Broker",
+    placeholder: "Select broker",
     title: "Broker:",
     name: "broker",
     value: [],
@@ -208,8 +208,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: PercentageIcon,
     key: "brokerPercent",
-    placeholder: "Comisión del Broker (%)",
-    title: "Porcentaje:",
+    placeholder: "Broker's commission (%)",
+    title: "Broker's commission:",
     name: "brokerPercent",
     value: "",
     type: "number",
@@ -218,8 +218,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: PriceIcon,
     key: "price",
-    placeholder: "Precio x ton",
-    title: "Precio:",
+    placeholder: "Enter the price per ton",
+    title: "Price per ton:",
     name: "price",
     value: "",
     type: "number",
@@ -233,7 +233,7 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: CoinIcon,
     key: "currency",
-    placeholder: "Currency",
+    placeholder: "Select currency",
     title: "Currency:",
     name: "currency",
     value: [],
@@ -251,7 +251,7 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: PaymentMethodIcon,
     key: "paymentMethod",
-    placeholder: "Payment Method",
+    placeholder: "Select payment method",
     title: "Payment Method:",
     name: "paymentMethod",
     value: [],
@@ -269,7 +269,7 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: SurveyorIcon,
     key: "surveyor",
-    placeholder: "Seleccionar surveyor",
+    placeholder: "Select surveyor",
     title: "Surveyor:",
     name: "surveyor",
     value: [],
@@ -287,7 +287,7 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: CropIcon,
     key: "insurance",
-    placeholder: "Agregar seguro",
+    placeholder: "Enter insurance",
     title: "Insurance:",
     name: "insurance",
     value: "",
@@ -313,7 +313,7 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
     icon: CropIcon,
     key: "destination",
     placeholder: "Ej: Livorno - Italy",
-    title: "Agregar destino:",
+    title: "Add Destination:",
     name: "destination",
     value: "",
     type: "text",
@@ -327,7 +327,7 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: CropIcon,
     key: "salesConditions",
-    placeholder: "Ej: FCA General Deheza",
+    placeholder: "Ej: FCA - General Deheza",
     title: "Sales Conditions:",
     name: "salesConditions",
     value: "",
@@ -337,8 +337,8 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
   {
     icon: ConditionsIcon,
     key: "specifications",
-    placeholder: "Agregar condiciones",
-    title: "Condiciones:",
+    placeholder: "Enter specifications",
+    title: "Specifications:",
     name: "specifications",
     value: "",
     type: "textarea",
@@ -348,5 +348,5 @@ export const inputsEdit: Array<GlobalInputs | Slot> = [
       },
     },
     cols: "c-col-span-6",
-  }
+  },
 ];

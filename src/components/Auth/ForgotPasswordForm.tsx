@@ -41,21 +41,21 @@ export function ForgotPasswordForm() {
 
       if (response.status === 200) {
         toast.success(
-          "Se ha enviado un correo electrónico para restablecer tu contraseña.",
+          "An email has been sent to reset your password.",
           {
             autoClose: 4000,
             theme: "dark",
           }
         );
       } else {
-        toast.error("Error al enviar correo electrónico.", {
+        toast.error("There was an error sending the email", {
           autoClose: 4000,
           theme: "dark",
         });
       }
     } catch (error) {
       console.error(error);
-      toast.error("Error al enviar correo electrónico.", {
+      toast.error("There was an error sending the email", {
         autoClose: 4000,
         theme: "dark",
       });
@@ -66,9 +66,9 @@ export function ForgotPasswordForm() {
     <div className="c-mt-4 c-mb-2 c-mx-2">
       {
         <Form inputs={inputs} onSubmit={onSubmit}>
-          <Button customClass="btn-primary">Recuperar contraseña</Button>
+          <Button customClass="btn-primary">Recover password</Button>
           <Link to="/login" className="link-login">
-            ¿Ya tienes una cuenta? <span>Inicia sesión</span>
+          Already have an account? <span>Sign in</span>
           </Link>
         </Form>
       }
