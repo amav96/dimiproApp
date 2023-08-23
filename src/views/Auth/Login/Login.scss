@@ -57,7 +57,6 @@
     display: grid;
     place-content: center;
     @media (max-width: $breakpoint-m) {
-      place-content: flex-start;
       padding: 30px 15px 0;
     }
 
