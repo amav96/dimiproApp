@@ -221,16 +221,16 @@ const ListContracts = () => {
             scopedColumns: {
               pdf: (item: any) => (
                 <Button
-                  style={{ width: "40px" }}
+                  style={{ width: "100%" }}
                   type="button"
                   onClick={() => onOpenPdf(item)}
                 >
-                  <img src={baseApiUrl + "/icons/pdf.svg"} alt="Edit" />
+                  Download
                 </Button>
               ),
               documents: (item: any) => (
                 <Button
-                  style={{ width: "40px" }}
+                  style={{ width: "100%" }}
                   type="button"
                   onClick={() => onOpenDocument(item)}
                 >

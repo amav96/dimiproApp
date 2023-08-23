@@ -83,6 +83,7 @@
               button {
                 margin: 0;
                 width: 100%;
+                height: 100%;
               }
             }
           }
@@ -93,7 +94,7 @@
             color: #585858;
           }
 
-          .btn-primary {
+          .btn-primary, button{
             cursor: pointer;
             padding: 8px;
             border-radius: 4px;
