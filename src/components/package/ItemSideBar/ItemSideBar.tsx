@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { ItemSideBarProps } from "@packageTypes";
 import "../SideBar/SideBar.scss";
-import arrowDown from './arrow-down.svg'
-import arrowUp from './arrow-up.svg'
+import arrowDown from "./arrow-down.svg";
+import arrowUp from "./arrow-up.svg";
 
 export function ItemSideBar(props: ItemSideBarProps) {
   const {
@@ -65,27 +65,28 @@ export function ItemSideBar(props: ItemSideBarProps) {
           onClick={handleNavigation}
           className="SidebarResizableContainer__item__box__item"
         >
-          <div className="SidebarResizableContainer__item__box__item__minibox" >
+          <div className="SidebarResizableContainer__item__box__item__minibox">
             <div className="SidebarResizableContainer__item__box__item__minibox__boxImg">
               <img src={image} />
             </div>
-            {
-              deployed && (
+           
               <div className="SidebarResizableContainer__item__box__item__minibox__title">
                 {title}
               </div>
-              )
-            }
-
+           
           </div>
           <div>
-          {
-            deployed && subSection && !deployedSection
-            ? <div className="c-mx-2"><img src={arrowUp} /></div>
-            : deployed && subSection && deployedSection
-              ? <div className="c-mx-2"><img src={arrowDown} /></div>
-              : <div></div>
-          }
+            {deployed && subSection && !deployedSection ? (
+              <div className="c-mx-2">
+                <img src={arrowUp} />
+              </div>
+            ) : deployed && subSection && deployedSection ? (
+              <div className="c-mx-2">
+                <img src={arrowDown} />
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
         {deployed && deployedSection && subSection && (
