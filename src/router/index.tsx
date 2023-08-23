@@ -50,7 +50,7 @@ export function Router() {
       <Route element={<ProtectRoute gate={"surveyors_index"} />}>
         <Route path="/settings/surveyors" element={<Surveyors />} />
       </Route>
-      <Route element={<ProtectRoute gate={"contracts_index"} />}>
+      <Route element={<ProtectRoute gate={"contracts_store"} />}>
         <Route path="/add-contract" element={<AddContract />} />
       </Route>
       <Route element={<ProtectRoute gate={"users_index"} />}>

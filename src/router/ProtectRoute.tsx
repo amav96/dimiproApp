@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Route, Navigate, Outlet } from 'react-router-dom';
 import usePermissions from '@hooks/usePermissions';
-import { Loader } from '@package';
 
 interface ProtectRouteProps {
   gate: string[] | string;
@@ -29,7 +28,7 @@ const ProtectRoute: React.FC<ProtectRouteProps> = ({ gate }) => {
 
   if (!isLoaded) {
     // Renderiza un componente de carga o una pantalla de espera mientras se verifica los permisos
-    return true;
+    return
   }
   return hasAccess.current ? <Outlet /> : <Navigate to="/acceso-denegado" />;
 };
