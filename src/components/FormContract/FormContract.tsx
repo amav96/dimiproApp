@@ -94,7 +94,6 @@ export const FormContract = () => {
   const [sendingContract, setSendingContract] = useState<boolean>(false);
   const onSubmit = async (data: any) => {
     const { items } = data;
-
     try {
       if(sendingContract) return 
       if (data.isFormValid === true) {
@@ -102,12 +101,12 @@ export const FormContract = () => {
 
         for (const key in items) {
           if (key === "documents") {
-            items.documents.forEach((file: File, index: number) => {
+            items.documents.forEach((file: any, index: number) => {
               if (
-                file.type.includes("image") ||
-                file.type === "application/pdf"
+                file.image.type.includes("image") ||
+                file.image.type === "application/pdf"
               ) {
-                formData.append(`documents[${index}]`, file);
+                formData.append(`documents[${index}]`, file.image);
               }
             });
           } else if (key === "calibers") {
@@ -117,7 +116,7 @@ export const FormContract = () => {
             calibers.forEach((caliber: string, index: number) => {
               formData.append(`calibers[${index}]`, caliber);
             });
-          } else {
+          } else if(items[key]) {
             formData.append(key, items[key]);
           }
         }
@@ -127,7 +126,7 @@ export const FormContract = () => {
           formData
         );
         setSendingContract(false);
-
+          console.log(response)
         if (response.status === 201 || response.status === 200) {
           toast.success("Contrato creado correctamente", {
             autoClose: 3000,
@@ -135,20 +134,21 @@ export const FormContract = () => {
           });
           navigate("/list-contracts");
         } else {
-          toast.error("An error occurred when creating the contract", {
+          toast.error("A1 An error occurred when creating the contract", {
             autoClose: 3000,
             theme: "dark",
           });
         }
       } else {
-        toast.error("An error occurred when creating the contract", {
+        toast.error("A2 n error occurred when creating the contract", {
           autoClose: 3000,
           theme: "dark",
         });
       }
     } catch (error) {
       setSendingContract(false);
-      toast.error("An error occurred when creating the contract", {
+      console.log(error)
+      toast.error("A3 An error occurred when creating the contract", {
         autoClose: 3000,
         theme: "dark",
       });

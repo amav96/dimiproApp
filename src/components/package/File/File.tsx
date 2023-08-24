@@ -71,7 +71,7 @@ export function File(props: PropsFile) {
       setImages([])
       files = transformFiles(files)
       if(value && value.length > 0){
-        build = [...value.value,...allowedFiles(files, accept)]
+        build = [...value,...allowedFiles(files, accept)]
         onChange(allowedFiles(files, accept));
       } else {
         build = allowedFiles(files, accept)
@@ -81,7 +81,7 @@ export function File(props: PropsFile) {
       setImages([])
       files = transformFiles(files)
       if(value && value.length > 0){
-        build = [...value.value,...allowedFiles(files, accept)]
+        build = [...value,...allowedFiles(files, accept)]
         listenForm(allowedFiles(files, accept));
       } else {
         build = allowedFiles(files, accept)

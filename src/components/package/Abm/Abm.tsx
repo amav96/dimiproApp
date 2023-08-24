@@ -54,6 +54,8 @@ export function Abm(props: AbmProps) {
     urlStore,
     urlUpdate,
     urlShow,
+    modelStore,
+    modelUpdate,
     modelShow,
     isEditMode: false,
     visible: false,
@@ -113,9 +115,12 @@ export function Abm(props: AbmProps) {
   }
 
   const handleUpdate = (data : any) => {
-    if(updateItemAfterUpdate){
-      const currentItems = refTableAlive?.current?.localItems.map((item : any) => item.id === data.id ? { ...item,...data } : item);
-      setLocalItems(currentItems)
+    if(updateItemAfterUpdate && (data?.id || data?._id)){
+      let trackBy = data?.id ? data.id : data?._id ? data._id : null
+      if(trackBy){
+        const currentItems = refTableAlive?.current?.localItems.map((item : any) => item.id === trackBy ? { ...item,...data } : item);
+        setLocalItems(currentItems)
+      }
     }
     if(modalFormData.afterUpdate){
       modalFormData.afterUpdate(data)

@@ -266,6 +266,7 @@ const ListContracts = () => {
             urlShow: Routes.CONTRACTS.SHOW,
             closable: true,
             title: "Edit contrtact",
+            modelUpdate: 'contract',
             afterUpdate: (data: any) => {
               if (data.errors || data.error) {
                 toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {

@@ -101,12 +101,13 @@ export function ModalForm(props: PropsModalForm<string | number>) {
                 if(afterStore){
                   afterStore({
                     type: 'serverMessage',
-                    message: 'An error has occurred with the server',
+                    message: 'S1 An error has occurred with the server',
                     ...data,
                     ...result,
                   })
                 }
               }else {
+               
                 if(afterStore){
                   if(typeof result === 'object'){
                     afterStore(result[modelStore])
@@ -120,7 +121,7 @@ export function ModalForm(props: PropsModalForm<string | number>) {
                 if(afterStore){
                   afterStore({
                     type: 'serverError',
-                    message: 'An error has occurred with the server',
+                    message: 'S2 An error has occurred with the server',
                     ...data
                   })
                 }
@@ -162,26 +163,28 @@ export function ModalForm(props: PropsModalForm<string | number>) {
                 if(afterUpdate){
                   afterUpdate({
                     type: 'serverMessage',
-                    message: 'An error has occurred with the server',
+                    message: 'U1 An error has occurred with the server',
                     ...data,
                     ...result,
                   })
                 }
               }else {
+                console.log(result, result[modelUpdate])
                 if(afterUpdate){
                   if(typeof result === 'object'){
-                    afterUpdate(result[modelStore])
+                    afterUpdate(result[modelUpdate])
                   } else {
                     afterUpdate(result)
                   }
                 }
               }
             } catch (error) {
+              console.log(error)
                 setLoading(false)
                 if(afterUpdate){
                   afterUpdate({
                     type: 'serverError',
-                    message: 'An error has occurred with the server',
+                    message: 'U2 An error has occurred with the server',
                     ...data
                   })
                 }
