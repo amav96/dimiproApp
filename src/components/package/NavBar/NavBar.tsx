@@ -1,38 +1,45 @@
 import { NavBarProps } from "@packageTypes";
 import "./NavBar.scss";
 import { useNavigate } from "react-router-dom";
-import menu from "../../../../public/icons/menu.svg";
-import menuClose from "../../../../public/icons/close-menu.svg";
-import { useMenu } from "../../../context/MenuContext";
+import menu from "./menu.svg";
+import menuClose from "./close-menu.svg";
 
 export function NavBar(props: NavBarProps) {
-  const { logo, title = "Aplicacion" } = props;
-
-  const { showSidebar, setShowSidebar } = useMenu();
+  const {
+    logo,
+    title = "Aplicacion",
+    displayMenu,
+    setDisplayMenu,
+    shouldShowSideBar,
+  } = props;
 
   const navigate = useNavigate();
 
-  const handleShowSidebar = () => {
-    setShowSidebar(!showSidebar);
+  const handleMenu = () => {
+    if (setDisplayMenu) {
+      setDisplayMenu(!displayMenu);
+    }
+    console.log("click menu");
   };
 
   return (
     <nav className="navbar-container">
       <div className="navbar-container__main">
         <img src={logo} onClick={() => navigate("/")} />
-        {showSidebar ? (
-          <img
-            src={menu}
-            onClick={handleShowSidebar}
-            className="navbar-menu__icon"
-          />
-        ) : (
-          <img
-            src={menuClose}
-            onClick={handleShowSidebar}
-            className="navbar-menu__icon"
-          />
-        )}
+        {shouldShowSideBar &&
+          (!displayMenu ? (
+            <img
+              src={menu}
+              onClick={handleMenu}
+              className="navbar-menu__icon"
+            />
+          ) : (
+            <img
+              src={menuClose}
+              onClick={handleMenu}
+              className="navbar-menu__icon"
+            />
+          ))}
       </div>
     </nav>
   );

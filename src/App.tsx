@@ -1,15 +1,11 @@
 import { BrowserRouter } from "react-router-dom";
-import MainPage from "./views/Main";
-import { MenuProvider } from "./context/MenuContext";
-
+import MainPage from "./views/MainPage";
 
 function App() {
   return (
     <div className="AppRoot-fullPage">
       <BrowserRouter>
-        <MenuProvider>
           <MainPage />
-        </MenuProvider>
       </BrowserRouter>
     </div>
   );

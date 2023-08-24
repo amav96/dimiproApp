@@ -75,7 +75,7 @@ export function Surveyors() {
                   theme: 'colored'
                   });
               } else {
-                toast(`Eliminado correctamente correctamente`, {
+                toast(`Successfully eliminated`, {
                   autoClose: 2000,
                   theme: 'dark'
                   });
@@ -91,7 +91,7 @@ export function Surveyors() {
         urlUpdate: Routes.SURVEYORS.UPDATE,
         urlShow: Routes.SURVEYORS.SHOW,
         closable: true,
-        title: 'Guardar usuario',
+        title: 'Save surveyor',
         afterUpdate: (data: any) => {
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
@@ -99,21 +99,21 @@ export function Surveyors() {
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });
           }
         },
         afterStore: (data: any) => {
-          console.log(data)
+          
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
               autoClose: 5000,
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });

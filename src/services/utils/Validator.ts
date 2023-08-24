@@ -20,7 +20,7 @@ export class Validator {
       const messages: Messages | undefined = validations.messages;
       if (property.required && isEmpty(value)) {
           this.required = true
-          let message = messages?.required ?? `Es obligatorio`;
+          let message = messages?.required ?? `Required field`;
           this.errors.push(message)
       } else if(property.required && !isEmpty(value) && this.required){
         // Se elimina el error generado en el if anterior, y se setea la variable en false

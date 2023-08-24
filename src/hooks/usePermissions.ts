@@ -13,24 +13,23 @@ export default function usePermissions () {
   const permissions = useSelector(selectPermissions);
   const navigate = useNavigate()
 
-  const hasPermissions = async (permission: string[] | string) : Promise<boolean>=> {
+  const hasOrGetPermissions = async (permission: string[] | string) : Promise<boolean>=> {
     if(!permissions || permissions.length === 0){
           const {
           permissions: serverPermissions ,
           errors
          } = await authenticationRepository.permissions()
 
-         
          if(errors){
-           if(errors.message === 'Usuario no autenticado'){
-            toast(`🦄 ${errors.message || 'No estas autenticado'}`, {
+           if(errors.message === 'User no authenticated'){
+            toast(`🦄 ${errors.message || 'You are not authenticated'}`, {
               position: "top-right",
               autoClose: 1000,
             });
             navigate('/login')
             return false
            }
-           toast(`🦄 ${errors.message || 'No estas autenticado'}`, {
+           toast(`🦄 ${errors.message || 'You are not authenticated'}`, {
               position: "top-right",
               autoClose: 1000,
             });
@@ -50,10 +49,14 @@ export default function usePermissions () {
     } else {
       return permissions.includes(permission)
     }
-    
+  }
+
+  const hasPermissions = (permission: string[] | string) : boolean => {
+    return permissions.includes(permission)
   }
 
   return {
+    hasOrGetPermissions,
     hasPermissions
   }
 }

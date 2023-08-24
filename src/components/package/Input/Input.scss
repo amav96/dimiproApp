@@ -29,8 +29,8 @@
     &__text{
         margin-top:4px;
         font-size: 15.5px;
-        color: $color-white;
-        background-color: $color-no-results;
+        color: var(--c-text-error-select);
+        background-color: var(--c-bg-error-input);
         border-radius: 4px;
         padding: 2px 8px;
     }
@@ -51,3 +51,18 @@
       }
     }
   }
+
+
+input,
+textarea {
+  width: 100%;
+  padding: 8.5px;
+  border-radius: 6.5px;
+  background: var(--c-bg-input);
+  border: 1px solid var(--c-border-input);
+  color: var(--c-text-input);
+
+  &:focus {
+    border: 2px solid var(--c-input-focus);
+  }
+}

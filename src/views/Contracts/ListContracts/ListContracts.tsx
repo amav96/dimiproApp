@@ -11,15 +11,18 @@ import ModalDocs from "../../../components/Modals/ModalDocs";
 import { useAppSelector } from "../../../hooks";
 import { RootState } from "../../../store";
 import "./_listContracts.scss";
-import { dataTable } from "./dataTable";
+import { dataTable as data } from "./dataTable";
 import { inputsEdit } from "./inputsModalForm";
+import usePermissions from "@hooks/usePermissions";
 
 const ListContracts = () => {
   const [IsOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [inputsModalForm, setInputsModalForm] =
     useState<Array<GlobalInputs | any>>(inputsEdit);
   const [dataDocuments, setDataDocuments] = useState<any>([]);
+  const [dataTable, setDataTable] = useState<any>(data);
   const { getDataProviders } = useDataProvider();
+  const {hasPermissions} = usePermissions();
 
   const companies = useAppSelector(
     (state: RootState) => state.dataProviders.companies
@@ -118,6 +121,21 @@ const ListContracts = () => {
     );
   }, [companies]);
 
+  useEffect(() => {
+    // Filtra las columnas que se van a mostrar en la tabla dependiendo si el usuario tiene permisos
+    const filteredDataTable = dataTable.filter((column: any) => {
+      if (column.key === "edit") {
+        return hasPermissions("contracts_update");
+      }
+      if (column.key === "delete") {
+        return hasPermissions("contracts_delete");
+      }
+      return true;
+    });
+
+    setDataTable(filteredDataTable);
+  }, []);
+
   const [formFilter, setFormFilter] = useState<GlobalInputs[]>([
     {
       key: "name",
@@ -176,15 +194,15 @@ const ListContracts = () => {
   };
 
   const onShow = (data: any) => {
-    console.log(data)
+    
   }
 
   return (
     <div className="list-contracts__container">
-      <Layout title="Lista de contratos">
+      <Layout title="Contracts list">
         <Abm
           table={{
-            columns: useMemo(() => dataTable, [formFilter, dataTable]),
+            columns: dataTable,
             urlIndex: Routes.CONTRACTS.INDEX,
             requestConfiguration: {
               method: "GET",
@@ -212,7 +230,7 @@ const ListContracts = () => {
                   theme: "colored",
                 });
               } else {
-                toast(`Eliminado correctamente correctamente`, {
+                toast(`Successfully eliminated`, {
                   autoClose: 2000,
                   theme: "dark",
                 });
@@ -221,16 +239,16 @@ const ListContracts = () => {
             scopedColumns: {
               pdf: (item: any) => (
                 <Button
-                  style={{ width: "40px" }}
+                  style={{ width: "100%" }}
                   type="button"
                   onClick={() => onOpenPdf(item)}
                 >
-                  <img src={baseApiUrl + "/icons/pdf.svg"} alt="Editar" />
+                  Download
                 </Button>
               ),
               documents: (item: any) => (
                 <Button
-                  style={{ width: "40px" }}
+                  style={{ width: "100%" }}
                   type="button"
                   onClick={() => onOpenDocument(item)}
                 >
@@ -247,7 +265,7 @@ const ListContracts = () => {
             urlUpdate: Routes.CONTRACTS.UPDATE,
             urlShow: Routes.CONTRACTS.SHOW,
             closable: true,
-            title: "Editar contrato",
+            title: "Edit contrtact",
             afterUpdate: (data: any) => {
               if (data.errors || data.error) {
                 toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
@@ -255,21 +273,21 @@ const ListContracts = () => {
                   theme: "colored",
                 });
               } else {
-                toast(`Guardado correctamente`, {
+                toast(`Successfully saved`, {
                   autoClose: 2000,
                   theme: "dark",
                 });
               }
             },
             afterStore: (data: any) => {
-              console.log(data);
+              ;
               if (data.errors || data.error) {
                 toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
                   autoClose: 5000,
                   theme: "colored",
                 });
               } else {
-                toast(`Guardado correctamente`, {
+                toast(`Successfully saved`, {
                   autoClose: 2000,
                   theme: "dark",
                 });

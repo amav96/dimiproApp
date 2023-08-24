@@ -1,12 +1,12 @@
 import { PropsButton } from '@packageTypes'
 import React from 'react';
+import './Button.scss'
 
 export function Button(props: PropsButton) {
 
   const {
-      text,
-      textColor= 'c-text-white',
-      backgroundColor = 'background-white',
+      textColor= 'c-text-button',
+      backgroundColor = 'c-bg-button',
       borderColor = 'c-border-rounded-l',
       padding = 'c-p-y-3 c-p-x-4',
       customClass = '',
@@ -27,7 +27,7 @@ export function Button(props: PropsButton) {
     <button
     style={style}
     onClick={handleClick}
-    className={`${backgroundColor} ${borderColor} ${padding} ${customClass}`}
+    className={`${backgroundColor} ${borderColor} ${padding} ${customClass} ${textColor}`}
     disabled={disabled}
     type={type} >
         {children && (

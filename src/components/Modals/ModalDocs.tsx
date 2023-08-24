@@ -5,8 +5,8 @@ import { Button } from "../package/Button";
 import baseApiUrl from "@services/BaseApiUrl";
 import $http from "@services/AxiosInstance";
 import { toast } from "react-toastify";
-import { File } from "../package/File";
 import { Form } from "../package/Form";
+import closeImg from './close.svg';
 
 interface ModalDocsProps {
   open: boolean;
@@ -45,12 +45,12 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
             (doc: any) => doc.uuid !== idDoc
           ),
         }));
-        toast.success("Documento eliminado exitosamente.", {
+        toast.success("Successfully eliminated.", {
           autoClose: 3000,
           theme: "dark",
         });
       } else {
-        toast.success("Hubo un error al eliminar el documento.", {
+        toast.success("There was an error adding the documents.", {
           autoClose: 3000,
           theme: "dark",
         });
@@ -95,12 +95,12 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
           ...prevData,
           documents: response.data.contract.documents,
         }));
-        toast.success("Documentos agregados exitosamente.", {
+        toast.success("Documents successfully added.", {
           autoClose: 3000,
           theme: "dark",
         });
       } else {
-        toast.error("Hubo un error al agregar los documentos.", {
+        toast.error("There was an error adding the documents.", {
           autoClose: 3000,
           theme: "dark",
         });
@@ -119,7 +119,7 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
     <div className={`modal-docs ${open ? "modal-docs--open" : ""}`}>
       <div className="modal-docs--container">
         <button className="modal-close" type="button" onClick={onClose}>
-          <img src="/icons/close.svg" alt="Cerrar" />
+          <img src={closeImg} alt="Cerrar" />
         </button>
 
         <div className="modal-docs--title">

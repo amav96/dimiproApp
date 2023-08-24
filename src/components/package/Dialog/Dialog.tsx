@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { DialogProp } from '@packageTypes'
 import { Modal, Button } from '@package';
+import './Dialog.scss'
 
 export function Dialog(props: DialogProp) {
 
-    const { 
-        isOpen, 
-        resource, 
-        textConfirm = 'Confirmar', 
-        textCancel = 'Cancelar', 
-        centered, 
-        text = '¿Estas seguro?', 
-        cancel, 
-        confirm 
+    const {
+        isOpen,
+        resource,
+        textConfirm = 'Confirmar',
+        textCancel = 'Cancelar',
+        centered,
+        text = '¿Estas seguro?',
+        cancel,
+        confirm
     } = props;
 
     const [internalIsOpen, setInternalIsOpen] = useState<boolean>(false)
@@ -30,7 +31,7 @@ export function Dialog(props: DialogProp) {
 
   return (
     <div>
-        { internalIsOpen && 
+        { internalIsOpen &&
           <Modal
           isOpen={internalIsOpen}
           closeModal={hideModal}
@@ -41,15 +42,16 @@ export function Dialog(props: DialogProp) {
               </div>
               <div className="c-flex c-flex-row c-justify-end">
                 <Button
-                textColor={'c-text-white'}
-                customClass='btn-primary'
+                backgroundColor='c-bg-button-dialog-accept'
+                textColor='c-text-button-dialog-accept'
                 onClick={handleConfirm}
                 >
                   {textConfirm}
                 </Button>
                 <Button
-                textColor={'c-text-white'}
-                customClass="c-mx-2 btn-secondary"
+                backgroundColor='c-bg-button-dialog-cancel'
+                textColor='c-text-button-dialog-cancel'
+                customClass="c-mx-2"
                 onClick={hideModal}
                 >
                   {textCancel}

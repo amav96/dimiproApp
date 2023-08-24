@@ -57,24 +57,26 @@
     display: grid;
     place-content: center;
     @media (max-width: $breakpoint-m) {
-      place-content: flex-start;
       padding: 30px 15px 0;
     }
 
     .form-container__width {
       max-width: 450px;
+      @media (min-width: $breakpoint-m) {
+        min-width: 400px;
+      }
     }
 
     h1 {
       font-weight: 600;
-      color: $color-white;
+      color: $color-black;
     }
 
     .subtitle {
       font-weight: 400;
       margin-top: 1rem;
       display: inline-block;
-      color: $color-white;
+      color: $color-black;
     }
 
     .Form {
@@ -93,7 +95,7 @@
       margin-bottom: 1.6rem;
       display: inline-block;
       width: 100%;
-      color: $color-white;
+      color: $color-black;
       &:hover {
         text-decoration: underline;
       }
@@ -113,7 +115,6 @@
       font-size: 14px;
       display: inline-block;
       width: 100%;
-      color: $color-white;
       &:hover {
         text-decoration: underline;
       }

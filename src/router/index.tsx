@@ -22,39 +22,39 @@ import RestorePassword from "../components/Auth/RestorePassword";
 export function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/ajustes/users" replace />} />
-      <Route element={<ProtectRoute gate={"users_index"} />}>
-        <Route path="/ajustes/users" element={<Users />} />
-      </Route>
-      <Route element={<ProtectRoute gate={"companies_index"} />}>
-        <Route path="/ajustes/companies" element={<Companies />} />
-      </Route>
-      <Route element={<ProtectRoute gate={"categories_index"} />}>
-        <Route path="/ajustes/categories" element={<Categories />} />
-      </Route>
-      <Route element={<ProtectRoute gate={"packagings_index"} />}>
-        <Route path="/ajustes/packagings" element={<Packagings />} />
-      </Route>
-      <Route element={<ProtectRoute gate={"calibers_index"} />}>
-        <Route path="/ajustes/calibers" element={<Calibers />} />
-      </Route>
-      <Route element={<ProtectRoute gate={"currencies_index"} />}>
-        <Route path="/ajustes/currencies" element={<Currencies />} />
-      </Route>
-      <Route element={<ProtectRoute gate={"payment_methods_index"} />}>
-        <Route path="/ajustes/paymentMethods" element={<PaymentMethods />} />
-      </Route>
-      <Route element={<ProtectRoute gate={"products_index"} />}>
-        <Route path="/ajustes/products" element={<Products />} />
-      </Route>
-      <Route element={<ProtectRoute gate={"surveyors_index"} />}>
-        <Route path="/ajustes/surveyors" element={<Surveyors />} />
-      </Route>
-      <Route element={<ProtectRoute gate={"contracts_index"} />}>
-        <Route path="/add-contract" element={<AddContract />} />
-      </Route>
+      <Route path="/" element={<Navigate to="/list-contracts" replace />} />
       <Route element={<ProtectRoute gate={"contracts_index"} />}>
         <Route path="/list-contracts" element={<ListContracts />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"companies_index"} />}>
+        <Route path="/settings/companies" element={<Companies />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"categories_index"} />}>
+        <Route path="/settings/categories" element={<Categories />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"packagings_index"} />}>
+        <Route path="/settings/packagings" element={<Packagings />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"calibers_index"} />}>
+        <Route path="/settings/calibers" element={<Calibers />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"currencies_index"} />}>
+        <Route path="/settings/currencies" element={<Currencies />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"payment_methods_index"} />}>
+        <Route path="/settings/paymentMethods" element={<PaymentMethods />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"products_index"} />}>
+        <Route path="/settings/products" element={<Products />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"surveyors_index"} />}>
+        <Route path="/settings/surveyors" element={<Surveyors />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"contracts_store"} />}>
+        <Route path="/add-contract" element={<AddContract />} />
+      </Route>
+      <Route element={<ProtectRoute gate={"users_index"} />}>
+        <Route path="/settings/users" element={<Users />} />
       </Route>
       <Route element={<ProtectRoute gate={"contracts_index"} />}>
         <Route path="/pdf/:id" element={<PDFcontract />} />

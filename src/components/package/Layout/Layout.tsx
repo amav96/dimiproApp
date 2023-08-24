@@ -1,3 +1,5 @@
+import './Layout.scss'
+
 interface LayoutProps {
   title?: string;
   textColor?: string;
@@ -8,7 +10,7 @@ interface LayoutProps {
 export function Layout(props: LayoutProps) {
   const {
     title = "Dashboard",
-    textColor = "c-text-white",
+    textColor = "c-text-layout",
     customClass = "",
     children,
   } = props;

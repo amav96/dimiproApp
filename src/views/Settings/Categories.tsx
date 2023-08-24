@@ -74,7 +74,7 @@ export function Categories() {
                   theme: 'colored'
                   });
               } else {
-                toast(`Eliminado correctamente correctamente`, {
+                toast(`Successfully eliminated`, {
                   autoClose: 2000,
                   theme: 'dark'
                   });
@@ -90,7 +90,7 @@ export function Categories() {
         urlUpdate: Routes.CATEGORIES.UPDATE,
         urlShow: Routes.CATEGORIES.SHOW,
         closable: true,
-        title: 'Guardar usuario',
+        title: 'Save product type',
         afterUpdate: (data: any) => {
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
@@ -98,21 +98,20 @@ export function Categories() {
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });
           }
         },
         afterStore: (data: any) => {
-          console.log(data)
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
               autoClose: 5000,
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });

@@ -20,16 +20,16 @@ export const dataTable = [
   {
     key: "broker",
     title: "Broker",
-    format: (value: any) => (value.name ? value.name : "s/n"),
+    format: (value: any) => (value.name ? value.name : "None"),
   },
   {
     key: "brokerPercent",
     title: "Broker (%)",
-    format: (value: any) => (value ? value : "s/n"),
+    format: (value: any) => (value ? value : "None"),
   },
   {
     key: "category",
-    title: "Type",
+    title: "Type Product",
     format: (value: any) => value.name,
   },
   {

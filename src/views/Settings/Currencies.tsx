@@ -121,7 +121,7 @@ export function Currencies() {
                   theme: 'colored'
                   });
               } else {
-                toast(`Eliminado correctamente correctamente`, {
+                toast(`Successfully eliminated`, {
                   autoClose: 2000,
                   theme: 'dark'
                   });
@@ -137,7 +137,7 @@ export function Currencies() {
         urlUpdate: Routes.CURRENCIES.UPDATE,
         urlShow: Routes.CURRENCIES.SHOW,
         closable: true,
-        title: 'Guardar usuario',
+        title: 'Save user',
         afterUpdate: (data: any) => {
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
@@ -145,21 +145,20 @@ export function Currencies() {
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });
           }
         },
         afterStore: (data: any) => {
-          console.log(data)
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
               autoClose: 5000,
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });

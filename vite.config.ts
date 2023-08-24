@@ -12,12 +12,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
 
-    port: Number(env.VUE_APP_PORT),
+    port: Number(env.VITE_REACT_APP_PORT),
     host: true, // needed for the Docker Container port mapping to work
     strictPort: true,
   },
   preview: {
-    port: Number(env.VUE_APP_PORT),
+    port: Number(env.VITE_REACT_APP_PORT),
     host: true, // needed for the Docker Container port mapping to work
     strictPort: true,
   },

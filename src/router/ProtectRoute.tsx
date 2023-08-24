@@ -1,20 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { Route, Navigate, Outlet } from 'react-router-dom';
 import usePermissions from '@hooks/usePermissions';
-import { Loader } from '@package';
 
 interface ProtectRouteProps {
   gate: string[] | string;
 }
 
 const ProtectRoute: React.FC<ProtectRouteProps> = ({ gate }) => {
-  const { hasPermissions } = usePermissions();
+  const { hasOrGetPermissions } = usePermissions();
   const [isLoaded, setIsLoaded] = useState(false);
   const hasAccess = useRef<boolean>(false)
 
   useEffect(() => {
     const checkPermissions = async () => {
-      hasAccess.current = await hasPermissions(gate);
+      hasAccess.current = await hasOrGetPermissions(gate);
       if (hasAccess) {
         setIsLoaded(true);
       } else {
@@ -25,11 +24,11 @@ const ProtectRoute: React.FC<ProtectRouteProps> = ({ gate }) => {
     };
 
     checkPermissions();
-  }, [hasPermissions, gate]);
+  }, [hasOrGetPermissions, gate]);
 
   if (!isLoaded) {
     // Renderiza un componente de carga o una pantalla de espera mientras se verifica los permisos
-    return (<Loader />);
+    return
   }
   return hasAccess.current ? <Outlet /> : <Navigate to="/acceso-denegado" />;
 };

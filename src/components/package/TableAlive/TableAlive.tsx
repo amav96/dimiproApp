@@ -2,6 +2,7 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } f
 import { TableAliveProps } from '@packageTypes'
 import {Table, Form, Button} from '@package'
 import './_table_alive.scss'
+import { Loader } from "@package";
 
 export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<string>, ref: React.Ref<HTMLFormElement>) {
   const {
@@ -115,11 +116,14 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
     applyLookFor(data.items, true)
   }
 
+  const [reseting, setReseting] = useState<boolean>(false)
   const resetLookFor = async () => {
+    setReseting(true)
     setLocalItems([])
     await refForm?.current?.resetValues()
     pagination.current.page = 1
     await applyLookFor()
+    setReseting(false)
   }
 
   const refForm = useRef<HTMLFormElement | null>(null)
@@ -148,24 +152,25 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
           >
             <div className="c-flex c-my-4">
               <Button
-              customClass={'btn-primary'}
+              backgroundColor={'c-bg-btn-filter'}
+              textColor={'c-text-btn-filter'}
               >
-                { searchIcon ? (<img src={searchIcon} alt="buscar"/>) : (<span>Buscar</span>)}
+                { searchIcon ? (<img src={searchIcon} alt="Search"/>) : (<span>Search</span>)}
               </Button>
               <Button
               type={'button'}
               onClick={resetLookFor}
-              customClass={'c-mx-2 btn-secondary'}
+              customClass={'c-mx-2'}
+              backgroundColor={'c-bg-btn-filter-remove'}
+              textColor={'c-text-btn-filter-remove'}
               >
-                Limpiar filtros
+                Clean filters
               </Button>
             </div>
           </Form>
         </div>
       }
-      {
-        header && header
-      }
+      
       <Table
       items={localItems}
       headerSticky={headerSticky}

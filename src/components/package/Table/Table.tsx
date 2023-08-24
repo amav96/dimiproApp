@@ -3,7 +3,8 @@ import { TableProps } from "@packageTypes";
 import "./Table.scss";
 import debounce from "@services/utils/Debounce";
 import { getProperty } from "@services/utils/Property";
-import { Loader } from "@package";
+import { Loader } from "../Loader";
+
 
 export function Table(props: TableProps<string>) {
   const {
@@ -72,7 +73,6 @@ export function Table(props: TableProps<string>) {
 
   return (
     <div className="table-wrapper" onScroll={debounce(scrollTable, 300)}>
-      {!loading && localItems.length === 0 && <div className="no-results"><p>No se encontraron resultados</p></div>}
       {loading && <Loader />}
       <style>
         {`.table-wrapper::-webkit-scrollbar {

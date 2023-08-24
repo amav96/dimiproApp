@@ -1,16 +1,17 @@
 .navbar-container {
   height: 61px;
   width: 100%;
-  background: $color-gray-soft;
+  background: var(--c-bg-navBar);
   border-radius: 0px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid var(--c-color-border-bottom-navBar);
+  // box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 
   &__main {
     display: flex;
     padding: 10px;
-    @media (max-width: $breakpoint-m) {
+    @media (max-width: 768px) {
       width: 100%;
       justify-content: space-between;
     }
@@ -19,20 +20,20 @@
       width: 100%;
       object-fit: cover;
       cursor: pointer;
-      @media (max-width: $breakpoint-m) {
+      @media (max-width: 768px) {
         height: auto;
         width: auto;
       }
 
       &.navbar-menu__icon {
         display: none;
-        @media (max-width: $breakpoint-m) {
+        @media (max-width: 768px) {
           display: block;
         }
       }
     }
     &__title {
-      color: var(--white);
+      color: var(--c-text-navBar);
       display: flex;
       align-items: center;
       font-weight: 500;

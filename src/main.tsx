@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import  './assets/css/index.scss'
+import  './assets/css/tailwind.css'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import { ToastContainer, toast } from 'react-toastify';

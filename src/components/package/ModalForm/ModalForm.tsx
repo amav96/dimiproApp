@@ -68,10 +68,10 @@ export function ModalForm(props: PropsModalForm<string | number>) {
     else update(data)
   }
 
-  const loading = useRef<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false)
   const save = async (data : any) => {
-    if(!loading.current && urlStore){
-        loading.current = true
+    if(!loading && urlStore){
+        setLoading(true)
         const { items, isFormValid } = data
         if(beforeStore){
           beforeStore({
@@ -81,7 +81,7 @@ export function ModalForm(props: PropsModalForm<string | number>) {
           })
         }
         if(isFormValid !== undefined && !isFormValid){
-          loading.current = false
+          setLoading(false)
         } else {
             try {
               const formParams = await serializeParams({...items})
@@ -95,7 +95,7 @@ export function ModalForm(props: PropsModalForm<string | number>) {
 
               const response = await fetch(urlStore, params);
               const result = await response.json();
-              loading.current = false
+              setLoading(false)
               const { error, errors } = result
               if(error || errors){
                 if(afterStore){
@@ -116,7 +116,7 @@ export function ModalForm(props: PropsModalForm<string | number>) {
                 }
               }
             } catch (error) {
-                loading.current = false
+                setLoading(false)
                 if(afterStore){
                   afterStore({
                     type: 'serverError',
@@ -130,8 +130,8 @@ export function ModalForm(props: PropsModalForm<string | number>) {
   }
 
   const update = async (data : any) => {
-    if(!loading.current && urlUpdate){
-        loading.current = true
+    if(!loading && urlUpdate){
+        setLoading(true)
         const { items, isFormValid } = data
         if(beforeUpdate){
           beforeUpdate({
@@ -141,7 +141,7 @@ export function ModalForm(props: PropsModalForm<string | number>) {
           })
         }
         if(isFormValid !== undefined && !isFormValid){
-          loading.current = false
+          setLoading(false)
         } else {
             try {
               const formParams = await serializeParams({...items})
@@ -156,7 +156,7 @@ export function ModalForm(props: PropsModalForm<string | number>) {
               const response = await fetch(urlUpdate, params);
               const result = await response.json();
 
-              loading.current = false
+              setLoading(false)
               const { error, errors } = result
               if(error || errors){
                 if(afterUpdate){
@@ -177,7 +177,7 @@ export function ModalForm(props: PropsModalForm<string | number>) {
                 }
               }
             } catch (error) {
-                loading.current = false
+                setLoading(false)
                 if(afterUpdate){
                   afterUpdate({
                     type: 'serverError',
@@ -277,10 +277,10 @@ export function ModalForm(props: PropsModalForm<string | number>) {
         scopedFields={scopedFields}
         >
           <Button
-          disabled={loading.current}
-          customClass={'c-mt-4 c-mr-4 btn-primary'}
+          disabled={loading}
+          customClass={'c-mt-4 c-mr-4'}
           >
-            Enviar
+           {loading ? 'Cargando...' : 'Enviar'}
           </Button>
         </Form>
         }

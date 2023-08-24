@@ -156,7 +156,7 @@ export function Companies() {
         title: 'Postal Code:',
         value: '',
         type: 'text',
-        cols: 'c-col-span-4'
+        cols: 'c-col-span-4',
       },
       {
         key: 'country',
@@ -442,7 +442,7 @@ export function Companies() {
                   theme: 'colored'
                   });
               } else {
-                toast(`Eliminado correctamente correctamente`, {
+                toast(`Successfully eliminated`, {
                   autoClose: 2000,
                   theme: 'dark'
                   });
@@ -466,21 +466,20 @@ export function Companies() {
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });
           }
         },
         afterStore: (data: any) => {
-          console.log(data)
           if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
               autoClose: 5000,
               theme: 'colored'
               });
           } else {
-            toast(`Guardado correctamente`, {
+            toast(`Successfully saved`, {
               autoClose: 2000,
               theme: 'dark'
               });

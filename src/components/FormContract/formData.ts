@@ -1,20 +1,20 @@
 import { GlobalInputs, Slot } from '../package/Form/Form.type';
 
-import ExporterIcon from '/icons/form/exporter.svg';
-import ProductIcon from '/icons/form/product.svg';
-import TypeIcon from '/icons/form/type.svg';
-import CaliberIcon from '/icons/form/caliber.svg';
-import CropIcon from '/icons/form/calendar.svg';
-import PackagingIcon from '/icons/form/packaging.svg';
-import QtyIcon from '/icons/form/weight.svg';
-import BrokerIcon from '/icons/form/broker.svg';
-import PercentageIcon from '/icons/form/percentage.svg';
-import PriceIcon from '/icons/form/price.svg';
-import CoinIcon from '/icons/form/coin.svg';
-import PaymentMethodIcon from '/icons/form/payment-method.svg';
-import SurveyorIcon from '/icons/form/surveyor.svg';
-import ConditionsIcon from '/icons/form/conditions.svg';
-import FileIcon from '/icons/form/file.svg';
+import ExporterIcon from '../../public/icons/form/exporter.svg';
+import ProductIcon from '../../public/icons/form/product.svg';
+import TypeIcon from '../../public/icons/form/type.svg';
+import CaliberIcon from '../../public/icons/form/caliber.svg';
+import CropIcon from '../../public/icons/form/calendar.svg';
+import PackagingIcon from '../../public/icons/form/packaging.svg';
+import QtyIcon from '../../public/icons/form/weight.svg';
+import BrokerIcon from '../../public/icons/form/broker.svg';
+import PercentageIcon from '../../public/icons/form/percentage.svg';
+import PriceIcon from '../../public/icons/form/price.svg';
+import CoinIcon from '../../public/icons/form/coin.svg';
+import PaymentMethodIcon from '../../public/icons/form/payment-method.svg';
+import SurveyorIcon from '../../public/icons/form/surveyor.svg';
+import ConditionsIcon from '../../public/icons/form/conditions.svg';
+import FileIcon from '../../public/icons/form/file.svg';
 
 export const formData: Array<GlobalInputs | Slot> = [
   {
@@ -26,8 +26,8 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar exportador",
-    title: "Exportador:",
+    placeholder: "Select exporter",
+    title: "Exporter:",
     formatValue: (value: any) => value?._id,
     validations: {
       rules: {
@@ -46,8 +46,8 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar importador",
-    title: "Importador:",
+    placeholder: "Select importer",
+    title: "Importer:",
     formatValue: (value: any) => value?._id,
     validations: {
       rules: {
@@ -60,8 +60,8 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: CropIcon,
     key: "name",
-    placeholder: "Nombre de contrato",
-    title: "Nombre de contrato:",
+    placeholder: "Enter the contract name",
+    title: "Contract Name:",
     name: "name",
     value: "",
     type: "text",
@@ -81,8 +81,8 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar producto",
-    title: "Producto:",
+    placeholder: "Select product",
+    title: "Product:",
     formatValue: (value: any) => value?._id,
     validations: {
       rules: {
@@ -101,8 +101,8 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar tipo",
-    title: "Tipo:",
+    placeholder: "Select product type",
+    title: "Product Type:",
     formatValue: (value: any) => value?._id,
     validations: {
       rules: {
@@ -121,8 +121,8 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: true,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar calibre",
-    title: "Calibre:",
+    placeholder: "Select calibers",
+    title: "Calibers:",
     formatValue : (value: any[]) => value.map((v:any) => v.id ?? v._id),
     validations: {
       rules: {
@@ -135,7 +135,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: CropIcon,
     key: "crop",
-    placeholder: "Agregar año de cosecha",
+    placeholder: "Add crop year",
     title: "Crop:",
     name: "crop",
     value: "",
@@ -156,7 +156,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     multiple: false,
     clearable: true,
     trackBy: '_id',
-    placeholder: "Seleccionar packaging",
+    placeholder: "Select packaging",
     title: "Packaging:",
     formatValue: (value: any) => value?._id,
     validations: {
@@ -170,8 +170,8 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: QtyIcon,
     key: "quantity",
-    placeholder: "Cantidad de toneladas",
-    title: "Toneladas:",
+    placeholder: "Number of tons",
+    title: "Tons:",
     name: "quantity",
     value: "",
     type: "number",
@@ -186,8 +186,8 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: QtyIcon,
     key: "margenPercentage",
-    placeholder: "Escribe sólo el número",
-    title: "Margen de error (%):",
+    placeholder: "Enter only the number",
+    title: "Error margin (%):",
     name: "margenPercentage",
     value: "",
     type: "number",
@@ -197,7 +197,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: BrokerIcon,
     key: "broker",
-    placeholder: "Broker",
+    placeholder: "Select broker",
     title: "Broker:",
     name: "broker",
     value: [],
@@ -209,8 +209,8 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: PercentageIcon,
     key: "brokerPercent",
-    placeholder: "Comisión del Broker (%)",
-    title: "Porcentaje:",
+    placeholder: "Broker's commission (%)",
+    title: "Broker's commission:",
     name: "brokerPercent",
     value: "",
     type: "number",
@@ -219,8 +219,8 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: PriceIcon,
     key: "price",
-    placeholder: "Precio x ton",
-    title: "Precio:",
+    placeholder: "Enter the price per ton",
+    title: "Price per ton:",
     name: "price",
     value: "",
     type: "number",
@@ -234,7 +234,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: CoinIcon,
     key: "currency",
-    placeholder: "Currency",
+    placeholder: "Select currency",
     title: "Currency:",
     name: "currency",
     value: [],
@@ -252,7 +252,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: PaymentMethodIcon,
     key: "paymentMethod",
-    placeholder: "Payment Method",
+    placeholder: "Select payment method",
     title: "Payment Method:",
     name: "paymentMethod",
     value: [],
@@ -270,7 +270,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: SurveyorIcon,
     key: "surveyor",
-    placeholder: "Seleccionar surveyor",
+    placeholder: "Select surveyor",
     title: "Surveyor:",
     name: "surveyor",
     value: [],
@@ -288,7 +288,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: CropIcon,
     key: "insurance",
-    placeholder: "Agregar seguro",
+    placeholder: "Enter insurance",
     title: "Insurance:",
     name: "insurance",
     value: "",
@@ -314,7 +314,7 @@ export const formData: Array<GlobalInputs | Slot> = [
     icon: CropIcon,
     key: "destination",
     placeholder: "Ej: Livorno - Italy",
-    title: "Agregar destino:",
+    title: "Add Destination:",
     name: "destination",
     value: "",
     type: "text",
@@ -328,7 +328,7 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: CropIcon,
     key: "salesConditions",
-    placeholder: "Ej: FCA General Deheza",
+    placeholder: "Ej: FCA - General Deheza",
     title: "Sales Conditions:",
     name: "salesConditions",
     value: "",
@@ -338,8 +338,8 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: ConditionsIcon,
     key: "specifications",
-    placeholder: "Agregar condiciones",
-    title: "Condiciones:",
+    placeholder: "Enter specifications",
+    title: "Specifications:",
     name: "specifications",
     value: "",
     type: "textarea",
@@ -353,8 +353,8 @@ export const formData: Array<GlobalInputs | Slot> = [
   {
     icon: FileIcon,
     key: "documents",
-    placeholder: "Agregar documentos",
-    title: "Documentos:",
+    placeholder: "Add documents",
+    title: "Documents:",
     name: "documents",
     value: "",
     type: "file",

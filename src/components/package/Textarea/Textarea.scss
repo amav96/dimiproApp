@@ -27,6 +27,9 @@
     &__text{
         margin-top:4px;
         font-size: 15.5px;
-        color: var(--red);
+        color: var(--c-text-error-select);
+        background-color: var(--c-bg-error-input);
+        border-radius: 4px;
+        padding: 2px 8px;
     }
 }

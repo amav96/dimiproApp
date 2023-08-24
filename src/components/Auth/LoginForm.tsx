@@ -47,7 +47,7 @@ export function LoginForm() {
     const { items } = data;
     setLoading(true);
     const response = await authController.login(items)
-    setLoading(false);
+    setLoading(false);    
     if(response.errors){
       toast(`🦄 ${response.errors.message}`, {
         autoClose: 2000,
@@ -62,7 +62,7 @@ export function LoginForm() {
       if(response.permissions){
         dispatch(setPermissions(response.permissions))
       }
-      navigate('/ajustes/users')
+      navigate('/list-contracts')
     }
 
   };
@@ -78,9 +78,9 @@ export function LoginForm() {
           onSubmit={onSubmit}
         >
           <Link to="/forgot-password" className="forgot-password">
-            ¿Olvidaste tu contraseña?
+            Forgot your password?
           </Link>
-          <Button disabled={loading} customClass="btn-primary">Iniciar sesión</Button>
+          <Button disabled={loading} customClass="btn-primary">Login</Button>
         </Form>
       }
     </div>
