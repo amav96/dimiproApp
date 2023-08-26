@@ -169,7 +169,6 @@ export function ModalForm(props: PropsModalForm<string | number>) {
                   })
                 }
               }else {
-                console.log(result, result[modelUpdate])
                 if(afterUpdate){
                   if(typeof result === 'object'){
                     afterUpdate(result[modelUpdate])
@@ -179,7 +178,6 @@ export function ModalForm(props: PropsModalForm<string | number>) {
                 }
               }
             } catch (error) {
-              console.log(error)
                 setLoading(false)
                 if(afterUpdate){
                   afterUpdate({

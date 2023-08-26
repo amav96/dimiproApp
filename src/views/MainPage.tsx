@@ -5,12 +5,28 @@ import { SideBar } from "../components/package/SideBar";
 import { NavBar } from "../components/package/NavBar";
 import usePermissions from '@hooks/usePermissions';
 import { Menu } from "@packageTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useDataProvider from "@hooks/useDataProvider";
 
 function MainPage() {
+  const { getDataProviders } = useDataProvider();
+
+  useEffect(() => {
+    getDataProviders([
+      "packagings",
+      "paymentMethods",
+      "surveyors",
+      "currencies",
+      "companies",
+      "products",
+      "calibers",
+      "categories",
+    ]);
+  }, []);
+
   const navigate = useNavigate();
   const location = useLocation();
-    const { hasPermissions } = usePermissions();
+  const { hasPermissions } = usePermissions();
 
   const isLoginPath = location.pathname === "/login";
   const isForgotPasswordPath = location.pathname === "/forgot-password";

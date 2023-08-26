@@ -1,4 +1,4 @@
-import  { useEffect, useRef, useState } from 'react'
+import  { useCallback, useEffect, useRef, useState } from 'react'
 import { Dialog, Button, ModalForm, TableAlive } from '@package';
 import { PropsModalForm, AbmProps } from '@packageTypes'
 import './Abm.scss'
@@ -25,58 +25,20 @@ export function Abm(props: AbmProps) {
       searchIcon,
       headerSticky
     },
-    modalForm: {
-      inputs,
-      urlStore,
-      urlUpdate,
-      urlShow,
-      modelStore,
-      modelUpdate,
-      modelShow,
-      resetAfterClose,
-      showRequestConfiguration,
-      storeRequestConfiguration,
-      updateRequestConfiguration,
-      onCloseModal,
-      afterUpdate,
-      beforeUpdate,
-      afterStore,
-      beforeStore,
-      closable,
-      title,
-      scopedFields,
-      onShow
-      } = {}
+    modalForm
   } = props;
 
-  const [modalFormData, setModalFormData] = useState<PropsModalForm<string | number>>({
-    inputs,
-    urlStore,
-    urlUpdate,
-    urlShow,
-    modelStore,
-    modelUpdate,
-    modelShow,
+  const [localModalForm, setLocalModalForm] = useState<PropsModalForm<string | number>>({
     isEditMode: false,
     visible: false,
-    resetAfterClose,
-    showRequestConfiguration,
-    storeRequestConfiguration,
-    updateRequestConfiguration,
-    onCloseModal,
-    afterUpdate,
-    beforeUpdate,
-    afterStore,
-    beforeStore,
-    title,
-    scopedFields,
-    onShow
+    urlShow: modalForm?.urlShow,
+    urlUpdate: modalForm?.urlUpdate
   })
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
 
   const onOpenStore = () => {
-    setModalFormData((prev) => ({
+    setLocalModalForm((prev) => ({
       ...prev,
       visible: true,
       isEditMode: false
@@ -91,12 +53,12 @@ export function Abm(props: AbmProps) {
         setLocalItems(() => ([...[data],...currentItems]))
       }
     }
-    if(modalFormData.afterStore){
-      modalFormData.afterStore(data)
+    if(modalForm?.afterStore){
+      modalForm.afterStore(data)
     }
 
     if(!data.errors && !data.error){
-      setModalFormData((prev) => ({
+      setLocalModalForm((prev) => ({
         ...prev,
         visible: false,
         isEditMode: false
@@ -105,7 +67,7 @@ export function Abm(props: AbmProps) {
   }
 
   const onOpenUpdate = (data: any) => {
-    setModalFormData((prev) => ({
+    setLocalModalForm((prev) => ({
       ...prev,
       visible: true,
       isEditMode: true,
@@ -114,7 +76,7 @@ export function Abm(props: AbmProps) {
     }))
   }
 
-  const handleUpdate = (data : any) => {
+  const handleUpdate = useCallback((data : any) => {
     if(updateItemAfterUpdate && (data?.id || data?._id)){
       let trackBy = data?.id ? data.id : data?._id ? data._id : null
       if(trackBy){
@@ -122,16 +84,17 @@ export function Abm(props: AbmProps) {
         setLocalItems(currentItems)
       }
     }
-    if(modalFormData.afterUpdate){
-      modalFormData.afterUpdate(data)
+    if(modalForm?.afterUpdate){
+      modalForm.afterUpdate(data)
     }
 
-    setModalFormData((prev) => ({
+    setLocalModalForm((prev) => ({
       ...prev,
       visible: false,
       isEditMode: false,
     }))
-  }
+
+  }, [modalForm?.afterUpdate])
 
   const cancelDelete = () => {
     setDeleteData((prev) => ({
@@ -217,20 +180,20 @@ export function Abm(props: AbmProps) {
   }
 
   const handleOnCloseModal = () => {
-    setModalFormData((prev) => ({
+    setLocalModalForm((prev) => ({
       ...prev,
       visible: false,
       isEditMode: false
     }))
 
-    if(onCloseModal){
-      onCloseModal()
+    if(modalForm?.onCloseModal){
+      modalForm.onCloseModal()
     }
   }
 
   const [internalScopedColumns, setInternalScopedColumns] = useState({
     ...scopedColumns,
-    ...(urlUpdate && {
+    ...(modalForm?.urlUpdate && {
       edit: (item: any) => (
         <Button
         style={{ width: '40px' }}
@@ -276,7 +239,7 @@ export function Abm(props: AbmProps) {
       header={(
         <div className="c-flex c-justify-end create-btn-container">
           {
-            urlStore && (
+            modalForm?.urlStore && (
               <Button
               type={'button'}
               backgroundColor='c-bg-button-store'
@@ -291,31 +254,33 @@ export function Abm(props: AbmProps) {
       )}
       headerSticky={headerSticky}
       />
-
-      <ModalForm
-      inputs={inputs}
-      urlStore={modalFormData.urlStore}
-      urlUpdate={modalFormData.urlUpdate}
-      urlShow={modalFormData.urlShow}
-      modelShow={modalFormData.modelShow}
-      modelStore={modalFormData.modelStore}
-      modelUpdate={modalFormData.modelUpdate}
-      isEditMode={modalFormData.isEditMode}
-      visible={modalFormData.visible}
-      scopedFields={modalFormData.scopedFields}
-      resetAfterClose={modalFormData.resetAfterClose}
-      showRequestConfiguration={modalFormData.showRequestConfiguration}
-      storeRequestConfiguration={modalFormData.storeRequestConfiguration}
-      updateRequestConfiguration={modalFormData.updateRequestConfiguration}
-      onCloseModal={handleOnCloseModal}
-      afterUpdate={handleUpdate}
-      afterStore={handleStore}
-      beforeUpdate={beforeUpdate}
-      beforeStore={beforeStore}
-      closable={closable}
-      title={title}
-      onShow={onShow}
-      />
+      {
+        modalForm &&
+        <ModalForm
+        inputs={modalForm.inputs}
+        urlStore={modalForm.urlStore}
+        urlUpdate={localModalForm.urlUpdate}
+        urlShow={localModalForm.urlShow}
+        modelShow={modalForm.modelShow}
+        modelStore={modalForm.modelStore}
+        modelUpdate={modalForm.modelUpdate}
+        isEditMode={localModalForm.isEditMode}
+        visible={localModalForm.visible}
+        scopedFields={modalForm.scopedFields}
+        resetAfterClose={modalForm.resetAfterClose}
+        showRequestConfiguration={modalForm.showRequestConfiguration}
+        storeRequestConfiguration={modalForm.storeRequestConfiguration}
+        updateRequestConfiguration={modalForm.updateRequestConfiguration}
+        onCloseModal={handleOnCloseModal}
+        afterUpdate={handleUpdate}
+        afterStore={handleStore}
+        beforeUpdate={modalForm.beforeUpdate}
+        beforeStore={modalForm.beforeStore}
+        closable={modalForm.closable}
+        title={modalForm.title}
+        onShow={modalForm.onShow}
+        />
+      }
 
       <Dialog
       isOpen={deleteData.isOpen}

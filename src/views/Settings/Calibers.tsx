@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { Abm, Layout } from '@package'
 import { Routes } from '@services/utils/Routes'
 import { authorization } from '@services/utils/Autorizathion'
@@ -6,9 +6,12 @@ import { GlobalInputs } from '@packageTypes'
 import baseApiUrl from '@services/BaseApiUrl'
 import { formatDateTime } from '@services/utils/Formatters'
 import {  toast } from 'react-toastify';
+import {setCalibers} from '@store/dataProviders/dataProvidersSlice'
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { RootState } from "../../store";
+import { Caliber } from 'src/types/caliber.type'
 
 export function Calibers() {
-
 
   const [formCrud, setFormCrud] = useState<GlobalInputs[]>([
       {
@@ -37,6 +40,26 @@ export function Calibers() {
       cols: 'c-col-span-4'
     }
   ])
+  const dispatch = useAppDispatch();
+
+  const calibers = useAppSelector(
+    (state: RootState) => state.dataProviders.calibers
+  );
+ 
+  const internalAfterUpdate =  useCallback((data : any) => {
+    if(data.errors || data.error){
+      toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+        autoClose: 5000,
+        theme: 'colored'
+        });
+    } else {
+      dispatch(setCalibers(calibers.map((caliber : Caliber) => caliber._id === data._id ? { ...caliber, ...data} : caliber)))
+      toast(`Successfully saved`, {
+        autoClose: 2000,
+        theme: 'dark'
+        });
+    }
+  }, [calibers])
 
   return (
     <Layout title={'Calibers'} >
@@ -92,19 +115,7 @@ export function Calibers() {
         urlShow: Routes.CALIBERS.SHOW,
         closable: true,
         title: 'Save calibers',
-        afterUpdate: (data: any) => {
-          if(data.errors || data.error){
-            toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-              autoClose: 5000,
-              theme: 'colored'
-              });
-          } else {
-            toast(`Successfully saved`, {
-              autoClose: 2000,
-              theme: 'dark'
-              });
-          }
-        },
+        afterUpdate: (data: any) => internalAfterUpdate(data),
         afterStore: (data: any) => {if(data.errors || data.error){
             toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
               autoClose: 5000,

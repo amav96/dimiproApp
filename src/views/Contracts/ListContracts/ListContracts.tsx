@@ -15,6 +15,7 @@ import { dataTable as data } from "./dataTable";
 import { inputsEdit } from "./inputsModalForm";
 import usePermissions from "@hooks/usePermissions";
 
+
 const ListContracts = () => {
   const [IsOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [inputsModalForm, setInputsModalForm] =
@@ -274,6 +275,7 @@ const ListContracts = () => {
                   theme: "colored",
                 });
               } else {
+                console.log(data)
                 toast(`Successfully saved`, {
                   autoClose: 2000,
                   theme: "dark",
