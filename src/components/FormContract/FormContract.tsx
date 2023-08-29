@@ -11,7 +11,6 @@ import { Form } from "../package/Form/Form";
 import { GlobalInputs, Slot } from "../package/Form/Form.type";
 import { formData } from "./formData";
 
-
 export const FormContract = () => {
   const [inputs, setInputs] = useState<Array<GlobalInputs | Slot>>(formData);
 
@@ -89,13 +88,22 @@ export const FormContract = () => {
         options: optionsMap[input.key] || input.options,
       }))
     );
-  }, [optionsMap]);
+  }, [
+    packaging,
+    paymentMethod,
+    surveyor,
+    currency,
+    companies,
+    product,
+    calibers,
+    category,
+  ]);
 
   const [sendingContract, setSendingContract] = useState<boolean>(false);
   const onSubmit = async (data: any) => {
     const { items } = data;
     try {
-      if(sendingContract) return 
+      if (sendingContract) return;
       if (data.isFormValid === true) {
         const formData = new FormData();
 
@@ -116,7 +124,7 @@ export const FormContract = () => {
             calibers.forEach((caliber: string, index: number) => {
               formData.append(`calibers[${index}]`, caliber);
             });
-          } else if(items[key]) {
+          } else if (items[key]) {
             formData.append(key, items[key]);
           }
         }
@@ -126,7 +134,7 @@ export const FormContract = () => {
           formData
         );
         setSendingContract(false);
-          console.log(response)
+        console.log(response);
         if (response.status === 201 || response.status === 200) {
           toast.success("Contrato creado correctamente", {
             autoClose: 3000,
@@ -134,21 +142,21 @@ export const FormContract = () => {
           });
           navigate("/list-contracts");
         } else {
-          toast.error("A1 An error occurred when creating the contract", {
+          toast.error("An error occurred when creating the contract", {
             autoClose: 3000,
             theme: "dark",
           });
         }
       } else {
-        toast.error("A2 n error occurred when creating the contract", {
+        toast.error("An error occurred when creating the contract", {
           autoClose: 3000,
           theme: "dark",
         });
       }
     } catch (error) {
       setSendingContract(false);
-      console.log(error)
-      toast.error("A3 An error occurred when creating the contract", {
+      console.log(error);
+      toast.error("An error occurred when creating the contract", {
         autoClose: 3000,
         theme: "dark",
       });
@@ -161,10 +169,12 @@ export const FormContract = () => {
         <span className="text-required">
           <span>*</span> The fields are required.
         </span>
-        <Button disabled={sendingContract} type="submit" customClass="btn-primary">
-          {
-            sendingContract ? 'Sending...' : 'Create contract'
-          }
+        <Button
+          disabled={sendingContract}
+          type="submit"
+          customClass="btn-primary"
+        >
+          {sendingContract ? "Sending..." : "Create contract"}
         </Button>
       </Form>
     </div>
