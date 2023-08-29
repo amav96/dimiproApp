@@ -12,6 +12,7 @@ import { RootState } from "../../store";
 import { GenericModel } from 'src/types/genericModel.type'
 import { useAfterUpdate } from '@hooks/useAfterUpdate'
 import { useAfterStore } from '@hooks/useAfterStore'
+import { useAfterDelete } from '@hooks/useAfterDelete'
 
 
 export function Categories() {
@@ -54,6 +55,8 @@ export function Categories() {
 
   const afterStore = useAfterStore(dispatch, setCategories, categories)
 
+  const afterDelete = useAfterDelete(dispatch, setCategories, categories)
+
   return (
     <Layout title={'Categories'} >
       <Abm
@@ -84,19 +87,7 @@ export function Categories() {
               'Content-Type': 'application/json'
             }
         },
-        afterDelete : (data: any) => {
-            if(!data || data.errors || data.error ){
-                toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-                  autoClose: 5000,
-                  theme: 'colored'
-                  });
-              } else {
-                toast(`Successfully eliminated`, {
-                  autoClose: 2000,
-                  theme: 'dark'
-                  });
-              }
-        },
+        afterDelete : (data: any) => afterDelete,
         deleteIcon: baseApiUrl + '/icons/basura.svg',
         updateIcon: baseApiUrl + '/icons/editar.svg',
         headerSticky: true

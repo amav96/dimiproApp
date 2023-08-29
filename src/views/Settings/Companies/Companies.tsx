@@ -441,6 +441,7 @@ export function Companies() {
   }
 
   }, [companies])
+  
 
   return (
     <Layout title={'Companies'} >

@@ -11,6 +11,7 @@ import { RootState } from '../../store'
 import { useAfterUpdate } from '@hooks/useAfterUpdate'
 import { useAfterStore } from '@hooks/useAfterStore'
 import { setPackagings } from '@store/dataProviders/dataProvidersSlice'
+import { useAfterDelete } from '@hooks/useAfterDelete'
 
 export function Packagings() {
 
@@ -50,8 +51,8 @@ export function Packagings() {
   );
 
   const afterUpdate = useAfterUpdate(dispatch, setPackagings, packagings);
-
   const afterStore = useAfterStore(dispatch, setPackagings, packagings);
+  const afterDelete = useAfterDelete(dispatch, setPackagings, packagings);
 
   return (
     <Layout title={'Packagings'} >
@@ -83,19 +84,7 @@ export function Packagings() {
               'Content-Type': 'application/json'
             }
         },
-        afterDelete : (data: any) => {
-            if(!data || data.errors || data.error ){
-                toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-                  autoClose: 5000,
-                  theme: 'colored'
-                  });
-              } else {
-                toast(`Successfully eliminated`, {
-                  autoClose: 2000,
-                  theme: 'dark'
-                  });
-              }
-        },
+        afterDelete : (data: any) => afterDelete(data),
         deleteIcon: baseApiUrl + '/icons/basura.svg',
         updateIcon: baseApiUrl + '/icons/editar.svg',
         headerSticky: true

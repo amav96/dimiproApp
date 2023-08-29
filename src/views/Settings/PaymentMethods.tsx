@@ -11,6 +11,7 @@ import { RootState } from '../../store'
 import { useAfterUpdate } from '@hooks/useAfterUpdate'
 import { useAfterStore } from '@hooks/useAfterStore'
 import { setPaymentMethods } from '@store/dataProviders/dataProvidersSlice'
+import { useAfterDelete } from '@hooks/useAfterDelete'
 
 export function PaymentMethods() {
 
@@ -49,8 +50,8 @@ export function PaymentMethods() {
   );
 
   const afterUpdate = useAfterUpdate(dispatch, setPaymentMethods, paymentMethods);
-
   const afterStore = useAfterStore(dispatch, setPaymentMethods, paymentMethods)
+  const afterDelete = useAfterDelete(dispatch, setPaymentMethods, paymentMethods)
 
   return (
     <Layout title={'Payment Methods'} >
@@ -82,19 +83,7 @@ export function PaymentMethods() {
               'Content-Type': 'application/json'
             }
         },
-        afterDelete : (data: any) => {
-            if(!data || data.errors || data.error ){
-                toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-                  autoClose: 5000,
-                  theme: 'colored'
-                  });
-              } else {
-                toast(`Successfully eliminated`, {
-                  autoClose: 2000,
-                  theme: 'dark'
-                  });
-              }
-        },
+        afterDelete : (data: any) => afterDelete(data),
         deleteIcon: baseApiUrl + '/icons/basura.svg',
         updateIcon: baseApiUrl + '/icons/editar.svg',
         headerSticky: true

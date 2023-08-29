@@ -11,6 +11,7 @@ import { RootState } from '../../store'
 import { useAfterUpdate } from '@hooks/useAfterUpdate'
 import { useAfterStore } from '@hooks/useAfterStore'
 import { setSurveyors } from '@store/dataProviders/dataProvidersSlice'
+import { useAfterDelete } from '@hooks/useAfterDelete'
 
 export function Surveyors() {
 
@@ -50,8 +51,8 @@ export function Surveyors() {
   );
 
   const afterUpdate = useAfterUpdate(dispatch, setSurveyors, surveyors);
-
   const afterStore = useAfterStore(dispatch, setSurveyors, surveyors);
+  const afterDelete = useAfterDelete(dispatch, setSurveyors, surveyors);
 
   return (
     <Layout title={'Surveyors'} >
@@ -83,19 +84,7 @@ export function Surveyors() {
               'Content-Type': 'application/json'
             }
         },
-        afterDelete : (data: any) => {
-            if(!data || data.errors || data.error ){
-                toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-                  autoClose: 5000,
-                  theme: 'colored'
-                  });
-              } else {
-                toast(`Successfully eliminated`, {
-                  autoClose: 2000,
-                  theme: 'dark'
-                  });
-              }
-        },
+        afterDelete : (data: any) => afterDelete(data),
         deleteIcon: baseApiUrl + '/icons/basura.svg',
         updateIcon: baseApiUrl + '/icons/editar.svg',
         headerSticky: true

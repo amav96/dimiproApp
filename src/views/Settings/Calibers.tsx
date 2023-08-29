@@ -12,6 +12,7 @@ import { RootState } from "../../store";
 import { Caliber } from "src/types/caliber.type";
 import { useAfterUpdate } from "@hooks/useAfterUpdate";
 import { useAfterStore } from "@hooks/useAfterStore";
+import { useAfterDelete } from "@hooks/useAfterDelete";
 
 export function Calibers() {
   const [formCrud, setFormCrud] = useState<GlobalInputs[]>([
@@ -50,6 +51,8 @@ export function Calibers() {
 
   const afterStore = useAfterStore(dispatch, setCalibers, calibers)
 
+  const afterDelete = useAfterDelete(dispatch, setCalibers, calibers)
+
   return (
     <Layout title={"Calibers"}>
       <Abm
@@ -87,19 +90,7 @@ export function Calibers() {
               "Content-Type": "application/json",
             },
           },
-          afterDelete: (data: any) => {
-            if (!data || data.errors || data.error) {
-              toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-                autoClose: 5000,
-                theme: "colored",
-              });
-            } else {
-              toast(`Successfully eliminated`, {
-                autoClose: 2000,
-                theme: "dark",
-              });
-            }
-          },
+          afterDelete: (data: any) => afterDelete(data),
           deleteIcon: baseApiUrl + "/icons/basura.svg",
           updateIcon: baseApiUrl + "/icons/editar.svg",
           headerSticky: true,
