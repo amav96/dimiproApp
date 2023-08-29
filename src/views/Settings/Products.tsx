@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Abm, Layout } from '@package'
 import { Routes } from '@services/utils/Routes'
 import { authorization } from '@services/utils/Autorizathion'
@@ -6,6 +6,11 @@ import { GlobalInputs } from '@packageTypes'
 import baseApiUrl from '@services/BaseApiUrl'
 import { formatDateTime } from '@services/utils/Formatters'
 import {  toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { RootState } from '../../store'
+import { useAfterUpdate } from '@hooks/useAfterUpdate'
+import { useAfterStore } from '@hooks/useAfterStore'
+import { setProducts } from '@store/dataProviders/dataProvidersSlice'
 
 export function Products() {
 
@@ -37,6 +42,16 @@ export function Products() {
       cols: 'c-col-span-4'
     }
   ])
+
+  const dispatch = useAppDispatch();
+
+  const products = useAppSelector(
+    (state: RootState) => state.dataProviders.products
+  );
+
+  const afterUpdate = useAfterUpdate(dispatch, setProducts, products);
+
+  const afterStore = useAfterStore(dispatch, setProducts, products);
 
   return (
     <Layout title={'Products'} >
@@ -92,33 +107,8 @@ export function Products() {
         urlShow: Routes.PRODUCTS.SHOW,
         closable: true,
         title: 'Save Product',
-        afterUpdate: (data: any) => {
-          if(data.errors || data.error){
-            toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-              autoClose: 5000,
-              theme: 'colored'
-              });
-          } else {
-            toast(`Successfully saved`, {
-              autoClose: 2000,
-              theme: 'dark'
-              });
-          }
-        },
-        afterStore: (data: any) => {
-          
-          if(data.errors || data.error){
-            toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-              autoClose: 5000,
-              theme: 'colored'
-              });
-          } else {
-            toast(`Successfully saved`, {
-              autoClose: 2000,
-              theme: 'dark'
-              });
-          }
-        },
+        afterUpdate: (data: any) => afterUpdate(data),
+        afterStore: (data: any) => afterStore(data),
         showRequestConfiguration : {
           method: 'GET',
           headers: {

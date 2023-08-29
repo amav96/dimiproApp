@@ -10,6 +10,8 @@ import { setCalibers } from "@store/dataProviders/dataProvidersSlice";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { RootState } from "../../store";
 import { Caliber } from "src/types/caliber.type";
+import { useAfterUpdate } from "@hooks/useAfterUpdate";
+import { useAfterStore } from "@hooks/useAfterStore";
 
 export function Calibers() {
   const [formCrud, setFormCrud] = useState<GlobalInputs[]>([
@@ -44,51 +46,9 @@ export function Calibers() {
     (state: RootState) => state.dataProviders.calibers
   );
 
-  const afterUpdate = useCallback(
-    (data: any) => {
-      if (data.errors || data.error) {
-        toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-          autoClose: 5000,
-          theme: "colored",
-        });
-      } else {
-        dispatch(
-          setCalibers(
-            calibers.map((caliber: Caliber) =>
-              caliber._id === data._id ? { ...caliber, ...data } : caliber
-            )
-          )
-        );
-        toast(`Successfully saved`, {
-          autoClose: 2000,
-          theme: "dark",
-        });
-      }
-    },
-    [calibers]
-  );
+  const afterUpdate = useAfterUpdate(dispatch, setCalibers, calibers);
 
-  const afterStore = useCallback(
-    (data: any) => {
-      {
-        if (data.errors || data.error) {
-          toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-            autoClose: 5000,
-            theme: "colored",
-          });
-        } else {
-          if (calibers.length > 0) {
-            dispatch(setCalibers([...calibers, ...[data]]));
-          }
-          toast(`Successfully saved`, {
-            autoClose: 2000,
-            theme: "dark",
-          });
-        }
-      }
-    },
-    [calibers]
-  );
+  const afterStore = useAfterStore(dispatch, setCalibers, calibers)
 
   return (
     <Layout title={"Calibers"}>

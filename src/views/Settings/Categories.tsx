@@ -10,6 +10,8 @@ import {setCategories} from '@store/dataProviders/dataProvidersSlice'
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { RootState } from "../../store";
 import { GenericModel } from 'src/types/genericModel.type'
+import { useAfterUpdate } from '@hooks/useAfterUpdate'
+import { useAfterStore } from '@hooks/useAfterStore'
 
 
 export function Categories() {
@@ -42,46 +44,15 @@ export function Categories() {
     }
   ])
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const categories = useAppSelector(
     (state: RootState) => state.dataProviders.categories
   );
 
-  const afterUpdate =  useCallback((data : any) => {
-    if(data.errors || data.error){
-      toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-        autoClose: 5000,
-        theme: 'colored'
-        });
-    } else {
-      dispatch(setCategories(categories.map((caliber : GenericModel) => caliber._id === data._id ? { ...caliber, ...data} : caliber)))
-      toast(`Successfully saved`, {
-        autoClose: 2000,
-        theme: 'dark'
-        });
-    }
-  }, [categories])
+  const afterUpdate = useAfterUpdate(dispatch, setCategories, categories);
 
-  const afterStore = useCallback((data: any) => {
-
-    {if(data.errors || data.error){
-      toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-        autoClose: 5000,
-        theme: 'colored'
-        });
-    } else {
-      if(categories.length > 0){
-        dispatch(setCategories([...categories, ...[data]]))
-      }
-      toast(`Successfully saved`, {
-        autoClose: 2000,
-        theme: 'dark'
-        });
-    }
-  }
-
-  }, [categories])
+  const afterStore = useAfterStore(dispatch, setCategories, categories)
 
   return (
     <Layout title={'Categories'} >

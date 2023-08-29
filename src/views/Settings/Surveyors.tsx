@@ -6,6 +6,11 @@ import { GlobalInputs } from '@packageTypes'
 import baseApiUrl from '@services/BaseApiUrl'
 import { formatDateTime } from '@services/utils/Formatters'
 import {  toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { RootState } from '../../store'
+import { useAfterUpdate } from '@hooks/useAfterUpdate'
+import { useAfterStore } from '@hooks/useAfterStore'
+import { setSurveyors } from '@store/dataProviders/dataProvidersSlice'
 
 export function Surveyors() {
 
@@ -37,6 +42,16 @@ export function Surveyors() {
       cols: 'c-col-span-4'
     }
   ])
+
+  const dispatch = useAppDispatch();
+
+  const surveyors = useAppSelector(
+    (state: RootState) => state.dataProviders.surveyors
+  );
+
+  const afterUpdate = useAfterUpdate(dispatch, setSurveyors, surveyors);
+
+  const afterStore = useAfterStore(dispatch, setSurveyors, surveyors);
 
   return (
     <Layout title={'Surveyors'} >
@@ -92,33 +107,8 @@ export function Surveyors() {
         urlShow: Routes.SURVEYORS.SHOW,
         closable: true,
         title: 'Save surveyor',
-        afterUpdate: (data: any) => {
-          if(data.errors || data.error){
-            toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-              autoClose: 5000,
-              theme: 'colored'
-              });
-          } else {
-            toast(`Successfully saved`, {
-              autoClose: 2000,
-              theme: 'dark'
-              });
-          }
-        },
-        afterStore: (data: any) => {
-          
-          if(data.errors || data.error){
-            toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-              autoClose: 5000,
-              theme: 'colored'
-              });
-          } else {
-            toast(`Successfully saved`, {
-              autoClose: 2000,
-              theme: 'dark'
-              });
-          }
-        },
+        afterUpdate: (data: any) => afterUpdate(data),
+        afterStore: (data: any) => afterStore(data),
         showRequestConfiguration : {
           method: 'GET',
           headers: {
