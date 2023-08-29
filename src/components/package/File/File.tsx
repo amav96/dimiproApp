@@ -11,7 +11,7 @@ import useFiles from "@hooks/useFiles";
 export function File(props: PropsFile) {
   let {
     icon,
-    placeholder = props.placeholder || "Seleccionar archivo",
+    placeholder = props.placeholder || "Select file/s",
     cols = "c-col-span-12",
     value,
     onChange,
@@ -234,7 +234,7 @@ const renderToolTip = (image : any) => {
             </div>
             <div className="File__box__text">
               {!isEmpty(value) && typeof value !== 'string' ? (
-                <div className="text-center" >Archivos seleccionados</div>
+                <div className="text-center" >Selected files</div>
               ) : (
                 <div className="text-center">
                   <span

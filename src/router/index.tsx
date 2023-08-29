@@ -59,8 +59,10 @@ export function Router() {
       <Route element={<ProtectRoute gate={"contracts_index"} />}>
         <Route path="/pdf/:id" element={<PDFcontract />} />
       </Route>
+      <Route element={<ProtectRoute gate={"profile_index"} />}>
+        <Route path="/profile" element={<Profile />} />
+      </Route>
       <Route path="/restore-password" element={<RestorePassword />} />
-      <Route path="profile" element={<Profile />} />
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/forgot-password" element={<Login />} />

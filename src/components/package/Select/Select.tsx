@@ -20,7 +20,7 @@ const validate = new Validator();
 export function Select(props: PropsSelect) {
   const {
     icon,
-    placeholder = props.placeholder || "Seleccione opción",
+    placeholder = props.placeholder || "Select option",
     cols = "c-col-span-12",
     value,
     onChange,

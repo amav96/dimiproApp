@@ -142,7 +142,7 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
                       customClass="c-bg-red c-text-white c-mx-2"
                       onClick={() => deleteDoc(contract.id, doc.uuid)}
                     >
-                      Eliminar
+                      Delete
                     </Button>
                     <a
                       href={`${bucketUrl}/${doc.path}`}
@@ -162,7 +162,7 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
             }}
           >
             <Button disabled={loadingDocument} type="submit" customClass="btn-primary">
-              {loadingDocument ? 'Cargando' : 'Agregar'}
+              {loadingDocument ? 'Loading...' : 'Add document/s'}
             </Button>
           </Form>
         </div>
