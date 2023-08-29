@@ -25,14 +25,35 @@ export function Abm(props: AbmProps) {
       searchIcon,
       headerSticky
     },
-    modalForm
+    modalForm :{
+      urlShow,
+      urlUpdate,
+      afterStore,
+      afterUpdate,
+      onCloseModal,
+      inputs,
+      urlStore,
+      modelShow,
+      modelStore,
+      modelUpdate,
+      scopedFields,
+      resetAfterClose,
+      showRequestConfiguration,
+      storeRequestConfiguration,
+      updateRequestConfiguration,
+      beforeUpdate,
+      beforeStore,
+      closable,
+      title,
+      onShow,
+    } = {}
   } = props;
 
   const [localModalForm, setLocalModalForm] = useState<PropsModalForm<string | number>>({
     isEditMode: false,
     visible: false,
-    urlShow: modalForm?.urlShow,
-    urlUpdate: modalForm?.urlUpdate
+    urlShow: urlShow,
+    urlUpdate: urlUpdate
   })
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
@@ -46,15 +67,15 @@ export function Abm(props: AbmProps) {
   }
 
   const refTableAlive = useRef<HTMLFormElement | null>(null)
-  const handleStore = (data: any) => {
+  const handleStore = useCallback((data: any) => {
     if(addItemAfterStore){
       if(!data.errors && !data.error){
         const currentItems = refTableAlive?.current?.localItems;
         setLocalItems(() => ([...[data],...currentItems]))
       }
     }
-    if(modalForm?.afterStore){
-      modalForm.afterStore(data)
+    if(afterStore){
+      afterStore(data)
     }
 
     if(!data.errors && !data.error){
@@ -64,7 +85,7 @@ export function Abm(props: AbmProps) {
         isEditMode: false
       }))
     }
-  }
+  }, [afterStore])
 
   const onOpenUpdate = (data: any) => {
     setLocalModalForm((prev) => ({
@@ -84,8 +105,8 @@ export function Abm(props: AbmProps) {
         setLocalItems(currentItems)
       }
     }
-    if(modalForm?.afterUpdate){
-      modalForm.afterUpdate(data)
+    if(afterUpdate){
+      afterUpdate(data)
     }
 
     setLocalModalForm((prev) => ({
@@ -94,7 +115,7 @@ export function Abm(props: AbmProps) {
       isEditMode: false,
     }))
 
-  }, [modalForm?.afterUpdate])
+  }, [afterUpdate])
 
   const cancelDelete = () => {
     setDeleteData((prev) => ({
@@ -104,7 +125,7 @@ export function Abm(props: AbmProps) {
   }
 
   const loadingDelete = useRef<boolean>(false);
-  const handleDelete = async (data: any) => {
+  const handleDelete = useCallback(async (data: any) => {
       const { item } = data
       if(!loadingDelete.current){
         loadingDelete.current = true
@@ -160,7 +181,7 @@ export function Abm(props: AbmProps) {
           loadingDelete.current = false
         }
       }
-  }
+  }, [afterDelete])
 
   const [deleteData, setDeleteData] = useState({
     isOpen: false,
@@ -179,21 +200,21 @@ export function Abm(props: AbmProps) {
     }))
   }
 
-  const handleOnCloseModal = () => {
+  const handleOnCloseModal = useCallback(() => {
     setLocalModalForm((prev) => ({
       ...prev,
       visible: false,
       isEditMode: false
     }))
 
-    if(modalForm?.onCloseModal){
-      modalForm.onCloseModal()
+    if(onCloseModal){
+      onCloseModal()
     }
-  }
+  }, [onCloseModal])
 
   const [internalScopedColumns, setInternalScopedColumns] = useState({
     ...scopedColumns,
-    ...(modalForm?.urlUpdate && {
+    ...(urlUpdate && {
       edit: (item: any) => (
         <Button
         style={{ width: '40px' }}
@@ -239,7 +260,7 @@ export function Abm(props: AbmProps) {
       header={(
         <div className="c-flex c-justify-end create-btn-container">
           {
-            modalForm?.urlStore && (
+            urlStore && (
               <Button
               type={'button'}
               backgroundColor='c-bg-button-store'
@@ -255,30 +276,29 @@ export function Abm(props: AbmProps) {
       headerSticky={headerSticky}
       />
       {
-        modalForm &&
         <ModalForm
-        inputs={modalForm.inputs}
-        urlStore={modalForm.urlStore}
+        inputs={inputs}
+        urlStore={urlStore}
         urlUpdate={localModalForm.urlUpdate}
         urlShow={localModalForm.urlShow}
-        modelShow={modalForm.modelShow}
-        modelStore={modalForm.modelStore}
-        modelUpdate={modalForm.modelUpdate}
+        modelShow={modelShow}
+        modelStore={modelStore}
+        modelUpdate={modelUpdate}
         isEditMode={localModalForm.isEditMode}
         visible={localModalForm.visible}
-        scopedFields={modalForm.scopedFields}
-        resetAfterClose={modalForm.resetAfterClose}
-        showRequestConfiguration={modalForm.showRequestConfiguration}
-        storeRequestConfiguration={modalForm.storeRequestConfiguration}
-        updateRequestConfiguration={modalForm.updateRequestConfiguration}
+        scopedFields={scopedFields}
+        resetAfterClose={resetAfterClose}
+        showRequestConfiguration={showRequestConfiguration}
+        storeRequestConfiguration={storeRequestConfiguration}
+        updateRequestConfiguration={updateRequestConfiguration}
         onCloseModal={handleOnCloseModal}
         afterUpdate={handleUpdate}
         afterStore={handleStore}
-        beforeUpdate={modalForm.beforeUpdate}
-        beforeStore={modalForm.beforeStore}
-        closable={modalForm.closable}
-        title={modalForm.title}
-        onShow={modalForm.onShow}
+        beforeUpdate={beforeUpdate}
+        beforeStore={beforeStore}
+        closable={closable}
+        title={title}
+        onShow={onShow}
         />
       }
 

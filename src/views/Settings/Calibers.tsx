@@ -45,8 +45,8 @@ export function Calibers() {
   const calibers = useAppSelector(
     (state: RootState) => state.dataProviders.calibers
   );
- 
-  const internalAfterUpdate =  useCallback((data : any) => {
+
+  const afterUpdate =  useCallback((data : any) => {
     if(data.errors || data.error){
       toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
         autoClose: 5000,
@@ -59,6 +59,26 @@ export function Calibers() {
         theme: 'dark'
         });
     }
+  }, [calibers])
+
+  const afterStore = useCallback((data: any) => {
+
+    {if(data.errors || data.error){
+      toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+        autoClose: 5000,
+        theme: 'colored'
+        });
+    } else {
+      if(calibers.length > 0){
+        dispatch(setCalibers([...calibers, ...[data]]))
+      }
+      toast(`Successfully saved`, {
+        autoClose: 2000,
+        theme: 'dark'
+        });
+    }
+  }
+
   }, [calibers])
 
   return (
@@ -115,19 +135,8 @@ export function Calibers() {
         urlShow: Routes.CALIBERS.SHOW,
         closable: true,
         title: 'Save calibers',
-        afterUpdate: (data: any) => internalAfterUpdate(data),
-        afterStore: (data: any) => {if(data.errors || data.error){
-            toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-              autoClose: 5000,
-              theme: 'colored'
-              });
-          } else {
-            toast(`Successfully saved`, {
-              autoClose: 2000,
-              theme: 'dark'
-              });
-          }
-        },
+        afterUpdate: (data: any) => afterUpdate(data),
+        afterStore: (data: any) => afterStore(data),
         showRequestConfiguration : {
           method: 'GET',
           headers: {

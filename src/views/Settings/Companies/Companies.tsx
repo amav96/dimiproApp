@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Abm, Layout } from '@package'
 import { Routes } from '@services/utils/Routes'
 import { authorization } from '@services/utils/Autorizathion'
@@ -8,10 +8,12 @@ import { formatDateTime } from '@services/utils/Formatters'
 import {  toast } from 'react-toastify';
 import './Companies.scss'
 import useDataProvider from '@hooks/useDataProvider'
-import { useAppSelector } from '../../../hooks'
+import { useAppSelector,useAppDispatch } from '../../../hooks'
 import { RootState } from '../../../store'
 import PlaceRepository from '@repositories/places.repository'
 import { Country } from 'src/types/places.type'
+import {setCompanies} from '@store/dataProviders/dataProvidersSlice'
+import { Company } from 'src/types/company.type'
 
 const placeController = new PlaceRepository()
 
@@ -400,6 +402,46 @@ export function Companies() {
     }
   }
 
+  const dispatch = useAppDispatch()
+
+  const companies = useAppSelector(
+    (state: RootState) => state.dataProviders.companies
+  );
+
+  const afterUpdate =  useCallback((data : any) => {
+    if(data.errors || data.error){
+      toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+        autoClose: 5000,
+        theme: 'colored'
+        });
+    } else {
+      dispatch(setCompanies(companies.map((caliber : Company) => caliber._id === data._id ? { ...caliber, ...data} : caliber)))
+      toast(`Successfully saved`, {
+        autoClose: 2000,
+        theme: 'dark'
+        });
+    }
+  }, [companies])
+
+  const afterStore = useCallback((data: any) => {
+    {if(data.errors || data.error){
+      toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+        autoClose: 5000,
+        theme: 'colored'
+        });
+    } else {
+      if(companies.length > 0){
+        dispatch(setCompanies([...companies, ...[data]]))
+      }
+      toast(`Successfully saved`, {
+        autoClose: 2000,
+        theme: 'dark'
+        });
+    }
+  }
+
+  }, [companies])
+
   return (
     <Layout title={'Companies'} >
       <Abm
@@ -459,32 +501,8 @@ export function Companies() {
         urlShow: Routes.COMPANIES.SHOW,
         closable: true,
         title: 'Save Company',
-        afterUpdate: (data: any) => {
-          if(data.errors || data.error){
-            toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-              autoClose: 5000,
-              theme: 'colored'
-              });
-          } else {
-            toast(`Successfully saved`, {
-              autoClose: 2000,
-              theme: 'dark'
-              });
-          }
-        },
-        afterStore: (data: any) => {
-          if(data.errors || data.error){
-            toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-              autoClose: 5000,
-              theme: 'colored'
-              });
-          } else {
-            toast(`Successfully saved`, {
-              autoClose: 2000,
-              theme: 'dark'
-              });
-          }
-        },
+        afterUpdate: (data: any) => afterUpdate(data),
+        afterStore: (data: any) => afterStore(data),
         showRequestConfiguration : {
           method: 'GET',
           headers: {

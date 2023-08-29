@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Abm, Layout } from '@package'
 import { Routes } from '@services/utils/Routes'
 import { authorization } from '@services/utils/Autorizathion'
@@ -6,6 +6,11 @@ import { GlobalInputs } from '@packageTypes'
 import baseApiUrl from '@services/BaseApiUrl'
 import { formatDateTime } from '@services/utils/Formatters'
 import {  toast } from 'react-toastify';
+import {setCategories} from '@store/dataProviders/dataProvidersSlice'
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { RootState } from "../../store";
+import { GenericModel } from 'src/types/genericModel.type'
+
 
 export function Categories() {
 
@@ -36,6 +41,47 @@ export function Categories() {
       cols: 'c-col-span-4'
     }
   ])
+
+  const dispatch = useAppDispatch()
+
+  const categories = useAppSelector(
+    (state: RootState) => state.dataProviders.categories
+  );
+
+  const afterUpdate =  useCallback((data : any) => {
+    if(data.errors || data.error){
+      toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+        autoClose: 5000,
+        theme: 'colored'
+        });
+    } else {
+      dispatch(setCategories(categories.map((caliber : GenericModel) => caliber._id === data._id ? { ...caliber, ...data} : caliber)))
+      toast(`Successfully saved`, {
+        autoClose: 2000,
+        theme: 'dark'
+        });
+    }
+  }, [categories])
+
+  const afterStore = useCallback((data: any) => {
+
+    {if(data.errors || data.error){
+      toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+        autoClose: 5000,
+        theme: 'colored'
+        });
+    } else {
+      if(categories.length > 0){
+        dispatch(setCategories([...categories, ...[data]]))
+      }
+      toast(`Successfully saved`, {
+        autoClose: 2000,
+        theme: 'dark'
+        });
+    }
+  }
+
+  }, [categories])
 
   return (
     <Layout title={'Categories'} >
@@ -91,32 +137,8 @@ export function Categories() {
         urlShow: Routes.CATEGORIES.SHOW,
         closable: true,
         title: 'Save product type',
-        afterUpdate: (data: any) => {
-          if(data.errors || data.error){
-            toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-              autoClose: 5000,
-              theme: 'colored'
-              });
-          } else {
-            toast(`Successfully saved`, {
-              autoClose: 2000,
-              theme: 'dark'
-              });
-          }
-        },
-        afterStore: (data: any) => {
-          if(data.errors || data.error){
-            toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-              autoClose: 5000,
-              theme: 'colored'
-              });
-          } else {
-            toast(`Successfully saved`, {
-              autoClose: 2000,
-              theme: 'dark'
-              });
-          }
-        },
+        afterUpdate: (data: any) => afterUpdate(data),
+        afterStore: (data: any) => afterStore(data),
         showRequestConfiguration : {
           method: 'GET',
           headers: {

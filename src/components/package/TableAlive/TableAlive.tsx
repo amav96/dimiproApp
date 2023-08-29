@@ -170,7 +170,9 @@ export const TableAlive = forwardRef(function TableAlive(props: TableAliveProps<
           </Form>
         </div>
       }
-      
+      {
+        header && header
+      }
       <Table
       items={localItems}
       headerSticky={headerSticky}
