@@ -7,13 +7,10 @@ import baseApiUrl from "@services/BaseApiUrl";
 import { Role } from "../../types/role.type";
 import { formatDateTime } from "@services/utils/Formatters";
 import useDataProvider from "@hooks/useDataProvider";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppSelector } from "../../hooks";
 import { RootState } from "../../store";
 import { Company } from "../../types/company.type";
 import { toast } from "react-toastify";
-import { setUser } from "@store/auth/authSlice";
-import { useAfterUpdate } from "@hooks/useAfterUpdate";
-import { useAfterStore } from "@hooks/useAfterStore";
 
 export function Users() {
   const { getDataProviders } = useDataProvider();
@@ -269,16 +266,6 @@ export function Users() {
     },
   ]);
 
-  const dispatch = useAppDispatch();
-
-  const surveyors = useAppSelector(
-    (state: RootState) => state.dataProviders.surveyors
-  );
-
-  const afterUpdate = useAfterUpdate(dispatch, setUser, surveyors);
-
-  const afterStore = useAfterStore(dispatch, setUser, surveyors);
-
   return (
     <Layout title={"Users"}>
       <Abm
@@ -344,8 +331,32 @@ export function Users() {
           urlShow: Routes.USERS.SHOW,
           closable: true,
           title: "Save User",
-          afterUpdate: (data: any) => afterUpdate(data),
-          afterStore: (data: any) => afterStore(data),
+          afterUpdate: (data: any) => {
+            if (data.errors || data.error) {
+              toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+                autoClose: 5000,
+                theme: "colored",
+              });
+            } else {
+              toast(`Successfully saved`, {
+                autoClose: 2000,
+                theme: "dark",
+              });
+            }
+          },
+          afterStore: (data: any) => {
+            if (data.errors || data.error) {
+              toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+                autoClose: 5000,
+                theme: "colored",
+              });
+            } else {
+              toast(`Successfully saved`, {
+                autoClose: 2000,
+                theme: "dark",
+              });
+            }
+          },
           showRequestConfiguration: {
             method: "GET",
             headers: {
