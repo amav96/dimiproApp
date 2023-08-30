@@ -63,6 +63,7 @@ export function File(props: PropsFile) {
   const localAccept = (): string => accept.join(",");
 
   const [images, setImages] = useState<any>([]);
+  const initialRenderRef = useRef(true);
   const uploadFile = (evt: React.ChangeEvent<HTMLInputElement>) => {
     let el = evt.target as HTMLInputElement;
     let files = el.files as unknown as Array<Object>
@@ -137,10 +138,6 @@ export function File(props: PropsFile) {
     if(onRemove){
       onRemove({image, index});
     }
-
-    if(reBuild.length === 0 && validations){
-      handleValidations(getFiles(reBuild), validations)
-    }
   };
 
   useEffect(() => {
@@ -148,6 +145,17 @@ export function File(props: PropsFile) {
       buildGallery(value.filter((v) => typeof v === 'object'))
     }
   }, [value])
+
+  useEffect(() => {
+    if (!initialRenderRef.current) {
+      console.log(images);
+      if (validations) {
+        handleValidations(images, validations);
+      }
+    } else {
+      initialRenderRef.current = false; 
+    }
+  }, [images])
 
   const buildGallery = async (files: any) => {
     // Aca contruyo las imagenes que seran rederizadas
@@ -172,39 +180,53 @@ export function File(props: PropsFile) {
     return files.map((file) => file.image)
   }
 
- 
-
 
   const tooltipsRef = useRef<any>([]);
 
-const showTooltip = (index: number) => {
-  const tooltip = tooltipsRef.current[index];
-    if (tooltip) {
-      tooltip.style.display = 'block';
-    }
-};
+  const showTooltip = (index: number) => {
+    const tooltip = tooltipsRef.current[index];
+      if (tooltip) {
+        tooltip.style.display = 'block';
+      }
+  };
 
-const hideTooltip = (index: number) => {
-  const tooltip = tooltipsRef.current[index];
-    if (tooltip) {
-      tooltip.style.display = 'none';
-    }
-};
+  const hideTooltip = (index: number) => {
+    const tooltip = tooltipsRef.current[index];
+      if (tooltip) {
+        tooltip.style.display = 'none';
+      }
+  };
 
-const renderToolTip = (image : any) => {
-  if (image.image?.file?.name) {
-    return image.image?.file?.name;
-  }
-  if (image.image?.url) {
-    if (image.image?.url.indexOf('/')) {
-      const divide = image.image?.url.split('/');
-      return divide[divide.length - 1];
-    } else {
-      return image.image?.url;
+  const renderToolTip = (image : any) => {
+    if (image.image?.file?.name) {
+      return image.image?.file?.name;
     }
+    if (image.image?.url) {
+      if (image.image?.url.indexOf('/')) {
+        const divide = image.image?.url.split('/');
+        return divide[divide.length - 1];
+      } else {
+        return image.image?.url;
+      }
+    }
+    return 'image';
+  };
+
+  const renderFile = (item: any) => {
+    if(item.image.url){
+      return item.image.url
+    }
+
+    if(item.image.file && item.image.file.type.split('/')[0] === 'image' && item.image.base64){
+      return item.image.base64
+    }
+
+    if(item.image.base64 && item.image.base64.split('/')[0].indexOf('image') > -1){
+      return item.image.base64
+    }
+
+    return documentImage
   }
-  return 'image';
-};
 
 
   return (
@@ -227,7 +249,7 @@ const renderToolTip = (image : any) => {
               evt.preventDefault()
             }
             onDrop={dropFiles}
-            
+
           >
             <div className="File__box__img">
               <img src={nubeFile} />
@@ -266,7 +288,7 @@ const renderToolTip = (image : any) => {
               <div className="image-container__box__remove" onClick={() => remove(item, index)}>
                 x
               </div>
-              <img src={item.image?.base64 ? item.image?.base64 : item.image?.url ? item.image?.url : documentImage} alt="Image" />
+              <img src={renderFile(item)} alt="Image" />
               <div className="c-tooltip" ref={(el) => (tooltipsRef.current[index] = el)}>
                 {renderToolTip(item)}
               </div>

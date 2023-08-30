@@ -7,6 +7,7 @@ import $http from "@services/AxiosInstance";
 import { toast } from "react-toastify";
 import { Form } from "../package/Form";
 import closeImg from './close.svg';
+import { GlobalInputs } from "../package/Form/Form.type";
 
 interface ModalDocsProps {
   open: boolean;
@@ -17,12 +18,12 @@ interface ModalDocsProps {
 const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
   const bucketUrl = import.meta.env.VITE_BUCKET_URL;
   const [contract, setContract] = useState<Contract>(data || {});
-  const [formData, setFormData] = useState<any>([
+  const [formData, setFormData] = useState<GlobalInputs[]>([
     {
       key: "documents",
       placeholder: "Agregar documentos",
       name: "documents",
-      value: "",
+      value: [],
       type: "file",
       validations: {
         rules: {
@@ -33,11 +34,16 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
     },
   ]);
 
+
+  const [loadingDocument, setLoadingDocument] = useState(false);
   const deleteDoc = async (idContract: string | undefined, idDoc: string) => {
+    if(loadingDocument) return
     try {
+      setLoadingDocument(true);
       const response: { data: any; status: number } = await $http.delete(
         `${baseApiUrl}/api/v1/contracts/remove-document/${idDoc}/${idContract}`
       );
+      setLoadingDocument(false);
       if (response.status === 200) {
         setContract((prevData) => ({
           ...prevData,
@@ -56,11 +62,12 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
         });
       }
     } catch (error) {
+      setLoadingDocument(false);
       console.error(error);
     }
   };
 
-  const [loadingDocument, setLoadingDocument] = useState(false);
+
   const addDoc = async (idContract: string | undefined, files: any) => {
     if(loadingDocument) return
     try {
@@ -72,10 +79,9 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
         return;
       }
       const formData = new FormData();
-
       Array.from(files.items.documents).forEach((file: any, index) => {
-        if (file.type.includes("image") || file.type === "application/pdf") {
-          formData.append(`documents[${index}]`, file);
+        if (file.image.type.includes("image") || file.image.type === "application/pdf") {
+          formData.append(`documents[${index}]`, file.image);
         }
       });
       setLoadingDocument(true);

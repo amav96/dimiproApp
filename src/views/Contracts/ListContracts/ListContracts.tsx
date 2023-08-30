@@ -195,7 +195,7 @@ const ListContracts = () => {
   };
 
   const onShow = (data: any) => {
-    
+
   }
 
   return (
@@ -321,7 +321,10 @@ const ListContracts = () => {
           }}
         />
       </Layout>
-      <ModalDocs open={IsOpenModal} onClose={closeModal} data={dataDocuments} />
+      {
+        IsOpenModal &&
+        <ModalDocs open={IsOpenModal} onClose={closeModal} data={dataDocuments} />
+      }
     </div>
   );
 };
