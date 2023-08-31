@@ -174,35 +174,7 @@ export function Users() {
       type: "text",
       cols: "c-col-span-4",
       formatValue: (value: string) => Number(value),
-    },
-    {
-      key: "password",
-      placeholder: "Password",
-      title: "Password:",
-      name: "password",
-      value: "",
-      type: "password",
-      cols: "c-col-span-4",
-      // validations: {
-      //   rules: {
-      //     required: true,
-      //   },
-      // },
-    },
-    {
-      key: "confirmPassword",
-      placeholder: "Confirm Password",
-      title: "Confirm Password:",
-      name: "confirmPassword",
-      value: "",
-      type: "password",
-      cols: "c-col-span-4",
-      // validations: {
-      //   rules: {
-      //     required: true,
-      //   },
-      // },
-    },
+    }
   ]);
 
   const [formFilter, setFormFilter] = useState<GlobalInputs[]>([
