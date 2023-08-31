@@ -414,21 +414,23 @@ const PDFcontract = () => {
                   </View>
                 </View>
                 {/* INSURANCE */}
-                <View
-                  style={[
-                    styles.spaceTop,
-                    { display: "flex", flexDirection: "row" },
-                  ]}
-                >
-                  <Text style={styles.labelWidth}>Insurance/Seguro:</Text>
+                {contract?.insurance && (
                   <View
-                    style={{
-                      marginLeft: 40,
-                    }}
+                    style={[
+                      styles.spaceTop,
+                      { display: "flex", flexDirection: "row" },
+                    ]}
                   >
-                    <Text>{contract?.insurance}</Text>
+                    <Text style={styles.labelWidth}>Insurance/Seguro:</Text>
+                    <View
+                      style={{
+                        marginLeft: 40,
+                      }}
+                    >
+                      <Text>{contract?.insurance}</Text>
+                    </View>
                   </View>
-                </View>
+                )}
                 {/* BROKER */}
                 {contract?.broker?.name  && (
                    <View
