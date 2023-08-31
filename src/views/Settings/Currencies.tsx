@@ -68,23 +68,6 @@ export function Currencies() {
       value: '',
       type: 'text',
       cols: 'c-col-span-4'
-    },
-    {
-      key: 'symbol',
-      placeholder: 'symbol',
-      name: 'symbol',
-      value: '',
-      type: 'text',
-      cols: 'c-col-span-4',
-    },
-    {
-      key: 'nameShort',
-      placeholder: 'nameShort',
-      name: 'nameShort',
-      value: '',
-      type: 'text',
-      cols: 'c-col-span-4',
-
     }
 
   ])
