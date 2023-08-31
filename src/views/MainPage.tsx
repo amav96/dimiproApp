@@ -167,14 +167,6 @@ function MainPage() {
             },
           },
           {
-            title: 'Packagings',
-            image: baseApiUrl + "/icons/lista-gray.svg",
-            path: "/settings/packagings",
-            onNavigate: (data: any) => {
-              navigate(data.path);
-            },
-          },
-          {
             title: "Users",
             image: baseApiUrl + "/icons/perfil-gray.svg",
             path: "/settings/users",
