@@ -87,7 +87,7 @@ export function Categories() {
               'Content-Type': 'application/json'
             }
         },
-        afterDelete : (data: any) => afterDelete,
+        afterDelete : (data: any) => afterDelete(data),
         deleteIcon: baseApiUrl + '/icons/basura.svg',
         updateIcon: baseApiUrl + '/icons/editar.svg',
         headerSticky: true
