@@ -14,6 +14,9 @@ import PlaceRepository from '@repositories/places.repository'
 import { Country } from 'src/types/places.type'
 import {setCompanies} from '@store/dataProviders/dataProvidersSlice'
 import { Company } from 'src/types/company.type'
+import { useAfterUpdate } from '@hooks/useAfterUpdate'
+import { useAfterStore } from '@hooks/useAfterStore'
+import { useAfterDelete } from '@hooks/useAfterDelete'
 
 const placeController = new PlaceRepository()
 
@@ -309,14 +312,6 @@ export function Companies() {
       cols: 'c-col-span-4'
     },
     {
-      key: 'postalCode',
-      placeholder : 'postal Code',
-      name: 'postalCode',
-      value: '',
-      type: 'text',
-      cols: 'c-col-span-4'
-    },
-    {
       key: 'countries',
       placeholder: 'Countries',
       name: 'countries',
@@ -402,45 +397,18 @@ export function Companies() {
     }
   }
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const companies = useAppSelector(
     (state: RootState) => state.dataProviders.companies
   );
 
-  const afterUpdate =  useCallback((data : any) => {
-    if(data.errors || data.error){
-      toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-        autoClose: 5000,
-        theme: 'colored'
-        });
-    } else {
-      dispatch(setCompanies(companies.map((caliber : Company) => caliber._id === data._id ? { ...caliber, ...data} : caliber)))
-      toast(`Successfully saved`, {
-        autoClose: 2000,
-        theme: 'dark'
-        });
-    }
-  }, [companies])
+  const afterUpdate = useAfterUpdate(dispatch, setCompanies, companies);
 
-  const afterStore = useCallback((data: any) => {
-    {if(data.errors || data.error){
-      toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-        autoClose: 5000,
-        theme: 'colored'
-        });
-    } else {
-      if(companies.length > 0){
-        dispatch(setCompanies([...companies, ...[data]]))
-      }
-      toast(`Successfully saved`, {
-        autoClose: 2000,
-        theme: 'dark'
-        });
-    }
-  }
+  const afterStore = useAfterStore(dispatch, setCompanies, companies)
 
-  }, [companies])
+  const afterDelete = useAfterDelete(dispatch, setCompanies, companies)
+
   
 
   return (
@@ -478,19 +446,7 @@ export function Companies() {
               'Content-Type': 'application/json'
             }
         },
-        afterDelete : (data: any) => {
-            if(!data || data.errors || data.error ){
-                toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
-                  autoClose: 5000,
-                  theme: 'colored'
-                  });
-              } else {
-                toast(`Successfully eliminated`, {
-                  autoClose: 2000,
-                  theme: 'dark'
-                  });
-              }
-        },
+        afterDelete : (data: any) => afterDelete(data),
         deleteIcon: baseApiUrl + '/icons/basura.svg',
         updateIcon: baseApiUrl + '/icons/editar.svg',
         headerSticky: true
