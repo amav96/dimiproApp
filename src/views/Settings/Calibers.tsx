@@ -1,15 +1,13 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Abm, Layout } from "@package";
 import { Routes } from "@services/utils/Routes";
 import { authorization } from "@services/utils/Autorizathion";
 import { GlobalInputs } from "@packageTypes";
 import baseApiUrl from "@services/BaseApiUrl";
 import { formatDateTime } from "@services/utils/Formatters";
-import { toast } from "react-toastify";
 import { setCalibers } from "@store/dataProviders/dataProvidersSlice";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { RootState } from "../../store";
-import { Caliber } from "src/types/caliber.type";
 import { useAfterUpdate } from "@hooks/useAfterUpdate";
 import { useAfterStore } from "@hooks/useAfterStore";
 import { useAfterDelete } from "@hooks/useAfterDelete";
