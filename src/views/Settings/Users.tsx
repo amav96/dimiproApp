@@ -250,9 +250,9 @@ export function Users() {
       multiple: false,
       cols: "c-col-span-4",
       options: companies,
-      formatValue: (value: Company[]) => {
+      formatValue: (value: Company) => {
         if (value) {
-          return value.map((v) => v._id).toString();
+          return value._id?.toString();
         }
         return [];
       },
@@ -323,6 +323,7 @@ export function Users() {
                 format: (value: string) => formatDateTime(value) || "",
               },
               { key: "edit", title: "Edit" },
+              { key: "delete", title: "Delete"}
             ],
             []
           ),
@@ -337,12 +338,31 @@ export function Users() {
           searchable: true,
           addItemAfterStore: true,
           updateItemAfterUpdate: true,
-          afterDelete: (data: any) => {
-            console.log("data after delete", data);
+          urlDelete: Routes.USERS.DELETE,
+          deleteItemAfterDelete: true,
+          deleteRequestConfiguration: {
+            method: "DELETE",
+            headers: {
+              Authorization: authorization(),
+              "Content-Type": "application/json",
+            },
           },
-          updateIcon: baseApiUrl + "/icons/editar.svg",
           deleteIcon: baseApiUrl + "/icons/basura.svg",
+          updateIcon: baseApiUrl + "/icons/editar.svg",
           headerSticky: true,
+          afterDelete: (data: any) => {
+            if (data.errors || data.error) {
+              toast.error(`${JSON.stringify(data.errors ?? data.error)}`, {
+                autoClose: 5000,
+                theme: "colored",
+              });
+            } else {
+              toast(`Successfully deleted`, {
+                autoClose: 2000,
+                theme: "dark",
+              });
+            }
+          },
         }}
         modalForm={{
           inputs: formCrud,

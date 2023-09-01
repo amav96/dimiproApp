@@ -27,7 +27,7 @@ export function ForgotPasswordForm() {
     if(loading.current) return
     try {
       if (data.isFormValid === false) {
-        toast.error("Por favor, completa los campos requeridos.", {
+        toast.error("Please complete the required fields.", {
           autoClose: 4000,
           theme: "dark",
         });
