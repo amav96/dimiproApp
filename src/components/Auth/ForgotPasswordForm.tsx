@@ -25,7 +25,7 @@ export function ForgotPasswordForm() {
   const onSubmit = async (data: any) => {
     try {
       if (data.isFormValid === false) {
-        toast.error("Por favor, completa los campos requeridos.", {
+        toast.error("Please complete the required fields.", {
           autoClose: 4000,
           theme: "dark",
         });

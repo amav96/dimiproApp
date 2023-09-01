@@ -39,12 +39,21 @@ export function LoginForm() {
         },
       },
     },
+    
   ]);
 
   const [loading, setLoading] = useState<boolean>(false)
   const onSubmit = async (data: any) => {
-
     const { items } = data;
+
+    if (!items.email || !items.password) {
+      toast.error('Please complete the required fields.', {
+        autoClose: 4000,
+        theme: "dark",
+
+      });
+      return;
+    }
     setLoading(true);
     const response = await authController.login(items)
     setLoading(false);    
