@@ -9,7 +9,7 @@ const $http = axios.create({
 const handleError = (error: AxiosError) => {
   if (axios.isAxiosError(error)) {
     if (error.code !== "200" && error.code !== "201") {
-      throw error.response?.data;
+      throw error
     }
   }else {
     throw {

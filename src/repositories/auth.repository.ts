@@ -3,7 +3,6 @@ import $http from "../services/AxiosInstance";
 import { User } from "../types/user.type";
 import { Routes } from "@services/utils/Routes";
 
-
 interface ResponseLogin {
     errors : {
       message?: string,
@@ -31,7 +30,7 @@ class AuthenticationRepository {
       const response = await $http.get(Routes.AUTH.PERMISSIONS);
       return response.data;
     } catch (errors : any) {
-      return errors;
+      throw errors
     }
   }
 
