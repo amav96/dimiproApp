@@ -174,8 +174,46 @@ export function Users() {
       type: "text",
       cols: "c-col-span-4",
       formatValue: (value: string) => Number(value),
+    },
+  ],);
+
+  useEffect(() => {
+    if(!formCrud.some((form) => form.key === 'password')){
+      setFormCrud((prev) => [
+        ...prev,
+        ...passwordInputs
+      ])
     }
-  ]);
+  },[])
+
+  const passwordInputs : GlobalInputs[] = [{
+    key: "password",
+    placeholder: "Password",
+    title: "Password:",
+    name: "password",
+    value: "",
+    type: "password",
+    cols: "c-col-span-4",
+    validations: {
+      rules: {
+        required: true,
+      },
+    },
+  },
+  {
+    key: "confirmPassword",
+    placeholder: "Confirm Password",
+    title: "Confirm Password:",
+    name: "confirmPassword",
+    value: "",
+    type: "password",
+    cols: "c-col-span-4",
+    validations: {
+      rules: {
+        required: true,
+      },
+    },
+  }]
 
   const [formFilter, setFormFilter] = useState<GlobalInputs[]>([
     {
@@ -237,6 +275,16 @@ export function Users() {
       },
     },
   ]);
+
+  const onIsEditMode = (data:any) => {
+    if(!data && !formCrud.some((form) => form.key === 'password')){
+      const rebuildForm: GlobalInputs[]  = [...formCrud, ...passwordInputs]
+      setFormCrud(rebuildForm)
+    } else {
+      let newForm = [...formCrud].filter((form) => form.key !== 'password' && form.key !== 'confirmPassword');
+      setFormCrud(newForm)
+    }
+  }
 
   return (
     <Layout title={"Users"}>
@@ -351,6 +399,7 @@ export function Users() {
             },
           },
         }}
+        onIsEditMode={onIsEditMode}
       />
     </Layout>
   );

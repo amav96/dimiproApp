@@ -18,4 +18,5 @@ export type AbmModalFormExternal = Omit<PropsModalForm<string | number>, 'isEdit
 export interface AbmProps {
   table: AbmTableAliveProps;
   modalForm?: AbmModalFormExternal;
+  onIsEditMode?: Function
 }

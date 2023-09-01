@@ -81,7 +81,19 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
           })
       }
     })
+    removeLeftovers()
   }, [inputs])
+
+  const removeLeftovers = () => {
+    if(generatedInputs && inputs && inputs?.length < generatedInputs.length){
+      let leftOverInputs = generatedInputs.filter((form) => !inputs.some((input) => input.key === form.key))
+      if(leftOverInputs.length > 0){
+        setGeneratedInputs((prev) => (prev.filter((currentInput) => !leftOverInputs.some((input) => input.key === currentInput.key))))
+      }
+    }
+  }
+
+
 
   const hasValidations = useRef<boolean>(false)
   const hasFormatValue = useRef<boolean>(true)

@@ -67,8 +67,6 @@ export function LoginForm() {
 
   };
 
-  
-
   return (
     
     <div className="c-mt-4 c-mb-2 c-mx-2">
@@ -80,7 +78,7 @@ export function LoginForm() {
           <Link to="/forgot-password" className="forgot-password">
             Forgot your password?
           </Link>
-          <Button disabled={loading} customClass="btn-primary">Login</Button>
+          <Button disabled={loading} customClass="btn-primary">{loading ? 'Sending...' : 'Login'}</Button>
         </Form>
       }
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Form, Modal, Button } from "@package";
 import { Slot, GlobalInputs } from "@packageTypes";
 import { Link } from "react-router-dom";
@@ -22,7 +22,9 @@ export function ForgotPasswordForm() {
     },
   ]);
 
+  const loading = useRef<boolean>(false)
   const onSubmit = async (data: any) => {
+    if(loading.current) return
     try {
       if (data.isFormValid === false) {
         toast.error("Por favor, completa los campos requeridos.", {
@@ -31,14 +33,14 @@ export function ForgotPasswordForm() {
         });
         return;
       }
-
+      loading.current = true;
       const response = await $http.post(
         `${baseApiUrl}/api/v1/restore-password`,
         {
           email: data.items.email,
         }
       );
-
+      loading.current = false;
       if (response.status === 200) {
         toast.success(
           "An email has been sent to reset your password.",
@@ -54,6 +56,7 @@ export function ForgotPasswordForm() {
         });
       }
     } catch (error) {
+      loading.current = false;
       console.error(error);
       toast.error("There was an error sending the email", {
         autoClose: 4000,

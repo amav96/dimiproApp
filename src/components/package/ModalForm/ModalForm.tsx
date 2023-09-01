@@ -59,7 +59,18 @@ export function ModalForm(props: PropsModalForm<string | number>) {
          ]))
        }
      })
+
+     removeLeftovers()
   }, [inputs])
+
+  const removeLeftovers = () => {
+    if(generatedForm && inputs && inputs?.length < generatedForm.length){
+      let leftOverInputs = generatedForm.filter((form) => !inputs.some((input) => input.key === form.key))
+      if(leftOverInputs.length > 0){
+        setGeneratedForm((prev) => (prev.filter((currentInput) => !leftOverInputs.some((input) => input.key === currentInput.key))))
+      }
+    }
+  }
 
   const [internalVisible, setInternalVisible] = useState<boolean>(false)
 
@@ -107,7 +118,7 @@ export function ModalForm(props: PropsModalForm<string | number>) {
                   })
                 }
               }else {
-               
+
                 if(afterStore){
                   if(typeof result === 'object'){
                     afterStore(result[modelStore])

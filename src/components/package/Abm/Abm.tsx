@@ -46,7 +46,8 @@ export function Abm(props: AbmProps) {
       closable,
       title,
       onShow,
-    } = {}
+    } = {},
+    onIsEditMode
   } = props;
 
   const [localModalForm, setLocalModalForm] = useState<PropsModalForm<string | number>>({
@@ -55,6 +56,16 @@ export function Abm(props: AbmProps) {
     urlShow: urlShow,
     urlUpdate: urlUpdate
   })
+
+  const prevIsEditModeRef = useRef(localModalForm.isEditMode);
+  useEffect(() => {
+    if (prevIsEditModeRef.current !== localModalForm.isEditMode) {
+      prevIsEditModeRef.current = localModalForm.isEditMode;
+      if(onIsEditMode){
+        onIsEditMode(localModalForm.isEditMode)
+      }
+    }
+  }, [localModalForm.isEditMode])
 
   const [localItems, setLocalItems] = useState<Array<any>>([])
 
@@ -242,7 +253,6 @@ export function Abm(props: AbmProps) {
       )
     })
   });
-
 
 
   return (
