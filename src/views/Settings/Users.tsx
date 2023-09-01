@@ -212,9 +212,9 @@ export function Users() {
       multiple: false,
       cols: "c-col-span-4",
       options: companies,
-      formatValue: (value: Company[]) => {
+      formatValue: (value: Company) => {
         if (value) {
-          return value.map((v) => v._id).toString();
+          return value._id?.toString();
         }
         return [];
       },
