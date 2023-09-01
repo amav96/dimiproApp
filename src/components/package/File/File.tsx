@@ -148,7 +148,6 @@ export function File(props: PropsFile) {
 
   useEffect(() => {
     if (!initialRenderRef.current) {
-      console.log(images);
       if (validations) {
         handleValidations(images, validations);
       }
@@ -164,6 +163,8 @@ export function File(props: PropsFile) {
         const convertedImage = await convertFileToRender(files[i].image);
         setImages((prevImages : any) => [...prevImages, { ...files[i], image: convertedImage }]);
       }
+    } else if(images.length > 0) {
+      setImages([])
     }
   }
 
@@ -286,7 +287,7 @@ export function File(props: PropsFile) {
           {images.map((item: any, index : number) => (
             <div key={index} className="image-container__box" onMouseOver={() => showTooltip(index)} onMouseOut={() => hideTooltip(index)}>
               <div className="image-container__box__remove" onClick={() => remove(item, index)}>
-                x
+                X
               </div>
               <img src={renderFile(item)} alt="Image" />
               <div className="c-tooltip" ref={(el) => (tooltipsRef.current[index] = el)}>

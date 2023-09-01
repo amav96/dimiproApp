@@ -25,11 +25,6 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
       name: "documents",
       value: [],
       type: "file",
-      validations: {
-        rules: {
-          required: true,
-        },
-      },
       cols: "c-col-span-6",
     },
   ]);
@@ -66,7 +61,6 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
       console.error(error);
     }
   };
-
 
   const addDoc = async (idContract: string | undefined, files: any) => {
     if(loadingDocument) return
@@ -105,6 +99,7 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
           autoClose: 3000,
           theme: "dark",
         });
+        resetForm()
       } else {
         toast.error("There was an error adding the documents.", {
           autoClose: 3000,
@@ -116,6 +111,11 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
       throw new Error(error);
     }
   };
+
+  const refForm = useRef<HTMLFormElement | null>(null)
+  const resetForm = () => {
+    refForm?.current?.setValue({key: 'documents', value: []})
+  }
 
   useEffect(() => {
     setContract(data);
@@ -166,6 +166,7 @@ const ModalDocs: React.FC<ModalDocsProps> = ({ open, onClose, data }) => {
             onSubmit={(data: any) => {
               addDoc(contract.id, data);
             }}
+            ref={refForm}
           >
             <Button disabled={loadingDocument} type="submit" customClass="btn-primary">
               {loadingDocument ? 'Loading...' : 'Add document/s'}

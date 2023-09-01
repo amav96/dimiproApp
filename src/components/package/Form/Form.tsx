@@ -45,7 +45,8 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
           })
         )
 
-        if ((updateInput.value && updateInput.value !== undefined && !Array.isArray(updateInput.value)) || 
+        if ((updateInput.value && updateInput.value !== undefined &&
+          (!Array.isArray(updateInput.value) || (Array.isArray(updateInput.value) && updateInput.value.length > 0))) ||
           (updateInput.value && Array.isArray(updateInput.value) && updateInput.value.length > 0)) {
           setFormValues((prev: keyValue<string | number>) => ({
             ...prev,
@@ -266,9 +267,19 @@ export const Form = forwardRef(function Form(props: Props<string | number>, ref:
     });
   },[])
 
+  const setValue = ({key, value} : { key: string, value: any}) => {
+    if(formValues.hasOwnProperty(key)){
+      setFormValues((prev: any) => ({
+        ...prev,
+        [key]: value
+      }))
+    }
+  }
+
   //@ts-ignore
   useImperativeHandle(ref, () => ({
     resetValues: resetValues,
+    setValue: setValue
   }));
 
   return (
