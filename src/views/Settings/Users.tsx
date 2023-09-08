@@ -245,7 +245,7 @@ export function Users() {
       placeholder: "Company",
       name: "company",
       trackBy: "_id",
-      value: [],
+      value: {},
       type: "select",
       multiple: false,
       cols: "c-col-span-4",

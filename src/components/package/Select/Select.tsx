@@ -353,8 +353,8 @@ export function Select(props: PropsSelect) {
   };
 
   useEffect(() => {
-    if (!multiple && value && !isEmpty(value)) {
-      setLocalValue(value[label as keyof object]);
+    if (!multiple && value !== undefined ) {
+      setLocalValue(!isEmpty(value) ?  value[label as keyof object] : '');
     }
     if (
       multiple &&
