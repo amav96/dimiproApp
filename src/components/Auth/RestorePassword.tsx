@@ -15,9 +15,9 @@ const RestorePassword = () => {
   const [inputs, setInputs] = useState<Array<GlobalInputs | Slot>>([
     {
       key: "password",
-      placeholder: "Contraseña",
+      placeholder: "Password",
       name: "password",
-      title: "Nueva contraseña:",
+      title: "New Password:",
       value: "",
       type: "password",
       cols: "c-col-span-4",
@@ -29,11 +29,11 @@ const RestorePassword = () => {
     },
     {
       key: "confirmPassword",
-      placeholder: "Confirmar contraseña",
+      placeholder: "Confirm Password",
       name: "confirmPassword",
       value: "",
       type: "password",
-      title: "Confirmar contraseña:",
+      title: "Confirm Password:",
       cols: "c-col-span-4",
       validations: {
         rules: {
@@ -60,7 +60,7 @@ const RestorePassword = () => {
 
         setisTokenValid(true);
       } catch (error) {
-        console.error("Error al verificar el token:", error);
+        console.error("error verifying token:", error);
         setisTokenValid(false);
       }
     };
@@ -79,7 +79,7 @@ const RestorePassword = () => {
 
     try {
       if (data.items.password !== data.items.confirmPassword) {
-        toast.error("Las contraseñas no coinciden.", {
+        toast.error("Passwords do not match", {
           autoClose: 4000,
           theme: "dark",
         });
@@ -91,7 +91,7 @@ const RestorePassword = () => {
         newPassword: data.items.password,
       });
 
-      toast.success("Contraseña actualizada correctamente.", {
+      toast.success("Password updated correctly.", {
         autoClose: 4000,
         theme: "dark",
       });
@@ -103,11 +103,11 @@ const RestorePassword = () => {
   };
 
   return (
-    <Layout title="Restablecer contraseña" customClass="restore-password-view">
+    <Layout title="Restore password" customClass="restore-password-view">
       {isTokenValid ? (
         <Form inputs={inputs} onSubmit={onSubmit}>
           <Button customClass="btn-primary c-my-4">
-            Restablecer contraseña
+            Restore password
           </Button>
         </Form>
       ) : (
@@ -118,11 +118,11 @@ const RestorePassword = () => {
               fontSize: "16px",
             }}
           >
-            Token inválido o expirado. Intenta nuevamente
+            Invalid or expired token. Please try again
           </h1>
           <Button customClass="btn-primary c-my-4">
             <Link to="/forgot-password" className="link-login">
-              Volver
+              Back
             </Link>
           </Button>
         </>
