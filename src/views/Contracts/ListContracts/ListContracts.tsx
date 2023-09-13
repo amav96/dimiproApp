@@ -253,7 +253,7 @@ const ListContracts = () => {
                   type="button"
                   onClick={() => onOpenDocument(item)}
                 >
-                  Ver doc
+                  Open
                 </Button>
               ),
             },

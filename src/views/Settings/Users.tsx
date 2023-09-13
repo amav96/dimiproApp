@@ -129,7 +129,7 @@ export function Users() {
       type: "select",
       cols: "c-col-span-4",
       options: companies,
-      formatValue: (value: Company) => value._id,
+      formatValue: (value: Company) => value._id?.toString(),
       validations: {
         rules: {
           required: true,
@@ -245,7 +245,7 @@ export function Users() {
       placeholder: "Company",
       name: "company",
       trackBy: "_id",
-      value: [],
+      value: {},
       type: "select",
       multiple: false,
       cols: "c-col-span-4",
@@ -254,7 +254,7 @@ export function Users() {
         if (value) {
           return value._id?.toString();
         }
-        return [];
+       
       },
     },
     {

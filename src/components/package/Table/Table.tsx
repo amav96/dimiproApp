@@ -72,7 +72,7 @@ export function Table(props: TableProps<string>) {
   };
 
   return (
-    <div className="table-wrapper" onScroll={debounce(scrollTable, 300)}>
+    <div className="table-wrapper">
       {loading && <Loader />}
       <style>
         {`.table-wrapper::-webkit-scrollbar {

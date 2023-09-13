@@ -84,7 +84,7 @@ export default function useDataProvider() {
         toast(`🦄 ${response.errors.message || 'Ha ocurrido un error al traer los proveedores de data'}`, {
           autoClose: 2000,
         });
-      } else {
+      } else if(response?.dataProviders) {
         Object.keys(response.dataProviders).forEach((k) => {
           if (k in dataProviders) {
             // @ts-ignore

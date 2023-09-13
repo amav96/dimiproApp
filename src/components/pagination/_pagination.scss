@@ -1,0 +1,24 @@
+.pagination-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    @media (max-width: $breakpoint-m) {
+        flex-wrap: wrap;
+    }
+    .btn-pagination, .btn-number-pagination {
+        border-radius: 50%;
+        height: 36px;
+        width: 36px;
+        padding: 7px;
+        display: grid;
+        place-content: center;
+    }
+
+    .btn-number-pagination {
+        background-color: #c1c1c1;
+        &.active-page {
+            background-color: #4a1d96;
+            color: white;
+        }
+    }
+}

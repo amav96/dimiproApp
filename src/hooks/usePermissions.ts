@@ -15,37 +15,42 @@ export default function usePermissions () {
 
   const hasOrGetPermissions = async (permission: string[] | string) : Promise<boolean>=> {
     if(!permissions || permissions.length === 0){
-          const {
-          permissions: serverPermissions ,
-          errors
-         } = await authenticationRepository.permissions()
-
-         if(errors){
-           if(errors.message === 'User no authenticated'){
-            toast(`🦄 ${errors.message || 'You are not authenticated'}`, {
-              position: "top-right",
-              autoClose: 1000,
-            });
+          try {
+            const {
+              permissions: serverPermissions ,
+              errors
+             } = await authenticationRepository.permissions()
+             console.log(errors)
+             if(errors){
+               if(errors.message === 'User no authenticated'){
+                toast(`🦄 ${errors.message || 'You are not authenticated'}`, {
+                  position: "top-right",
+                  autoClose: 1000,
+                });
+                navigate('/login')
+                return false
+               }
+               toast(`🦄 ${errors.message || 'You are not authenticated'}`, {
+                  position: "top-right",
+                  autoClose: 1000,
+                });
+                navigate('/acceso-denegado')
+                return false
+             } else {
+              if(serverPermissions && serverPermissions.length > 0){
+                dispatch(setPermissions(serverPermissions))
+               }
+                if(typeof permission === 'string'){
+                  // console.log(serverPermissions.includes(permission))
+                  return serverPermissions.includes(permission)
+                } else {
+                  return true //aca debo implementar logica para machear el array d permissions
+                }
+             }
+          } catch (error : any) {
             navigate('/login')
             return false
-           }
-           toast(`🦄 ${errors.message || 'You are not authenticated'}`, {
-              position: "top-right",
-              autoClose: 1000,
-            });
-            navigate('/acceso-denegado')
-            return false
-         } else {
-          if(serverPermissions && serverPermissions.length > 0){
-            dispatch(setPermissions(serverPermissions))
-           }
-            if(typeof permission === 'string'){
-              // console.log(serverPermissions.includes(permission))
-              return serverPermissions.includes(permission)
-            } else {
-              return true //aca debo implementar logica para machear el array d permissions
-            }
-         }
+          }
     } else {
       return permissions.includes(permission)
     }
