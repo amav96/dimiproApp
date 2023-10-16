@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {User} from '../../types/user.type'
-import { RootState } from 'src/store'
+import { RootState } from '@'
 
 interface AuthState {
   user: User | null,

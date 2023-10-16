@@ -1,7 +1,7 @@
 import { Company } from "./company.type"
 import { Currency } from "./currency.type"
 import { GenericModel } from "./genericModel.type"
-import { Packaging } from "./packaging.types"
+import { Packaging } from "./packaging.type"
 import { City, Country } from "./places.type"
 import { Product } from "./product.type"
 import { Surveyor } from "./surveyor.type"

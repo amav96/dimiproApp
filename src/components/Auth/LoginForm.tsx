@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
-import { Form, Button } from "@package";
-import { Slot, GlobalInputs } from "@packageTypes";
 import { Link, useNavigate } from "react-router-dom";
 import AuthenticationRepository from "@repositories/auth.repository";
-import { useAppSelector, useAppDispatch } from "../../hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import {setUser, setPermissions, setToken } from '@store/auth/authSlice'
 import {  toast } from 'react-toastify';
+import { Button, Form, Input } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 
 const authController = new AuthenticationRepository()
@@ -13,55 +13,13 @@ export function LoginForm() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const [inputs, setInputs] = useState<Array<GlobalInputs | Slot>>([
-    {
-      key: "email",
-      placeholder: "Email",
-      name: "email",
-      value: "",
-      type: "email",
-      validations: {
-        rules: {
-          required: true,
-        },
-      },
-      customClass: 'c-mb-4'
-    },
-    {
-      key: "password",
-      placeholder: "Password",
-      name: "password",
-      value: null,
-      type: "password",
-      validations: {
-        rules: {
-          required: true,
-        },
-      },
-    },
-    
-  ]);
-
   const [loading, setLoading] = useState<boolean>(false)
-  const onSubmit = async (data: any) => {
-    const { items } = data;
 
-    if (!items.email || !items.password) {
-      toast.error('Please complete the required fields.', {
-        autoClose: 4000,
-        theme: "dark",
-
-      });
-      return;
-    }
+  const onSubmit = async (values: any) => {
     setLoading(true);
-    const response = await authController.login(items)
-    setLoading(false);    
-    if(response.errors){
-      toast(`🦄 ${response.errors.message}`, {
-        autoClose: 2000,
-        });
-    } else {
+    try {
+      const response = await authController.login(values)
+      setLoading(false);
       if(response.user){
         dispatch(setUser(response.user))
       }
@@ -72,24 +30,70 @@ export function LoginForm() {
         dispatch(setPermissions(response.permissions))
       }
       navigate('/list-contracts')
-    }
 
+    } catch (error : any) {
+      setLoading(false);
+      const { data } = error
+      if(data.errors){
+        toast(`🦄 ${data.errors.message}`, {
+          autoClose: 2000,
+          });
+      } else {
+        toast(`🦄 You have not been able to log in`, {
+          autoClose: 2000,
+          });
+      }
+    }
   };
 
+
   return (
-    
+
     <div className="c-mt-4 c-mb-2 c-mx-2">
-      {
-        <Form
-          inputs={inputs}
-          onSubmit={onSubmit}
-        >
-          <Link to="/forgot-password" className="forgot-password">
-            Forgot your password?
-          </Link>
-          <Button disabled={loading} customClass="btn-primary">{loading ? 'Sending...' : 'Login'}</Button>
-        </Form>
-      }
+    <Form
+      name="normal_login"
+      className="login-form"
+      initialValues={{ remember: true }}
+      onFinish={onSubmit}
+    >
+      <Form.Item
+        name="email"
+        rules={[{ required: true, message: 'Please input your Email!' }]}
+      >
+        <Input
+          size="large"
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Email" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[{ required: true, message: 'Please input your Password!' }]}
+      >
+        <Input
+          size="large"
+          prefix={<LockOutlined  className="site-form-item-icon" />}
+          type="password"
+          placeholder="Password"
+        />
+      </Form.Item>
+      <Form.Item>
+        <a className="login-form-forgot" href="">
+        Forgot your password?
+        </a>
+      </Form.Item>
+
+      <Form.Item>
+        <Button
+          loading={loading}
+          size="large"
+          type="primary"
+          block
+          htmlType="submit"
+          className="login-form-button">
+          Login
+        </Button>
+      </Form.Item>
+    </Form>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { selectPermissions } from "@store/auth/authSlice";
 import AuthenticationRepository from "@repositories/auth.repository";
 import {setPermissions} from '@store/auth/authSlice'
-import { useAppSelector, useAppDispatch } from "../hooks";
+import { useAppSelector, useAppDispatch } from "./hooks";
 import {  toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 

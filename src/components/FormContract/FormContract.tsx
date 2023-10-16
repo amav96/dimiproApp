@@ -1,8 +1,8 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../src/hooks";
-import { RootState } from "../../../src/store";
+import { useAppSelector } from "../../hooks/hooks";
+import { RootState } from "../../store/store";
 import useDataProvider from "@hooks/useDataProvider";
 import baseApiUrl from "@services/BaseApiUrl";
 import $http from "@services/AxiosInstance";

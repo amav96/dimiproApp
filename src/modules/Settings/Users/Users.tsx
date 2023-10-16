@@ -4,12 +4,12 @@ import { Routes } from "@services/utils/Routes";
 import { authorization } from "@services/utils/Autorizathion";
 import { GlobalInputs } from "@packageTypes";
 import baseApiUrl from "@services/BaseApiUrl";
-import { Role } from "../../types/role.type";
+import { Role } from "../../../types/role.type";
 import { formatDateTime } from "@services/utils/Formatters";
 import useDataProvider from "@hooks/useDataProvider";
-import { useAppSelector } from "../../hooks";
-import { RootState } from "../../store";
-import { Company } from "../../types/company.type";
+import { useAppSelector } from "../../../hooks/hooks";
+import { RootState } from "../../../store/store";
+import { ICompany } from "../../../types/company.type";
 import { toast } from "react-toastify";
 
 export function Users() {
@@ -129,7 +129,7 @@ export function Users() {
       type: "select",
       cols: "c-col-span-4",
       options: companies,
-      formatValue: (value: Company) => value._id?.toString(),
+      formatValue: (value: ICompany) => value._id?.toString(),
       validations: {
         rules: {
           required: true,
@@ -250,7 +250,7 @@ export function Users() {
       multiple: false,
       cols: "c-col-span-4",
       options: companies,
-      formatValue: (value: Company) => {
+      formatValue: (value: ICompany) => {
         if (value) {
           return value._id?.toString();
         }
@@ -309,7 +309,7 @@ export function Users() {
               {
                 key: "company",
                 title: "Company",
-                format: (value: Company) => {
+                format: (value: ICompany) => {
                   if (value) {
                     return value.name;
                   } else {

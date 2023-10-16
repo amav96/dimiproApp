@@ -24,7 +24,7 @@ class PlaceRepository {
     }
   }
 
-  async getCitiesByCountryAndState(countryId: number | string, stateId: number | string){
+  async getCitiesByCountryAndState(countryId:  string, stateId:  string){
     try {
         const response = await $http.get(Routes.baseApiUrl+ `countries/${countryId}/states/${stateId}/cities`);
         return response.data;

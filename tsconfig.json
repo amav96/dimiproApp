@@ -15,6 +15,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
+      "@": ["src/*"],
       "@repositories/*": ["src/repositories/*"],
       "@store/*": ["src/store/*"],
       "@hooks/*": ["src/hooks/*"],

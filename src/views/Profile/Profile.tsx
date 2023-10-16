@@ -1,6 +1,6 @@
 import { Button, Form, Layout } from "@package";
 import React, { useEffect, useMemo, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { selectUser } from "@store/auth/authSlice";
 import ProfileImg from "./profile.svg";
 import "./_profile.scss";
@@ -11,7 +11,7 @@ import baseApiUrl from "@services/BaseApiUrl";
 import { toast } from "react-toastify";
 import { Company } from "src/types/company.type";
 import useDataProvider from "@hooks/useDataProvider";
-import { RootState } from "src/store";
+import { RootState } from "@";
 
 const Profile = () => {
   const { getDataProviders } = useDataProvider();

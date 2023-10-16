@@ -841,11 +841,11 @@ textarea {
   border-radius: 6.5px;
 }
 
-input::placeholder,
-textarea::placeholder {
-  opacity: 1; /* 1 */
-  color: $color-gray-light;
-}
+// input::placeholder,
+// textarea::placeholder {
+//   opacity: 1; /* 1 */
+//   color: $color-gray-light;
+// }
 
 /*
 Set the default cursor for buttons.

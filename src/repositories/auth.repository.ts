@@ -21,7 +21,7 @@ class AuthenticationRepository {
       const response = await $http.post(Routes.AUTH.LOGIN, params);
       return response.data;
     } catch (errors : any) {
-      return errors;
+      throw errors.response
     }
   }
 

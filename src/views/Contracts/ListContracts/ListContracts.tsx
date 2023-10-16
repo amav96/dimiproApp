@@ -8,8 +8,8 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { Company } from "src/types/company.type";
 import ModalDocs from "../../../components/Modals/ModalDocs";
-import { useAppSelector } from "../../../hooks";
-import { RootState } from "../../../store";
+import { useAppSelector } from "../../../hooks/hooks";
+import { RootState } from "../../../store/store";
 import "./_listContracts.scss";
 import { dataTable as data } from "./dataTable";
 import { inputsEdit } from "./inputsModalForm";
@@ -100,7 +100,6 @@ const ListContracts = () => {
   }, [optionsMap]);
 
   useEffect(() => {
-    getDataProviders(["companies"]);
 
     setFormFilter((prevInputs) =>
       prevInputs.map((input) => {

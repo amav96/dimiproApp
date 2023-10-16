@@ -1,7 +1,7 @@
 import { Loader } from '@package'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppSelector, useAppDispatch } from "../../../hooks";
+import { useAppSelector, useAppDispatch } from "../../../hooks/hooks";
 import {setUser, setPermissions, setToken } from '@store/auth/authSlice'
 
 export function Logout() {

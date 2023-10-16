@@ -1,5 +1,5 @@
-export interface Country {
-    id: number;
+export interface ICountry {
+    id: string;
     name: string;
     iso3: string;
     numeric_code: string;
@@ -29,7 +29,7 @@ export interface Country {
     emojiU: string;
   }
 
-export interface State {
+export interface IState {
     id: number;
     name: string;
     country_id: number;
@@ -40,7 +40,7 @@ export interface State {
     longitude: string;
   }
 
-export  interface City {
+export  interface ICity {
     id: number;
     name: string;
   }

@@ -1,6 +1,6 @@
 import { Currency } from "./currency.type";
 import { GenericModel } from "./genericModel.type";
-import { Packaging } from "./packaging.types";
+import { Packaging } from "./packaging.type";
 import { PaymentMethod } from "./paymentMethod.type";
 import { Country } from "./places.type";
 import { Product } from "./product.type";
