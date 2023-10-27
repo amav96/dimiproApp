@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Layout } from "@package";
 import { formatDateTime } from "@services/utils/Formatters";
-import { Button, Skeleton, Space, Table, Modal, Tooltip, } from 'antd';
+import { Button, Skeleton, Space, Table, Modal, Tooltip, PaginationProps, Pagination, } from 'antd';
 import ContractRepository from "@repositories/contract.repository";
 import { IContract } from "src/types/contract.type";
 import Column from "antd/es/table/Column";
@@ -19,6 +19,7 @@ import { IPaymentMethod } from '../../../types/paymentMethod.type';
 import { ISurveyor } from '../../../types/surveyor.type';
 import { DocumentsModal } from "./DocumentsModal";
 import { useNavigate } from "react-router-dom";
+import { ContractSave } from './ContractSave';
 
 const contractController = new ContractRepository();
 
@@ -40,13 +41,34 @@ export function ContractList() {
   const itemsMemory = useRef<IContract[]>([]);
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [pagination, setPagination] = useState<any>({
+    currentPage: 1,
+    total: 0,
+    pageSize: 0
+  });
+
+  const onChange: PaginationProps['onChange'] = (page) => {
+    setPagination((prev : any) => ({
+      ...prev,
+      currentPage: page,
+     }));
+     filterParams.current.page = page;
+     getItems(filterParams.current)
+  };
+  const filterParams = useRef<any>({});
+
   const getItems = async (params: IFilterUser = {}) => {
     try {
       setLoading(true)
-      const response = await contractController.getAll(params);
+      filterParams.current = params
+      const response = await contractController.getAll(filterParams.current);
       itemsMemory.current = response
-      console.log(response.docs)
       setItems(response.docs);
+      setPagination((prev : any) => ({
+        ...prev,
+        total: response.totalDocs,
+        pageSize: response.limit
+       }));
       // Procesa la respuesta exitosa aquí
     } catch (error) {
       // Maneja el error aquí, por ejemplo, muestra un mensaje al usuario
@@ -63,14 +85,6 @@ export function ContractList() {
     setOpen((prev) => !prev)
   }
 
-  const openStore = () => {
-    setOpen((prev) => !prev)
-  }
-
-  const addItem = (data: IContract) => {
-    setItems((prev) => [...prev, ...[data]])
-  }
-
   const updateItems = ( data: IContract) => {
     setItems((prev) => (
       prev.map((val) => {
@@ -83,11 +97,11 @@ export function ContractList() {
     ))
   }
 
-  const cancel = (val : boolean) => {
+  const handleClose = () => {
     if(currentItem !== null){
       setCurrentItem(null)
     }
-    setOpen(val)
+    setOpen(false)
   }
 
   const { confirm } = Modal;
@@ -119,15 +133,15 @@ export function ContractList() {
 
   }
 
-  const [showDocumentsModal, setShowDocumentsModal] = useState<boolean>(false)
+  const [openDocumentsModal, setOpenDocumentsModal] = useState<boolean>(false)
   const [documents, setDocuments] = useState<any>([]);
-  const openDocumentsModal = (data: any, contract: IContract) => {
+  const handleOpenDocumentsModal = (data: any, contract: IContract) => {
     setCurrentItem(contract)
     setDocuments(data)
-    setShowDocumentsModal(true)
-  } 
-  const closeDocumentsModal = () => {
-    setShowDocumentsModal(false)
+    setOpenDocumentsModal(true)
+  }
+  const handleCloseDocumentsModal = () => {
+    setOpenDocumentsModal(false)
     setCurrentItem(null)
     setDocuments([])
   }
@@ -151,7 +165,7 @@ export function ContractList() {
     window.open(`/pdf/${contractId}`);
   };
 
-  
+
   return (
     <Layout title={"Contracts"}>
         <ContractFilter
@@ -169,7 +183,8 @@ export function ContractList() {
         </Button>
       </Space>
 
-      { 
+      {
+        <>
         <Table
             dataSource={items}
             rowKey="_id"
@@ -177,6 +192,7 @@ export function ContractList() {
               emptyText: loading ? <Skeleton active={true} /> : (<></>)
             }}
             scroll={{ x: 400 }}
+            pagination={false}
           >
             <Column title="Name" dataIndex="name" key="name"  />
             <Column
@@ -266,12 +282,12 @@ export function ContractList() {
               title="Documents"
               dataIndex="documents"
               key="documents"
-              render={(documents: any, data: any) => 
+              render={(documents: any, data: any) =>
                 (<>
                 <Button
                   block
                   type="default"
-                  onClick={() => openDocumentsModal(documents, data)}
+                  onClick={() => handleOpenDocumentsModal(documents, data)}
                   >
                   Open
                 </Button>
@@ -281,7 +297,7 @@ export function ContractList() {
               title="Pdf"
               dataIndex="id"
               key="id"
-              render={(id: string) => 
+              render={(id: string) =>
                 (<>
                 <Button
                   block
@@ -307,15 +323,18 @@ export function ContractList() {
               </Space>
             )}
             />
-        </Table> 
+        </Table>
+
+        <Pagination className="mt-2" current={pagination.currentPage} onChange={onChange} total={pagination.total} pageSize={pagination.pageSize} />
+      </>
       }
       {
          currentItem ? (
           <DocumentsModal
             contract={currentItem}
             documents={documents}
-            open={showDocumentsModal}
-            onClose={closeDocumentsModal}
+            open={openDocumentsModal}
+            onClose={handleCloseDocumentsModal}
             onUpdate={updateContractDocuments}
             onStore={updateContractDocuments}
           />
@@ -323,7 +342,25 @@ export function ContractList() {
           <></>
         )
       }
-      
+
+      <Modal
+        title={`Contract edit`}
+        centered
+        open={open}
+        onCancel={() => handleClose()}
+        footer={null}
+        width={1000}
+      >
+        {
+          currentItem &&
+          <ContractSave
+          contract={currentItem}
+          onClose={() => handleClose()}
+          onUpdate={(contract: IContract) => updateItems(contract)}
+          />
+        }
+
+      </Modal>
 
     </Layout>
   );

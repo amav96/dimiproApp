@@ -1,10 +1,12 @@
 import { ICompany } from "./company.type"
 import { ICurrency } from "./currency.type"
-import { GenericModel } from "./genericModel.type"
 import { IPackaging } from "./packaging.type"
 import { IProduct } from "./product.type"
 import { ISurveyor } from "./surveyor.type"
 import { IUser } from "./user.type"
+import { ICaliber } from './caliber.type';
+import { ICategory } from './category.type';
+import { IPaymentMethod } from './paymentMethod.type';
 
 export interface IDocument {
     path: string,
@@ -19,8 +21,8 @@ export interface IContract  {
     importer: ICompany,
     operator: IUser,
     product: IProduct,
-    category: GenericModel,
-    calibers: GenericModel[],
+    category: ICategory,
+    calibers: ICaliber[],
     crop: Date,
     packaging: IPackaging,
     quantity: number,
@@ -31,8 +33,9 @@ export interface IContract  {
     price: string,
     documents?: IDocument[],
     currency: ICurrency,
-    paymentMethod: GenericModel,
+    paymentMethod: IPaymentMethod,
     specifications: string,
+    salesConditions?: string,
     surveyor: ISurveyor,
     insurance?: string,
     shippingDate?: string,
@@ -61,6 +64,7 @@ export interface IContractSave {
     currency: string,
     paymentMethod: string,
     specifications: string,
+    salesConditions?: string,
     surveyor: string,
     insurance?: string,
     shippingDate?: string,

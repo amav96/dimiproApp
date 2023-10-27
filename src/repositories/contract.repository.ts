@@ -22,7 +22,7 @@ class ContractRepository {
     }
   }
 
-  async update(params: IContractSave, id : string) {
+  async update(params: FormData, id : string) {
     try {
       const response = await $http.patch(`${Routes.CONTRACTS.UPDATE}/${id}`, params);
       return response.data;

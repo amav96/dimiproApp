@@ -6,6 +6,7 @@ import { AccesoDenegado } from "@views/Helpers/AccesoDenegado";
 import ProtectRoute from "./ProtectRoute";
 import { AddContract } from "../modules/Contracts/pages/AddContract";
 import { Contracts } from "../modules/Contracts/pages/Contracts";
+import { PDFContract } from "../modules/Contracts/pages/PDFContract";
 import { NotFound } from "@views/Helpers/NotFound";
 import { Companies } from "../modules/Settings/pages/Companies";
 import { Packagings } from "../modules/Settings/pages/Packagings";
@@ -15,7 +16,6 @@ import { PaymentMethods } from "../modules/Settings/pages/PaymentMethods";
 import { Products } from "../modules/Settings/pages/Products";
 import { Surveyors } from "../modules/Settings/pages/Surveyors";
 import { Categories } from "../modules/Settings/pages/Categories";
-import PDFcontract from "@views/Contracts/PDFcontract";
 import Profile from "@views/Profile/Profile";
 import RestorePassword from "../components/Auth/RestorePassword";
 
@@ -32,7 +32,7 @@ export function Router() {
         <Route path="/add-contract" element={<AddContract />} />
       </Route>
       <Route element={<ProtectRoute gate={"contracts_index"} />}>
-        <Route path="/pdf/:id" element={<PDFcontract />} />
+        <Route path="/pdf/:id" element={<PDFContract />} />
       </Route>
 
       {/* SETTINGS */}

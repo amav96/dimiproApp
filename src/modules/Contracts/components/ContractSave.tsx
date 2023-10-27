@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '@hooks/hooks';
 import { RootState } from '@store/store';
 import { Upload, Button, Col, Form, FormInstance, Input, Modal, Row, Select, Breakpoint, Grid, DatePicker } from 'antd';
@@ -10,12 +10,26 @@ import { ICurrency } from '../../../types/currency.type';
 import { IPaymentMethod } from '../../../types/paymentMethod.type';
 import { ISurveyor } from '../../../types/surveyor.type';
 import dayjs from 'dayjs';
-import { IContractSave } from '../../../types/contract.type';
+import { IContractSave, IContract } from '../../../types/contract.type';
 import ContractRepository from '@repositories/contract.repository';
 import { toast } from 'react-toastify';
+import { ICaliber } from '../../../types/caliber.type';
 
 const contractController = new ContractRepository();
-export  function ContractSave() {
+
+interface IContractSaveProp {
+    contract?: IContract,
+    onClose?: Function,
+    onUpdate?: Function
+}
+
+export  function ContractSave(prop: IContractSaveProp) {
+
+    const {
+        contract = null,
+        onClose,
+        onUpdate
+    } = prop
 
     const { TextArea } = Input;
 
@@ -34,11 +48,14 @@ export  function ContractSave() {
     const formRef = React.useRef<FormInstance>(null);
     const monthFormat = 'YYYY/MM';
 
+    const isEditMode = () => contract !== null
+
     const [loading, setLoading] = useState<boolean>(false)
     const onSubmit = async (values: IContractSave) => {
+        setLoading(true);
         let formValues = {...values}
         formValues.shippingDate = dayjs(values.shippingDate).format(monthFormat)
-        if(formValues.documents.length > 0){
+        if(!isEditMode() && formValues.documents?.length > 0){
             formValues.documents = formValues.documents.map((file: any) => file.originFileObj)
         }
 
@@ -67,25 +84,36 @@ export  function ContractSave() {
         }
 
         try {
-            setLoading(true);
-            const response = await contractController.store(formData);
+            const response =
+                !isEditMode()
+                ? await contractController.store(formData)
+                : contract?._id ? await contractController.update(formData, contract._id) : null
+
+            if(response.contract && onUpdate){
+                onUpdate(response.contract)
+            }
+
             toast(`Successfully saved`, {
                 autoClose: 2000,
                 theme: "dark",
               });
-            onReset()
         } catch (error : any) {
+            console.log(error)
             toast.error(`An error has ocurred`, {
                 autoClose: 5000,
                 theme: "colored",
             });
         } finally {
+            onReset()
             setLoading(false);
         }
     }
 
     const onReset = () => {
         formRef.current?.resetFields();
+        if(isEditMode() && onClose){
+            onClose()
+        }
     };
 
     const normFile = (e: any) => {
@@ -94,6 +122,40 @@ export  function ContractSave() {
         }
         return e?.fileList;
     };
+
+    useEffect(() => {
+        if(null !== contract){
+            completeForm()
+        }
+    }, [contract])
+
+    const completeForm = () => {
+        if(contract && formRef.current){
+            formRef.current.setFieldsValue({
+              name: contract.name,
+              exporter: contract.exporter._id,
+              importer: contract.importer._id,
+              product: contract.product._id,
+              category: contract.category._id,
+              calibers: contract.calibers.map((caliber: ICaliber) => caliber._id),
+              crop: contract.crop,
+              packaging: contract.packaging._id,
+              quantity: contract.quantity,
+              ...(contract.price ? { price : contract.price } : {}),
+              ...(contract.brokerPercent ? { brokerPercent : contract.brokerPercent } : {}),
+              ...(contract.freeQuantity ? { freeQuantity : contract.freeQuantity } : {}),
+              ...(contract.broker ? { broker : contract.broker._id } : {}),
+              currency: contract.currency._id,
+              paymentMethod: contract.paymentMethod._id,
+              surveyor: contract.surveyor._id,
+              ...(contract.insurance ? { insurance : contract.insurance } : {}),
+              shippingDate: dayjs(contract.shippingDate),
+              destination: contract.destination,
+              ...(contract.salesConditions ? { salesConditions : contract.salesConditions } : {}),
+              specifications: contract.specifications,
+            })
+          }
+    }
 
   return (
     <div>
@@ -128,7 +190,7 @@ export  function ContractSave() {
                     style={{ width: '100%' }}
                     size="large"
                     placeholder="Exporter"
-                    options={companies && Array.isArray(companies) ? 
+                    options={companies && Array.isArray(companies) ?
                         companies.filter((company: ICompany) => company.exporter).map((c : ICompany) => ({
                     ...c,
                     label: c.name,
@@ -155,7 +217,7 @@ export  function ContractSave() {
                     style={{ width: '100%' }}
                     size="large"
                     placeholder="Importer"
-                    options={companies && Array.isArray(companies) ? 
+                    options={companies && Array.isArray(companies) ?
                         companies.filter((company: ICompany) => company.importer).map((c : ICompany) => ({
                         ...c,
                         label: c.name,
@@ -182,7 +244,7 @@ export  function ContractSave() {
                     style={{ width: '100%' }}
                     size="large"
                     placeholder="Product"
-                    options={products && Array.isArray(products) ? 
+                    options={products && Array.isArray(products) ?
                         products.map((c : IProduct) => ({
                         ...c,
                         label: c.name,
@@ -209,7 +271,7 @@ export  function ContractSave() {
                     style={{ width: '100%' }}
                     size="large"
                     placeholder="Product type"
-                    options={categories && Array.isArray(categories) ? 
+                    options={categories && Array.isArray(categories) ?
                         categories.map((c : IProduct) => ({
                         ...c,
                         label: c.name,
@@ -239,7 +301,7 @@ export  function ContractSave() {
                     size="large"
                     placeholder="Calibers"
                     options={
-                        calibers && Array.isArray(calibers) ? 
+                        calibers && Array.isArray(calibers) ?
                         calibers.map((c : IProduct) => ({
                         ...c,
                         label: c.name,
@@ -272,7 +334,7 @@ export  function ContractSave() {
             <Col span={colSpan}>
                 <Form.Item
                 name="packaging"
-                label="Packagings"
+                label="Packaging"
                 rules={[{required: true, message: 'Please select Packagings!'}]}
                 >
                 <Select
@@ -281,7 +343,7 @@ export  function ContractSave() {
                     size="large"
                     placeholder="Packagings"
                     options={
-                        packagings && Array.isArray(packagings) ? 
+                        packagings && Array.isArray(packagings) ?
                         packagings.map((c : IPackaging) => ({
                         ...c,
                         label: c.name,
@@ -355,7 +417,7 @@ export  function ContractSave() {
                     size="large"
                     placeholder="brokers"
                     options={
-                        companies && Array.isArray(companies) ? 
+                        companies && Array.isArray(companies) ?
                         companies.filter((company: ICompany) => company.broker)
                         .map((c : ICompany) => ({
                             ...c,
@@ -396,7 +458,7 @@ export  function ContractSave() {
                     size="large"
                     placeholder="Currency"
                     options={
-                        currencies && Array.isArray(currencies) ? 
+                        currencies && Array.isArray(currencies) ?
                         currencies.map((c : ICurrency) => ({
                             ...c,
                             label: c.name,
@@ -425,7 +487,7 @@ export  function ContractSave() {
                     size="large"
                     placeholder="PaymentMethod"
                     options={
-                        paymentMethods && Array.isArray(paymentMethods) ? 
+                        paymentMethods && Array.isArray(paymentMethods) ?
                         paymentMethods.map((c : IPaymentMethod) => ({
                             ...c,
                             label: c.name,
@@ -454,7 +516,7 @@ export  function ContractSave() {
                     size="large"
                     placeholder="Surveyor"
                     options={
-                        surveyors && Array.isArray(surveyors) ? 
+                        surveyors && Array.isArray(surveyors) ?
                         surveyors.map((c : ISurveyor) => ({
                             ...c,
                             label: c.name,
@@ -528,23 +590,28 @@ export  function ContractSave() {
             </Col>
         </Row>
 
-        <Row gutter={10} >
-            <Form.Item
-                name="documents"
-                label="Contract documents"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                rules={[{required: true, message: 'Please select document!'}]}
-                >
-                <Upload
-                    beforeUpload={() => false}
-                    listType="picture"
-                    defaultFileList={[]}
+        {
+
+            !isEditMode()
+            ?<Row gutter={10} >
+                <Form.Item
+                    name="documents"
+                    label="Contract documents"
+                    valuePropName="fileList"
+                    getValueFromEvent={normFile}
+                    rules={[{required: true, message: 'Please select document!'}]}
                     >
-                    <Button icon={<UploadOutlined />}>Select document</Button>
-                </Upload>
-            </Form.Item>
-        </Row>
+                    <Upload
+                        beforeUpload={() => false}
+                        listType="picture"
+                        defaultFileList={[]}
+                        >
+                        <Button icon={<UploadOutlined />}>Select document</Button>
+                    </Upload>
+                </Form.Item>
+            </Row>
+            : (<></>)
+        }
 
         <Row gutter={10} justify="end">
           <Col className="mt-2" span={8}>

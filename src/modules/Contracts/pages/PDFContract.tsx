@@ -10,13 +10,13 @@ import {
   Font,
 } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../hooks/hooks";
-import { RootState } from "../../store/store";
+import { useAppSelector } from "../../../hooks/hooks";
+import { RootState } from "../../../store/store";
 import { useParams } from "react-router-dom";
-import logo from "../../public/icons/logo.png";
-import Inter from "../../assets/fonts/Inter-Regular.otf";
-import InterBlack from "../../assets/fonts/Inter-Black.otf";
-import InterSemiBold from "../../assets/fonts/Inter-SemiBold.otf";
+import logo from "../../../public/icons/logo.png";
+import Inter from "../../../assets/fonts/Inter-Regular.otf";
+import InterBlack from "../../../assets/fonts/Inter-Black.otf";
+import InterSemiBold from "../../../assets/fonts/Inter-SemiBold.otf";
 
 function formatDate(inputDate: string) {
   const date = new Date(inputDate);
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const PDFcontract = () => {
+export function PDFContract() {
   const { getDataProviders } = useDataProvider();
   const [data, setData] = useState<any[]>([]);
 
@@ -534,4 +534,3 @@ const PDFcontract = () => {
   );
 };
 
-export default PDFcontract;
