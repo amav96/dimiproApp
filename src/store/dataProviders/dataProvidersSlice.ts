@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Role } from "../../types/role.type";
 import { IPackaging } from "../../types/packaging.type";
-import { Country } from "../../types/places.type";
+import { ICountry } from "../../types/places.type";
 import { IPaymentMethod } from "../../types/paymentMethod.type";
 import { ISurveyor } from "../../types/surveyor.type";
 import { ICurrency } from "../../types/currency.type";
@@ -34,7 +34,7 @@ export const dataProvidersSlice = createSlice({
     setPackagings: (state, action: PayloadAction<IPackaging[] | []>) => {
       state.packagings = action.payload;
     },
-    setCountries: (state, action: PayloadAction<Country[] | []>) => {
+    setCountries: (state, action: PayloadAction<ICountry[] | []>) => {
       state.countries = action.payload;
     },
     setPaymentMethods: (state, action: PayloadAction<IPaymentMethod[] | []>) => {

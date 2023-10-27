@@ -1,4 +1,5 @@
 export interface ICountry {
+    _id: string,
     id: string;
     name: string;
     iso3: string;
@@ -30,6 +31,7 @@ export interface ICountry {
   }
 
 export interface IState {
+    _id: string,
     id: number;
     name: string;
     country_id: number;
@@ -41,6 +43,7 @@ export interface IState {
   }
 
 export  interface ICity {
+    _id: string,
     id: number;
     name: string;
   }

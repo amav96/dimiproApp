@@ -83,13 +83,19 @@ export function CompanySave(props: IPropsCompany) {
   const completeForm = () => {
     if(company && formRef.current){
       formRef.current.setFieldsValue({
-        ...company
+        ...company,
+        ...(company.country ? { country: company.country.iso2 } : {}),
+        ...(company.state ? { state: company.state.iso2 } : {}),
+        ...(company.city ? { city: company.city.id } : {}),
       })
       if(company.country){
         onCountry(company.country)
       }
       if(company.state){
         onState(company.state)
+      }
+      if(company.city){
+        citySelected.current = company.city
       }
     }
   }
@@ -187,73 +193,86 @@ export function CompanySave(props: IPropsCompany) {
 
           <Col span={colSpan}>
             <Form.Item
-              name="country"
-              label="Country"
+            name="country"
+            label="Country"
+            rules={[{required: true, message: 'Please select country!'}]}
             >
               <Select
                 showSearch
                 style={{ width: '100%' }}
                 size="large"
                 placeholder="Country"
-                options={countries?.map((c : ICountry) => ({
-                  ...c,
-                  label: c.name,
-                  value: c.iso2
-                })) || []}
-                onSelect={(_,data: ICountry) => onCountry(data)}
+                onSelect={(_, option: any) => onCountry(option.data)}
                 // @ts-ignore
                 autoComplete="none"
                 allowClear
                 optionFilterProp="name"
-              />
+              >
+                {countries &&
+                Array.isArray(countries) &&
+                countries.map((c: ICountry) => (
+                  <Select.Option key={c.id} value={c.iso2} data={c} name={c.name}>
+                    {c.name}
+                  </Select.Option>
+                ))}
+              </Select>
             </Form.Item>
           </Col>
 
           <Col span={colSpan}>
             <Form.Item
-              name="state"
-              label="State"
+                name="state"
+                label="State"
+                rules={[(states && states.length > 0 ? {required: true, message: 'Please select state!'} : {})]}
             >
               <Select
                 showSearch
                 style={{ width: '100%' }}
                 size="large"
                 placeholder="State"
-                options={states?.map((c : IState) => ({
-                  ...c,
-                  label: c.name,
-                  value: c.iso2
-                })) || []}
+                onSelect={(_, option: any) => onState(option.data)}
                 // @ts-ignore
                 autoComplete="none"
-                onSelect={(_, data : IState) => onState(data)}
+                allowClear
                 optionFilterProp="name"
                 loading={stateLoading}
-              />
+              >
+                {states &&
+                Array.isArray(states) &&
+                states.map((c: IState) => (
+                  <Select.Option key={c.id} value={c.iso2} data={c} name={c.name}>
+                    {c.name}
+                  </Select.Option>
+                ))}
+              </Select>
             </Form.Item>
           </Col>
 
           <Col span={colSpan}>
             <Form.Item
-              name="city"
-              label="City"
+                name="city"
+                label="City"
             >
               <Select
                 showSearch
                 style={{ width: '100%' }}
                 size="large"
                 placeholder="City"
-                options={cities?.map((c : ICity) => ({
-                  ...c,
-                  label: c.name,
-                  value: c.id
-                })) || []}
+                onSelect={(_, option: any) => citySelected.current = option.data}
                 // @ts-ignore
                 autoComplete="none"
+                allowClear
                 optionFilterProp="name"
-                onSelect={(_, data: ICity) => citySelected.current = data}
                 loading={cityLoading}
-              />
+              >
+                {cities &&
+                Array.isArray(cities) &&
+                cities.map((c: ICity) => (
+                  <Select.Option key={c.id} value={c.id} data={c} name={c.name}>
+                    {c.name}
+                  </Select.Option>
+                ))}
+              </Select>
             </Form.Item>
           </Col>
 

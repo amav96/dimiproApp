@@ -1,6 +1,6 @@
 import $http from "../services/AxiosInstance";
 // import { ErrorApi } from "../../types/Api";
-import { User } from "../types/user.type";
+import { IUser } from "../types/user.type";
 import { Routes } from "@services/utils/Routes";
 
 interface ResponseLogin {
@@ -10,7 +10,7 @@ interface ResponseLogin {
       password?: string[]
     }
     token?: string,
-    user? : User,
+    user? : IUser,
     permissions? : string[],
     refresh?: string
 }

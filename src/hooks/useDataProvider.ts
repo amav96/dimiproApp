@@ -89,7 +89,7 @@ export default function useDataProvider() {
         Object.keys(response.dataProviders).forEach((k) => {
           if (k in dataProviders) {
             // @ts-ignore
-            if(dataProviders[k].errors){
+            if(response.dataProviders[k].errors){
               // @ts-ignore
               dispatch(dataProviders[k].action([]));
               // @ts-ignore
@@ -97,7 +97,6 @@ export default function useDataProvider() {
               // @ts-ignore
               dispatch(dataProviders[k].action(response.dataProviders[k]));
             }
-           
           }
         });
       }

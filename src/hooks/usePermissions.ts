@@ -20,7 +20,6 @@ export default function usePermissions () {
               permissions: serverPermissions ,
               errors
              } = await authenticationRepository.permissions()
-             console.log(errors)
              if(errors){
                if(errors.message === 'User no authenticated'){
                 toast(`🦄 ${errors.message || 'You are not authenticated'}`, {

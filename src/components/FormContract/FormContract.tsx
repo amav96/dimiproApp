@@ -118,10 +118,7 @@ export const FormContract = () => {
               }
             });
           } else if (key === "calibers") {
-            const calibers = Array.isArray(items.calibers)
-              ? items.calibers
-              : [items.calibers];
-            calibers.forEach((caliber: string, index: number) => {
+            items.calibers.forEach((caliber: string, index: number) => {
               formData.append(`calibers[${index}]`, caliber);
             });
           } else if (items[key]) {

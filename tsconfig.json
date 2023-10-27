@@ -22,6 +22,7 @@
       "@views/*": ["src/views/*"],
       "@services/*": ["src/services/*"],
       "@package": ["src/components/package"],
+      "@components/*": ["src/components/*"],
       "@packageTypes": ["src/packageTypes"]
     }
   },

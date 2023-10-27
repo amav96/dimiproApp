@@ -1,30 +1,30 @@
 import $http from "@services/AxiosInstance";
 import { Routes } from "@services/utils/Routes";
-import { ISaveCompany } from "src/types/company.type";
+import { ISaveUser } from "src/types/user.type";
 
 
-class CompanyRepository {
+class UserRepository {
   async getAll(params: any = {}) : Promise<any> {
     try {
-      const response = await $http.get(Routes.COMPANIES.INDEX, {params});
+      const response = await $http.get(Routes.USERS.INDEX, {params});
       return response.data;
     } catch (errors : any) {
       throw errors;
     }
   }
 
-  async store(params: ISaveCompany) {
+  async store(params: ISaveUser) {
     try {
-      const response = await $http.post(Routes.COMPANIES.STORE, params);
+      const response = await $http.post(Routes.USERS.STORE, params);
       return response.data;
     } catch (errors : any) {
       throw errors;
     }
   }
 
-  async update(params: ISaveCompany, id : string) {
+  async update(params: ISaveUser, id : string) {
     try {
-      const response = await $http.patch(`${Routes.COMPANIES.UPDATE}/${id}`, params);
+      const response = await $http.patch(`${Routes.USERS.UPDATE}/${id}`, params);
       return response.data;
     } catch (errors : any) {
       throw errors;
@@ -33,7 +33,7 @@ class CompanyRepository {
 
   async delete(id : string) {
     try {
-      const response = await $http.delete(`${Routes.COMPANIES.DELETE}/${id}`);
+      const response = await $http.delete(`${Routes.USERS.DELETE}/${id}`);
       return response.data;
     } catch (errors : any) {
       throw errors;
@@ -42,4 +42,4 @@ class CompanyRepository {
 
 }
 
-export default CompanyRepository;
+export default UserRepository;

@@ -19,6 +19,13 @@ export function CompanyFilter(props: ICompanyFilter) {
 
     const handleFilter = (values: any) => {
         let filters = {...values};
+
+        for(let filter in filters){
+          if(filters[filter] === '' || filters[filter] === null || filters[filter] === undefined){
+            delete filters[filter]
+          }
+        }
+
         if(filters.exporter !== undefined) {
             filters.exporter = Number(filters.exporter);
         }
@@ -28,6 +35,7 @@ export function CompanyFilter(props: ICompanyFilter) {
         if(filters.broker !== undefined){
             filters.broker = Number(filters.broker);
         }
+        
         onFilter(filters)
 
     }

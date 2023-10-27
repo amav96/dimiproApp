@@ -1,45 +1,68 @@
-import { Company } from "./company.type"
-import { Currency } from "./currency.type"
+import { ICompany } from "./company.type"
+import { ICurrency } from "./currency.type"
 import { GenericModel } from "./genericModel.type"
-import { Packaging } from "./packaging.type"
-import { City, Country } from "./places.type"
-import { Product } from "./product.type"
-import { Surveyor } from "./surveyor.type"
-import { User } from "./user.type"
+import { IPackaging } from "./packaging.type"
+import { IProduct } from "./product.type"
+import { ISurveyor } from "./surveyor.type"
+import { IUser } from "./user.type"
 
-export interface Document {
-    path: string
+export interface IDocument {
+    path: string,
+    uuid: string
 }
 
-export interface Contract  {
-    _id?:string,
-    id?:string,
+export interface IContract  {
+    _id:string,
+    id:string,
     name: string,
-    exporter: Company,
-    importer: Company,
-    operator: User,
-    product: Product,
+    exporter: ICompany,
+    importer: ICompany,
+    operator: IUser,
+    product: IProduct,
     category: GenericModel,
     calibers: GenericModel[],
     crop: Date,
-    packaging: Packaging,
+    packaging: IPackaging,
     quantity: number,
     freeQuantity?: number,
     weight: string,
-    broker: Company,
+    broker: ICompany,
     brokerPercent?: string,
     price: string,
-    documents?: Document[],
-    currency: Currency,
+    documents?: IDocument[],
+    currency: ICurrency,
     paymentMethod: GenericModel,
     specifications: string,
-    surveyor: Surveyor,
+    surveyor: ISurveyor,
     insurance?: string,
-    shippingDate?: Date,
-    destination?: {
-        country: Country,
-        city: City,
-    },
+    shippingDate?: string,
+    destination?: string,
     created_at: Date,
     updated_at: Date
+}
+
+export interface IContractSave {
+    name: string,
+    exporter: string,
+    importer: string,
+    operator: string,
+    product: string,
+    category: string,
+    calibers: string[],
+    crop: Date,
+    packaging: string,
+    quantity: number,
+    freeQuantity?: number,
+    weight: string,
+    broker: string,
+    brokerPercent?: string,
+    price: string,
+    documents: File[],
+    currency: string,
+    paymentMethod: string,
+    specifications: string,
+    surveyor: string,
+    insurance?: string,
+    shippingDate?: string,
+    destination?: string,
 }

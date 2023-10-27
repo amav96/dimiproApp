@@ -190,19 +190,19 @@ export function CompanyList() {
             title="Country"
             dataIndex="country"
             key="country"
-            render={(country: ICountry) => (<>{country.name}</>)}
+            render={(country: ICountry) => (<>{country? country.name : ''}</>)}
           />
           <Column
             title="State"
             dataIndex="state"
             key="state"
-            render={(state: IState) => (<>{state.name}</>)}
+            render={(state: IState) => (<>{state ? state.name : ''}</>)}
           />
           <Column
             title="City"
             dataIndex="city"
             key="city"
-            render={(city: ICity) => (<>{city.name}</>)}
+            render={(city: ICity) => (<>{city ? city.name : ''}</>)}
           />
           <Column title="CP" dataIndex="postalCode" key="postalCode" />
           <Column title="Address" dataIndex="address" key="address" />
