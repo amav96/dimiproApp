@@ -1,17 +1,17 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Layout } from "@package";
-import { formatDateTime } from "@services/utils/Formatters";
+import { Layout } from "@components/Layout";
+import { formatDateTime } from "@utils/Formatters";
 import { Button, Skeleton, Space, Table, Modal, Tooltip, } from 'antd';
 import UserRepository from "@repositories/user.repository";
-import { IUser } from "src/types/user.type";
+import { IUser } from "@localTypes/user.type";
 import Column from "antd/es/table/Column";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { UserSave } from "./UserSave";
 import useDataProvider from '@hooks/useDataProvider';
 import { UserFilter } from "./UserFilter";
-import { IFilterUser } from '../../../types/user.type';
-import { IRole } from '../../../types/role.type';
-import { ICompany } from '../../../types/company.type';
+import { IFilterUser } from '@localTypes/user.type';
+import { IRole } from '@localTypes/role.type';
+import { ICompany } from '@localTypes/company.type';
 
 const userController = new UserRepository();
 

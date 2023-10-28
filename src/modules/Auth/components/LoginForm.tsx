@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthenticationRepository from "@repositories/auth.repository";
-import { useAppSelector, useAppDispatch } from "../../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "@hooks/hooks";
 import {setUser, setPermissions, setToken } from '@store/auth/authSlice'
 import {  toast } from 'react-toastify';
 import { Button, Form, Input } from 'antd';
@@ -49,7 +49,7 @@ export function LoginForm() {
 
   return (
 
-    <div className="c-mt-4 c-mb-2 c-mx-2">
+    <div className="mt-4 mb-2 mx-2">
     <Form
       name="normal_login"
       className="login-form"

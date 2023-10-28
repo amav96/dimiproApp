@@ -21,9 +21,11 @@
       "@hooks/*": ["src/hooks/*"],
       "@views/*": ["src/views/*"],
       "@services/*": ["src/services/*"],
+      "@localTypes/*": ["src/localTypes/*"],
+      "@utils/*": ["src/utils/*"],
       "@package": ["src/components/package"],
       "@components/*": ["src/components/*"],
-      "@packageTypes": ["src/packageTypes"]
+
     }
   },
   "exclude": [

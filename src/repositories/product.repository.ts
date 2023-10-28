@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { IProductSave } from "src/types/product.type";
+import { Routes } from "@services/Routes";
+import { IProductSave } from "@localTypes/product.type";
 
 
 class ProductRepository {

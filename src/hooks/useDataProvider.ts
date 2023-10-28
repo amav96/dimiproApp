@@ -14,7 +14,7 @@ import {
 } from '@store/dataProviders/dataProvidersSlice'
 import { useAppSelector, useAppDispatch } from "./hooks";
 
-import { ModelsDataProvider } from "src/types/dataProvider.type";
+import { ModelsDataProvider } from "@localTypes/dataProvider.type";
 import DataProviderRepository from "@repositories/dataProvider.repository";
 import { toast } from 'react-toastify';
 import { RootState } from '../store/store';

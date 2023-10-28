@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { ISaveUser } from "src/types/user.type";
+import { Routes } from "@services/Routes";
+import { ISaveUser } from "@localTypes/user.type";
 
 
 class UserRepository {

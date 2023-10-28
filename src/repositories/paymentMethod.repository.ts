@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { IPaymentMethodSave } from "src/types/paymentMethod.type";
+import { Routes } from "@services/Routes";
+import { IPaymentMethodSave } from "@localTypes/paymentMethod.type";
 
 
 class PaymentMethodRepository {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useAppSelector } from '@hooks/hooks';
-import { RootState } from '../../../store/store';
-import { Button, Checkbox, Col, Form, Input, Row, Select } from 'antd';
-import { ICountry } from '../../../types/places.type';
+import { RootState } from '@store/store';
+import { Button, Checkbox, Col, Form, Grid, Input, Row, Select } from 'antd';
+import { ICountry } from '@localTypes/places.type';
 import { SearchOutlined } from '@ant-design/icons';
 
 interface ICompanyFilter {
@@ -40,24 +40,28 @@ export function CompanyFilter(props: ICompanyFilter) {
 
     }
 
+    const { useBreakpoint } = Grid;
+    const screens = useBreakpoint();
+    const colspan = screens.md ? 6 : 24;
+
   return (
     <Form
           onFinish={(values: any) => handleFilter(values)}
         >
            <Row gutter={4} >
-                
-              <Col >
+
+              <Col span={colspan} >
                 <Form.Item name="name">
                   <Input autoComplete="none" size="large" placeholder="Name" />
                 </Form.Item>
               </Col>
-              <Col >
+              <Col span={colspan} >
                 <Form.Item name="email">
                   <Input autoComplete="none" size="large" placeholder="email" />
                 </Form.Item>
               </Col>
 
-              <Col span={6} >
+              <Col span={colspan} >
                 <Form.Item
                   name="country"
                 >

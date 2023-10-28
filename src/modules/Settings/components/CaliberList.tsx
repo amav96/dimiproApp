@@ -1,16 +1,16 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Layout } from "@package";
-import { formatDateTime } from "@services/utils/Formatters";
+import { Layout } from "@components/Layout";
+import { formatDateTime } from "@utils/Formatters";
 import { setCalibers } from "@store/dataProviders/dataProvidersSlice";
-import { useAppSelector, useAppDispatch } from "../../../hooks/hooks";
-import { RootState } from "../../../store/store";
+import { useAppSelector, useAppDispatch } from "@hooks/hooks";
+import { RootState } from "@store/store";
 import { useAfterUpdate } from "@hooks/useAfterUpdate";
 import { useAfterStore } from "@hooks/useAfterStore";
 import { useAfterDelete } from "@hooks/useAfterDelete";
 
 import { Button, Col, Form, Input, Row, Skeleton, Space, Table, Modal, Tooltip } from 'antd';
 import CaliberRepository from "@repositories/caliber.repository";
-import { ICaliber } from "src/types/caliber.type";
+import { ICaliber } from "@localTypes/caliber.type";
 import Column from "antd/es/table/Column";
 import { EditOutlined, DeleteOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import { CaliberSave } from "./CaliberSave";
@@ -129,6 +129,7 @@ export function CaliberList() {
   const afterStore = useAfterStore(dispatch, setCalibers, calibers)
 
   const afterDelete = useAfterDelete(dispatch, setCalibers, calibers)
+  
 
   return (
     <Layout title={"Calibers"}>
@@ -140,24 +141,24 @@ export function CaliberList() {
         caliber={currentCaliber}
       />
 
-        <Form
-          onFinish={onFilter}
-        >
-           <Row gutter={2} >
-              <Col >
-                <Form.Item name="name">
-                  <Input size="large" placeholder="Name" />
-                </Form.Item>
-              </Col>
-              <Form.Item>
-                <Button
-                  size="large"
-                  icon={<SearchOutlined />}
-                  htmlType="submit">
-                </Button>
+      <Form
+        onFinish={onFilter}
+      >
+          <Row gutter={2} >
+            <Col >
+              <Form.Item name="name">
+                <Input size="large" placeholder="Name" />
               </Form.Item>
-          </Row>
-        </Form>
+            </Col>
+            <Form.Item>
+              <Button
+                size="large"
+                icon={<SearchOutlined />}
+                htmlType="submit">
+              </Button>
+            </Form.Item>
+        </Row>
+      </Form>
 
       <Space wrap style={{ display: 'flex', justifyContent: 'end', marginBottom: '10px' }}>
         <Button

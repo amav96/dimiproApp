@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { ISurveyorSave } from "src/types/surveyor.type";
+import { Routes } from "@services/Routes";
+import { ISurveyorSave } from "@localTypes/surveyor.type";
 
 class SurveyorRepository {
   async getAll() : Promise<any> {

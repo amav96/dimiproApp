@@ -69,14 +69,14 @@
 
     h1 {
       font-weight: 600;
-      color: $color-black;
+      color: black;
     }
 
     .subtitle {
       font-weight: 400;
       margin-top: 1rem;
       display: inline-block;
-      color: $color-black;
+      color: black;
     }
 
     .Form {
@@ -95,7 +95,7 @@
       margin-bottom: 1.6rem;
       display: inline-block;
       width: 100%;
-      color: $color-black;
+      color: black;
       &:hover {
         text-decoration: underline;
       }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, FormInstance, Input, Modal } from 'antd';
 import ProductRepository from '@repositories/product.repository';
-import { IProductProps, IProductSave } from 'src/types/product.type';
+import { IProductProps, IProductSave } from '@localTypes/product.type';
 
 const productController = new ProductRepository();
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form, FormInstance, Input, Modal } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import CaliberRepository from '@repositories/caliber.repository';
-import { ICaliberProps, ICaliberSave } from 'src/types/caliber.type';
+import { ICaliberProps, ICaliberSave } from '@localTypes/caliber.type';
 import { toast } from 'react-toastify';
 
 const caliberController = new CaliberRepository();

@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { ISaveCompany } from "src/types/company.type";
+import { Routes } from "@services/Routes";
+import { ISaveCompany } from "@localTypes/company.type";
 
 
 class CompanyRepository {

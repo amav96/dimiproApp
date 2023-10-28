@@ -10,8 +10,8 @@ import {
   Font,
 } from "@react-pdf/renderer";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../../hooks/hooks";
-import { RootState } from "../../../store/store";
+import { useAppSelector } from "@hooks/hooks";
+import { RootState } from "@store/store";
 import { useParams } from "react-router-dom";
 import logo from "../../../public/icons/logo.png";
 import Inter from "../../../assets/fonts/Inter-Regular.otf";

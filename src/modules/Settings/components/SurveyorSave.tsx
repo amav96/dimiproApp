@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, FormInstance, Input, Modal } from 'antd';
 import SurveyorRepository from '@repositories/surveyor.repository';
-import { ISurveyorProps, ISurveyorSave } from 'src/types/surveyor.type';
+import { ISurveyorProps, ISurveyorSave } from '@localTypes/surveyor.type';
 
 const surveyorController = new SurveyorRepository();
 
@@ -43,7 +43,6 @@ export function SurveyorSave(props: ISurveyorProps) {
   };
 
   const cancel = () => {
-    console.log('canceando')
     onReset()
     onCancel(false)
   }

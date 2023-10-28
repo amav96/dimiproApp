@@ -43,7 +43,7 @@ export function ForgotPasswordForm() {
   };
 
   return (
-    <div className="c-mt-4 c-mb-2 c-mx-2">
+    <div className="mt-4 mb-2 mx-2">
       {
         <Form
         onFinish={onSubmit}

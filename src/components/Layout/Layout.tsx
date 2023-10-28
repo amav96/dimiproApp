@@ -16,9 +16,9 @@ export function Layout(props: LayoutProps) {
   } = props;
 
   return (
-    <div className={`c-m-4 ${customClass}`}>
-      <div className="c-my-2">
-        <h1 className={`c-text-2xl ${textColor}`}>{title}</h1>
+    <div className={`m-4 ${customClass}`}>
+      <div className="my-4">
+        <h1 className={`text-2xl ${textColor}`}>{title}</h1>
       </div>
       {children}
     </div>

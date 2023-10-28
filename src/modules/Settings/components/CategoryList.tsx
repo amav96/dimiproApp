@@ -1,16 +1,16 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Layout } from "@package";
-import { formatDateTime } from "@services/utils/Formatters";
+import { Layout } from "@components/Layout";
+import { formatDateTime } from "@utils/Formatters";
 import { setCategories } from "@store/dataProviders/dataProvidersSlice";
-import { useAppSelector, useAppDispatch } from "../../../hooks/hooks";
-import { RootState } from "../../../store/store";
+import { useAppSelector, useAppDispatch } from "@hooks/hooks";
+import { RootState } from "@store/store";
 import { useAfterUpdate } from "@hooks/useAfterUpdate";
 import { useAfterStore } from "@hooks/useAfterStore";
 import { useAfterDelete } from "@hooks/useAfterDelete";
 
 import { Button, Col, Form, Input, Row, Skeleton, Space, Table, Modal, Tooltip } from 'antd';
 import CategoryRepository from "@repositories/category.repository";
-import { ICategory } from "src/types/category.type";
+import { ICategory } from "@localTypes/category.type";
 import Column from "antd/es/table/Column";
 import { EditOutlined, DeleteOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import { CategorySave } from "./CategorySave";

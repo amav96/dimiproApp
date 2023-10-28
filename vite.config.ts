@@ -25,13 +25,13 @@ export default defineConfig({
     alias: [
       { find: '@', replacement: '/src' },
       { find: '@components', replacement: '/src/components' },
-      { find: '@package', replacement: '/src/components/package' },
       { find: '@services', replacement: '/src/services' },
+      { find: '@localTypes', replacement: '/src/localTypes' },
+      { find: '@utils', replacement: '/src/utils' },
       { find: '@store', replacement: '/src/store' },
       { find: '@hooks', replacement: '/src/hooks' },
       { find: '@views', replacement: '/src/views' },
       { find: '@repositories', replacement: '/src/repositories' },
-      { find: '@packageTypes', replacement: '/src/packageTypes' },
     ],
    },
    css: {

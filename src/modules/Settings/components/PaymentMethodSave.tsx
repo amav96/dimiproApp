@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form, FormInstance, Input, Modal } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import PaymentMethodRepository from '@repositories/paymentMethod.repository';
-import { IPaymentMethodProps, IPaymentMethodSave } from 'src/types/paymentMethod.type';
+import { IPaymentMethodProps, IPaymentMethodSave } from '@localTypes/paymentMethod.type';
 
 const paymentMethodController = new PaymentMethodRepository();
 

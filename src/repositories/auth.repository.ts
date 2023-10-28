@@ -1,7 +1,7 @@
 import $http from "../services/AxiosInstance";
-// import { ErrorApi } from "../../types/Api";
-import { IUser } from '../types/user.type';
-import { Routes } from "@services/utils/Routes";
+// import { ErrorApi } from "../@localTypes/Api";
+import { IUser } from '@localTypes/user.type';
+import { Routes } from "@services/Routes";
 
 interface ResponseLogin {
     errors : {

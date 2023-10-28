@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { ICurrencySave } from "src/types/currency.type";
+import { Routes } from "@services/Routes";
+import { ICurrencySave } from "@localTypes/currency.type";
 
 
 class CurrencyRepository {

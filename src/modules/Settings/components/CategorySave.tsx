@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form, FormInstance, Input, Modal } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import CategoryRepository from '@repositories/category.repository';
-import { ICategoryProps, ICategorySave } from 'src/types/category.type';
+import { ICategoryProps, ICategorySave } from '@localTypes/category.type';
 import { toast } from 'react-toastify';
 
 const categoryController = new CategoryRepository();

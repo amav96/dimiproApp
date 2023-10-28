@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { IContractSave } from "src/types/contract.type";
+import { Routes } from "@services/Routes";
+import { IContractSave } from "@localTypes/contract.type";
 
 
 class ContractRepository {

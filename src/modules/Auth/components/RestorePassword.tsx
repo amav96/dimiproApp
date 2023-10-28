@@ -2,7 +2,7 @@ import $http from "@services/AxiosInstance";
 import baseApiUrl from "@services/BaseApiUrl";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Layout } from "../../../components/package/Layout";
+import { Layout } from "../../../components/Layout";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../assets/styles/_restore-password.scss'
 import { Input, Form, Col, Button } from "antd";

@@ -1,23 +1,23 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Layout } from "@package";
-import { formatDateTime } from "@services/utils/Formatters";
+import { Layout } from "@components/Layout";
+import { formatDateTime } from "@utils/Formatters";
 import { setCompanies } from "@store/dataProviders/dataProvidersSlice";
-import { useAppSelector, useAppDispatch } from "../../../hooks/hooks";
-import { RootState } from "../../../store/store";
+import { useAppSelector, useAppDispatch } from "@hooks/hooks";
+import { RootState } from "@store/store";
 import { useAfterUpdate } from "@hooks/useAfterUpdate";
 import { useAfterStore } from "@hooks/useAfterStore";
 import { useAfterDelete } from "@hooks/useAfterDelete";
 
-import { Button, Col, Form, Input, Row, Skeleton, Space, Table, Modal, Tooltip, Select, Tag } from 'antd';
+import { Button, Skeleton, Space, Table, Modal, Tooltip, Select, Tag } from 'antd';
 import CompanyRepository from "@repositories/company.repository";
-import { ICompany } from "src/types/company.type";
+import { ICompany } from "@localTypes/company.type";
 import Column from "antd/es/table/Column";
 import { EditOutlined, DeleteOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import { CompanySave } from "./CompanySave";
 import useDataProvider from '@hooks/useDataProvider';
 import { CompanyFilter } from "./CompanyFilter";
-import { IFilterCompany } from '../../../types/company.type';
-import { ICity, ICountry, IState } from '../../../types/places.type';
+import { IFilterCompany } from '@localTypes/company.type';
+import { ICity, ICountry, IState } from '@localTypes/places.type';
 
 const companyController = new CompanyRepository();
 

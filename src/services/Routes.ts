@@ -1,4 +1,4 @@
-import baseApiUrl from "../BaseApiUrl";
+import baseApiUrl from "./BaseApiUrl";
 const apiPlaceHolder = 'https://jsonplaceholder.typicode.com'
 export const Routes = {
     POSTS : {

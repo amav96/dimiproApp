@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form, FormInstance, Input, Modal } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import PackagingRepository from '@repositories/packaging.repository';
-import { IPackagingProps, IPackagingSave } from 'src/types/packaging.type';
+import { IPackagingProps, IPackagingSave } from '@localTypes/packaging.type';
 
 const packagingController = new PackagingRepository();
 

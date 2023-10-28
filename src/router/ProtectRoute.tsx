@@ -1,13 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import { Route, Navigate, Outlet } from 'react-router-dom';
-import usePermissions from '@hooks/usePermissions';
+import { useAuth } from '@hooks/useAuth';
+import { useNavigate } from "react-router-dom";
+
 
 interface ProtectRouteProps {
   gate: string[] | string;
 }
 
 const ProtectRoute: React.FC<ProtectRouteProps> = ({ gate }) => {
-  const { hasOrGetPermissions } = usePermissions();
+
+  const navigate = useNavigate()
+
+  const { hasOrGetPermissions } = useAuth();
   const [isLoaded, setIsLoaded] = useState(false);
   const hasAccess = useRef<boolean>(false)
 
@@ -17,6 +22,7 @@ const ProtectRoute: React.FC<ProtectRouteProps> = ({ gate }) => {
       if (hasAccess) {
         setIsLoaded(true);
       } else {
+        navigate('/login')
         if(isLoaded){
           setIsLoaded(false);
         }

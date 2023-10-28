@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, Checkbox, Col, Form, FormInstance, Input, Modal, Row, Select, Breakpoint, Grid } from 'antd';
+import { Button, Checkbox, Col, Form, FormInstance, Input, Modal, Row, Select, Grid } from 'antd';
 import CompanyRepository from '@repositories/company.repository';
-import { IPropsCompany, ISaveCompany } from 'src/types/company.type';
-import { toast } from 'react-toastify';
+import { IPropsCompany, ISaveCompany } from '@localTypes/company.type';
 import { useAppSelector } from '@hooks/hooks';
 import { RootState } from '@store/store';
 import PlaceRepository from '@repositories/places.repository'
-import { IState, ICountry, ICity } from '../../../types/places.type';
+import { IState, ICountry, ICity } from '@localTypes/places.type';
 
 const companyController = new CompanyRepository();
 const placeController = new PlaceRepository()

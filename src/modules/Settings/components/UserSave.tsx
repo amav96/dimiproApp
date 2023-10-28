@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Checkbox, Col, Form, FormInstance, Input, Modal, Row, Select, Breakpoint, Grid } from 'antd';
 import UserRepository from '@repositories/user.repository';
-import { IPropsUser, ISaveUser } from 'src/types/user.type';
+import { IPropsUser, ISaveUser } from '@localTypes/user.type';
 import { useAppSelector } from '@hooks/hooks';
 import { RootState } from '@store/store';
-import { ICompany } from 'src/types/company.type';
+import { ICompany } from '@localTypes/company.type';
 import { toast } from 'react-toastify';
-import { IRole } from '../../../types/role.type';
+import { IRole } from '@localTypes/role.type';
 
 const userController = new UserRepository();
 

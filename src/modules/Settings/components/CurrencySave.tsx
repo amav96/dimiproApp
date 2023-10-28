@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form, FormInstance, Input, Modal } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import CurrencyRepository from '@repositories/currency.repository';
-import { ICurrencyProps, ICurrencySave } from 'src/types/currency.type';
+import { ICurrencyProps, ICurrencySave } from '@localTypes/currency.type';
 
 const currencyController = new CurrencyRepository();
 

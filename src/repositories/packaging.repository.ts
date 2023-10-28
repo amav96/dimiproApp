@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { IPackagingSave } from "src/types/packaging.type";
+import { Routes } from "@services/Routes";
+import { IPackagingSave } from "@localTypes/packaging.type";
 
 class PackagingRepository {
   async getAll() : Promise<any> {

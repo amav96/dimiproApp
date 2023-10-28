@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { ICategorySave } from "src/types/category.type";
+import { Routes } from "@services/Routes";
+import { ICategorySave } from "@localTypes/category.type";
 
 
 class CategoryRepository {

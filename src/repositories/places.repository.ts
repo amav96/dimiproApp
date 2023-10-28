@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { DataProvider } from "src/types/dataProvider.type";
+import { Routes } from "@services/Routes";
+import { DataProvider } from "@localTypes/dataProvider.type";
 
 interface Params {
   models: any

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Layout } from "@package";
 import ProfileImg from "../assets/images/profile.svg";
 import "../assets/styles/_profile.scss";
 import { Col, Form, Input, Row, Select, FormInstance, Button } from 'antd';
 import { useAppDispatch, useAppSelector } from '@hooks/hooks';
-import { RootState } from '../../../store/store';
+import { RootState } from '@store/store';
 import { selectUser } from "@store/auth/authSlice";
-import { IUser } from '../../../types/user.type';
+import { IUser } from '@localTypes/user.type';
 import UserRepository from '@repositories/user.repository';
 import { toast } from "react-toastify";
 import { Link } from 'react-router-dom';
+import { useTheme } from '@hooks/useTheme';
+import { Layout } from 'antd';
 
 const userController = new UserRepository();
 
@@ -56,9 +57,19 @@ export function Profile() {
           });
     }
   }
+  const {  Content } = Layout;
+  const { colorBgContainer }= useTheme()
 
   return (
-    <Layout title="My Profile">
+    <Content
+        style={{
+          margin: '24px 16px',
+          padding: 24,
+          minHeight: 280,
+          background: colorBgContainer,
+        }}
+      >
+        <h1 className={`text-2xl`}>Profile</h1>
         <div className="container_profile">
             <Form
             ref={formRef}
@@ -156,6 +167,7 @@ export function Profile() {
 
             <img src={ProfileImg} alt="profile" className="profile_img" />
         </div>
-  </Layout>
+
+    </Content>
   )
 }

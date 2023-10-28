@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { ICaliberSave } from "src/types/caliber.type";
+import { Routes } from "@services/Routes";
+import { ICaliberSave } from "@localTypes/caliber.type";
 
 
 class CaliberRepository {

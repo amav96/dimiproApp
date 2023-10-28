@@ -1,9 +1,9 @@
 import { Button, Modal, Upload } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { IDocument, IContract } from '../../../types/contract.type';
+import { IDocument, IContract } from '@localTypes/contract.type';
 import { UploadOutlined } from '@ant-design/icons';
 import type { UploadFile } from 'antd/es/upload/interface';
-import { AWS } from '../../../services/utils/AWS';
+import { AWS } from '@utils/AWS';
 import ContractRepository from '@repositories/contract.repository';
 
 interface IDocumentsModalProps {

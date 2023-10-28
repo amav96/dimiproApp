@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '@hooks/hooks';
 import { RootState } from '@store/store';
 import { Upload, Button, Col, Form, FormInstance, Input, Modal, Row, Select, Breakpoint, Grid, DatePicker } from 'antd';
-import { ICompany } from '../../../types/company.type';
+import { ICompany } from '@localTypes/company.type';
 import {  UploadOutlined, UsergroupDeleteOutlined, LineHeightOutlined, InboxOutlined } from '@ant-design/icons';
-import { IProduct } from '../../../types/product.type';
-import { IPackaging } from '../../../types/packaging.type';
-import { ICurrency } from '../../../types/currency.type';
-import { IPaymentMethod } from '../../../types/paymentMethod.type';
-import { ISurveyor } from '../../../types/surveyor.type';
+import { IProduct } from '@localTypes/product.type';
+import { IPackaging } from '@localTypes/packaging.type';
+import { ICurrency } from '@localTypes/currency.type';
+import { IPaymentMethod } from '@localTypes/paymentMethod.type';
+import { ISurveyor } from '@localTypes/surveyor.type';
 import dayjs from 'dayjs';
-import { IContractSave, IContract } from '../../../types/contract.type';
+import { IContractSave, IContract } from '@localTypes/contract.type';
 import ContractRepository from '@repositories/contract.repository';
 import { toast } from 'react-toastify';
-import { ICaliber } from '../../../types/caliber.type';
+import { ICaliber } from '@localTypes/caliber.type';
 
 const contractController = new ContractRepository();
 
@@ -64,9 +64,7 @@ export  function ContractSave(prop: IContractSaveProp) {
         for (const key in formValues) {
         let keyValue : any = formValues[key as keyof object]
           if (key === "documents") {
-            console.log(formValues.documents)
             formValues.documents.forEach((file: any, index: number) => {
-                console.log({file})
               if (
                 file.type.includes("image") ||
                 file.type === "application/pdf"
