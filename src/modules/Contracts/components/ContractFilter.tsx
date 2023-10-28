@@ -32,7 +32,7 @@ export function ContractFilter(props: IContractFilter) {
           onFinish={(values: any) => handleFilter(values)}
         >
            <Row gutter={4} >
-              <Col >
+              <Col span={5} >
                 <Form.Item name="name">
                   <Input id="name-filter" autoComplete="none" size="large" placeholder="name" />
                 </Form.Item>

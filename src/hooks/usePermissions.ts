@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
-import { selectPermissions } from "@store/auth/authSlice";
+import { selectPermissions, setUser } from "@store/auth/authSlice";
 import AuthenticationRepository from "@repositories/auth.repository";
 import {setPermissions} from '@store/auth/authSlice'
-import { useAppSelector, useAppDispatch } from "./hooks";
+import { useAppDispatch } from "./hooks";
 import {  toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +17,8 @@ export default function usePermissions () {
     if(!permissions || permissions.length === 0){
           try {
             const {
-              permissions: serverPermissions ,
+              permissions: serverPermissions,
+              user,
               errors
              } = await authenticationRepository.permissions()
              if(errors){
@@ -39,12 +40,15 @@ export default function usePermissions () {
               if(serverPermissions && serverPermissions.length > 0){
                 dispatch(setPermissions(serverPermissions))
                }
-                if(typeof permission === 'string'){
-                  // console.log(serverPermissions.includes(permission))
-                  return serverPermissions.includes(permission)
-                } else {
-                  return true //aca debo implementar logica para machear el array d permissions
-                }
+               if(user && Object.keys(user).length > 0){
+                dispatch(setUser(user))
+               }
+              if(typeof permission === 'string'){
+                // console.log(serverPermissions.includes(permission))
+                return serverPermissions.includes(permission)
+              } else {
+                return true //aca debo implementar logica para machear el array d permissions
+              }
              }
           } catch (error : any) {
             navigate('/login')

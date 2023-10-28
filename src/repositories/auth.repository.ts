@@ -1,6 +1,6 @@
 import $http from "../services/AxiosInstance";
 // import { ErrorApi } from "../../types/Api";
-import { IUser } from "../types/user.type";
+import { IUser } from '../types/user.type';
 import { Routes } from "@services/utils/Routes";
 
 interface ResponseLogin {
@@ -25,7 +25,7 @@ class AuthenticationRepository {
     }
   }
 
-  async permissions(): Promise<{permissions : string[] , errors?: any}> {
+  async permissions(): Promise<{permissions : string[] , user: IUser ,errors?: any}> {
     try {
       const response = await $http.get(Routes.AUTH.PERMISSIONS);
       return response.data;

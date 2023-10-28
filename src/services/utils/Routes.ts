@@ -19,6 +19,7 @@ export const Routes = {
         SHOW: baseApiUrl + '/api/v1/users',
         DELETE: baseApiUrl + '/api/v1/users',
     },
+    
     CALIBERS: {
         INDEX: baseApiUrl + '/api/v1/calibers',
         STORE: baseApiUrl + '/api/v1/calibers',

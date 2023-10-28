@@ -194,7 +194,6 @@ export function UserSave(props: IPropsUser) {
               <Form.Item
                 name="prefixCode"
                 label="Prefix +58"
-                // rules={[{ required: true, message: 'Please select prefixCode!' }]}
               >
                 <Select
                 showSearch
@@ -215,7 +214,6 @@ export function UserSave(props: IPropsUser) {
                 <Form.Item
                 name="phoneNumber"
                 label="phone"
-                // rules={[{ required: true, message: 'Please input phoneNumber!' }]}
                 >
                 <Input
                     size="large"

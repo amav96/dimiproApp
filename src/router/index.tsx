@@ -1,7 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Users } from "../modules/Settings/pages/Users";
-import { Login } from "@views/Auth/Login";
-import { Logout } from "@views/Auth/Logout";
 import { AccesoDenegado } from "@views/Helpers/AccesoDenegado";
 import ProtectRoute from "./ProtectRoute";
 import { AddContract } from "../modules/Contracts/pages/AddContract";
@@ -16,8 +14,11 @@ import { PaymentMethods } from "../modules/Settings/pages/PaymentMethods";
 import { Products } from "../modules/Settings/pages/Products";
 import { Surveyors } from "../modules/Settings/pages/Surveyors";
 import { Categories } from "../modules/Settings/pages/Categories";
-import Profile from "@views/Profile/Profile";
-import RestorePassword from "../components/Auth/RestorePassword";
+import { Profile } from "../modules/Profile/pages/Profile";
+import RestorePassword from "../modules/Auth/components/RestorePassword";
+
+import { Login } from "../modules/Auth/Login";
+import { Logout } from "../modules/Auth/Logout";
 
 export function Router() {
   return (

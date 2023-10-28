@@ -1,9 +1,9 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {User} from '../../types/user.type'
-import { RootState } from '@'
+import {IUser} from '../../types/user.type'
+import { RootState } from '../store';
 
 interface AuthState {
-  user: User | null,
+  user: IUser | null,
   permissions: string[],
   token: string,
 }
@@ -18,7 +18,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User | null>) => {
+    setUser: (state, action: PayloadAction<IUser | null>) => {
       state.user = action.payload
     },
     setPermissions: (state, action: PayloadAction<string[]>) => {
@@ -41,7 +41,7 @@ export const selectPermissions = (state: RootState) => state.auth.permissions;
 
 export const selectToken = (state: RootState) => state.auth.token;
 
-export const editUser = (updatedUser: User) => (dispatch: any , getState: any) => {
+export const editUser = (updatedUser: IUser) => (dispatch: any , getState: any) => {
   dispatch(setUser(updatedUser));
 }
 

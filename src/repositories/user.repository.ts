@@ -30,6 +30,7 @@ class UserRepository {
       throw errors;
     }
   }
+  
 
   async delete(id : string) {
     try {
