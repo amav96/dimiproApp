@@ -19,7 +19,7 @@ const ProtectRoute: React.FC<ProtectRouteProps> = ({ gate }) => {
   useEffect(() => {
     const checkPermissions = async () => {
       hasAccess.current = await hasOrGetPermissions(gate);
-      if (hasAccess) {
+      if (hasAccess.current) {
         setIsLoaded(true);
       } else {
         navigate('/login')

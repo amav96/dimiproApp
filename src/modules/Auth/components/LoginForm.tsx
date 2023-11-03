@@ -19,6 +19,7 @@ export function LoginForm() {
     setLoading(true);
     try {
       const response = await authController.login(values)
+     
       setLoading(false);
       if(response.user){
         dispatch(setUser(response.user))
@@ -32,16 +33,24 @@ export function LoginForm() {
       navigate('/list-contracts')
 
     } catch (error : any) {
-      setLoading(false);
-      const { data } = error
-      if(data.errors){
-        toast(`🦄 ${data.errors.message}`, {
+      if(!error){
+        setLoading(false);
+        toast(`🦄 Has ocurred error in server`, {
           autoClose: 2000,
           });
-      } else {
-        toast(`🦄 You have not been able to log in`, {
-          autoClose: 2000,
-          });
+      }else {
+
+        setLoading(false);
+        const { data } = error
+        if(data?.errors){
+          toast(`🦄 ${data.errors.message}`, {
+            autoClose: 2000,
+            });
+        } else {
+          toast(`🦄 You have not been able to log in`, {
+            autoClose: 2000,
+            });
+        }
       }
     }
   };

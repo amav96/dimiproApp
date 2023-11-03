@@ -23,9 +23,10 @@ import { Logout } from "../modules/Auth/Logout";
 export function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/list-contracts" replace />} />
+     
 
       {/* CONTRACTS */}
+      <Route path="/" element={<Navigate to="/list-contracts" replace />} />
       <Route element={<ProtectRoute gate={"contracts_index"} />}>
         <Route path="/list-contracts" element={<Contracts />} />
       </Route>
