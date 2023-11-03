@@ -12,11 +12,12 @@ import {
   setCategories,
   setContracts
 } from '@store/dataProviders/dataProvidersSlice'
-import { useAppSelector, useAppDispatch } from "../hooks";
-import { RootState } from "src/store";
-import { ModelsDataProvider } from "src/types/dataProvider.type";
+import { useAppSelector, useAppDispatch } from "./hooks";
+
+import { ModelsDataProvider } from "@localTypes/dataProvider.type";
 import DataProviderRepository from "@repositories/dataProvider.repository";
 import { toast } from 'react-toastify';
+import { RootState } from '../store/store';
 
 const dataProviderController = new DataProviderRepository();
 
@@ -88,7 +89,14 @@ export default function useDataProvider() {
         Object.keys(response.dataProviders).forEach((k) => {
           if (k in dataProviders) {
             // @ts-ignore
-            dispatch(dataProviders[k].action(response.dataProviders[k]));
+            if(response.dataProviders[k].errors){
+              // @ts-ignore
+              dispatch(dataProviders[k].action([]));
+              // @ts-ignore
+            } else if(dataProviders[k]){
+              // @ts-ignore
+              dispatch(dataProviders[k].action(response.dataProviders[k]));
+            }
           }
         });
       }

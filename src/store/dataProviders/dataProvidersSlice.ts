@@ -1,13 +1,13 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Role } from "../../types/role.type";
-import { Packaging } from "../../types/packaging.types";
-import { Country } from "../../types/places.type";
-import { PaymentMethod } from "../../types/paymentMethod.type";
-import { Surveyor } from "../../types/surveyor.type";
-import { Currency } from "../../types/currency.type";
-import { Product } from "../../types/product.type";
-import { GenericModel } from "../../types/genericModel.type";
-import { dataProviderState } from "../../types/dataProvider.type";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Role } from "../@localTypes/role.type";
+import { IPackaging } from "../@localTypes/packaging.type";
+import { ICountry } from "../@localTypes/places.type";
+import { IPaymentMethod } from "../@localTypes/paymentMethod.type";
+import { ISurveyor } from "../@localTypes/surveyor.type";
+import { ICurrency } from "../@localTypes/currency.type";
+import { IProduct } from "../@localTypes/product.type";
+import { GenericModel } from "../@localTypes/genericModel.type";
+import { dataProviderState } from "../@localTypes/dataProvider.type";
 
 const initialState: dataProviderState = {
   roles: [],
@@ -31,25 +31,25 @@ export const dataProvidersSlice = createSlice({
     setRoles: (state, action: PayloadAction<Role[] | []>) => {
       state.roles = action.payload;
     },
-    setPackagings: (state, action: PayloadAction<Packaging[] | []>) => {
+    setPackagings: (state, action: PayloadAction<IPackaging[] | []>) => {
       state.packagings = action.payload;
     },
-    setCountries: (state, action: PayloadAction<Country[] | []>) => {
+    setCountries: (state, action: PayloadAction<ICountry[] | []>) => {
       state.countries = action.payload;
     },
-    setPaymentMethods: (state, action: PayloadAction<PaymentMethod[] | []>) => {
+    setPaymentMethods: (state, action: PayloadAction<IPaymentMethod[] | []>) => {
       state.paymentMethods = action.payload;
     },
-    setSurveyors: (state, action: PayloadAction<Surveyor[] | []>) => {
+    setSurveyors: (state, action: PayloadAction<ISurveyor[] | []>) => {
       state.surveyors = action.payload;
     },
-    setCurrencies: (state, action: PayloadAction<Currency[] | []>) => {
+    setCurrencies: (state, action: PayloadAction<ICurrency[] | []>) => {
       state.currencies = action.payload;
     },
     setCompanies: (state, action: PayloadAction<any[] | []>) => {
       state.companies = action.payload;
     },
-    setProducts: (state, action: PayloadAction<Product[] | []>) => {
+    setProducts: (state, action: PayloadAction<IProduct[] | []>) => {
       state.products = action.payload;
     },
     setPrefixs: (state, action: PayloadAction<GenericModel[] | []>) => {

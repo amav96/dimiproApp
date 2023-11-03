@@ -1,24 +1,26 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {User} from '../../types/user.type'
-import { RootState } from 'src/store'
+import {IUser} from '../@localTypes/user.type'
+import { RootState } from '../store';
 
 interface AuthState {
-  user: User | null,
+  user: IUser | null,
   permissions: string[],
   token: string,
+  authLoader: boolean
 }
 
 const initialState: AuthState = {
   user: null,
   permissions: [],
-  token : ''
+  token : '',
+  authLoader: false,
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User | null>) => {
+    setUser: (state, action: PayloadAction<IUser | null>) => {
       state.user = action.payload
     },
     setPermissions: (state, action: PayloadAction<string[]>) => {
@@ -32,6 +34,9 @@ export const authSlice = createSlice({
         localStorage.removeItem('token')
       }
     },
+    setAuthLoader : (state, action: PayloadAction<boolean>) => {
+      state.authLoader = action.payload
+    }
   },
 })
 
@@ -41,10 +46,12 @@ export const selectPermissions = (state: RootState) => state.auth.permissions;
 
 export const selectToken = (state: RootState) => state.auth.token;
 
-export const editUser = (updatedUser: User) => (dispatch: any , getState: any) => {
+export const selectAuthLoader = (state: RootState) => state.auth.authLoader;
+
+export const editUser = (updatedUser: IUser) => (dispatch: any , getState: any) => {
   dispatch(setUser(updatedUser));
 }
 
 // Action creators are generated for each case reducer function
-export const { setUser, setPermissions, setToken } = authSlice.actions
+export const { setUser, setPermissions, setToken, setAuthLoader } = authSlice.actions
 export default authSlice.reducer

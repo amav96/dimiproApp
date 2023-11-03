@@ -15,13 +15,17 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
+      "@": ["src/*"],
       "@repositories/*": ["src/repositories/*"],
       "@store/*": ["src/store/*"],
       "@hooks/*": ["src/hooks/*"],
       "@views/*": ["src/views/*"],
       "@services/*": ["src/services/*"],
+      "@localTypes/*": ["src/localTypes/*"],
+      "@utils/*": ["src/utils/*"],
       "@package": ["src/components/package"],
-      "@packageTypes": ["src/packageTypes"]
+      "@components/*": ["src/components/*"],
+
     }
   },
   "exclude": [

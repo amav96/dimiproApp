@@ -1,6 +1,6 @@
 import $http from "@services/AxiosInstance";
-import { Routes } from "@services/utils/Routes";
-import { DataProvider } from "src/types/dataProvider.type";
+import { Routes } from "@services/Routes";
+import { DataProvider } from "@localTypes/dataProvider.type";
 
 interface Params {
   models: any
@@ -24,7 +24,7 @@ class PlaceRepository {
     }
   }
 
-  async getCitiesByCountryAndState(countryId: number | string, stateId: number | string){
+  async getCitiesByCountryAndState(countryId:  string, stateId:  string){
     try {
         const response = await $http.get(Routes.baseApiUrl+ `countries/${countryId}/states/${stateId}/cities`);
         return response.data;

@@ -1,0 +1,10 @@
+
+  .ant-menu-item.ant-menu-item-selected {
+    background-color: #ebe0fd9c !important; /* Color violeta cuando está seleccionado */
+    color: #7f77f1 !important; /* Texto en negro cuando está seleccionado */
+  }
+
+.ant-menu-submenu-selected > .ant-menu-submenu-title {
+   background-color: #ebe0fd9c !important;
+   color: #7f77f1 !important;
+}

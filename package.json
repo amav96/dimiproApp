@@ -18,8 +18,10 @@
     "library"
   ],
   "dependencies": {
+    "@ant-design/colors": "^7.0.0",
     "@react-pdf/renderer": "^3.1.12",
     "@reduxjs/toolkit": "^1.9.5",
+    "antd": "5.10.1",
     "axios": "^1.4.0",
     "ci": "^2.2.0",
     "localforage": "^1.10.0",
@@ -44,7 +46,7 @@
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.4.0",
     "@types/node": "^18.14.1",
-    "@types/react": "18.0.24",
+    "@types/react": "^18.2.24",
     "@types/react-datepicker": "^4.10.0",
     "@types/react-dom": "18.0.8",
     "@vitejs/plugin-react": "2.2.0",

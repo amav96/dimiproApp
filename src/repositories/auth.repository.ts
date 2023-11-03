@@ -1,7 +1,7 @@
 import $http from "../services/AxiosInstance";
-// import { ErrorApi } from "../../types/Api";
-import { User } from "../types/user.type";
-import { Routes } from "@services/utils/Routes";
+// import { ErrorApi } from "../@localTypes/Api";
+import { IUser } from '@localTypes/user.type';
+import { Routes } from "@services/Routes";
 
 interface ResponseLogin {
     errors : {
@@ -10,7 +10,7 @@ interface ResponseLogin {
       password?: string[]
     }
     token?: string,
-    user? : User,
+    user? : IUser,
     permissions? : string[],
     refresh?: string
 }
@@ -21,11 +21,11 @@ class AuthenticationRepository {
       const response = await $http.post(Routes.AUTH.LOGIN, params);
       return response.data;
     } catch (errors : any) {
-      return errors;
+      throw errors.response
     }
   }
 
-  async permissions(): Promise<{permissions : string[] , errors?: any}> {
+  async permissions(): Promise<{permissions : string[] , user: IUser ,errors?: any}> {
     try {
       const response = await $http.get(Routes.AUTH.PERMISSIONS);
       return response.data;

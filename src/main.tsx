@@ -3,9 +3,10 @@ import App from './App'
 import  './assets/css/index.scss'
 import  './assets/css/tailwind.css'
 import { Provider } from 'react-redux'
-import { store } from './store'
-import { ToastContainer, toast } from 'react-toastify';
+import { store } from './store/store'
+import { ToastContainer, } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ConfigProvider } from 'antd'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store}>
@@ -21,7 +22,18 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         pauseOnHover
         theme="light"
         />
+        <ConfigProvider
+            theme={{
+                components: {
+                Button: {
+                    colorPrimary: '#531dab',
+                    algorithm: true, // Enable algorithm
+                    },
+                },
+            }}
+        >
             <App/>
+        </ConfigProvider>
         <ToastContainer />
     </Provider>
 )
