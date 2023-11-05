@@ -374,6 +374,7 @@ export  function ContractSave(prop: IContractSaveProp) {
             <Col span={colSpan} >
                 <Form.Item
                 name="price"
+                rules={[{ required: true, message: 'Please input price por ton!' }]}
                 label="Price per ton"
                 >
                 <Input

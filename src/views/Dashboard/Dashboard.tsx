@@ -20,7 +20,7 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme, Grid } from 'antd';
 import { Router } from "../../router";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation  } from "react-router-dom"
 import './Dashboard.scss'
 
 const { Header, Sider, Content } = Layout;
@@ -47,8 +47,12 @@ function getItem(
 }
 
 
-
 const Dashboard: React.FC = () => {
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+
   const [collapsed, setCollapsed] = useState(false);
   const [startX, setStartX] = useState(0);
 
@@ -92,8 +96,6 @@ const Dashboard: React.FC = () => {
     getItem('Logout', '16', <LogoutOutlined />, { path: '/logout' }),
   ];
 
-  const navigate = useNavigate();
-
   const findMenuItem = (items: any, key: any) : any => {
     for (const item of items) {
       if (item.key === key) {
@@ -120,35 +122,40 @@ const Dashboard: React.FC = () => {
   const { useBreakpoint } = Grid;
   const screens = useBreakpoint();
 
+  const viewPdf = () => location.pathname.indexOf('/pdf/') > -1
+
   return (
     <Layout>
-      <Sider 
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      collapsedWidth={screens.sm ? 80 : 0}  
-      trigger={null} 
-      collapsible collapsed={collapsed} 
-      style={{
-        background: colorBgContainer,
-        position: screens.xs ? 'fixed' : 'relative', // Posicionamiento fijo en dispositivos móviles
-        height: screens.xs ? '100%' : 'auto', // Altura 100% en dispositivos móviles
-        zIndex: 1000, // Asegura que esté por encima del contenido
-      }}
-      >
-        <div className="demo-logo-vertical" />
-          <div className="flex justify-center my-3">
-            <img 
-            className="max-w-full"
-            src={"https://www.dimiproworld.com/wp-content/uploads/2018/10/adventure_logo_1-dimiopro.png"} 
-            onClick={() => navigate("/")} />
-          </div>
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          onClick={(value: any) => go(value)}
-          items={items}
-        />
+      {
+        !viewPdf() && 
+        <Sider 
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        collapsedWidth={screens.sm ? 80 : 0}  
+        trigger={null} 
+        collapsible collapsed={collapsed} 
+        style={{
+          background: colorBgContainer,
+          position: screens.xs ? 'fixed' : 'relative', // Posicionamiento fijo en dispositivos móviles
+          height: screens.xs ? '100%' : 'auto', // Altura 100% en dispositivos móviles
+          zIndex: 1000, // Asegura que esté por encima del contenido
+        }}
+        >
+          <div className="demo-logo-vertical" />
+            <div className="flex justify-center my-3">
+              <img 
+              className="max-w-full"
+              src={"https://www.dimiproworld.com/wp-content/uploads/2018/10/adventure_logo_1-dimiopro.png"} 
+              onClick={() => navigate("/")} />
+            </div>
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            onClick={(value: any) => go(value)}
+            items={items}
+          />
       </Sider>
+      }
       <Layout
      
       >

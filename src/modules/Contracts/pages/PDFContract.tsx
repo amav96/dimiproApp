@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@hooks/hooks";
 import { RootState } from "@store/store";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import logo from "../../../public/icons/logo.png";
 import Inter from "../../../assets/fonts/Inter-Regular.otf";
 import InterBlack from "../../../assets/fonts/Inter-Black.otf";
@@ -93,6 +93,9 @@ const styles = StyleSheet.create({
 });
 
 export function PDFContract() {
+
+  const location = useLocation();
+  console.log(location)
   const { getDataProviders } = useDataProvider();
   const [data, setData] = useState<any[]>([]);
 

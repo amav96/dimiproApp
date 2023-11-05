@@ -24,7 +24,6 @@ export function Router() {
   return (
     <Routes>
      
-
       {/* CONTRACTS */}
       <Route path="/" element={<Navigate to="/list-contracts" replace />} />
       <Route element={<ProtectRoute gate={"contracts_index"} />}>
