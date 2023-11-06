@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -45,7 +45,6 @@ function getItem(
     resource
   } as MenuItem;
 }
-
 
 
 const Dashboard: React.FC = () => {
@@ -107,18 +106,30 @@ const Dashboard: React.FC = () => {
     }
     return null;
   };
+
+  const { useBreakpoint } = Grid;
+  const screens = useBreakpoint();
   
+  const isMobile = () => screens.xs || screens.sm
+
   const go = (menu : any) => {
     const { keyPath } = menu;
     const [key] = keyPath;
     const foundItem = findMenuItem(items, key);
     if(foundItem?.resource.path){
       navigate(foundItem.resource.path)
+      if(isMobile() && !collapsed){
+        setCollapsed(true)
+      }
     }
   };
 
-  const { useBreakpoint } = Grid;
-  const screens = useBreakpoint();
+  useEffect(() => {
+    if(isMobile() && !collapsed){
+      setCollapsed(true)
+    }
+  }, [screens])
+  
 
   return (
     <Layout>
