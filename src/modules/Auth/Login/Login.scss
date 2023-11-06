@@ -56,10 +56,7 @@
     height: 100%;
     display: grid;
     place-content: center;
-    @media (max-width: $breakpoint-m) {
-      padding: 30px 15px 0;
-    }
-
+ 
     .form-container__width {
       max-width: 450px;
       @media (min-width: $breakpoint-m) {

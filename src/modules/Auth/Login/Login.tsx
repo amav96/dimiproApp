@@ -11,7 +11,7 @@ export function Login() {
   const isForgotPasswordPath = location.pathname === "/forgot-password";
 
   return (
-    <div className="login-container">
+    <div className="login-container ">
       <div className="form-container">
         <div className="form-container__width">
           <h1 className="text-4xl mx-2">

@@ -61,7 +61,7 @@ export function LoginForm() {
     <div className="mt-4 mb-2 mx-2">
     <Form
       name="normal_login"
-      className="login-form"
+      className=""
       initialValues={{ remember: true }}
       onFinish={onSubmit}
     >
