@@ -1,21 +1,21 @@
-import { Currency } from "./currency.type";
+import { ICurrency } from "./currency.type";
 import { GenericModel } from "./genericModel.type";
-import { Packaging } from "./packaging.type";
-import { PaymentMethod } from "./paymentMethod.type";
-import { Country } from "./places.type";
-import { Product } from "./product.type";
-import { Role } from "./role.type";
-import { Surveyor } from "./surveyor.type";
+import { IPackaging } from "./packaging.type";
+import { IPaymentMethod } from "./paymentMethod.type";
+import { ICountry } from "./places.type";
+import { IProduct } from "./product.type";
+import { IRole } from "./role.type";
+import { ISurveyor } from "./surveyor.type";
 
 export interface dataProviderState {
-  roles: Role[] | [];
-  packagings: Packaging[] | [];
-  countries: Country[] | [];
-  paymentMethods: PaymentMethod[] | [];
-  surveyors: Surveyor[] | [];
-  currencies: Currency[] | [];
+  roles: IRole[] | [];
+  packagings: IPackaging[] | [];
+  countries: ICountry[] | [];
+  paymentMethods: IPaymentMethod[] | [];
+  surveyors: ISurveyor[] | [];
+  currencies: ICurrency[] | [];
   companies: any[] | [];
-  products: Product[] | [];
+  products: IProduct[] | [];
   prefixs: GenericModel[];
   calibers: GenericModel[];
   categories: GenericModel[];

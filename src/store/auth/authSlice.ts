@@ -1,5 +1,5 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {IUser} from '../@localTypes/user.type'
+import {  createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {IUser} from '@localTypes/user.type'
 import { RootState } from '../store';
 
 interface AuthState {

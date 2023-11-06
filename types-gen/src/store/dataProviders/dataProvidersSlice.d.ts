@@ -1,0 +1,26 @@
+import { PayloadAction } from "@reduxjs/toolkit";
+import { Role } from "../@localTypes/role.type";
+import { IPackaging } from "../@localTypes/packaging.type";
+import { ICountry } from "../@localTypes/places.type";
+import { IPaymentMethod } from "../@localTypes/paymentMethod.type";
+import { ISurveyor } from "../@localTypes/surveyor.type";
+import { ICurrency } from "../@localTypes/currency.type";
+import { IProduct } from "../@localTypes/product.type";
+import { GenericModel } from "../@localTypes/genericModel.type";
+export declare const dataProvidersSlice: import("@reduxjs/toolkit").Slice<dataProviderState, {
+    setRoles: (state: any, action: PayloadAction<Role[] | []>) => void;
+    setPackagings: (state: any, action: PayloadAction<IPackaging[] | []>) => void;
+    setCountries: (state: any, action: PayloadAction<ICountry[] | []>) => void;
+    setPaymentMethods: (state: any, action: PayloadAction<IPaymentMethod[] | []>) => void;
+    setSurveyors: (state: any, action: PayloadAction<ISurveyor[] | []>) => void;
+    setCurrencies: (state: any, action: PayloadAction<ICurrency[] | []>) => void;
+    setCompanies: (state: any, action: PayloadAction<any[] | []>) => void;
+    setProducts: (state: any, action: PayloadAction<IProduct[] | []>) => void;
+    setPrefixs: (state: any, action: PayloadAction<GenericModel[] | []>) => void;
+    setCalibers: (state: any, action: PayloadAction<GenericModel[] | []>) => void;
+    setCategories: (state: any, action: PayloadAction<GenericModel[] | []>) => void;
+    setContracts: (state: any, action: PayloadAction<any[] | []>) => void;
+}, "dataProviders">;
+export declare const setRoles: import("@reduxjs/toolkit").ActionCreatorWithPayload<Role[] | [], "dataProviders/setRoles">, setPackagings: import("@reduxjs/toolkit").ActionCreatorWithPayload<[] | IPackaging[], "dataProviders/setPackagings">, setCountries: import("@reduxjs/toolkit").ActionCreatorWithPayload<[] | ICountry[], "dataProviders/setCountries">, setPaymentMethods: import("@reduxjs/toolkit").ActionCreatorWithPayload<[] | IPaymentMethod[], "dataProviders/setPaymentMethods">, setSurveyors: import("@reduxjs/toolkit").ActionCreatorWithPayload<[] | ISurveyor[], "dataProviders/setSurveyors">, setCurrencies: import("@reduxjs/toolkit").ActionCreatorWithPayload<[] | ICurrency[], "dataProviders/setCurrencies">, setCompanies: import("@reduxjs/toolkit").ActionCreatorWithPayload<any[] | [], "dataProviders/setCompanies">, setProducts: import("@reduxjs/toolkit").ActionCreatorWithPayload<[] | IProduct[], "dataProviders/setProducts">, setPrefixs: import("@reduxjs/toolkit").ActionCreatorWithPayload<[] | GenericModel[], "dataProviders/setPrefixs">, setCalibers: import("@reduxjs/toolkit").ActionCreatorWithPayload<[] | GenericModel[], "dataProviders/setCalibers">, setCategories: import("@reduxjs/toolkit").ActionCreatorWithPayload<[] | GenericModel[], "dataProviders/setCategories">, setContracts: import("@reduxjs/toolkit").ActionCreatorWithPayload<any[] | [], "dataProviders/setContracts">;
+declare const _default: import("redux").Reducer<dataProviderState>;
+export default _default;

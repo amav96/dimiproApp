@@ -6,9 +6,8 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "declaration": true,
-    "declarationDir": "types-gen",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "moduleResolution": "node",
     "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
@@ -32,6 +31,7 @@
     "dist",
     "node_modules",
     "src/**/*.test.tsx",
-    "src/**/*.stories.tsx"
+    "src/**/*.stories.tsx",
+    "./dist/**/*"
   ]
 }
