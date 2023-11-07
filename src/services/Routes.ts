@@ -49,6 +49,7 @@ export const Routes = {
         DELETE: baseApiUrl + '/api/v1/contracts',
         ADD_DOCUMENT:  baseApiUrl + '/api/v1/contracts/add-documents',
         REMOVE_DOC: baseApiUrl + '/api/v1/contracts/remove-document',
+        GET_URL_BUCKET: baseApiUrl + '/api/v1/contracts/generateUrlBucket',
     },
     CURRENCIES: {
         INDEX: baseApiUrl + '/api/v1/currencies',

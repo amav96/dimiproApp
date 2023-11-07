@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { IDocument, IContract } from '@localTypes/contract.type';
 import { UploadOutlined } from '@ant-design/icons';
 import type { UploadFile } from 'antd/es/upload/interface';
-import { AWS } from '@utils/AWS';
+import { AWS, uploadFileToS3 } from '@utils/AWS';
 import ContractRepository from '@repositories/contract.repository';
 
 interface IDocumentsModalProps {
@@ -47,16 +47,23 @@ export function DocumentsModal(props: IDocumentsModalProps) {
 
     const addDocument = async (data: any ) => {
         const { file, onSuccess, onError } = data;
-        const form = new FormData();
-        form.append('documents[0]', file);
+        const response = await contractController.generateUrlBucket(file.name, file.uid, file.type);
+        if(response && response.url){
+            const { url, path } = response;
+            const uploadToS3 = await uploadFileToS3(url, file)
+            console.log(uploadToS3)
+            try {
+                const response = await contractController.addDocument({
+                    uuid: file.uid,
+                    path
+                }, contract._id);
+                onStore(response.contract)
+                onSuccess();
 
-        try {
-            const response = await contractController.addDocument(form, contract._id);
-            onStore(response.contract)
-            onSuccess();
-
-        } catch (error) {
-            onError('Upload failed');
+            } catch (error) {
+                onError('Upload failed');
+            }
+            
         }
     }
 

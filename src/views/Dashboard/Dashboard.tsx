@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -20,7 +20,11 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme, Grid } from 'antd';
 import { Router } from "../../router";
+<<<<<<< HEAD
 import { useNavigate, useLocation  } from "react-router-dom"
+=======
+import { useNavigate, useLocation } from "react-router-dom"
+>>>>>>> master
 import './Dashboard.scss'
 
 const { Header, Sider, Content } = Layout;
@@ -52,7 +56,10 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
   const [collapsed, setCollapsed] = useState(false);
   const [startX, setStartX] = useState(0);
 
@@ -96,6 +103,11 @@ const Dashboard: React.FC = () => {
     getItem('Logout', '16', <LogoutOutlined />, { path: '/logout' }),
   ];
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
   const findMenuItem = (items: any, key: any) : any => {
     for (const item of items) {
       if (item.key === key) {
@@ -109,18 +121,29 @@ const Dashboard: React.FC = () => {
     }
     return null;
   };
+
+  const { useBreakpoint } = Grid;
+  const screens = useBreakpoint();
   
+  const isMobile = () => !screens.sm
+
   const go = (menu : any) => {
     const { keyPath } = menu;
     const [key] = keyPath;
     const foundItem = findMenuItem(items, key);
     if(foundItem?.resource.path){
       navigate(foundItem.resource.path)
+      if(isMobile() && !collapsed){
+        setCollapsed(true)
+      }
     }
   };
 
-  const { useBreakpoint } = Grid;
-  const screens = useBreakpoint();
+  useEffect(() => {
+    if(isMobile() && !collapsed){
+      setCollapsed(true)
+    }
+  }, [screens])
 
   const viewPdf = () => location.pathname.indexOf('/pdf/') > -1
 
@@ -154,7 +177,7 @@ const Dashboard: React.FC = () => {
             onClick={(value: any) => go(value)}
             items={items}
           />
-      </Sider>
+        </Sider>
       }
       <Layout
      

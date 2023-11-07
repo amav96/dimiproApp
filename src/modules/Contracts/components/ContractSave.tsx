@@ -14,6 +14,8 @@ import { IContractSave, IContract } from '@localTypes/contract.type';
 import ContractRepository from '@repositories/contract.repository';
 import { toast } from 'react-toastify';
 import { ICaliber } from '@localTypes/caliber.type';
+import { uploadFileToS3 } from '@utils/AWS';
+
 
 const contractController = new ContractRepository();
 
@@ -55,24 +57,15 @@ export  function ContractSave(prop: IContractSaveProp) {
         setLoading(true);
         let formValues = {...values}
         formValues.shippingDate = dayjs(values.shippingDate).format(monthFormat)
-        if(!isEditMode() && formValues.documents?.length > 0){
-            formValues.documents = formValues.documents.map((file: any) => file.originFileObj)
+        if(!isEditMode() && formValues.documents && formValues?.documents?.length > 0){
+            formValues.documents = null;
         }
-
+       
         const formData = new FormData();
 
         for (const key in formValues) {
         let keyValue : any = formValues[key as keyof object]
-          if (key === "documents") {
-            formValues.documents.forEach((file: any, index: number) => {
-              if (
-                file.type.includes("image") ||
-                file.type === "application/pdf"
-              ) {
-                formData.append(`documents[${index}]`, file);
-              }
-            });
-          } else if (key === "calibers") {
+         if (key === "calibers") {
             formValues.calibers.forEach((caliber: string, index: number) => {
               formData.append(`calibers[${index}]`, caliber);
             });
@@ -80,12 +73,33 @@ export  function ContractSave(prop: IContractSaveProp) {
             formData.append(key, keyValue);
           }
         }
-
+        
         try {
             const response =
                 !isEditMode()
                 ? await contractController.store(formData)
                 : contract?._id ? await contractController.update(formData, contract._id) : null
+
+           if(response.contract && !isEditMode() && values.documents){
+                for(let i=0; i < values.documents.length; i++){
+                    let file = values.documents[i].originFileObj;
+                    const bucket = await contractController.generateUrlBucket(file.name, file.uid, file.type);
+                    if(bucket && bucket.url && response.contract._id){
+                        const { url, path } = bucket;
+                        await uploadFileToS3(url, file)
+                        try {
+                            await contractController.addDocument({
+                                uuid: file.uid,
+                                path
+                            }, response.contract._id);
+            
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    }
+                }
+              
+            }
 
             if(response.contract && onUpdate){
                 onUpdate(response.contract)

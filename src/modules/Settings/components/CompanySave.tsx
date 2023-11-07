@@ -291,6 +291,7 @@ export function CompanySave(props: IPropsCompany) {
             <Form.Item
             name="postalCode"
             label="Postal code"
+            rules={[{ required: true, message: 'Please input postal code!' }]}
             >
               <Input
                 size="large"
