@@ -40,7 +40,7 @@ class ContractRepository {
     }
   }
 
-  async addDocument(params: FormData, idContract : string)  {
+  async addDocument(params: object, idContract : string)  {
     try {
       const response = await $http.post(`${Routes.CONTRACTS.ADD_DOCUMENT}/${idContract}`, params);
       return response.data;
@@ -54,6 +54,21 @@ class ContractRepository {
       const response = await $http.delete(`${Routes.CONTRACTS.REMOVE_DOC}/${idContract}/${idDoc}`);
       return response.data;
     } catch (errors : any) {
+      throw errors;
+    }
+  }
+
+  async generateUrlBucket(name: string, uuid: string, type: string){
+    console.log(type)
+    try {
+      const response = await $http.post(`${Routes.CONTRACTS.GET_URL_BUCKET}`, {
+        name,
+        uuid,
+        type,
+      });
+      return response.data;
+    } catch (errors : any) {
+      console.log(errors)
       throw errors;
     }
   }

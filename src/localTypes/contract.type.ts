@@ -60,7 +60,7 @@ export interface IContractSave {
     broker: string,
     brokerPercent?: string,
     price: string,
-    documents: File[],
+    documents: any[] | null,
     currency: string,
     paymentMethod: string,
     specifications: string,
